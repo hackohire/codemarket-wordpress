@@ -7,8 +7,6 @@ if(!is_user_logged_in()){
     $link = site_url().'/register';
 	wp_redirect($link);
 } 
-
-global $wpdb;
  
 $author = get_current_user_id();
 $author = new WP_User($author);
@@ -30,11 +28,9 @@ get_header(); ?>
 					<a href="/help/">Help</a>
 				</div>
 				<div class="my-add-product">
-					<a href="/vendor-dashboard/?task=new-product">Add Product</a>					
-				</div>
-				<div class="my-add-product">
-					<a href="/vendor-dashboard/?task=help-request">Help Request</a>
-				</div>				
+					<a href="/vendor-dashboard/?task=new-product">Add Product</a>
+					
+				</div> 
 				<div class="my-sales-amount">
 					<strong class="widget-detail__title"><?php 
 					if( $myrows ){
@@ -46,15 +42,12 @@ get_header(); ?>
 					?></strong> 
 					<span class="widget-detail__info">Sales Amount</span>
 				</div>
-				
 				<div class="clear"></div>
-				
 				<div class="my-buy-sales-products">
 					<ul class="my-tab-menu">
 						<li class="active" data-tab-id="my-tab-sell">Sell</li>
 						<li data-tab-id="my-tab-buy">Buy</li>
 						<li data-tab-id="my-tab-help">Help</li>
-						<li data-tab-id="my-tab-help-request">Request Help</li>
 					</ul>
 					<div class="my-tab-panel" id="my-tab-sell">
 						<table class="table fes-table table-condensed  table-striped" id="fes-order-list">
@@ -66,37 +59,37 @@ get_header(); ?>
 							</thead>
 							<tbody>
 
-							<?php 
-							$args = array(
-								'post_type'=>'download','author'=>get_current_user_id(),
-								'post_status' => array('publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit', 'trash'));
-							$query = new WP_Query( $args );
+						<?php 
+						$args = array(
+  'post_type'=>'download','author'=>get_current_user_id(),
+   'post_status' => array('publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit', 'trash'));
+$query = new WP_Query( $args );
 							
 							?>
 								<?php 
 				
 						// Check that we have query results.
-							if ( $query->have_posts() ) {
-								while ( $query->have_posts() ) {
-									$query->the_post();
-									global $post;
-									
-								  ?>
-								   
-									<tr>
-										<td class="fes-order-list-td widget">		
-										<a href="<?php the_permalink(); ?>" title="View" class="view-order-fes"><?php the_title(); ?></a>
-										</td>
-										<td class="fes-order-list-td"><?php echo edd_price($post->ID); ?></td>					
-									</tr>  
-							 <?php
-								}
-							 
-							}
-							 
+if ( $query->have_posts() ) {
+    while ( $query->have_posts() ) {
+        $query->the_post();
+        global $post;
+        
+      ?>
+       
+      	<tr>
+								<td class="fes-order-list-td widget">		
+								<a href="<?php the_permalink(); ?>" title="View" class="view-order-fes"><?php the_title(); ?></a>
+								</td>
+								<td class="fes-order-list-td"><?php echo edd_price($post->ID); ?></td>					
+							</tr>  
+ <?php
+    }
+ 
+}
+ 
 
-							 
-							?>
+ 
+?>
 							<?php
 						/*	foreach( $sell_info as $sell){ 
 							$my_download = new EDD_Download( $sell['download_id'] );
@@ -113,9 +106,8 @@ get_header(); ?>
 							</tbody>
 						</table>
 					</div>
-					
 					<div class="my-tab-panel" id="my-tab-buy">
-						<table class="table fes-table table-condensed  table-striped" id="fes-order-list">
+					<table class="table fes-table table-condensed  table-striped" id="fes-order-list">
 							<thead>
 								<tr>
 									<th>Product Name</th>
@@ -145,8 +137,8 @@ get_header(); ?>
 						</table>
 					</div>
 
-					<div class="my-tab-panel" id="my-tab-help" style="display:none">
-						<table class="table fes-table table-condensed  table-striped" id="fes-order-list">
+<div class="my-tab-panel" id="my-tab-help" style="display:none">
+				<table class="table fes-table table-condensed  table-striped" id="fes-order-list">
 							<thead>
 								<tr>
 									<th>Question Name</th>
@@ -160,9 +152,9 @@ get_header(); ?>
 						global $wpdb;
 						echo $usersid=$current_user->ID;
      
-						 $query = sprintf("SELECT * FROM `".$wpdb->prefix."cf7_data_entry`");
-					   $data = $wpdb->get_results($query);
-							$data_sorted = cf7d_sortdata($data);
+     $query = sprintf("SELECT * FROM `".$wpdb->prefix."cf7_data_entry`");
+   $data = $wpdb->get_results($query);
+        $data_sorted = cf7d_sortdata($data);
 							 foreach ($data_sorted as $k) { //echo "<pre>"; print_r($k);
 							 ?>
                          	<tr>
@@ -175,56 +167,6 @@ get_header(); ?>
 						
 						</tbody>
 						</table>
-					</div>
-				
-					<div class="my-tab-panel" id="my-tab-help-request"  style="display:none">
-						<?php
-						$user_id = get_current_user_id();
-						$query       = "SELECT * FROM `" . $wpdb->prefix . "help_request` WHERE user_id = " . $user_id;
-						$arrData = $wpdb->get_results($query, ARRAY_A);
-						
-						if(!empty($arrData))
-						{
-							$site_url = site_url();
-							
-							?>
-							<table class="table fes-table table-condensed  table-striped" id="fes-order-list">
-								<thead>
-									<tr>
-										<th width="20%">Title</th>
-										<th width="30%">Description</th>
-										<th>price</th>
-										<th>Image</th>
-										<th>Edit</th>
-										<th>Delete</th>
-									</tr>
-								</thead>
-								<tbody>								
-									<?php								
-									foreach($arrData as $data)
-									{
-										echo '<tr>';
-										
-										echo '<td>' . $data['request_title'] . '</td>';
-										
-										$content = stripslashes($data['request_description']);
-										echo '<td>' . strip_tags($content, '<br>') . '</td>';
-										
-										echo '<td>' . $data['request_price'] . '</td>';
-										
-										$img_url = wp_get_attachment_url($data['request_image_id']);
-										echo '<td><img width="50" src="' . $img_url . '"></td>';
-										echo '<td><a style="text-decoration: none;" href="'.$site_url.'/vendor-dashboard/?task=edit-help-request&id='.$data['id'].'">Edit</a></td>';
-										echo '<td class="del_request" data-id="'.$data['id'].'">Delete</td>';
-										
-										echo '</tr>';
-									}
-									?>							
-								</tbody>
-							</table>
-							<?php	
-						}						
-						?>
 					</div>
 				</div>
 
@@ -256,38 +198,5 @@ get_header(); ?>
 		});
 	});
 </script>
-
-<script type='text/javascript'>
-
-jQuery(document).ready(function ($)
-{
-	jQuery('.del_request').on('click', function (event)
-	{
-		event.preventDefault();
-		
-		var ajax_url = window.location.protocol + "//" + window.location.host;
-		var del_id = $(this).attr('data-id');
-		
-		$.ajax({
-			url: ajax_url + "/wp-admin/admin-ajax.php",
-			type: 'post',
-			dataType: 'JSON',
-			data: {
-				'action': 'delete_help_request',
-				'delete_id': del_id
-			},
-			success: function (data)
-			{
-				window.location.href = "/profile/";
-			}
-		});
-		
-	});
-});	
-
-</script>
-
-<style>
-.del_request{cursor: pointer;}
-</style>
+<style></style>
 <?php get_footer(); ?>

@@ -209,7 +209,7 @@ class Marketify_Template_Page_Header {
 		$background_image = $this->find_background_image( $args );
 
 		if ( $background_image ) {
-			$args['style'][] = 'background-image:url(' . $background_image . ');';
+			$args['style'][] = 'background-image:url(' . $background_image . ') !important;';
 			$args['class'][] = 'has-image';
 		} else {
 			$args['class'][] = 'no-image';

@@ -28,7 +28,7 @@ get_header(); ?>
 
 			</div #primary -->
 
-			<?php //get_sidebar( 'archive-download' ); ?>
+			<?php get_sidebar( 'archive-download' ); ?>
 		</div>
 
 		<?php do_action( 'marketify_shop_after' ); ?>

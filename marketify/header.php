@@ -16,6 +16,42 @@
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 
 	<?php wp_head(); ?>
+	<?php if (is_user_logged_in()) {?>
+	 <script type = "text/javascript" 
+         src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+      </script>
+      <script type="text/javascript">
+$(document).ready(function() {
+ $('#number').keydown(function (e) {
+if (e.shiftKey || e.ctrlKey || e.altKey) {
+e.preventDefault();
+} else {
+var key = e.keyCode;
+if (!((key == 8) || (key == 46) || (key >= 35 && key <= 40) || (key >= 48 && key <= 57) || (key >= 96 && key <= 105))) {
+e.preventDefault();
+}
+}
+});
+});
+</script>
+ <script>
+ $(document).ready(function() {  //alert();
+     $('.wpcf7-email').val('<?php echo $_SESSION['email'];?>');
+ });
+ </script><?php
+      if(is_page('Register')){?>
+      <script>
+     window.location.href="http://www.codemarket.io/profile/";
+ </script>
+ <?php }
+ if(is_page( 'Login' )){ ?>
+ 
+ <script>
+     window.location.href="hhttp://www.codemarket.io/profile/";
+ </script>
+    // header("location:https://girish3.codemarket.io/profile/");
+    
+ <?php } } ?> 
 </head>
 <body <?php body_class(); ?>>
 

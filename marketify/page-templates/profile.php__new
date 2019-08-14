@@ -206,10 +206,7 @@ get_header(); ?>
 										echo '<tr>';
 										
 										echo '<td>' . $data['request_title'] . '</td>';
-										
-										$content = stripslashes($data['request_description']);
-										echo '<td>' . strip_tags($content, '<br>') . '</td>';
-										
+										echo '<td>' . stripslashes($data['request_description']) . '</td>';
 										echo '<td>' . $data['request_price'] . '</td>';
 										
 										$img_url = wp_get_attachment_url($data['request_image_id']);

@@ -1,0 +1,315 @@
+<?php
+/**
+ * Marketify
+ *
+ * Do not modify this file. Place all modifications in a child theme.
+ */
+
+if ( ! isset( $content_width ) ) {
+	$content_width = 680;
+}
+
+class Marketify {
+
+	private static $instance;
+
+	public $helpers;
+
+	public $activation;
+
+	public $integrations;
+	public $widgets;
+
+	public $template;
+
+	public $page_settings;
+	public $widgetized_pages;
+
+	public static function instance() {
+		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Marketify ) ) {
+			self::$instance = new self;
+		}
+
+		return self::$instance;
+	}
+
+	public function __construct() {
+		$this->base();
+		$this->setup();
+	}
+
+	// Integration getter helper
+	public function get( $integration ) {
+		return $this->integrations->get( $integration );
+	}
+
+	private function base() {
+		$this->files = array(
+			'customizer/class-customizer.php',
+
+			'activation/class-activation.php',
+
+			'setup/class-setup.php',
+
+			'class-helpers.php',
+
+			'integrations/class-integration.php',
+			'integrations/class-integrations.php',
+
+			'widgets/class-widgets.php',
+			'widgets/class-widget.php',
+
+			'template/class-template.php',
+
+			'pages/class-page-settings.php',
+			'pages/class-widgetized-page.php',
+
+			'deprecated.php',
+		);
+
+		foreach ( $this->files as $file ) {
+			require_once( get_template_directory() . '/inc/' . $file );
+		}
+	}
+
+	private function setup() {
+		$this->helpers = new Marketify_Helpers();
+
+		$this->activation = new Marketify_Activation();
+
+		$this->integrations = new Marketify_Integrations();
+		$this->widgets = new Marketify_Widgets();
+
+		$this->template = new Marketify_Template();
+
+		$this->widgetized_pages = new Marketify_Widgetized_Pages();
+
+		// $this->page_settings = new Marketify_Page_Settings();
+		add_action( 'after_setup_theme', array( $this, 'setup_theme' ) );
+	}
+
+	public function setup_theme() {
+		$locale = apply_filters( 'plugin_locale', get_locale(), 'marketify' );
+		load_textdomain( 'marketify', WP_LANG_DIR . "/marketify-$locale.mo" );
+		load_theme_textdomain( 'marketify', get_template_directory() . '/languages' );
+
+		add_theme_support( 'automatic-feed-links' );
+		add_theme_support( 'post-thumbnails' );
+		add_theme_support( 'title-tag' );
+
+		add_editor_style( 'css/editor-style.css' );
+
+		add_theme_support( 'custom-background', apply_filters( 'marketify_custom_background_args', array(
+			'default-color' => 'ffffff',
+			'default-image' => '',
+		) ) );
+
+		if ( apply_filters( 'marketify_hard_crop_images', true ) ) {
+			add_image_size( 'medium', get_option( 'medium_size_w' ), get_option( 'medium_size_h' ), true );
+			add_image_size( 'large', get_option( 'large_size_w' ), get_option( 'large_size_h' ), true );
+		}
+	}
+
+}
+
+function marketify() {
+	return Marketify::instance();
+}
+
+marketify();
+
+
+/**
+ * Get Theme Version.
+ *
+ * @since 2.13.0
+ * @link https://developer.wordpress.org/reference/functions/wp_get_theme/
+ *
+ * @return string
+ */
+function marketify_version() {
+	// Current active theme data.
+	$theme = wp_get_theme( get_template() );
+
+	return $theme->Version;
+}
+
+
+function slider_buttons(){
+if(!is_user_logged_in()){
+    $link = site_url().'/vendor-login-registration';
+}else{
+    $user_id = get_current_user_id();
+    $is_vendor = EDD_FES()->vendors->user_is_status( 'approved', $user_id );
+    if($is_vendor){
+        $link = site_url().'/vendor-dashboard';
+    }else{
+        $link = site_url().'/vendor-login-registration';
+    }
+}    
+?>
+<p><a class="button" style="border-color: #1176ef;" href="/downloads">Shop Now</a> <a class="button" style="border-color: #1176ef;" href="<?php echo $link; ?>" title="Start Selling">Start Selling</a></p>
+<?php
+}
+add_shortcode('slider_buttons','slider_buttons');
+
+function add_help_request_table()
+{
+	global $wpdb;
+
+	$table_name = $wpdb->prefix . 'help_request';
+	
+	if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) 
+	{
+		$sql        = "CREATE TABLE " . $table_name . " (
+					id int(11) NOT NULL AUTO_INCREMENT,				
+					user_id int(20) DEFAULT NULL,
+					request_title varchar(255) NOT NULL DEFAULT '',
+					request_description text NOT NULL,
+					request_image_id int(20) DEFAULT NULL,
+					price int(5) DEFAULT NULL,
+					created_at datetime NOT NULL,
+					updated_at datetime NOT NULL,
+					PRIMARY KEY  (id)
+				  );";
+
+		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+		dbDelta($sql);
+	}
+}
+
+function save_help_request() {	
+
+	global $wpdb;
+	
+	add_help_request_table();
+	
+	$user_id = get_current_user_id();
+	
+	parse_str($_POST['form_data'], $formdata);	
+	
+	$message = [];
+	
+	if($formdata['request_title'] == '')
+	{
+		$message['code'] = 404;
+		$message['field'] = 'request_title';
+		$message['messgae'] = 'Title is required';
+		
+		echo json_encode($message);
+		wp_die();
+	}
+	
+	if($formdata['request_description'] == '')
+	{
+		$message['code'] = 404;
+		$message['field'] = 'request_description';
+		$message['messgae'] = 'Description is required';
+		
+		echo json_encode($message);
+		wp_die();
+	}
+	
+	if($formdata['request_image_id'] == '')
+	{
+		$message['code'] = 404;
+		$message['field'] = 'request_image_id';
+		$message['messgae'] = 'Image is required';
+		
+		echo json_encode($message);
+		wp_die();
+	}
+	
+	if($formdata['request_price'] == '')
+	{
+		$message['code'] = 404;
+		$message['field'] = 'request_price';
+		$message['messgae'] = 'Price is required';
+		
+		echo json_encode($message);
+		wp_die();
+	}
+	
+	if($formdata['request_title'] != '' && $formdata['request_description'] != '')
+	{
+		
+		
+		if($formdata['id'] != '')
+		{
+			$params = [];
+			$params['user_id'] = $user_id;
+			$params['request_title'] = $formdata['request_title'];
+			$params['request_description'] = $formdata['request_description'];
+			$params['request_image_id'] = isset($formdata['request_image_id']) ? $formdata['request_image_id'] : '';
+			$params['request_price'] = $formdata['request_price'];
+			$params['updated_at'] = date('Y-m-d H:i:s');
+		
+			$wpdb->update($wpdb->prefix . 'help_request', $params, ['id' => $formdata['id']]);
+			
+			$message['code'] = 301;
+			$message['messgae'] = 'Successfully update your request';
+		}
+		else
+		{
+			$params = [];
+			$params['user_id'] = $user_id;
+			$params['request_title'] = $formdata['request_title'];
+			$params['request_description'] = $formdata['request_description'];
+			$params['request_image_id'] = isset($formdata['request_image_id']) ? $formdata['request_image_id'] : '';
+			$params['request_price'] = $formdata['request_price'];
+			$params['created_at'] = date('Y-m-d H:i:s');
+			$params['updated_at'] = date('Y-m-d H:i:s');
+		
+			$wpdb->insert($wpdb->prefix . 'help_request', $params);
+			
+			$message['code'] = 301;
+			$message['messgae'] = 'Successfully added new request';
+		}		
+		
+	}
+	else
+	{
+		$message['code'] = 404;
+		$message['messgae'] = 'Something Wrong';
+	}
+	
+	/*
+	// Print last SQL query string
+	echo $wpdb->last_query;
+	// Print last SQL query result
+	echo $wpdb->last_result;
+	// Print last SQL query Error
+	echo $wpdb->last_error;	
+	
+	echo "<pre>";
+	print_r($formdata);
+	echo "</pre>" . __FILE__ . ' ( Line Number ' . __LINE__ . ')';
+	die();
+	*/
+	
+	echo json_encode($message);
+	wp_die();
+	
+}
+
+add_action('wp_ajax_nopriv_save_help_request', 'save_help_request');
+add_action('wp_ajax_save_help_request', 'save_help_request');
+
+function delete_help_request(){
+	
+	global $wpdb;
+	
+	$user_id = get_current_user_id();
+	
+	$wpdb->delete($wpdb->prefix . 'help_request', ['id' => $_POST['delete_id'], 'user_id' => $user_id]);
+	
+	$message = [];
+	$message['code'] = 301;
+	$message['messgae'] = 'Request has been deleted';
+	
+	echo json_encode($message);
+	wp_die();
+}
+
+add_action('wp_ajax_nopriv_delete_help_request', 'delete_help_request');
+add_action('wp_ajax_delete_help_request', 'delete_help_request');

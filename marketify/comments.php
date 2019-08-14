@@ -27,6 +27,7 @@ if ( post_password_required() ) {
 		<?php do_action( 'marketify_comments_before' ); ?>
 
 		<?php if ( have_comments() ) : ?>
+		
 			<h2 class="comments-title section-title"><span><?php _e( 'Comments', 'marketify' ); ?></span></h2>
 
 			<ol class="comment-list">
