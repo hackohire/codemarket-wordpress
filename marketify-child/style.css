@@ -22,6 +22,7 @@ Version:        1.0
 }
 .single-download .page-header.page-header--download.download-header.container {
     padding-top: 15px;
+    
 }
 .single-download .download-header__info.download-header__info--actions {
     display: none;
@@ -39,14 +40,16 @@ Version:        1.0
     color: #000;
 }
 .single-download .header-outer.has-image.has-video {
-        background-image: none !important;
-  background: linear-gradient(#29303B,#29303B,#29303B) !important;
+           background-repeat: no-repeat !important;
+    background-size: cover !important; 
+  background: transparent;
+  margin-top: 78px;
     color: #fff;
 }	
 
 .single-download h1.page-title {
     line-height: normal;
-    color: #fff;
+    color: #000;
     text-align: left;
     margin: 0 0 0 30px;
     max-width: 50%;    font-size: 28px;
@@ -60,8 +63,15 @@ Version:        1.0
     background: #efeeee;
 }
 .single-download .page-header.page-header--download.download-header.container {
-    padding-top: 90px;
-    display: inline-block;height:280px;
+    padding-top: 0px;
+    display: inline-block;
+    height: 280px;
+    position: relative;
+    width: 100%;
+    top: -58px;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 .single-download .nav-menu--primary li a, .nav-menu li.menu-item-has-children:after, .nav-menu li.page_item_has_children:after {
     color: #000 !important;
@@ -283,3 +293,7 @@ ul.my-tab-menu li:first-child{border-right: none;}
 ul.my-tab-menu li.active{background: #f2f2f2;border-color: #f2f2f2;}
 #my-tab-buy{display: none;}
 #my-tab-help{display: none;}
+.meetup-img{height: 145px;
+    overflow: hidden;
+    width: 100%;border: 2px solid #1355ce;}
+    .entry-title2{margin-bottom:15px}

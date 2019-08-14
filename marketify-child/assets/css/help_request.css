@@ -1,0 +1,15 @@
+body.home{overflow-x: unset !important;}
+
+.error_request_title,
+.error_request_description,
+.error_request_image_id,
+.error_request_price{font-size:18px;color: red !important;width:100%;position:relative;display: inline-block;}
+
+.cm_help_request_btn{padding: 10px;background: #ddd;color: #000 !important;text-decoration: none;}
+.cm_help_request_delete_btn{cursor: pointer;}
+
+.single_help_request_detail .help_request_title{margin: 0 0 20px 0;}
+
+table#help_request_list thead tr{background: #ddd}
+table#help_request_list tbody tr{border-bottom: 1px solid #ccc;}
+table#help_request_list th, table#help_request_list td{padding: 5px;}

@@ -29,8 +29,7 @@
 $(document).ready(function() {
   $('#example').dataTable( {
   "pageLength": 20,
-"searching": false,
-"ordering": false
+"searching": false
 } );
 } );
 </script>
