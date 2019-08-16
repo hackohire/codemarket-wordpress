@@ -253,7 +253,7 @@ p{font-size: 16px;     margin-bottom:.5em;}
     font-weight: 600;
     line-height: 1.33em;
 }
-.site-content{margin-top:0;width: 100%;}
+.site-content{ margin:10px auto;width: 100%;}
 .header-outer, .minimal, .custom-background.minimal, .wp-playlist .mejs-controls .mejs-time-rail .mejs-time-current{ background: linear-gradient(220deg,#EC5252 -10%,#6E1A52 70%);}
 .single-download .download-video{ width:346px; margin-right:27px; height:206px; float:right; border:solid 3px #fff; border-radius:5px; }
 .single-download .download-audio{ width:346px; margin-right:27px; height:206px; float:right; border:solid 3px #fff; border-radius:5px; }
@@ -283,27 +283,17 @@ h3.widget-title--download-archive{ margin-bottom:0;  }
 ul.edd-taxonomy-widget li.cat-item::before{ color:#01AEEF; }
 
 
-.my-sales-amount *{text-align: left;}
-.my-buy-sales-products{margin-top: 0;}
-.my-add-product{float: right;border: 1px solid #ccc;padding: 5px 20px; margin-bottom: 10px;}
-.my-add-product a{text-decoration: none;}
-.my-tab-menu{margin: 0;list-style: none;}
-ul.my-tab-menu li {float: left;width: 20%;padding: 3px;border: 1px solid #f2f2f2;text-align: center;cursor: pointer;}
-ul.my-tab-menu li:first-child{border-right: none;}
+.my-sales-amount *{text-align: left;} 
+.my-buy-sales-products{margin-top: 40px;}
+.my-add-product{float: right;border: 1px solid #ccc;padding: 4px 20px;} 
+.my-add-product a{text-decoration: none;} 
+.my-tab-menu{margin: 10px 0;list-style: none;}
+ul.my-tab-menu li {float: left;width: 20%;padding: 3px;border: 1px solid #f2f2f2;text-align: center;cursor: pointer;} 
+ul.my-tab-menu li:first-child{border-right: none;} 
 ul.my-tab-menu li.active{background: #f2f2f2;border-color: #f2f2f2;}
 #my-tab-buy{display: none;}
 #my-tab-help{display: none;}
-.meetup-img{height: 145px;overflow: hidden;width: 100%;border: 2px solid #1355ce;}
-
-body.home{overflow-x: unset !important;}
-.fes-el.text.license{display: none;}
-.fes-submission-form .fes-fields select{width: 100%;height: 41px;background: transparent;}
-.my-buy-sales-products {border: 1px solid #f2f2f2;padding: 10px sele10px 0 10px;}
-.my-buy-sales-products {border: 1px solid #f2f2f2;padding: 10px 10px 0 10px;}
-/*
-.type-download form.edd_download_purchase_form{display:none;}
-.type-download.types-bug-fix form.edd_download_purchase_form,
-.type-download.help-request form.edd_download_purchase_form{display:block;}
-*/
-.my-tab-panel .add_product_form{width: 100%;border: 1px solid #ccc;padding: 5px 20px;}
-.product_pagination .pagination{margin: 0 0 20px 0;float: right;}
+.meetup-img{height: 145px;
+    overflow: hidden;
+    width: 100%;border: 2px solid #1355ce;}
+    .entry-title2{margin-bottom:15px}

@@ -63,12 +63,18 @@ get_header();
 			    <div class="clear"></div>
 
 			    <?php
-			    $current_user_id = get_current_user_id();
-
 			    $args = [
 				'post_type'	 => 'download',
-				'author'	 => $current_user_id,
-				'post_status'	 => 'publish',
+				'author'	 => get_current_user_id(),
+				    /*
+				      'tax_query'	 => array(
+				      array(
+				      'taxonomy'	 => 'types',
+				      'field'		 => 'slug',
+				      'terms'		 => ['bug-fix', 'help-request', 'interview', 'requirment'],
+				      ),
+				      ),
+				     */
 			    ];
 
 			    $arrDownload = new WP_Query($args);
@@ -89,7 +95,7 @@ get_header();
 				    if ($type[0]->slug == 'bug-fix')
 				    {
 					//$arrBugsFix[] = $product_data;
-					$arrSell[] = $product_data;
+						$arrSell[] = $product_data;
 				    }
 				    else if ($type[0]->slug == 'help-request')
 				    {
@@ -112,16 +118,12 @@ get_header();
 
 			    $site_url = get_site_url();
 			    ?>
-				
-				<div class="my-add-product">
-				    <a class="show_product_form" href="JavaScript:Void(0);"><i class="fas fa-plus-square"></i> Add</a>
-				</div>
-				<div class="clear"></div>
-				<div class="add_product_form" style="display:none">
-				    <?php echo EDD_FES()->forms->render_submission_form(); ?>
-				</div>
 
-			    <div class="my-tab-panel" id="my-tab-sell">				
+			    <div class="my-tab-panel" id="my-tab-sell">
+
+				<div class="my-add-product">
+				    <a href="<?php echo $site_url; ?>/vendor-dashboard/?task=new-product"><i class="fas fa-plus-square"></i> Add</a>
+				</div>
 
 				<table class="table fes-table table-condensed  table-striped" id="fes-order-list">
 				    <thead>
@@ -176,7 +178,7 @@ get_header();
 					}
 					else
 					{
-					    echo '<tr><td colspan="5">No Product Found</td></tr>';
+					    echo '<tr><td colspan="4">No Product Found</td></tr>';
 					}
 					?>
 
@@ -184,7 +186,11 @@ get_header();
 				</table>
 			    </div>
 
-			    <div class="my-tab-panel" id="my-tab-buy" style="display:none">				
+			    <div class="my-tab-panel" id="my-tab-buy">
+
+				<div class="my-add-product">
+				    <a href="<?php echo $site_url; ?>/vendor-dashboard/?task=new-product"><i class="fas fa-plus-square"></i> Add</a>
+				</div>
 
 				<table class="table fes-table table-condensed  table-striped" id="fes-order-list">
 				    <thead>
@@ -218,6 +224,10 @@ get_header();
 			    </div>
 
 			    <div class="my-tab-panel" id="my-tab-help-request"  style="display:none">
+
+				<div class="my-add-product">
+				    <a href="<?php echo $site_url; ?>/vendor-dashboard/?task=new-product"><i class="fas fa-plus-square"></i> Add</a>
+				</div>
 
 				<table class="table fes-table table-condensed  table-striped" id="fes-order-list">
 				    <thead>
@@ -272,7 +282,7 @@ get_header();
 					}
 					else
 					{
-					    echo '<tr><td colspan="5">No Help Request Found</td></tr>';
+					    echo '<tr><td colspan="4">No Help Request Found</td></tr>';
 					}
 					?>
 
@@ -316,8 +326,6 @@ get_header();
 	    jQuery(this).addClass('active');
 	    jQuery('.my-tab-panel').hide();
 	    jQuery('#' + jQuery(this).attr('data-tab-id')).show();
-		
-		$('.add_product_form').hide();
 	});
     });
 </script>
@@ -325,14 +333,6 @@ get_header();
 <script>
     jQuery(document).ready(function ($)
     {
-		
-	$('body').on('click', '.show_product_form', function (event)
-	{
-	    event.preventDefault();
-	    
-	    $('.add_product_form').show();
-	});
-	
 	$('.cm_delete_product_btn').on('click', function (event)
 	{
 	    event.preventDefault();
@@ -358,8 +358,6 @@ get_header();
 	    });
 
 	});
-	
-	
 
     });
 </script>
