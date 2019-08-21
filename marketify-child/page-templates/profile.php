@@ -123,7 +123,7 @@ get_header();
 
 			    <div class="my-tab-panel" id="my-tab-sell">				
 
-				<table class="table fes-table table-condensed  table-striped" id="fes-order-list">
+				<table class="table fes-table table-condensed  table-striped tablesorter {sortlist: [[2,0]]}" id="myTable fes-order-list">
 				    <thead>
 					<tr>
 					    <th>Title</th>
@@ -186,7 +186,7 @@ get_header();
 
 			    <div class="my-tab-panel" id="my-tab-buy" style="display:none">				
 
-				<table class="table fes-table table-condensed  table-striped" id="fes-order-list">
+				<table class="table fes-table table-condensed  table-striped tablesorter {sortlist: [[2,0]]}" id="myTable fes-order-list">
 				    <thead>
 					<tr>
 					    <th>Title</th>
@@ -219,7 +219,7 @@ get_header();
 
 			    <div class="my-tab-panel" id="my-tab-help-request"  style="display:none">
 
-				<table class="table fes-table table-condensed  table-striped" id="fes-order-list">
+				<table class="table fes-table table-condensed  table-striped  tablesorter {sortlist: [[2,0]]}" id="myTable fes-order-list">
 				    <thead>
 					<tr>
 					    <th>Title</th>

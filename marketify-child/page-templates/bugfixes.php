@@ -15,7 +15,7 @@ $query = new WP_Query( $args );
 	
 	<div id="content" class="site-content site-content--home" role="main">
 <div class="container"><h3 class="widget-title widget-title--home section-title"><span>Product List</span></h3>
-<table id="example"  class="table table-striped table-bordered" style="width:100%">
+<table 	<table class="table fes-table table-condensed table-striped  tablesorter {sortlist: [[2,0]]}" id="myTable help_request_list" style="width:100%">
 							<thead>
 								<tr>
 									<th>Product Name</th>

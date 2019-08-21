@@ -101,7 +101,7 @@ function help_request_list_callback($atts)
 	?>
 	<h3 class="widget-title widget-title--home section-title"><span><?php echo $atts['title']; ?></span></h3>
 
-	<table class="table fes-table table-condensed table-striped" id="help_request_list">
+	<table class="table fes-table table-condensed table-striped tablesorter {sortlist: [[2,0]]}" id="myTable help_request_list">
 
 	    <thead>
 		<tr>
@@ -210,7 +210,7 @@ function product_list_callback($atts)
 	}
 	?>
 
-	<table class="table fes-table table-condensed table-striped" id="help_request_list">
+	<table class="table fes-table table-condensed table-striped tablesorter {sortlist: [[2,0]]}" id="myTable help_request_list">
 
 	    <thead>
 		<tr>
