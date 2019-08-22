@@ -30,6 +30,8 @@ get_header(); ?>
 	
 	<div class="site-content site-content--home container" role="main">
 	    <?php echo do_shortcode('[help_request_list]'); ?>
+	    
+	    <?php echo do_shortcode('[user_list]'); ?>
 	</div><!-- #content -->
 
 <?php get_footer(); ?>

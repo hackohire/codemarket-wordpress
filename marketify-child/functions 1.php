@@ -470,15 +470,15 @@ function user_list_callback($atts)
 		<?php
 		foreach ($blogusers as $user_id)
 		{
+		  
 		$current_user_id = $user_id->ID;
  ?>
-		    <?php if(count_user_posts($current_user_id,'download') > 0){ ?><tr>
-		     <td><?php echo esc_html( $user_id->display_name );?></td>
+		    <tr>
+		     <td><?php echo esc_html( $user_id->display_name )  ?></td>
 	        <td class="fes-order-list-td widget">
-	<?php echo count_user_posts($current_user_id,'download');?>
+	<?php echo count_user_posts($current_user_id,'download'); ?>
 	        </td>	
 	        </tr>
-	        <?php }?>
 	    <?php
 	}
 	?>							
