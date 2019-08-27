@@ -61,31 +61,22 @@ wp_enqueue_script('custom_script');
 
 			    <ul class="my-tab-menu">
 <?php if(isset($_REQUEST['req_id']))
-{?>
-<script>
-$(document).ready(function(){
-
-    $('.types option:eq(2)').prop('selected', true);
-    $('.types option:eq(1)').hide();
-    $('.types option:eq(3)').hide();
-    $('.types option:eq(4)').hide();
-    
-});
-</script>
+{ ?>
 <?php } else{?>
 				<li class="active" data-tab-id="my-tab-sell">Sell</li><?php }
-?>
-<?php if(isset($_REQUEST['req_id']))
-{?><style>.my-tab-panel{display:none}</style>				<li class="active" data-tab-id="my-tab-help-request">Request Help</li>
-
+ if(isset($_REQUEST['req_id']))
+{?>
+				<li class="active" data-tab-id="my-tab-help-request">Request Help</li>
 <?php } else{?>
 				<li data-tab-id="my-tab-help-request">Request Help</li>
+				
 				<?php }?>
-			<?php if(isset($_REQUEST['req_id']))
+				<?php if(isset($_REQUEST['req_id']))
 {?>
 <?php } else{?>
-				<li data-tab-id="my-tab-buy">Buy</li>				
-			   <?php }?> </ul>
+				<li data-tab-id="my-tab-buy">Buy</li>
+				<?php }?>
+			    </ul>
 
 			    <div class="clear"></div>
 
@@ -139,17 +130,12 @@ $(document).ready(function(){
 
 			    $site_url = get_site_url();
 			    ?>
-<?php if(isset($_REQUEST['req_id']))
-{?><?php } else{ ?>
+
 			    <div class="my-add-product">
 				<a class="show_product_form" href="JavaScript:Void(0);"><i class="fas fa-plus-square"></i> Add</a>
 			    </div>
-			    <?php }?>
 			    <div class="clear"></div>
-			    
-			    
-			    <div class="add_product_form" <?php if(isset($_REQUEST['req_id']))
-{?><?php } else{ ?> style="display:none"<?php }?>>
+			    <div class="add_product_form" style="display:none">
 				<?php echo EDD_FES()->forms->render_submission_form(); ?>
 			    </div>
 

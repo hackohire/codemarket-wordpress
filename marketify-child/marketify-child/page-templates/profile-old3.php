@@ -3,17 +3,26 @@
  * Template Name:  Profile Page
  * @package Child Marketify
  */
- 
-if (!is_user_logged_in())
+if(isset($_GET['request']))
 {
-    $link = site_url() . '/register';
-    wp_redirect($link);
+   $author1 = $_REQUEST['request'];
+   ?>
+   <style>.my-add-product{display:none}</style>
+   <?php
 }
+else
+{
+if(!is_user_logged_in()){
+    $link = site_url().'/vendor-login-registration';
+	wp_redirect($link);
+} 
+$author1 = get_current_user_id();
+}
+
+$author = new WP_User($author1);
 
 global $wpdb;
 
-$author	 = get_current_user_id();
-$author	 = new WP_User($author);
 $id	 = $author->ID;
 $myrows	 = $wpdb->get_results("SELECT sales_value FROM wp_fes_vendors where user_id='" . $id . "'");
 
@@ -22,10 +31,6 @@ $sell_info = $wpdb->get_results("select ID, (select meta_value from wp_postmeta 
 $buy_info = $wpdb->get_results("select ID, ( select post_id from wp_postmeta where meta_key='_edd_commission_payment_id' and meta_value=a.ID ) as commision_id from wp_posts a join wp_postmeta b on a.post_type='edd_payment' and  a.post_status = 'publish' and b.post_id = a.ID and meta_key = '_edd_payment_user_id' and meta_value = $id", ARRAY_A);
 
 get_header();
-
-wp_enqueue_style('select2_style');
-wp_enqueue_script('select2_script');
-wp_enqueue_script('custom_script');
 ?>
 
 <?php do_action('marketify_entry_before'); ?>
@@ -60,37 +65,15 @@ wp_enqueue_script('custom_script');
 			<div class="my-buy-sales-products">
 
 			    <ul class="my-tab-menu">
-<?php if(isset($_REQUEST['req_id']))
-{?>
-<script>
-$(document).ready(function(){
-
-    $('.types option:eq(2)').prop('selected', true);
-    $('.types option:eq(1)').hide();
-    $('.types option:eq(3)').hide();
-    $('.types option:eq(4)').hide();
-    
-});
-</script>
-<?php } else{?>
-				<li class="active" data-tab-id="my-tab-sell">Sell</li><?php }
-?>
-<?php if(isset($_REQUEST['req_id']))
-{?><style>.my-tab-panel{display:none}</style>				<li class="active" data-tab-id="my-tab-help-request">Request Help</li>
-
-<?php } else{?>
+				<li class="active" data-tab-id="my-tab-sell">Sell</li>
 				<li data-tab-id="my-tab-help-request">Request Help</li>
-				<?php }?>
-			<?php if(isset($_REQUEST['req_id']))
-{?>
-<?php } else{?>
 				<li data-tab-id="my-tab-buy">Buy</li>				
-			   <?php }?> </ul>
+			    </ul>
 
 			    <div class="clear"></div>
 
 			    <?php
-			    $current_user_id = get_current_user_id();
+			    $current_user_id = $author1;
 
 			    $args = [
 				'post_type'	 => 'download',
@@ -139,30 +122,27 @@ $(document).ready(function(){
 
 			    $site_url = get_site_url();
 			    ?>
-<?php if(isset($_REQUEST['req_id']))
-{?><?php } else{ ?>
-			    <div class="my-add-product">
-				<a class="show_product_form" href="JavaScript:Void(0);"><i class="fas fa-plus-square"></i> Add</a>
-			    </div>
-			    <?php }?>
-			    <div class="clear"></div>
-			    
-			    
-			    <div class="add_product_form" <?php if(isset($_REQUEST['req_id']))
-{?><?php } else{ ?> style="display:none"<?php }?>>
-				<?php echo EDD_FES()->forms->render_submission_form(); ?>
-			    </div>
+				
+				<div class="my-add-product">
+				    <a class="show_product_form" href="JavaScript:Void(0);"><i class="fas fa-plus-square"></i> Add</a>
+				</div>
+				<div class="clear"></div>
+				<div class="add_product_form" style="display:none">
+				    <?php echo EDD_FES()->forms->render_submission_form(); ?>
+				</div>
 
 			    <div class="my-tab-panel" id="my-tab-sell">				
 
-				<table class="table fes-table table-condensed table-striped tablesorter {sortlist: [[2,0]]}" id="myTable fes-order-list">
+				<table class="table fes-table table-condensed  table-striped tablesorter {sortlist: [[2,0]]}" id="myTable fes-order-list">
 				    <thead>
 					<tr>
 					    <th>Title</th>
 					    <th>Image</th>
 					    <th>Price</th>
+					    <?php if(isset($_GET['request']))
+{}else{?>
 					    <th>Edit</th>
-					    <th>Delete</th>
+					    <th>Delete</th><?php }?>
 					</tr>
 				    </thead>
 				    <tbody>
@@ -199,9 +179,12 @@ $(document).ready(function(){
 						    <?php
 						    $edit_url	 = $site_url . '/vendor-dashboard/?task=edit-product&post_id=' . $data->ID;
 						    ?>
+						    <?php if(isset($_GET['request']))
+{}else{?>
 						    <td class="cm_edit_product_btn"><a href="<?php echo $edit_url; ?>">Edit</a></td>
 
 						    <td class="cm_delete_product_btn" data-id="<?php echo $data->ID; ?>">Delete</td>
+						    <?php }?>
 						</tr>  
 						<?php
 					    }
@@ -218,7 +201,7 @@ $(document).ready(function(){
 
 			    <div class="my-tab-panel" id="my-tab-buy" style="display:none">				
 
-				<table class="table fes-table table-condensed table-striped tablesorter {sortlist: [[2,0]]}" id="myTable fes-order-list">
+				<table class="table fes-table table-condensed  table-striped tablesorter {sortlist: [[2,0]]}" id="myTable fes-order-list">
 				    <thead>
 					<tr>
 					    <th>Title</th>
@@ -251,14 +234,17 @@ $(document).ready(function(){
 
 			    <div class="my-tab-panel" id="my-tab-help-request"  style="display:none">
 
-				<table class="table fes-table table-condensed table-striped tablesorter {sortlist: [[2,0]]}" id="myTable fes-order-list">
+				<table class="table fes-table table-condensed  table-striped  tablesorter {sortlist: [[2,0]]}" id="myTable fes-order-list">
 				    <thead>
 					<tr>
 					    <th>Title</th>
 					    <th>Image</th>
 					    <th>Price</th>
+					     <?php if(isset($_GET['request']))
+{}else{?>
 					    <th>Edit</th>
 					    <th>Delete</th>
+					    <?php }?>
 					</tr>
 				    </thead>
 				    <tbody>
@@ -295,9 +281,12 @@ $(document).ready(function(){
 						    <?php
 						    $edit_url	 = $site_url . '/vendor-dashboard/?task=edit-product&post_id=' . $data->ID;
 						    ?>
+						     <?php if(isset($_GET['request']))
+{}else{?>
 						    <td class="cm_edit_product_btn"><a href="<?php echo $edit_url; ?>">Edit</a></td>
 
 						    <td class="cm_delete_product_btn" data-id="<?php echo $data->ID; ?>">Delete</td>
+						    <?php }?>
 						</tr>  
 						<?php
 					    }
@@ -348,8 +337,51 @@ $(document).ready(function(){
 	    jQuery(this).addClass('active');
 	    jQuery('.my-tab-panel').hide();
 	    jQuery('#' + jQuery(this).attr('data-tab-id')).show();
-	    $('.add_product_form').hide();
+		
+		$('.add_product_form').hide();
 	});
+    });
+</script>
+
+<script>
+    jQuery(document).ready(function ($)
+    {
+		
+	$('body').on('click', '.show_product_form', function (event)
+	{
+	    event.preventDefault();
+	    
+	    $('.add_product_form').show();
+	});
+	
+	$('.cm_delete_product_btn').on('click', function (event)
+	{
+	    event.preventDefault();
+
+	    var ajax_url = window.location.protocol + "//" + window.location.host;
+	    var del_id = $(this).attr('data-id');
+
+	    $.ajax({
+		url: ajax_url + "/wp-admin/admin-ajax.php",
+		type: 'post',
+		dataType: 'JSON',
+		data: {
+		    'action': 'delete_product',
+		    'delete_id': del_id
+		},
+		success: function (data)
+		{
+		    if (data.code == 301)
+		    {
+			window.location.href = "/profile/";
+		    }
+		}
+	    });
+
+	});
+	
+	
+
     });
 </script>
 

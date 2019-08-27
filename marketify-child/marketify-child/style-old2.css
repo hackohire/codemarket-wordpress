@@ -1,0 +1,24 @@
+/*
+Theme Name:     Marketify Child
+Theme URI:      http://astoundify.com/themes/marketify
+Template:       marketify
+Version:        1.0
+*/
+.my-sales-amount *{text-align: left;}
+.my-buy-sales-products{margin-top: 0;}
+.my-add-product{float: right;border: 1px solid #ccc;padding: 4px 20px; margin-bottom: 20px;}
+.my-add-product a{text-decoration: none;}
+.my-tab-menu{margin: 10px 0;list-style: none;}
+ul.my-tab-menu li {float: left;width: 20%;padding: 3px;border: 1px solid #f2f2f2;text-align: center;cursor: pointer;}
+ul.my-tab-menu li:first-child{border-right: none;}
+ul.my-tab-menu li.active{background: #f2f2f2;border-color: #f2f2f2;}
+#my-tab-buy{display: none;}
+#my-tab-help{display: none;}
+
+body.home{overflow-x: unset !important;}
+.fes-el.text.license{display: none;}
+.fes-vendor-dashboard .fes-submission-form .fes-fields select{width: 100%;height: 41px;background: transparent;}
+.my-buy-sales-products .my-tab-panel{border: 1px solid #f2f2f2;padding: 10px 10px 0 10px;}
+.type-download form.edd_download_purchase_form{display:none;}
+.type-download.types-bug-fix form.edd_download_purchase_form,
+.type-download.help-request form.edd_download_purchase_form{display:block;}

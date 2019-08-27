@@ -101,7 +101,7 @@ function help_request_list_callback($atts)
 	?>
 	<h3 class="widget-title widget-title--home section-title"><span><?php echo $atts['title']; ?></span></h3>
 
-<div class="table-responsive">	<table class="table fes-table table-condensed table-striped tablesorter {sortlist: [[2,0]]}" id="myTable  help_request_list">
+	<table class="table fes-table table-condensed table-striped tablesorter {sortlist: [[2,0]]}" id="myTable help_request_list">
 
 	    <thead>
 		<tr>
@@ -149,7 +149,6 @@ function help_request_list_callback($atts)
 	?>							
 	</tbody>
 	</table>
-	</div>
 	<?php
     }
 
@@ -211,7 +210,7 @@ function product_list_callback($atts)
 	}
 	?>
 
-	<div class="table-responsive"><table class="table fes-table table-condensed table-striped  tablesorter {sortlist: [[2,0]]}" id="myTable help_request_list">
+	<table class="table fes-table table-condensed table-striped tablesorter {sortlist: [[2,0]]}" id="myTable help_request_list">
 
 	    <thead>
 		<tr>
@@ -259,7 +258,7 @@ function product_list_callback($atts)
 	?>							
 	</tbody>
 	</table>
-</div>
+
 	<?php
 	if ($atts['pagination'] == 'yes')
 	{
@@ -435,48 +434,11 @@ function meetups_save_post($post_id)
     }
 }
 
-add_action('wp_enqueue_scripts', 'cm_enqueue_style_script');
 
-function cm_enqueue_style_script()
-{
-    wp_register_style('select2_style', get_stylesheet_directory_uri() . '/assets/css/select2.min.css');
 
-    wp_register_script('select2_script', get_stylesheet_directory_uri() . '/assets/js/select2.full.min.js', '', '', true);
-	wp_register_script('custom_script', get_stylesheet_directory_uri() . '/assets/js/custom_script.js', '', '', true);
-}
 
-function check_download_category()
-{
-    $arrCategory = $_REQUEST['selectData'];
 
-    $newCategory = [];
 
-    foreach ($arrCategory as $key => $value)
-    {
-	$term = get_term($value);
-
-	if (empty($term))
-	{
-		$value = ucfirst($value);
-		
-	    $data = wp_insert_term(
-		    $value, // the term 
-		    'download_category');
-
-	    $newCategory[$key] = $data['term_id'];
-	}
-	else
-	{
-	    $newCategory[$key] = $value;
-	}
-    }
-
-    echo json_encode($newCategory);
-    wp_die();
-}
-
-add_action('wp_ajax_nopriv_check_download_category', 'check_download_category');
-add_action('wp_ajax_check_download_category', 'check_download_category');
 
 function user_list_callback($atts)
 {
@@ -494,13 +456,13 @@ function user_list_callback($atts)
 //print_r($blogusers);
 	?>
 	<h3 class="widget-title widget-title--home section-title"><span><?php echo $atts['title']; ?></span></h3>
-<div class="container">
-<div class="table-responsive">	<table class="table fes-table table-condensed table-striped tablesorter {sortlist: [[2,0]]}" id="myTable user_list">
+
+	<table class="table fes-table table-condensed table-striped tablesorter {sortlist: [[2,0]]}" id="myTable user_list">
 
 	    <thead>
 		<tr>
 		    <th>User</th>
-		     <th>No. of Bug Fix</th>
+		     <th>No. Of Bug Fixes</th>
 		</tr>
 	    </thead>
 
@@ -508,22 +470,20 @@ function user_list_callback($atts)
 		<?php
 		foreach ($blogusers as $user_id)
 		{
-		  
 		$current_user_id = $user_id->ID;
  ?>
-		    <tr>
-		     <td><a href="profile?request=<?php echo $current_user_id; ?>"><?php echo esc_html( $user_id->display_name )  ?></a></td>
+		    <?php if(count_user_posts($current_user_id,'download') > 0){ ?><tr>
+		   <td><a href="profile?request=<?php echo $current_user_id; ?>"><?php echo esc_html( $user_id->display_name )  ?></a></td>
 	        <td class="fes-order-list-td widget">
-	<?php echo count_user_posts($current_user_id,'download'); ?>
+	<?php echo count_user_posts($current_user_id,'download');?>
 	        </td>	
 	        </tr>
+	        <?php }?>
 	    <?php
 	}
-	
 	?>							
 	</tbody>
-	</table></div>
-	</div>
+	</table>
 	<?php
     
 
