@@ -42,7 +42,6 @@ Version:        1.0
   margin-top: 78px;
     color: #fff;
 }	
-
 .single-download h1.page-title {
     line-height: normal;
     color: #000;
@@ -329,4 +328,37 @@ body.home{overflow-x: unset !important;}
 }
 .fes-form-fieldset-submission .mce-edit-area iframe{
     height: 300px !important;
+}
+
+
+/*girish*/
+.img-responsive1{height:400px !important;}
+
+@media(max-width:992px)
+{
+	.img-responsive1{height:320px !important;}
+}
+@media(max-width:768px)
+{
+	.img-responsive1{height:250px !important;}
+}
+@media(max-width:580px)
+{
+.site-branding .custom-header {
+	margin-top: 14px;}
+	.site-branding{width:170px;}
+	.img-responsive1{height:auto !important;}
+	.nav-menu--primary-toggle::before {
+    margin-top: 16px;
+}
+}
+
+@media(max-width:390px)
+{
+	.img-responsive1{height:160px !important;}
+}
+
+@media(max-width:377px)
+{
+	.img-responsive1{height:120px !important;}
 }
