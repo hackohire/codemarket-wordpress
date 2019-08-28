@@ -1,0 +1,1 @@
+tinymce.PluginManager.add('arkbquote', function (editor, url) {    editor.addButton('arkbquote', {        onclick: function () {				editor.selection.setContent('<blockquote>' + editor.selection.getContent() + '</blockquote><br>');         },        tooltip: 'Супер Цитата',        image: url + '/img/cite-16.png'    })});

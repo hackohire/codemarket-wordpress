@@ -1,0 +1,478 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ark-wce\n"
+"POT-Creation-Date: 2017-12-06 14:01+0600\n"
+"PO-Revision-Date: 2017-12-06 14:05+0600\n"
+"Last-Translator: Александр Каратаев <ddw2@yandex.ru>\n"
+"Language-Team: Каратаев А.Р. <ddw2@yandex.ru>\n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.5\n"
+"X-Poedit-Basepath: ../../../../../../../../../../..\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: WebServers/home/localhost/www/Server/WordPress/obg/wp-"
+"content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php\n"
+"X-Poedit-SearchPath-1: Winginx/home/local.obg.kz/public_html/wp-content/"
+"plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php\n"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:114
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:115
+msgid "Settings visual editor comments"
+msgstr "Paramètres de l'éditeur visuel des commentaires"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:172
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:174
+msgid "Settings saved."
+msgstr "Paramètres sauvegardés"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:178
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:180
+msgid "Settings successfully restored the default."
+msgstr "Les paramètres ont bien été restaurés par défaut."
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:186
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:188
+msgid "Editor Options"
+msgstr "Options de l'éditeur"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:190
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:192
+msgid "Select Editor"
+msgstr "Sélectionnez Editor"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:195
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:197
+msgid "When not working TinyMCE - select CkEditor"
+msgstr "Lorsqu'ils ne sont pas TinyMCE travail - sélectionnez CKEditor"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:197
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:199
+msgid ""
+"Under the laws of some countries, it is required to establish a checkbox to "
+"confirm consent to the terms of confidentiality and user agreements of the "
+"site. Without such a confirmation, sending a comment should be inaccessible. "
+"If at least one URL is below specified, then such checkbox will appear in "
+"the form of comments."
+msgstr ""
+"Selon les lois de certains pays, il est nécessaire d'établir une case à "
+"cocher pour confirmer le consentement aux termes de la confidentialité et "
+"les accords d'utilisation du site. Sans une telle confirmation, l'envoi d'un "
+"commentaire devrait être inaccessible. Si au moins une URL est spécifiée ci-"
+"dessous, une telle case à cocher apparaîtra sous la forme de commentaires."
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:199
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:201
+msgid "The text of the checkbox (before the links)"
+msgstr "Le texte de la case à cocher (avant les liens)"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:200
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:202
+msgid "I agree to the"
+msgstr "je suis d'accord avec le"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:202
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:204
+msgid "Full URL to privacy conditions"
+msgstr "URL complète des conditions de confidentialité"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:204
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:209
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:206
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:215
+msgid "Link text"
+msgstr "Texte du lien"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:205
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:207
+msgid "terms of privacy"
+msgstr "termes de la vie privée"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:207
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:213
+msgid "Full URL to the user agreement"
+msgstr "URL complète de l'accord de l'utilisateur"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:210
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:216
+msgid "and user agreement"
+msgstr "et accord d'utilisateur"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:215
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:221
+msgid "General Settings buttons"
+msgstr "Boutons Paramètres généraux"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:219
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:225
+msgid "Undo"
+msgstr "Annuler"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:221
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:227
+msgid "Redo"
+msgstr "Rétablir"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:224
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:230
+msgid "Bold"
+msgstr "Gras"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:227
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:233
+msgid "Italic"
+msgstr "Italique"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:230
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:236
+msgid "Underline"
+msgstr "Souligné"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:233
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:239
+msgid "Strikethrough"
+msgstr "Barré"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:236
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:242
+msgid "Forecolor"
+msgstr "Couleur du texte"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:239
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:245
+msgid "Backcolor"
+msgstr "Couleur de fond du texte"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:245
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:251
+msgid "FontSize"
+msgstr "Taille de police"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:247
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:253
+msgid "Font"
+msgstr "Police"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:252
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:258
+msgid "Link"
+msgstr "Lien URL"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:255
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:261
+msgid "Image"
+msgstr "Image"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:258
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:264
+msgid "Blockquote"
+msgstr "Citation"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:261
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:267
+msgid "Code"
+msgstr "Code"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:264
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:270
+msgid "Bullist"
+msgstr "Paragraphes"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:267
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:273
+msgid "Numlist"
+msgstr "Liste numérotée"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:270
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:276
+msgid "Table"
+msgstr "Table"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:273
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:279
+msgid "Emoticons"
+msgstr "Emoticons"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:277
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:283
+msgid "Additional set of smileys"
+msgstr "Packs de smileys supplémentaires"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:278
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:284
+msgid ""
+"For TinyMCE will be added to the individual buttons for each set. For "
+"SKEditor default smileys will be replaced with the selected set."
+msgstr ""
+"Pour TinyMCE sera ajouté aux boutons individuels pour chaque ensemble. Pour "
+"SKEditor smileys par défaut seront remplacés par l'ensemble sélectionné."
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:293
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:299
+msgid "From a set of emoticons QIP"
+msgstr "Smileys QIP"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:296
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:302
+msgid "From a set of emoticons Skype"
+msgstr "Smileys Skype"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:299
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:305
+msgid "From a set of emoticons k-babe"
+msgstr "Smileys k-babe"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:304
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:310
+msgid "Advanced settings CKEditor"
+msgstr "Paramètres avancés CKEditor"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:308
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:314
+msgid "Paste As Text"
+msgstr "Coller en tant que texte"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:310
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:316
+msgid "Paste from Word"
+msgstr "Coller à partir de Word"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:312
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:318
+msgid "HorizontalRule"
+msgstr "HorizontalRule"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:314
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:320
+msgid "JustifyLeft"
+msgstr "JustifyLeft"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:316
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:322
+msgid "JustifyCenter"
+msgstr "JustifyCenter"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:318
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:324
+msgid "JustifyRight"
+msgstr "JustifyRight"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:320
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:326
+msgid "JustifyBlock"
+msgstr "JustifyBlock"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:322
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:328
+msgid "Video Embed"
+msgstr "Vidéo Incorporée"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:326
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:332
+msgid "CodeSnippet"
+msgstr "CodeSnippet"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:329
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:335
+msgid "Styles for snippets of code"
+msgstr "Styles pour des bouts de code"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:339
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:345
+msgid "Demonstration styles"
+msgstr "Styles de démonstration"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:342
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:348
+msgid "The number of columns with smiles"
+msgstr "Le nombre de colonnes avec des sourires"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:345
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:351
+msgid "Choosing skin for CkEditor"
+msgstr "Choisir la peau pour CKEditor"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:393
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:399
+msgid "For advanced users"
+msgstr "Pour les utilisateurs avancés"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:398
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:404
+msgid ""
+"Use your CSS. Style file myckeditor.css is in the folder wp-content\\plugins"
+"\\ark-wysiwyg-comment-editor\\css."
+msgstr ""
+"Utilisez votre CSS. Le fichier de style myckeditor.css se trouve dans le "
+"dossier wp-content\\plugins\ark-wysiwyg-comment-editor\\css."
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:398
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:404
+msgid ""
+"Correcting this file allows you to change the display of some elements of "
+"the editor text area."
+msgstr ""
+"La correction de ce fichier vous permet de modifier l'affichage de certains "
+"éléments de la zone de texte de l'éditeur."
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:398
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:404
+msgid "When you upgrade the plugin changes to the file may be lost."
+msgstr ""
+"Lorsque vous mettez à niveau le plugin, les modifications apportées au "
+"fichier risquent d'être perdues."
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:398
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:404
+msgid ""
+"It is recommended after setting the copy file to your computer, then to "
+"restore your settings."
+msgstr ""
+"Il est recommandé après avoir défini le fichier de copie sur votre "
+"ordinateur, puis de restaurer vos paramètres."
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:403
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:409
+msgid "Advanced settings TinyMCE"
+msgstr "Paramètres avancés TinyMCE"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:407
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:413
+msgid "Language frontend Editor"
+msgstr "Langage de l'éditeur de commentaire"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:416
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:422
+msgid "Fixed width Editor"
+msgstr "Editeur avec largeur fixe"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:419
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:425
+msgid "Editor Width"
+msgstr "Largeur de l'éditeur"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:422
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:428
+msgid "Additional buttons"
+msgstr "Des boutons supplémentaires"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:424
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:430
+msgid "Preview"
+msgstr "Prévisualisation"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:427
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:433
+msgid "Choosing skin for TinyMCE"
+msgstr "Choisir la peau pour TinyMCE"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:469
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:475
+msgid "Experimental options"
+msgstr "Fonctions expérimentales"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:470
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:476
+msgid ""
+"These options and their experimental use of a matter of personal preference. "
+"Try it - you may like it. If not - at any time, deselect options."
+msgstr ""
+"Ces options et leur utilisation sont expérimentales, il s'agit d'une "
+"question de préférence personnelle. Essayez-les, vous aimerez peut-être. "
+"Dans le cas contraire, vous pourrez décocher les options à tout moment."
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:473
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:479
+msgid "Improved button quotes"
+msgstr "Bouton de citation amélioré"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:474
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:480
+msgid ""
+"This button is in contrast to the standard, put quotes and performs a line "
+"feed. This functionality greatly simplifies the insertion of citations and "
+"the writing of the text after it."
+msgstr ""
+"Ce bouton est en contraste avec la norme, les citations sont affichées avec "
+"un saut de ligne. Cette fonctionnalité simplifie grandement l'insertion de "
+"citations et la rédaction du texte qui suit."
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:478
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:484
+msgid "Use the citation style plugin"
+msgstr "Utiliser le style de citation du plugin"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:479
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:485
+msgid ""
+"The default style quotes of your template. Selecting this option will "
+"replace this style style plug. He is such what is there and can not be "
+"adjusted. If not work, or just do not like it - deselect."
+msgstr ""
+"Modèle de citation par défaut. Sélectionner cette option va remplacer le "
+"style. Il ne pourra pas être ajusté. Si ce modèle ne fonctionne pas, ou tout "
+"simplement si vous ne l'aimez pas, vous pouvez décocher cette option."
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:483
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:489
+msgid "Sample quote"
+msgstr "Exemple de citation"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:484
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:490
+msgid "This is just a sample quote."
+msgstr "Il s'agit tout simplement d'un exemple de citation."
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:489
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:495
+msgid "Use the citation style plug-in editor"
+msgstr "Utilisez le style de citation du plugin"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:490
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:496
+msgid ""
+"Selecting this option will allow you to see the formatted quote directly "
+"when editing. Valid only on the built-in style plugin."
+msgstr ""
+"La sélection de cette option vous permettra de voir directement la citation "
+"formatée lors de l'édition. Valable uniquement sur le plugin de style "
+"intégré."
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:494
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:500
+msgid "Save Changes"
+msgstr "Sauvegarder les modifications"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:495
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:501
+msgid "Restore Default Settings"
+msgstr "Restaurer les réglages par défaut"
+
+#: WebServers/home/localhost/www/Server/WordPress/obg/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:499
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:505
+msgid "Thanks"
+msgstr "Merci"
+
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:210
+msgid "Text between links"
+msgstr "Texte entre les liens"
+
+#: Winginx/home/local.obg.kz/public_html/wp-content/plugins/ark-wysiwyg-comment-editor/ark-commenteditor.php:211
+msgid "and"
+msgstr "et"
+
+#~ msgid "Plugin"
+#~ msgstr "Plugin"
+
+#~ msgid "Editor button"
+#~ msgstr "Boutons à insérer dans l'éditeur"
+
+#~ msgid "Настройки визуального редактора комментариев"
+#~ msgstr "Настройки визуального редактора комментариев"
+
+#~ msgid "Восстановить настройки по умолчанию"
+#~ msgstr "Восстановить настройки по умолчанию"

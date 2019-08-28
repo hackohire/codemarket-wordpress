@@ -1,0 +1,1 @@
+tinymce.PluginManager.add('arkbquote', function (editor, url) {    editor.addButton('arkbquote', {        onclick: function () {				editor.selection.setContent('<blockquote><p>' + editor.selection.getContent() + '</p></blockquote><p>&nbsp;</p>');         },        tooltip: 'Super Cite',        image: url + '/img/cite-16.png'    })});
