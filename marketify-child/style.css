@@ -11,7 +11,7 @@ Version:        1.0
 @import url('https://www.udemy.com/staticx/udemy/js/webpack/entry-main-legacy.74de6401472e8d000822.css');
 @import url('https://www.udemy.com/staticx/udemy/js/webpack/course-landing-components-app.6a74a294a529fcd1ed10.css');
 */
-
+ul.styles li{list-style: none;}
 .your-subject,.dis{display:none;}
 .download-gallery__image.slick-slide.slick-current.slick-active {
     display: none;

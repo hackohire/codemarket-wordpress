@@ -82,19 +82,17 @@ function help_request_list_callback($atts)
     $args = [
 	'post_type'	 => 'download',
 	'post_status'	 => 'publish',
-	'download_category' =>'',
 	'tax_query'	 => array(
 	    array(
 		'taxonomy'	 => 'types',
 		'field'		 => 'slug',
 		'terms'		 => ['help-request',],
 	    ),
-	    
 	),
     ];
 
     $arrDownload = new WP_Query($args);
-//print_r($arrDownload);
+
     wp_reset_query();
 
     if ($arrDownload->found_posts > 0)
@@ -126,8 +124,6 @@ function help_request_list_callback($atts)
 		    $img_url	 = get_the_post_thumbnail_url($data->ID);
 		    $user_name	 = get_userdata($data->post_author);
 		    $date		 = date_create($data->post_date);
-		    
-		 $cateogry = get_the_term_list( $data->ID, 'download_category','<ul class="styles"><li>', ',</li><li>', '</li></ul>');
 		    ?>
 	        <td class="fes-order-list-td widget">
 	    	<a href="<?php echo $product_link ?>" title="View" class="view-order-fes"><?php echo $data->post_title; ?></a>
@@ -147,7 +143,7 @@ function help_request_list_callback($atts)
 		?>
 
 	        <td><?php echo $user_name->data->display_name; ?></td>
-	         <td><?php  echo $cateogry ?></td>
+	         <td><?php echo $user_name->data->download_category; ?></td>
 
 	        <td><?php echo date_format($date, "Y-m-d"); ?></td>
 
@@ -227,7 +223,6 @@ function product_list_callback($atts)
 		    <th>Price</th>
 		    <th>Image</th>
 		    <th>User</th>
-		      <th>Category</th>
 		    <th>Date</th>
 		</tr>
 	    </thead>
@@ -240,7 +235,6 @@ function product_list_callback($atts)
 		    $img_url	 = get_the_post_thumbnail_url($product->ID);
 		    $user_name	 = get_userdata($product->post_author);
 		    $date		 = date_create($product->post_date);
-		    $cateogry = get_the_term_list( $product->ID, 'download_category','<ul class="styles"><li>', ',</li><li>', '</li></ul>');
 		    ?>
 	        <td class="fes-order-list-td widget">
 	    	<a href="<?php echo $product_link ?>" title="View" class="view-order-fes"><?php echo $product->post_title; ?></a>
@@ -260,7 +254,6 @@ function product_list_callback($atts)
 		?>
 
 	        <td><?php echo $user_name->data->display_name; ?></td>
-	          <td><?php echo $cateogry ?></td>
 
 	        <td><?php echo date_format($date, "Y-m-d"); ?></td>
 
@@ -511,7 +504,6 @@ function user_list_callback($atts)
 	    <thead>
 		<tr>
 		    <th>User</th>
-		   <!-- <th>Category</th>-->
 		     <th>No. of Bug Fix</th>
 		</tr>
 	    </thead>
@@ -525,7 +517,6 @@ function user_list_callback($atts)
  ?>
 		    <tr>
 		     <td><a href="profile?request=<?php echo $current_user_id; ?>"><?php echo esc_html( $user_id->display_name )  ?></a></td>
-		     <!-- <td><?php //echo $cateogry ?></td>-->
 	        <td class="fes-order-list-td widget">
 	<?php echo count_user_posts($current_user_id,'download'); ?>
 	        </td>	

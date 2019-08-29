@@ -7,7 +7,7 @@ class Marketify_EDD_Template_Download {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
 		add_action( 'marketify_entry_before', array( $this, 'download_title' ), 5 );
-		//add_action( 'marketify_entry_before', array( $this, 'featured_area_header_actions' ), 5 );
+		add_action( 'marketify_entry_before', array( $this, 'featured_area_header_actions' ), 5 );
 
 		add_action( 'marketify_download_info', array( $this, 'download_price' ), 5 );
 		add_action( 'marketify_download_actions', array( $this, 'demo_link' ) );

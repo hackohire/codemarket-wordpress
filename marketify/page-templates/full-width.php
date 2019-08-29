@@ -8,10 +8,24 @@
 get_header(); ?>
 
 	<?php do_action( 'marketify_entry_before' ); ?>
-
+<style>
+    .styles li
+    {
+        list-style:none !important;
+    }
+</style>
 	<div class="container">
 		<div id="content" class="site-content row">
-
+ <?php if (is_user_logged_in()) { if(is_page('Buy')) { ?> 
+ <div class="col-md-12"><div class="my-add-product">
+				<a class="show_product_form" href="/profile/?req_id=1"><i class="fas fa-plus-square"></i> Add</a>
+			    </div></div><?php } 
+			     else if(is_page('Sell')) {?>
+			     <div class="col-md-12"><div class="my-add-product">
+				<a class="show_product_form" href="/profile/?sell=2"><i class="fas fa-plus-square"></i> Add</a>
+			    </div></div>
+			     <?php } 
+			    }?>
 			<div id="primary" class="content-area col-sm-12">
 				<main id="main" class="site-main" role="main">
 

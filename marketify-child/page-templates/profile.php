@@ -72,18 +72,30 @@ $(document).ready(function(){
     
 });
 </script>
-<?php } else{?>
+<?php } elseif(isset($_REQUEST['sell'])){?>
+<script>
+$(document).ready(function(){
+
+    $('.types option:eq(2)').hide();
+    $('.types option:eq(1)').prop('selected', true);
+    $('.types option:eq(3)').hide();
+    $('.types option:eq(4)').hide();
+    
+});
+</script>
+<li class="active" data-tab-id="my-tab-sell">Sell</li>
+<?php } else{ ?>
 				<li class="active" data-tab-id="my-tab-sell">Sell</li><?php }
 ?>
 <?php if(isset($_REQUEST['req_id']))
-{?><style>.my-tab-panel{display:none}</style>				<li class="active" data-tab-id="my-tab-help-request">Request Help</li>
+{?><style>#my-tab-sell{display:none}</style>				<li class="active" data-tab-id="my-tab-help-request">Request Help</li>
 
-<?php } else{?>
+<?php }  elseif(isset($_REQUEST['sell'])){?><style>.my-tab-panel{display:none}</style><?php } else{ ?>
 				<li data-tab-id="my-tab-help-request">Request Help</li>
 				<?php }?>
 			<?php if(isset($_REQUEST['req_id']))
 {?>
-<?php } else{?>
+<?php } elseif(isset($_REQUEST['sell'])){} else{ ?>
 				<li data-tab-id="my-tab-buy">Buy</li>				
 			   <?php }?> </ul>
 
@@ -140,7 +152,7 @@ $(document).ready(function(){
 			    $site_url = get_site_url();
 			    ?>
 <?php if(isset($_REQUEST['req_id']))
-{?><?php } else{ ?>
+{?><?php } elseif(isset($_REQUEST['sell'])){}  else{ ?>
 			    <div class="my-add-product">
 				<a class="show_product_form" href="JavaScript:Void(0);"><i class="fas fa-plus-square"></i> Add</a>
 			    </div>
@@ -149,7 +161,7 @@ $(document).ready(function(){
 			    
 			    
 			    <div class="add_product_form" <?php if(isset($_REQUEST['req_id']))
-{?><?php } else{ ?> style="display:none"<?php }?>>
+{?><?php }  elseif(isset($_REQUEST['sell'])){} else{ ?> style="display:none"<?php }?>>
 				<?php echo EDD_FES()->forms->render_submission_form(); ?>
 			    </div>
 
