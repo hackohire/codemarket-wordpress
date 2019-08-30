@@ -72,6 +72,10 @@ $(function(){
 });
 </script>
 	<?php wp_head(); ?>
+	<style>.styles {
+    padding: 0;
+    margin: 0;
+}</style>
 </head>
 <body <?php body_class(); ?>>
  <?php if (is_user_logged_in()) {?>

@@ -3,7 +3,6 @@
  * Template Name:  Profile Page
  * @package Child Marketify
  */
- 
 if (!is_user_logged_in())
 {
     $link = site_url() . '/register';
@@ -60,44 +59,104 @@ wp_enqueue_script('custom_script');
 			<div class="my-buy-sales-products">
 
 			    <ul class="my-tab-menu">
-<?php if(isset($_REQUEST['req_id']))
-{?>
-<script>
-$(document).ready(function(){
+				<?php
+				if (isset($_REQUEST['req_id']))
+				{
+				    ?>
+    				<script>
+    				    $(document).ready(function ()
+    				    {
 
-    $('.types option:eq(2)').prop('selected', true);
-    $('.types option:eq(1)').hide();
-    $('.types option:eq(3)').hide();
-    $('.types option:eq(4)').hide();
-    
-});
-</script>
-<?php } elseif(isset($_REQUEST['sell'])){?>
-<script>
-$(document).ready(function(){
+    					$('.types option:eq(2)').prop('selected', true);
+    					$('.types option:eq(1)').hide();
+    					$('.types option:eq(3)').hide();
+    					$('.types option:eq(4)').hide();
 
-    $('.types option:eq(2)').hide();
-    $('.types option:eq(1)').prop('selected', true);
-    $('.types option:eq(3)').hide();
-    $('.types option:eq(4)').hide();
-    
-});
-</script>
-<li class="active" data-tab-id="my-tab-sell">Sell</li>
-<?php } else{ ?>
-				<li class="active" data-tab-id="my-tab-sell">Sell</li><?php }
-?>
-<?php if(isset($_REQUEST['req_id']))
-{?><style>#my-tab-sell{display:none}</style>				<li class="active" data-tab-id="my-tab-help-request">Request Help</li>
+    				    });
+    				</script>
+				    <?php
+				}
+				else if (isset($_REQUEST['sell']))
+				{
+				    ?>
+    				<script>
+    				    $(document).ready(function ()
+    				    {
 
-<?php }  elseif(isset($_REQUEST['sell'])){?><style>.my-tab-panel{display:none}</style><?php } else{ ?>
-				<li data-tab-id="my-tab-help-request">Request Help</li>
-				<?php }?>
-			<?php if(isset($_REQUEST['req_id']))
-{?>
-<?php } elseif(isset($_REQUEST['sell'])){} else{ ?>
-				<li data-tab-id="my-tab-buy">Buy</li>				
-			   <?php }?> </ul>
+    					$('.types option:eq(2)').hide();
+    					$('.types option:eq(1)').prop('selected', true);
+    					$('.types option:eq(3)').hide();
+    					$('.types option:eq(4)').hide();
+
+    				    });
+    				</script>
+    				<li class="active" data-tab-id="my-tab-sell">Sell</li>
+				    <?php
+				}
+				else if (isset($_REQUEST['interview']))
+				{
+				    ?>
+    				<li class="active">Interview</li>
+    				<script>
+    				    $(document).ready(function ()
+    				    {
+
+    					$('.types option:eq(2)').hide();
+    					$('.types option:eq(1)').hide();
+    					$('.types option:eq(3)').prop('selected', true);
+    					$('.types option:eq(4)').hide();
+
+    				    });
+    				</script>
+
+				    <?php
+				}
+				else
+				{
+				    ?>
+    				<li class="active" data-tab-id="my-tab-sell">Sell</li><?php }
+				?>
+				<?php
+				if (isset($_REQUEST['req_id']))
+				{
+				    ?><style>#my-tab-sell{display:none}</style>			
+    				<li class="active" data-tab-id="my-tab-help-request">Request Help</li>
+
+				    <?php
+				}
+				elseif (isset($_REQUEST['sell']))
+				{
+				    ?>
+    				<style>.my-tab-panel{display:none}</style><?php
+				}
+				elseif (isset($_REQUEST['interview']))
+				{
+				    
+				}
+				else
+				{
+				    ?>
+    				<li data-tab-id="my-tab-help-request">Request Help</li>
+				<?php } ?>
+				<?php
+				if (isset($_REQUEST['req_id']))
+				{
+				    ?>
+				    <?php
+				}
+				elseif (isset($_REQUEST['sell']))
+				{
+				    
+				}
+				elseif (isset($_REQUEST['interview']))
+				{
+				    
+				}
+				else
+				{
+				    ?>
+    				<li data-tab-id="my-tab-buy">Buy</li>				
+				<?php } ?> </ul>
 
 			    <div class="clear"></div>
 
@@ -151,17 +210,67 @@ $(document).ready(function(){
 
 			    $site_url = get_site_url();
 			    ?>
-<?php if(isset($_REQUEST['req_id']))
-{?><?php } elseif(isset($_REQUEST['sell'])){}  else{ ?>
-			    <div class="my-add-product">
-				<a class="show_product_form" href="JavaScript:Void(0);"><i class="fas fa-plus-square"></i> Add</a>
-			    </div>
-			    <?php }?>
+			    <?php
+			    if (isset($_REQUEST['req_id']))
+			    {
+				?>
+				<?php
+			    }
+			    elseif (isset($_REQUEST['sell']))
+			    {
+				
+			    }
+			    else if (isset($_REQUEST['interview']))
+			    {
+				?>
+    			    <style>
+    				#my-tab-sell{display:none}
+    			    </style>
+				<?php
+			    }
+			    else
+			    {
+				if (isset($_REQUEST['post_id']))
+				{
+				    
+				}
+				else
+				{
+				    ?>
+				    <div class="my-add-product">
+					<a class="show_product_form" href="JavaScript:Void(0);"><i class="fas fa-plus-square"></i> Add</a>
+				    </div>
+				    <?php
+				}
+			    }
+			    ?>
 			    <div class="clear"></div>
-			    
-			    
-			    <div class="add_product_form" <?php if(isset($_REQUEST['req_id']))
-{?><?php }  elseif(isset($_REQUEST['sell'])){} else{ ?> style="display:none"<?php }?>>
+			    <?php
+			    $form_style = '';
+			    if (isset($_REQUEST['req_id']))
+			    {
+				$form_style = '';
+			    }
+			    else if (isset($_REQUEST['sell']))
+			    {
+				$form_style = '';
+			    }
+			    else if (isset($_REQUEST['interview']))
+			    {
+				$form_style = '';
+			    }
+			    else if (isset($_REQUEST['post_id']))
+			    {
+				$form_style = '';
+			    }
+			    else
+			    {
+				$form_style = 'style="display:none"';
+			    }
+
+			    $edit_product_link = $site_url . '/profile/?task=edit-product&post_id=';
+			    ?>
+			    <div class="add_product_form" <?php echo $form_style ?>>
 				<?php echo EDD_FES()->forms->render_submission_form(); ?>
 			    </div>
 
@@ -202,16 +311,13 @@ $(document).ready(function(){
 						    </td>
 
 						    <?php
-						    $img_url	 = get_the_post_thumbnail_url($data->ID);
+						    $img_url = get_the_post_thumbnail_url($data->ID);
 						    ?>
 						    <td><img width="50" src="<?php echo $img_url; ?>" ></td>
 
 						    <td class="fes-order-list-td"><?php echo edd_price($data->ID); ?></td>
 
-						    <?php
-						    $edit_url	 = $site_url . '/vendor-dashboard/?task=edit-product&post_id=' . $data->ID;
-						    ?>
-						    <td class="cm_edit_product_btn"><a href="<?php echo $edit_url; ?>">Edit</a></td>
+						    <td class="cm_edit_product_btn"><a href="<?php echo $edit_product_link . $data->ID; ?>">Edit</a></td>
 
 						    <td class="cm_delete_product_btn" data-id="<?php echo $data->ID; ?>">Delete</td>
 						</tr>  
@@ -252,8 +358,8 @@ $(document).ready(function(){
 					    $my_download	 = new EDD_Download($down_id);
 					    ?>
     					<tr>
-    					    <td class="fes-order-list-td widget">		<a href="<?php echo $product_link; ?>" title="View" class="view-order-fes"><?php echo $product_name; ?></a>
-    					    </td>
+    					    <td class="fes-order-list-td widget"><a href="<?php echo $product_link; ?>" title="View" class="view-order-fes"><?php echo $product_name; ?></a></td>
+
     					    <td class="fes-order-list-td"><?php echo edd_currency_filter(edd_format_amount($my_download->get_price())); ?></td>					
     					</tr>	
 					<?php } ?>
@@ -298,16 +404,13 @@ $(document).ready(function(){
 						    </td>
 
 						    <?php
-						    $img_url	 = get_the_post_thumbnail_url($data->ID);
+						    $img_url = get_the_post_thumbnail_url($data->ID);
 						    ?>
 						    <td><img width="50" src="<?php echo $img_url; ?>" ></td>
 
 						    <td class="fes-order-list-td"><?php echo edd_price($data->ID); ?></td>
 
-						    <?php
-						    $edit_url	 = $site_url . '/vendor-dashboard/?task=edit-product&post_id=' . $data->ID;
-						    ?>
-						    <td class="cm_edit_product_btn"><a href="<?php echo $edit_url; ?>">Edit</a></td>
+						    <td class="cm_edit_product_btn"><a href="<?php echo $edit_product_link . $data->ID; ?>">Edit</a></td>
 
 						    <td class="cm_delete_product_btn" data-id="<?php echo $data->ID; ?>">Delete</td>
 						</tr>  
