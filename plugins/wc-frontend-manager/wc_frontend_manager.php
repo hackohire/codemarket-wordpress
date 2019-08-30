@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name: WCFM - WooCommerce Frontend Manager
+ * Plugin Name: WooCommerce Frontend Manager
  * Plugin URI: https://wclovers.com
  * Description: WooCommerce is really Easy and Beautiful. We are here to make your life much more Easier and Peaceful.
  * Author: WC Lovers
- * Version: 6.1.6
+ * Version: 6.1.0
  * Author URI: https://wclovers.com
  *
  * Text Domain: wc-frontend-manager

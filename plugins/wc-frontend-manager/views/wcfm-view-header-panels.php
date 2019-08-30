@@ -64,7 +64,7 @@ if( !$wcfm_is_allow_headpanels ) {
   <?php } ?>
   
   <?php if( apply_filters( 'wcfm_is_pref_enquiry', true ) && apply_filters( 'wcfm_is_allow_enquiry', true ) ) { ?>
-    <a href="<?php echo get_wcfm_enquiry_url(); ?>" class="wcfm_header_panel_enquiry text_tip <?php if( isset( $wp->query_vars['wcfm-enquiry'] ) || isset( $wp->query_vars['wcfm-enquiry-manage'] ) ) echo 'active'; ?>" data-tip="<?php _e( 'Inquiry Board', 'wc-frontend-manager' ); ?>"><i class="wcfmfa fa-question-circle"></i><span class="unread_notification_count enquiry_count"><?php echo $unread_enquiry; ?></span><div class="notification-ring"></div></a>
+    <a href="<?php echo get_wcfm_enquiry_url(); ?>" class="wcfm_header_panel_enquiry text_tip <?php if( isset( $wp->query_vars['wcfm-enquiry'] ) || isset( $wp->query_vars['wcfm-enquiry-manage'] ) ) echo 'active'; ?>" data-tip="<?php _e( 'Enquiry Board', 'wc-frontend-manager' ); ?>"><i class="wcfmfa fa-question-circle"></i><span class="unread_notification_count enquiry_count"><?php echo $unread_enquiry; ?></span><div class="notification-ring"></div></a>
   <?php } ?>
   
   <?php if( apply_filters( 'wcfm_is_pref_notice', true ) && apply_filters( 'wcfm_is_allow_notice', true ) ) { ?>

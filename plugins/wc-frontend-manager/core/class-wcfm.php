@@ -498,16 +498,16 @@ class WCFM {
 	static function update_wcfm() {
 		global $WCFM, $WCFM_Query, $wpdb;
 		
-		$wcfm_tables = $wpdb->query( "SHOW tables like '{$wpdb->prefix}wcfm_support_response_meta'");
+		$wcfm_tables = $wpdb->query( "SHOW tables like '{$wpdb->prefix}wcfm_enquiries_response'");
 		if( !$wcfm_tables ) {
-			delete_option( 'wcfm_updated_6_1_5' );
+			delete_option( 'wcfm_updated_5_1_3' );
 			delete_option( 'wcfm_table_install' );
 		}
-		if( !get_option( 'wcfm_updated_6_1_5' ) ) {
+		if( !get_option( 'wcfm_updated_5_1_3' ) ) {
 			delete_option( 'wcfm_table_install' );
 			require_once ( $WCFM->plugin_path . 'helpers/class-wcfm-install.php' );
 			$WCFM_Install = new WCFM_Install();
-			update_option( 'wcfm_updated_6_1_5', 1 );
+			update_option( 'wcfm_updated_5_1_3', 1 );
 		}
 		
 		// Disable Vendor role - 4.0.2
@@ -665,7 +665,7 @@ class WCFM {
 																								)
 														);
 		
-		if ( !function_exists( 'wc_coupons_enabled' ) || ( function_exists( 'wc_coupons_enabled' ) && !wc_coupons_enabled() ) ) unset( $wcfm_menus['wcfm-coupons'] );
+		if ( !wc_coupons_enabled() ) unset( $wcfm_menus['wcfm-coupons'] );
 		
 		uasort( $wcfm_menus, array( &$this, 'wcfm_sort_by_priority' ) );
 		
@@ -897,8 +897,8 @@ class WCFM {
 			
 			$attachment_id = (int) attachment_url_to_postid( $attachment_url );
 			if( !$attachment_id ) {
-				$new_upload_path        =   $wph->functions->untrailingslashit_all(    $wph->functions->get_module_item_setting('new_upload_path')  );
-        $new_content_path       =   $wph->functions->untrailingslashit_all(    $wph->functions->get_module_item_setting('new_content_path')  );
+				$new_upload_path = $wph->functions->get_module_item_setting('new_upload_path');
+				$new_content_path = $wph->functions->get_module_item_setting('new_content_path');
 				
 				if( $new_upload_path ) {
 					$attachment_url = str_replace( $new_upload_path, 'wp-content/uploads', $attachment_url );

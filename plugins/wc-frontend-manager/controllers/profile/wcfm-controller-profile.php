@@ -174,19 +174,19 @@ class WCFM_Profile_Controller {
 					$vendor_data['social'] = $social_fields;
 					update_user_meta( $user_id, 'dokan_profile_settings', $vendor_data );
 				} elseif( $is_marketplace == 'wcfmmarketplace' )  {
-					$wcfm_profile_social_fields = apply_filters( 'wcfm_profile_social_types', array( 
-																																													'twitter'    => 'twitter',
-																																													'fb'         => 'facebook',
-																																													'instagram'  => 'instagram',
-																																													'youtube'    => 'youtube',
-																																													'linkedin'   => 'linkdin',
-																																													'gplus'      => 'google_plus',
-																																													'snapchat'   => 'snapchat',
-																																													'pinterest'  => 'pinterest',
-																																													'googleplus' => 'google_plus',
-																																													'twitter'    => 'twitter',
-																																													'facebook'   => 'facebook',
-																																												) );
+					$wcfm_profile_social_fields = array( 
+																							'twitter'    => 'twitter',
+																							'fb'         => 'facebook',
+																							'instagram'  => 'instagram',
+																							'youtube'    => 'youtube',
+																							'linkedin'   => 'linkdin',
+																							'gplus'      => 'google_plus',
+																							'snapchat'   => 'snapchat',
+																							'pinterest'  => 'pinterest',
+																							'googleplus' => 'google_plus',
+																							'twitter'    => 'twitter',
+																							'facebook'   => 'facebook',
+																						);
 					$social_fields = array();
 					foreach( $wcfm_profile_social_fields as $wcfm_profile_social_key => $wcfm_profile_social_field ) {
 						$social_fields[$wcfm_profile_social_key] = $wcfm_profile_form[$wcfm_profile_social_field];

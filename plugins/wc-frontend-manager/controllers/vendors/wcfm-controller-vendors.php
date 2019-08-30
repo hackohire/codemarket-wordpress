@@ -101,7 +101,7 @@ class WCFM_Vendors_Controller {
 					}
 				}
 				if( WCFM_Dependencies::wcfmu_plugin_active_check() ) {
-					if( apply_filters( 'wcfm_is_pref_vendor_verification', true ) && apply_filters( 'wcfm_is_pref_profile', true ) ) {
+					if( apply_filters( 'wcfm_is_pref_vendor_verification', true ) ) {
 						global $WCFMu;
 						//$verification_label .= $WCFMu->wcfmu_vendor_support->wcfm_show_verified_seller_badge( $wcfm_vendors_id, '', 'get' );
 						$verification_label .= $WCFMu->vendor_verification->show_verified_seller_badge( $wcfm_vendors_id, '', 'get' );
@@ -213,10 +213,8 @@ class WCFM_Vendors_Controller {
 				$actions = '';
 				if( apply_filters( 'wcfm_is_allow_manage_vendor', true ) ) {
 					if( !$disable_vendor ) {
-						$actions = '<a href="'. get_wcfm_vendors_manage_url($wcfm_vendors_id) .'" class="wcfm-action-icon"><span class="wcfmfa fa-eye text_tip" data-tip="' . __( 'Details', 'wc-frontend-manager' ) . '"></span></a>';
 						if( $WCFM->is_marketplace && ( $WCFM->is_marketplace == 'wcfmmarketplace' ) && apply_filters( 'wcfm_is_allow_reports', true ) ) {
-							$actions .= '<a href="'. get_wcfm_vendors_manage_url($wcfm_vendors_id) .'#wwcfm_orders_listing_expander" class="wcfm-action-icon"><span class="wcfmfa fa-shopping-cart text_tip" data-tip="' . __( 'Orders', 'wc-frontend-manager' ) . '"></span></a>';
-							$actions .= '<a href="'. get_wcfm_reports_url( '', 'wcfm-reports-sales-by-vendor', $wcfm_vendors_id ) .'" class="wcfm-action-icon"><span class="wcfmfa fa-chart-line text_tip" data-tip="' . __( 'Sales Report', 'wc-frontend-manager' ) . '"></span></a>';
+							$actions = '<a href="'. get_wcfm_reports_url( '', 'wcfm-reports-sales-by-vendor', $wcfm_vendors_id ) .'" class="wcfm-action-icon"><span class="wcfmfa fa-chart-line text_tip" data-tip="' . __( 'Sales Report', 'wc-frontend-manager' ) . '"></span></a>';
 						}
 						$actions .= '<a href="#" data-memberid="'.$wcfm_vendors_id.'" class="wcfm_vendor_disable_button wcfm-action-icon"><span class="wcfmfa fa-times-circle text_tip" data-tip="' . __( 'Disable Vendor Account', 'wc-frontend-manager' ) . '"></span></a>';
 					} else {

@@ -122,12 +122,12 @@ class WCFM_Articles_Controller {
 				
 				// Title
 				if( apply_filters( 'wcfm_is_allow_edit_articles', true ) ) {
-					$wcfm_articles_json_arr[$index][] =  '<a href="' . get_wcfm_articles_manage_url( $wcfm_articles_single->ID ) . '" class="wcfm_article_title wcfm_dashboard_item_title">' . $wcfm_articles_single->post_title . '</a>';
+					$wcfm_articles_json_arr[$index][] =  '<a href="' . get_wcfm_articles_manage_url( $wcfm_articles_single->ID ) . '" class="wcfm_article_title">' . $wcfm_articles_single->post_title . '</a>';
 				} else {
 					if( $wcfm_articles_single->post_status == 'publish' ) {
 						$wcfm_articles_json_arr[$index][] =  apply_filters( 'wcfm_article_title_dashboard', $wcfm_articles_single->post_title, $wcfm_articles_single->ID );
 					} elseif( apply_filters( 'wcfm_is_allow_edit_articles', true ) ) {
-						$wcfm_articles_json_arr[$index][] =  apply_filters( 'wcfm_article_title_dashboard', '<a href="' . get_wcfm_articles_manage_url( $wcfm_articles_single->ID ) . '" class="wcfm_article_title wcfm_dashboard_item_title">' . $wcfm_articles_single->post_title . '</a>', $wcfm_articles_single->ID );
+						$wcfm_articles_json_arr[$index][] =  apply_filters( 'wcfm_article_title_dashboard', '<a href="' . get_wcfm_articles_manage_url( $wcfm_articles_single->ID ) . '" class="wcfm_article_title">' . $wcfm_articles_single->post_title . '</a>', $wcfm_articles_single->ID );
 					} else {
 						$wcfm_articles_json_arr[$index][] =  apply_filters( 'wcfm_article_title_dashboard', $wcfm_articles_single->post_title, $wcfm_articles_single->ID );
 					}
@@ -147,19 +147,11 @@ class WCFM_Articles_Controller {
 				$wcfm_articles_json_arr[$index][] =  date_i18n( wc_date_format(), strtotime($wcfm_articles_single->post_date) );
 				
 				// Author
-				if( !wcfm_is_vendor() ) {
-					if( wcfm_is_vendor( $wcfm_articles_single->post_author ) ) {
-						$wcfm_articles_json_arr[$index][] = $WCFM->wcfm_vendor_support->wcfm_get_vendor_store_by_vendor( $wcfm_articles_single->post_author );
-					} else {
-						$author = get_user_by( 'id', $wcfm_articles_single->post_author );
-						if( $author ) {
-							$wcfm_articles_json_arr[$index][] =  $author->display_name;
-						} else {
-							$wcfm_articles_json_arr[$index][] =  '&ndash;';
-						}
-					}
+				$author = get_user_by( 'id', $wcfm_articles_single->post_author );
+				if( $author ) {
+					$wcfm_articles_json_arr[$index][] =  $author->display_name;
 				} else {
-					$wcfm_articles_json_arr[$index][] = '&ndash;';
+					$wcfm_articles_json_arr[$index][] =  '&ndash;';
 				}
 				
 				// Action

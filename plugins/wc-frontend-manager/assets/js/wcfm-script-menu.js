@@ -359,19 +359,16 @@ jQuery( document ).ready( function( $ ) {
 	    	if( $nval < 0 ) $(this).val(0);
 	    });
 	    $(this).on('keydown', function(e) {
-	    	//console.log(e.keyCode);
-				if( !( ( e.keyCode > 95 && e.keyCode < 106 )
-								|| ( e.keyCode > 47 && e.keyCode < 58 ) 
-								|| e.keyCode == 8
-								|| e.keyCode == 9
-								|| e.keyCode == 37
-								|| e.keyCode == 39
-								|| e.keyCode == 46
-								|| e.keyCode == 110
-								|| e.keyCode == 188
-								|| e.keyCode == 190 ) ) {
-									return false;
-								}
+				if(!((e.keyCode > 95 && e.keyCode < 106)
+					|| (e.keyCode > 47 && e.keyCode < 58) 
+					|| e.keyCode == 8
+					|| e.keyCode == 110
+					|| e.keyCode == 190
+					|| e.keyCode == 46
+					|| e.keyCode == 37
+					|| e.keyCode == 39)) {
+						return false;
+				}
 			});
 	  });
 	  setTimeout( function() {  restrictNonNegativeInput(); }, 500 );

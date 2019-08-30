@@ -255,7 +255,7 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 																																					'autop'     => false,
 																																				) ) );
 				
-						$order_item_details .= '<div class=""><span class="qty">' . $line_item->get_quantity() . 'x</span><span class="name">' . apply_filters( 'wcfm_order_item_name', $line_item->get_name(), $line_item );
+						$order_item_details .= '<div class=""><span class="qty">' . $line_item->get_quantity() . 'x</span><span class="name">' . $line_item->get_name();
 						if ( $product && $product->get_sku() ) {
 							$order_item_details .= ' (' . __( 'SKU:', 'wc-frontend-manager' ) . ' ' . esc_html( $product->get_sku() ) . ')';
 						}
@@ -295,15 +295,7 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 				
 				// Gross Sales
 				$gross_sales = 0;
-				$commission_ids = explode( ",", $order->commission_ids );
-				foreach( $commission_ids as $commission_id ) {
-					if( apply_filters( 'wcfmmmp_gross_sales_respect_setting', true ) ) {
-						$gross_sales += (float) $WCFMmp->wcfmmp_commission->wcfmmp_get_commission_meta( $commission_id, 'gross_total' );
-					} else {
-						$gross_sales += (float) $WCFMmp->wcfmmp_commission->wcfmmp_get_commission_meta( $commission_id, 'gross_sales_total' );
-					}
-				}
-				/*if( $WCFMmp->wcfmmp_vendor->is_vendor_deduct_discount( $order->vendor_id, $order->order_id ) ) {
+				if( $WCFMmp->wcfmmp_vendor->is_vendor_deduct_discount( $order->vendor_id, $order->order_id ) ) {
 					$gross_sales += (float) sanitize_text_field( $order->item_total );
 				} else {
 					$gross_sales += (float) sanitize_text_field( $order->item_sub_total );
@@ -324,7 +316,7 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 							$gross_sales += (float) $WCFMmp->wcfmmp_commission->wcfmmp_get_commission_meta( $commission_id, 'gross_shipping_tax' );
 						}
 					}
-				}*/
+				}
 				
 				$gross_sales_amt = $gross_sales;
 				if( $order->is_partially_refunded || in_array( 1, $is_refundeds ) ) {
@@ -397,9 +389,7 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 					} else {
 						$order_status = sanitize_title( $order->commission_status );
 					}
-					$allowed_order_status = apply_filters( 'wcfm_allowed_order_status', wc_get_order_statuses(), $order->order_id );
-					$status_update_block_statuses = apply_filters( 'wcfm_status_update_block_statuses', array( 'refunded', 'cancelled', 'failed' ), $order->order_id );
-					if( in_array( 'wc-completed', array_keys($allowed_order_status) ) && !in_array( 'completed', $status_update_block_statuse ) && !in_array( $order_status, array( 'failed', 'cancelled', 'refunded', 'completed' ) ) ) $actions = '<a class="wcfm_order_mark_complete wcfm-action-icon" href="#" data-orderid="' . $order->order_id . '"><span class="wcfmfa fa-check-circle text_tip" data-tip="' . esc_attr__( 'Mark as Complete', 'wc-frontend-manager' ) . '"></span></a>';
+					if( !in_array( $order_status, array( 'failed', 'cancelled', 'refunded', 'completed' ) ) ) $actions = '<a class="wcfm_order_mark_complete wcfm-action-icon" href="#" data-orderid="' . $order->order_id . '"><span class="wcfmfa fa-check-circle text_tip" data-tip="' . esc_attr__( 'Mark as Complete', 'wc-frontend-manager' ) . '"></span></a>';
 				}
 				
 				if( $can_view_orders )

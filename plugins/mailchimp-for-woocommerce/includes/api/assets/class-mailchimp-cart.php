@@ -90,11 +90,9 @@ class MailChimp_WooCommerce_Cart
      * @return $this
      */
     public function setCampaignID($id)
-    {   
-        $api = MailChimp_WooCommerce_MailChimpApi::getInstance();
-        $cid = trim($id);
-        $campaign = $api->getCampaign($cid);
-        $this->campaign_id = $campaign['id'];
+    {
+        $this->campaign_id = $id;
+
         return $this;
     }
 

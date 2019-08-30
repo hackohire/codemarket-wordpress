@@ -117,13 +117,6 @@ class WCFM_ThirdParty_Support {
 			}
 		}
 		
-		// WooCommerce Product Schedular - 6.1.4
-    if( apply_filters( 'wcfm_is_allow_wc_product_scheduler', true ) ) {
-			if( WCFM_Dependencies::wcfm_wc_product_scheduler_active_check() ) {
-				add_filter( 'end_wcfm_products_manage', array( &$this, 'wcfm_wc_product_scheduler_product_manage_views' ), 160 );
-			}
-		}
-		
 		// Product Manage Third Party Plugins View
     add_action( 'end_wcfm_products_manage', array( &$this, 'wcfm_thirdparty_products_manage_views' ), 100 );
 	}
@@ -315,7 +308,7 @@ class WCFM_ThirdParty_Support {
 		$job_dashboard_page = get_option( 'job_manager_job_dashboard_page_id' );
 		$add_listings_page = get_option( 'job_manager_submit_job_form_page_id' );
 		$post_a_job = get_permalink ( $add_listings_page );
-		if( ( $add_listings_page && is_object( $post ) && ( $add_listings_page == $post->ID ) ) || ( $job_dashboard_page && is_object( $post ) && ( $job_dashboard_page == $post->ID ) && isset( $_GET['action'] ) && ( in_array( $_GET['action'], array( 'edit', 'mark_filled', 'mark_not_filled' ) ) ) ) ) {
+		if( ( $add_listings_page && is_object( $post ) && ( $add_listings_page == $post->ID ) ) || ( $job_dashboard_page && is_object( $post ) && ( $job_dashboard_page == $post->ID ) && isset( $_GET['action'] ) && ( $_GET['action'] == 'edit' ) ) ) {
 			ob_start();
 			echo '<div id="wcfm-main-contentainer">';
 			echo  '<div id="wcfm-content">';
@@ -330,8 +323,6 @@ class WCFM_ThirdParty_Support {
 			echo '<div class="wcfm-container wcfm-top-element-container">';
 			if( isset( $_GET['action'] ) && ( $_GET['action'] == 'edit' ) ) {
 				echo '<h2>' . __( 'Edit Listing', 'wc-frontend-manager' ) . '</h2>';
-			} else if( isset( $_GET['action'] ) && ( in_array( $_GET['action'], array( 'mark_filled', 'mark_not_filled' ) ) ) ) {
-				echo '<h2>' . __( 'Manage Listing', 'wc-frontend-manager' ) . '</h2>';
 			} else {
 				echo '<h2>' . __( 'Add Listing', 'wc-frontend-manager' ) . '</h2>';
 			}
@@ -360,7 +351,7 @@ class WCFM_ThirdParty_Support {
 		
 		$job_dashboard_page = get_option( 'job_manager_job_dashboard_page_id' );
 		$add_listings_page = get_option( 'job_manager_submit_job_form_page_id' );
-		if( ( $add_listings_page && is_object( $post ) && ( $add_listings_page == $post->ID ) ) || ( $job_dashboard_page && is_object( $post ) && ( $job_dashboard_page == $post->ID ) && isset( $_GET['action'] ) && ( in_array( $_GET['action'], array( 'edit', 'mark_filled', 'mark_not_filled' ) ) ) ) ) {
+		if( ( $add_listings_page && is_object( $post ) && ( $add_listings_page == $post->ID ) ) || ( $job_dashboard_page && is_object( $post ) && ( $job_dashboard_page == $post->ID ) && isset( $_GET['action'] ) && ( $_GET['action'] == 'edit' ) ) ) {
 			$current_endpoint = 'wcfm-listings-manage';
 		}
 		return $current_endpoint;
@@ -374,7 +365,7 @@ class WCFM_ThirdParty_Support {
 		
 		$job_dashboard_page = get_option( 'job_manager_job_dashboard_page_id' );
 		$add_listings_page = get_option( 'job_manager_submit_job_form_page_id' );
-		if( ( $add_listings_page && is_object( $post ) && ( $add_listings_page == $post->ID ) ) || ( $job_dashboard_page && is_object( $post ) && ( $job_dashboard_page == $post->ID ) && isset( $_GET['action'] ) && ( in_array( $_GET['action'], array( 'edit', 'mark_filled', 'mark_not_filled' ) ) ) ) ) {
+		if( ( $add_listings_page && is_object( $post ) && ( $add_listings_page == $post->ID ) ) || ( $job_dashboard_page && is_object( $post ) && ( $job_dashboard_page == $post->ID ) && isset( $_GET['action'] ) && ( $_GET['action'] == 'edit' ) ) ) {
 			
 			if( !WCFM_Dependencies::wcfm_products_listings_active_check() && !WCFM_Dependencies::wcfm_products_mylistings_active_check() ) {
 				$WCFM->library->load_scripts( 'wcfm-profile' );
@@ -778,82 +769,6 @@ class WCFM_ThirdParty_Support {
 		</div>
 		<?php
 		wdmCpbEnqueueScripts( 'post-new.php' );
-	}
-	
-	/**
-	 * Product Manager WC Product Scheduler Plugins View
-	 */
-	function wcfm_wc_product_scheduler_product_manage_views() {
-		global $wp, $WCFM;
-		
-		$product_id = 0;
-		
-		$status = 0;
-		
-		$start_date = '';
-		$st_hh = '';
-		$st_mn = '';
-		
-		$end_date = '';
-		$end_hh = '';
-		$end_mn = '';
-		
-		$countdown = 0;
-		
-		if( isset( $wp->query_vars['wcfm-products-manage'] ) && !empty( $wp->query_vars['wcfm-products-manage'] ) ) {
-			$product_id = absint( $wp->query_vars['wcfm-products-manage'] );
-			
-			if( $product_id ) {
-				$status      = get_post_meta( $product_id, 'wpas_schedule_sale_status', true );   
-				$start_time  = get_post_meta( $product_id, 'wpas_schedule_sale_st_time', true );   
-				$end_time    = get_post_meta( $product_id, 'wpas_schedule_sale_end_time', true );   
-				$mode        = get_post_meta( $product_id, 'wpas_schedule_sale_mode', true );   
-				$countdown   = get_post_meta( $product_id, 'wpas_schedule_sale_countdown', true );  
-				
-				if( !empty($start_time) ) {
-					$start_date = date('Y-m-d', $start_time);
-					$st_mm      = date('m', $start_time);
-					$st_dd      = date('d', $start_time);
-					$st_hh      = date('H', $start_time);
-					$st_mn      = date('i', $start_time);
-				}
-				
-				if( isset($end_time) &!empty($end_time) ) {
-					$end_date  = date('Y-m-d', $end_time);
-					$end_mm    = date('m', $end_time);
-					$end_dd    = date('d', $end_time);
-					$end_hh    = date('H', $end_time);
-					$end_mn    = date('i', $end_time);
-				}
-			}
-		}
-		?>
-		<div class="page_collapsible products_manage_wc_product_scheduler simple variable external booking" id="wcfm_products_manage_form_wc_product_scheduler_head"><label class="wcfmfa fa-clock"></label><?php _e('Availability Scheduler', 'wc-frontend-manager'); ?><span></span></div>
-		<div class="wcfm-container simple variable external booking">
-			<div id="wcfm_products_manage_form_wc_product_scheduler_expander" class="wcfm-content">
-			  <?php
-				$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_wc_product_scheduler_fields', array(  
-						
-						"wpas_select_status" => array('label' => __( 'Status', 'wc-frontend-manager' ) , 'type' => 'select', 'options' => array( '0' => __( 'Disable', 'wc-frontend-manager'), '1' => __( 'Enable', 'wc-frontend-manager' ) ), 'class' => 'wcfm-select wcfm_ele simple variable external booking', 'label_class' => 'wcfm_title simple variable external booking', 'value' => $status ),
-						
-						"wpas_st_date" => array( 'label' => __( 'Start Time', 'wc-frontend-manager'), 'type' => 'text', 'placeholder' => __('From', 'wc-frontend-manager') . '... YYYY-DD-MM', 'custom-attributes' => array( 'date_format' => 'yy-mm-dd' ), 'class' => 'wcfm-text wcfm_ele wcfm_small_ele wcfm_datepicker simple variable external booking', 'label_class' => 'wcfm_title wcfm_ele simple variable external booking', 'value' => $start_date ),
-						"wpas_st_hh" => array( 'type' => 'number', 'class' => 'wcfm-text wcfm_ele wcfm_small_ele wcfm_non_negative_input simple variable external booking', 'label_class' => 'wcfm_title simple variable external booking', 'attributes' => array( 'min' => 0, 'max' => 12, 'step' => 1 ), 'value' => $st_hh ),
-						"wpas_st_mn" => array( 'type' => 'number', 'class' => 'wcfm-text wcfm_ele wcfm_small_ele wcfm_non_negative_input simple variable external booking', 'label_class' => 'wcfm_title simple variable external booking', 'attributes' => array( 'min' => 0, 'max' => 60, 'step' => 1 ), 'value' => $end_mn ),
-						
-						"wpas_end_date" => array( 'label' => __( 'End Time', 'wc-frontend-manager'), 'type' => 'text', 'placeholder' => __('Upto', 'wc-frontend-manager') . '... YYYY-DD-MM', 'custom-attributes' => array( 'date_format' => 'yy-mm-dd' ), 'class' => 'wcfm-text wcfm_ele wcfm_small_ele wcfm_datepicker simple variable external booking', 'label_class' => 'wcfm_title wcfm_ele simple variable external booking', 'value' => $end_date ),
-						"wpas_end_hh" => array( 'type' => 'number', 'class' => 'wcfm-text wcfm_ele wcfm_small_ele wcfm_non_negative_input simple variable external booking', 'label_class' => 'wcfm_title simple variable external booking', 'attributes' => array( 'min' => 0, 'max' => 12, 'step' => 1 ), 'value' => $end_hh ),
-						"wpas_end_mn" => array( 'type' => 'number', 'class' => 'wcfm-text wcfm_ele wcfm_small_ele wcfm_non_negative_input simple variable external booking', 'label_class' => 'wcfm_title simple variable external booking', 'attributes' => array( 'min' => 0, 'max' => 60, 'step' => 1 ), 'value' => $end_mn ),
-						
-						"wpas_enable_countdown" => array('label' => __( 'CountDown', 'wc-frontend-manager' ) , 'type' => 'select', 'options' => array( '0' => __( 'Disable', 'wc-frontend-manager'), '1' => __( 'Enable', 'wc-frontend-manager' ) ), 'class' => 'wcfm-select wcfm_ele simple variable external booking', 'label_class' => 'wcfm_title simple variable external booking', 'value' => $countdown ),
-						
-						
-																															), $product_id ) );
-				?>
-				<div class="wcfm-clearfix"></div><br />
-				<p class="description instructions"><?php _e( 'Note: Start time and End time will be on GMT, Current GMT time is', 'wc-frontend-manager' );  echo ': ' .  date( "Y-m-d @ H:i", time() ); ?></p>
-			</div>
-		</div>
-		<?php
 	}
 	
 	/**

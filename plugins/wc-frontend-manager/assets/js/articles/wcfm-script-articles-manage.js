@@ -56,10 +56,6 @@ jQuery( document ).ready( function( $ ) {
 		});
 	}
 	
-	if( $('#wcfm_vendor').length > 0 ) {
-		$('#wcfm_vendor').select2( $wcfm_vendor_select_args );
-	}
-	
 	// Category checklist view cat limit control
 	if( $('#article_cats_checklist').length > 0 ) {
 		var catlimit = $('#article_cats_checklist').data('catlimit');
@@ -83,58 +79,6 @@ jQuery( document ).ready( function( $ ) {
 		});
 		$('.article_cats_checklist_item_hide_by_cap').attr( 'disabled', true );
 	}
-	
-	// Add New Taxonomy
-	$('.wcfm_add_new_taxonomy').each(function() {
-		$(this).on('click', function() {
-			$(this).parent().find('.wcfm_add_new_taxonomy_form').toggleClass('wcfm_add_new_taxonomy_form_hide');
-		});
-	});
-	$('.wcfm_add_taxonomy_bt').each(function() {
-		$(this).on('click', function() {
-			$wrapper = $(this).parent();
-			if( $wrapper.find('.wcfm_new_tax_ele').val() ) {
-				$taxonomy = $(this).data('taxonomy');
-				$new_term = $wrapper.find('.wcfm_new_tax_ele').val();
-				$parent_term = $wrapper.find('.wcfm_new_parent_taxt_ele').val();
-				var data         = {
-					action:       'wcfm_add_taxonomy_new_term',
-					taxonomy:     $taxonomy,
-					new_term:     $new_term,
-					parent_term:  $parent_term
-				};
-		
-				$('.wcfm_add_new_taxonomy_box').block({
-					message: null,
-					overlayCSS: {
-						background: '#fff',
-						opacity: 0.6
-					}
-				});
-				
-				$.ajax({
-					type:		'POST',
-					url: wcfm_params.ajax_url,
-					data: data,
-					success:	function(response) {
-						if(response) {
-							if ( response.error ) {
-								// Error.
-								window.alert( response.error );
-							} else {
-								// Success.
-								$( '#article_cats_checklist' ).prepend( response );
-								$wrapper.find('.wcfm_new_tax_ele').val('');
-								$wrapper.find('.wcfm_new_parent_taxt_ele').val(0);
-							}
-			
-							$( '.wcfm_add_new_taxonomy_box' ).unblock();
-						}
-					}
-				});
-			}
-		});
-	});
 	
 	// Tag Cloud
 	if( $('.wcfm_fetch_tag_cloud').length > 0 ) {

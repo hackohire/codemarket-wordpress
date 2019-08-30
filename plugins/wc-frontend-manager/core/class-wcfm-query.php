@@ -59,10 +59,6 @@ class WCFM_Query {
 		
 		// WC 3.6 FIX
 		if( isset( $wcfm_modified_endpoints['wcfm-orders'] ) && !empty( $wcfm_modified_endpoints['wcfm-orders'] ) && $wcfm_modified_endpoints['wcfm-orders'] == 'orders' ) $wcfm_modified_endpoints['wcfm-orders'] = 'orderslist';
-		if( isset( $wcfm_modified_endpoints['wcfm-booking'] ) && !empty( $wcfm_modified_endpoints['wcfm-booking'] ) && $wcfm_modified_endpoints['wcfm-booking'] == 'booking' ) $wcfm_modified_endpoints['wcfm-booking'] = 'bookinglist';
-		if( isset( $wcfm_modified_endpoints['wcfm-bookings'] ) && !empty( $wcfm_modified_endpoints['wcfm-bookings'] ) && $wcfm_modified_endpoints['wcfm-bookings'] == 'bookings' ) $wcfm_modified_endpoints['wcfm-bookings'] = 'bookingslist';
-		if( isset( $wcfm_modified_endpoints['wcfm-subscriptions'] ) && !empty( $wcfm_modified_endpoints['wcfm-subscriptions'] ) && $wcfm_modified_endpoints['wcfm-subscriptions'] == 'subscriptions' ) $wcfm_modified_endpoints['wcfm-subscriptions'] = 'subscriptionslist';
-		if( isset( $wcfm_modified_endpoints['wcfm-sell-items-catalog'] ) && !empty( $wcfm_modified_endpoints['wcfm-sell-items-catalog'] ) && $wcfm_modified_endpoints['wcfm-sell-items-catalog'] == 'sell-items-catalog' ) $wcfm_modified_endpoints['wcfm-sell-items-catalog'] = 'add-to-my-store-catalog';
 		
 		
 		// Query vars to add to WP.

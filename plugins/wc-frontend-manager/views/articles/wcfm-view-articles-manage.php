@@ -16,10 +16,6 @@ if( isset( $wp->query_vars['wcfm-articles-manage'] ) && empty( $wp->query_vars['
 		wcfm_restriction_message_show( "Article Limit Reached" );
 		return;
 	}
-	if( !apply_filters( 'wcfm_is_allow_space_limit', true ) ) {
-		wcfm_restriction_message_show( "Space Limit Reached" );
-		return;
-	}
 } elseif( isset( $wp->query_vars['wcfm-articles-manage'] ) && !empty( $wp->query_vars['wcfm-articles-manage'] ) ) {
 	$wcfm_articles_single = get_post( $wp->query_vars['wcfm-articles-manage'] );
 	if( $wcfm_articles_single->post_status == 'publish' ) {
@@ -29,7 +25,7 @@ if( isset( $wp->query_vars['wcfm-articles-manage'] ) && empty( $wp->query_vars['
 		}
 	}
 	if( wcfm_is_vendor() ) {
-		$is_article_from_vendor = $WCFM->wcfm_vendor_support->wcfm_is_component_for_vendor( $wp->query_vars['wcfm-articles-manage'], 'article' );
+		$is_article_from_vendor = $WCFM->wcfm_vendor_support->wcfm_is_article_from_vendor( $wp->query_vars['wcfm-articles-manage'] );
 		if( !$is_article_from_vendor ) {
 			wcfm_restriction_message_show( "Restricted Article" );
 			return;
@@ -46,9 +42,6 @@ $description = '';
 $featured_img = '';
 $categories = array();
 $article_tags = '';
-
-$wcfm_vendor = 0;
-$vendor_arr = array();
 
 if( isset( $wp->query_vars['wcfm-articles-manage'] ) && !empty( $wp->query_vars['wcfm-articles-manage'] ) ) {
 	
@@ -91,11 +84,6 @@ if( isset( $wp->query_vars['wcfm-articles-manage'] ) && !empty( $wp->query_vars[
 		// Article Tags
 		$article_tag_list = wp_get_post_terms($article_id, 'post_tag', array("fields" => "names"));
 		$article_tags = implode(',', $article_tag_list);
-		
-		$wcfm_vendor = $wcfm_articles_single->post_author;
-		if( wcfm_is_vendor( $wcfm_vendor ) ) {
-			$vendor_arr = array( $wcfm_articles_single->post_author => $WCFM->wcfm_vendor_support->wcfm_get_vendor_store_name_by_vendor( $wcfm_articles_single->post_author ) );
-		}
 	}
 }
 
@@ -255,14 +243,6 @@ if( $wpeditor && $rich_editor ) {
 								?>
 							</div>
 						<?php } ?>
-						
-						<?php
-						if( function_exists( 'wcfmmp_get_store_url' ) && !wcfm_is_vendor() ) {
-							$WCFM->wcfm_fields->wcfm_generate_form_field( array(  
-																																"wcfm_vendor" => array( 'label' => __( 'Store', 'wc-frontend-manager' ), 'type' => 'select', 'options' => $vendor_arr, 'class' => 'wcfm-select wcfm_ele', 'label_class' => 'wcfm_title', 'value' => $wcfm_vendor ),
-																															) );
-						}
-						?>
 					</div>
 					<div class="wcfm_article_manager_gallery_fields">
 					  <?php
@@ -274,7 +254,7 @@ if( $wpeditor && $rich_editor ) {
 					
 						<?php if( $wcfm_is_category_checklist = apply_filters( 'wcfm_is_category_checklist', true ) ) { ?>
 							<?php 
-							if( $wcfm_is_allow_category = apply_filters( 'wcfm_is_allow_category', true ) ) {
+							if( $wcfm_is_allow_category = apply_filters( 'wcfm_is_allow_category', true ) ) { 
 								$catlimit = apply_filters( 'wcfm_article_catlimit', -1 ); 
 								?>
 								<div class="wcfm_clearfix"></div>
@@ -288,38 +268,6 @@ if( $wpeditor && $rich_editor ) {
 										?>
 									</ul>
 								</div>
-								<div class="wcfm_clearfix"></div>
-								<?php
-								if( WCFM_Dependencies::wcfmu_plugin_active_check() ) {
-									if( apply_filters( 'wcfm_is_allow_add_category', true ) && apply_filters( 'wcfm_is_allow_add_taxonomy', true ) ) {
-										?>
-										<div class="wcfm_add_new_category_box wcfm_add_new_taxonomy_box">
-											<p class="description wcfm_full_ele wcfm_side_add_new_category wcfm_add_new_category wcfm_add_new_taxonomy">+<?php _e( 'Add new category', 'wc-frontend-manager' ); ?></p>
-											<div class="wcfm_add_new_taxonomy_form wcfm_add_new_taxonomy_form_hide">
-												<?php 
-												$WCFM->wcfm_fields->wcfm_generate_form_field( array( "wcfm_new_cat" => array( 'type' => 'text', 'class' => 'wcfm-text wcfm_new_tax_ele wcfm_full_ele' ) ) ); 
-												$args = array(
-																			'show_option_all'    => '',
-																			'show_option_none'   => __( '-- Parent category --', 'wc-frontend-manager' ),
-																			'option_none_value'  => '0',
-																			'hide_empty'         => 0,
-																			'hierarchical'       => 1,
-																			'name'               => 'wcfm_new_parent_cat',
-																			'class'              => 'wcfm-select wcfm_new_parent_taxt_ele wcfm_full_ele',
-																			'taxonomy'           => 'category',
-																		);
-												wp_dropdown_categories( $args );
-												?>
-												<button type="button" data-taxonomy="category" class="button wcfm_add_category_bt wcfm_add_taxonomy_bt"><?php _e( 'Add', 'wc-frontend-manager' ); ?></button>
-												<div class="wcfm_clearfix"></div>
-											</div>
-										</div>
-										<div class="wcfm_clearfix"></div>
-										<?php
-									}
-								}
-								?>
-									
 								<?php
 								if( $wcfm_is_allow_custom_taxonomy = apply_filters( 'wcfm_is_allow_custom_taxonomy', true ) ) {
 									$article_taxonomies = get_object_taxonomies( 'post', 'objects' );

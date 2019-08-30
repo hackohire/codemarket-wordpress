@@ -18,12 +18,7 @@ class WCFM_Policy {
 		add_action( 'wcfm_settings_update', array( &$this, 'wcfm_policy_settings_update' ), 16 );
 		
 		if( $is_marketplace = wcfm_is_marketplace() ) {
-			
-			if( $is_marketplace = 'wcfmmarketplace' ) {
-			  add_action( 'wcfm_vendor_settings_after_seo', array( &$this, 'wcfm_policy_vendor_settings' ), 15 );
-			} else {
-				add_action( 'end_wcfm_vendor_settings', array( &$this, 'wcfm_policy_vendor_settings' ), 15 );
-			}
+			add_action( 'end_wcfm_vendor_settings', array( &$this, 'wcfm_policy_vendor_settings' ), 15 );
 			add_action( 'wcfm_vendor_settings_update', array( &$this, 'wcfm_policy_vendor_settings_update' ), 15, 2 );
 			
 			if( $is_marketplace = 'wcmarketplace' ) {
@@ -388,7 +383,7 @@ class WCFM_Policy {
 	public function get_policy_tab_title( $product_id = 0 ) {
 		global $WCFM, $product;
 		
-		if( !apply_filters( 'wcmp_vendor_can_overwrite_policies', true ) || !apply_filters( 'wcfm_is_allow_policy_settings', true ) || !apply_filters( 'wcfm_is_allow_show_policy', true ) ) return; 
+		if( !apply_filters( 'wcmp_vendor_can_overwrite_policies', true ) || !apply_filters( 'wcfm_is_allow_policy_settings', true ) ) return; 
 		
 		$_wcfm_product_policy_tab_title = '';
 		
@@ -422,7 +417,7 @@ class WCFM_Policy {
 		
 		$_wcfm_policy_tab_title = isset( $wcfm_policy_options['policy_tab_title'] ) ? $wcfm_policy_options['policy_tab_title'] : '';
 		if( wcfm_empty($_wcfm_product_policy_tab_title) ) $_wcfm_product_policy_tab_title = $_wcfm_policy_tab_title;
-		if( wcfm_empty($_wcfm_product_policy_tab_title) ) $_wcfm_product_policy_tab_title = __( 'Store Policies', 'wc-frontend-manager' );
+		if( wcfm_empty($_wcfm_product_policy_tab_title) ) $_wcfm_product_policy_tab_title = __( 'Store Polices', 'wc-frontend-manager' );
 		
 		return apply_filters( 'wcfm_product_policy_tab_title', $_wcfm_product_policy_tab_title, $product_id );
 	}
@@ -430,7 +425,7 @@ class WCFM_Policy {
 	public function get_shipping_policy( $product_id ) {
 		global $WCFM;
 		
-		if( !apply_filters( 'wcmp_vendor_can_overwrite_policies', true ) || !apply_filters( 'wcfm_is_allow_policy_settings', true ) || !apply_filters( 'wcfm_is_allow_show_policy', true ) || !apply_filters( 'wcfm_is_allow_show_shipping_policy', true ) ) return; 
+		if( !apply_filters( 'wcmp_vendor_can_overwrite_policies', true ) || !apply_filters( 'wcfm_is_allow_policy_settings', true ) ) return; 
 		
 		$_wcfm_product_shipping_policy = '';
 		
@@ -481,7 +476,7 @@ class WCFM_Policy {
 	public function get_refund_policy( $product_id ) {
 		global $WCFM;
 		
-		if( !apply_filters( 'wcmp_vendor_can_overwrite_policies', true ) || !apply_filters( 'wcfm_is_allow_policy_settings', true ) || !apply_filters( 'wcfm_is_allow_show_policy', true ) || !apply_filters( 'wcfm_is_allow_show_refund_policy', true ) ) return; 
+		if( !apply_filters( 'wcmp_vendor_can_overwrite_policies', true ) || !apply_filters( 'wcfm_is_allow_policy_settings', true ) ) return; 
 		
 		$_wcfm_product_refund_policy = '';
 		
@@ -532,7 +527,7 @@ class WCFM_Policy {
 	public function get_cancellation_policy( $product_id ) {
 		global $WCFM;
 		
-		if( !apply_filters( 'wcmp_vendor_can_overwrite_policies', true ) || !apply_filters( 'wcfm_is_allow_policy_settings', true ) || !apply_filters( 'wcfm_is_allow_show_policy', true ) || !apply_filters( 'wcfm_is_allow_show_cancel_policy', true ) ) return; 
+		if( !apply_filters( 'wcmp_vendor_can_overwrite_policies', true ) || !apply_filters( 'wcfm_is_allow_policy_settings', true ) ) return; 
 		
 		$_wcfm_product_cancellation_policy = '';
 		

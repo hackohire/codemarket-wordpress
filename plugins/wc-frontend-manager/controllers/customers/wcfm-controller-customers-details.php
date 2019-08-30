@@ -84,7 +84,7 @@ class WCFM_Customers_Details_Orders_Controller {
 				$wcfm_orders_json_arr[$index][] =  '<span class="order-status tips wcicon-status-' . sanitize_title( $the_order->get_status() ) . ' text_tip" data-tip="' . wc_get_order_status_name( $the_order->get_status() ) . '"></span>';
 				
 				// Order
-				if( apply_filters( 'wcfm_allow_view_customer_name', true ) ) {
+				if( apply_filters( 'wcfm_allow_order_customer_details', true ) ) {
 					$user_info = array();
 					if ( $the_order->get_user_id() ) {
 						$user_info = get_userdata( $the_order->get_user_id() );
@@ -354,7 +354,7 @@ class WCFM_Customers_Details_Bookings_Controller {
 				
 				// Action
 				$actions = '';
-				if ( current_user_can( 'manage_bookings_settings' ) || current_user_can( 'manage_bookings' ) ) {
+				if ( current_user_can( 'manage_bookings' ) ) {
 					if( WCFM_Dependencies::wcfmu_plugin_active_check() ) {
 					 if ( in_array( $the_booking->get_status(), array( 'pending-confirmation' ) ) ) $actions = '<a class="wcfm_booking_mark_confirm wcfm-action-icon" href="#" data-bookingid="' . $wcfm_bookings_single->ID . '"><span class="wcfmfa fa-check-circle text_tip" data-tip="' . esc_attr__( 'Mark as Confirmed', 'wc-frontend-manager' ) . '"></span></a>';
 					}

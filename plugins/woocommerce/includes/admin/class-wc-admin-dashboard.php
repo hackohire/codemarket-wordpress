@@ -215,12 +215,7 @@ if ( ! class_exists( 'WC_Admin_Dashboard', false ) ) :
 			if ( false === $lowinstock_count ) {
 				$lowinstock_count = (int) $wpdb->get_var(
 					$wpdb->prepare(
-						"SELECT COUNT( product_id )
-						FROM {$wpdb->wc_product_meta_lookup} AS lookup
-						INNER JOIN {$wpdb->posts} as posts ON lookup.product_id = posts.ID
-						WHERE stock_quantity <= %d
-						AND stock_quantity > %d
-						AND posts.post_status = 'publish'",
+						"SELECT COUNT( product_id ) FROM {$wpdb->wc_product_meta_lookup} WHERE stock_quantity <= %d AND stock_quantity > %d",
 						$stock,
 						$nostock
 					)
@@ -234,11 +229,7 @@ if ( ! class_exists( 'WC_Admin_Dashboard', false ) ) :
 			if ( false === $outofstock_count ) {
 				$outofstock_count = (int) $wpdb->get_var(
 					$wpdb->prepare(
-						"SELECT COUNT( product_id )
-						FROM {$wpdb->wc_product_meta_lookup} AS lookup
-						INNER JOIN {$wpdb->posts} as posts ON lookup.product_id = posts.ID
-						WHERE stock_quantity <= %d
-						AND posts.post_status = 'publish'",
+						"SELECT COUNT( product_id ) FROM {$wpdb->wc_product_meta_lookup} WHERE stock_quantity <= %d",
 						$nostock
 					)
 				);

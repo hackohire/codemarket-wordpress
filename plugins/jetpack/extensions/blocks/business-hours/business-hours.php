@@ -118,7 +118,8 @@ function jetpack_business_hours_render( $attributes ) {
 				continue;
 			}
 			$days_hours .= sprintf(
-				'%1$s - %2$s',
+				/* Translators: Business opening hours info. */
+				_x( 'From %1$s to %2$s', 'from business opening hour to closing hour', 'jetpack' ),
 				date( $time_format, $opening ),
 				date( $time_format, $closing )
 			);
@@ -133,8 +134,6 @@ function jetpack_business_hours_render( $attributes ) {
 	}
 
 	$content .= '</dl>';
-
-	Jetpack_Gutenberg::load_assets_as_required( 'business-hours' );
 
 	/**
 	 * Allows folks to filter the HTML content for the Business Hours block

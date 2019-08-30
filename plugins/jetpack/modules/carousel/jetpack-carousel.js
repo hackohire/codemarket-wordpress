@@ -474,9 +474,6 @@ jQuery( document ).ready( function( $ ) {
 					$( window ).scrollTop( scroll );
 					$( '.jp-carousel-previous-button' ).hide();
 					$( '.jp-carousel-next-button' ).hide();
-					// Set height to original value
-					// Fix some themes where closing carousel brings view back to top
-					$( 'html' ).css( 'height', '' );
 				} )
 				.bind( 'jp_carousel.afterClose', function() {
 					if ( window.location.hash && history.back ) {
@@ -1693,10 +1690,6 @@ jQuery( document ).ready( function( $ ) {
 			) {
 				return;
 			}
-
-			// Set height to auto
-			// Fix some themes where closing carousel brings view back to top
-			$( 'html' ).css( 'height', 'auto' );
 
 			e.preventDefault();
 

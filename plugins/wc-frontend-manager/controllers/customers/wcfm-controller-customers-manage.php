@@ -189,18 +189,10 @@ class WCFM_Customers_Manage_Controller {
 							$WCFM->wcfm_notification->wcfm_send_direct_message( $author_id, $message_to, $author_is_admin, $author_is_vendor, $wcfm_messages, 'new_customer' );
 						}
 						
-						if( function_exists( 'wcfmmp_get_store_url' ) && !wcfm_is_vendor() ) {
-							if( isset( $wcfm_customer_form_data['wcfm_vendor'] ) && !empty( $wcfm_customer_form_data['wcfm_vendor'] ) ) {
-								update_user_meta( $customer_id, '_wcfm_vendor', $wcfm_customer_form_data['wcfm_vendor'] );
-							} else {
-								delete_user_meta( $customer_id, '_wcfm_vendor' );
-							}
-						}
-						
 						do_action( 'wcfm_customers_manage', $customer_id, $wcfm_customer_form_data );
 					}
 					
-					if(!$has_error) { echo '{"status": true, "message": "' . $wcfm_customer_messages['customer_saved'] . '", "redirect": "' . apply_filters( 'wcfm_customer_manage_redirect', get_wcfm_customers_manage_url($customer_id), $customer_id ) . '"}'; }
+					if(!$has_error) { echo '{"status": true, "message": "' . $wcfm_customer_messages['customer_saved'] . '", "redirect": "' . apply_filters( 'wcfm_customer_manage_redirect', get_wcfm_customers_url(), $customer_id ) . '"}'; }
 					else { echo '{"status": false, "message": "' . $wcfm_customer_messages['customer_failed'] . '"}'; }
 				}
 			} else {

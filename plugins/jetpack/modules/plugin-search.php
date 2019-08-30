@@ -374,14 +374,16 @@ class Jetpack_Plugin_Search {
 	 *
 	 * @since 7.1.0
 	 * @since 7.2.0 Only remove Jetpack.
-	 * @since 7.4.0 Simplify for WordPress 5.1+.
 	 *
 	 * @param array|object $plugin
 	 *
 	 * @return bool
 	 */
 	function filter_cards( $plugin ) {
-		return ! in_array( $plugin['slug'], array( 'jetpack' ), true );
+		// Take in account that before WordPress 5.1, the list of plugins is an array of objects.
+		// With WordPress 5.1 the list of plugins is an array of arrays.
+		$slug = is_array( $plugin ) ? $plugin['slug'] : $plugin->slug;
+		return ! in_array( $slug, array( 'jetpack' ), true );
 	}
 
 	/**
@@ -444,13 +446,13 @@ class Jetpack_Plugin_Search {
 		switch ( $feature ) {
 			case 'sharing':
 			case 'publicize':
-				$configure_url = "https://wordpress.com/marketing/connections/$siteFragment";
+				$configure_url = "https://wordpress.com/sharing/$siteFragment";
 				break;
 			case 'seo-tools':
-				$configure_url = "https://wordpress.com/marketing/traffic/$siteFragment#seo";
+				$configure_url = "https://wordpress.com/settings/traffic/$siteFragment#seo";
 				break;
 			case 'google-analytics':
-				$configure_url = "https://wordpress.com/marketing/traffic/$siteFragment#analytics";
+				$configure_url = "https://wordpress.com/settings/traffic/$siteFragment#analytics";
 				break;
 			case 'wordads':
 				$configure_url = "https://wordpress.com/ads/settings/$siteFragment";

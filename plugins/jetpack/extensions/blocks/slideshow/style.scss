@@ -1,14 +1,9 @@
 @import '../../shared/styles/gutenberg-colors.scss';
-@import '../../shared/styles/gutenberg-variables.scss';
 @import '../../shared/styles/jetpack-variables.scss';
 
 .wp-block-jetpack-slideshow {
 	margin-bottom: $jetpack-block-margin-bottom;
 	position: relative;
-
-	[tabindex='-1']:focus {
-		outline: 0;
-	}
 
 	.wp-block-jetpack-slideshow_container {
 		width: 100%;
@@ -84,11 +79,6 @@
 		}
 	}
 
-	.wp-block-jetpack-slideshow_button-prev,
-	.wp-block-jetpack-slideshow_button-next {
-		display: none;
-	}
-
 	&.swiper-container-rtl .swiper-button-prev.swiper-button-white,
 	&.swiper-container-rtl .wp-block-jetpack-slideshow_button-prev,
 	.swiper-button-next.swiper-button-white,
@@ -129,7 +119,6 @@
 		cursor: text;
 		left: 0;
 		margin: 0 !important;
-		max-height: 100%;
 		padding: 0.75em;
 		position: absolute;
 		right: 0;
@@ -138,10 +127,6 @@
 		a {
 			color: inherit;
 		}
-	}
-
-	&[data-autoplay='true'] .wp-block-jetpack-slideshow_caption.gallery-caption {
-		max-height: calc( 100% - 68px );
 	}
 
 	.wp-block-jetpack-slideshow_pagination.swiper-pagination-bullets {
@@ -175,15 +160,6 @@
 			background-color: currentColor;
 			opacity: 1;
 			transform: scale( 1 );
-		}
-	}
-}
-
-@media ( min-width: $break-small ) {
-	.wp-block-jetpack-slideshow {
-		.wp-block-jetpack-slideshow_button-prev,
-		.wp-block-jetpack-slideshow_button-next {
-			display: block;
 		}
 	}
 }

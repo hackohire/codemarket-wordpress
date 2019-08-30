@@ -11,7 +11,7 @@
 
 global $WCFM;
 
-if( !current_user_can( 'manage_bookings_settings' ) && !current_user_can( 'manage_bookings' ) ) {
+if( !current_user_can( 'manage_bookings' ) ) {
 	wcfm_restriction_message_show( "Bookings" );
 	return;
 }

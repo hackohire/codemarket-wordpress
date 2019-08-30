@@ -79,17 +79,7 @@ class WCFM_Enquiry {
 		}
 		
 		// Single Product page enquiry button
-		$wcfm_enquiry_button_position  = isset( $WCFM->wcfm_options['wcfm_enquiry_button_position'] ) ? $WCFM->wcfm_options['wcfm_enquiry_button_position'] : 'bellow_atc';
-		if( $wcfm_enquiry_button_position == 'bellow_price' ) {
-			add_action( 'woocommerce_single_product_summary',	array( &$this, 'wcfm_enquiry_button' ), 15 );
-		} elseif( $wcfm_enquiry_button_position == 'bellow_sc' ) {
-			add_action( 'woocommerce_single_product_summary',	array( &$this, 'wcfm_enquiry_button' ), 25 );
-		} else {
-			add_action( 'woocommerce_single_product_summary',	array( &$this, 'wcfm_enquiry_button' ), 35 );
-		}
-		
-		// YiTh Quick View Inquiry Button
-		//add_action( 'yith_wcqv_product_summary',	array( &$this, 'wcfm_enquiry_button' ), 35 );
+		add_action( 'woocommerce_single_product_summary',	array( &$this, 'wcfm_enquiry_button' ), 35 );
 		
 		// WCFM Marketplace Store enquiry button
 		add_action( 'wcfmmp_store_enquiry',	array( &$this, 'wcfmmp_store_enquiry_button' ), 35 );
@@ -103,13 +93,9 @@ class WCFM_Enquiry {
 		// Enquiry direct message type
 		add_filter( 'wcfm_message_types', array( &$this, 'wcfm_enquiry_message_types' ), 25 );
 		
-		// Inquiry Login Require
-		add_filter( 'wcfm_is_allow_enquiry_with_login', array( &$this, 'wcfm_enquiry_with_login' ), 25 );
-		
-		// Enqueue scripts
+		//enqueue scripts
 		add_action('wp_enqueue_scripts', array(&$this, 'wcfm_enquiry_scripts'));
-		
-		// Enqueue styles
+		//enqueue styles
 		add_action('wp_enqueue_scripts', array(&$this, 'wcfm_enquiry_styles'));
 	}
 	
@@ -199,15 +185,12 @@ class WCFM_Enquiry {
 	    		$wcfm_screen_manager_data[3] = 'yes';
 	    	}
 	    	$wcfm_screen_manager_data[4] = 'yes';
-	    	//$wcfm_screen_manager_data[5] = 'yes';
+	    	$wcfm_screen_manager_data[5] = 'yes';
 	    	$wcfm_screen_manager_data = apply_filters( 'wcfm_enquiry_screen_manage', $wcfm_screen_manager_data );
 	    	wp_localize_script( 'wcfm_enquiry_js', 'wcfm_enquiry_screen_manage', $wcfm_screen_manager_data );
       break;
       
       case 'wcfm-enquiry-manage':
-      	$WCFM->library->load_select2_lib();
-      	$WCFM->library->load_multiinput_lib();
-      	$WCFM->library->load_collapsible_lib();
       	wp_enqueue_script( 'wcfm_enquiry_manage_js', $WCFM->library->js_lib_url_min . 'enquiry/wcfm-script-enquiry-manage.js', array('jquery'), $WCFM->version, true );
       	// Localized Script
         $wcfm_messages = get_wcfm_enquiry_manage_messages();
@@ -387,7 +370,6 @@ class WCFM_Enquiry {
   	if( isset( $_POST['responseid'] ) && !empty( $_POST['responseid'] ) ) {
   		$responseid = $_POST['responseid'];
   		$wpdb->query( "DELETE FROM {$wpdb->prefix}wcfm_enquiries_response WHERE ID = {$responseid}" );
-  		$wpdb->query( "DELETE FROM {$wpdb->prefix}wcfm_enquiries_response_meta WHERE `enquiry_response_id` = {$responseid}" );
   	}
   	
   	echo "success";
@@ -416,34 +398,24 @@ class WCFM_Enquiry {
    */
 	function wcfm_enquiry_button() {
 		global $WCFM, $post;
-		if( apply_filters( 'wcfm_is_pref_enquiry', true ) && apply_filters( 'wcfm_is_pref_enquiry_button', true ) && apply_filters( 'wcfm_is_allow_product_enquiry_bubtton', true ) ) {
+		if( apply_filters( 'wcfm_is_pref_enquiry_button', true ) ) {
 			
 			$vendor_id = 0;
 			$product_id = 0;
 			if( is_product() && $post && is_object( $post ) ) {
 				$product_id = $post->ID;
 				$vendor_id = $WCFM->wcfm_vendor_support->wcfm_get_vendor_id_from_product( $product_id );
-				
-				//if( !wcfm_is_vendor( $vendor_id ) || !$WCFM->wcfm_vendor_support->wcfm_vendor_has_capability( $vendor_id, 'enquiry' ) ) return;
 			}
 			
-			$button_style     = 'margin-right:10px;';
-			$hover_color      = '';
-			$hover_text_color = '#ffffff';
+			$button_style = '';
 			$wcfm_options = $WCFM->wcfm_options;
-			$wcfm_store_color_settings = get_option( 'wcfm_store_color_settings', array() );
-			if( !empty( $wcfm_store_color_settings ) ) {
-				if( isset( $wcfm_store_color_settings['button_bg'] ) ) { $button_style .= 'background: ' . $wcfm_store_color_settings['button_bg'] . ';border-bottom-color: ' . $wcfm_store_color_settings['button_bg'] . ';'; }
-				if( isset( $wcfm_store_color_settings['button_text'] ) ) { $button_style .= 'color: ' . $wcfm_store_color_settings['button_text'] . ';'; }
-				if( isset( $wcfm_store_color_settings['button_active_bg'] ) ) { $hover_color = $wcfm_store_color_settings['button_active_bg']; }
-				if( isset( $wcfm_store_color_settings['button_active_text'] ) ) { $hover_text_color = $wcfm_store_color_settings['button_active_text']; }
-			} else {
-				if( isset( $wcfm_options['wc_frontend_manager_button_background_color_settings'] ) ) { $button_style .= 'background: ' . $wcfm_options['wc_frontend_manager_button_background_color_settings'] . ';border-bottom-color: ' . $wcfm_options['wc_frontend_manager_button_background_color_settings'] . ';'; }
-				if( isset( $wcfm_options['wc_frontend_manager_button_text_color_settings'] ) ) { $button_style .= 'color: ' . $wcfm_options['wc_frontend_manager_button_text_color_settings'] . ';'; }
-				if( isset( $wcfm_options['wc_frontend_manager_base_highlight_color_settings'] ) ) { $hover_color = $wcfm_options['wc_frontend_manager_base_highlight_color_settings']; }
-			}
+			if( isset( $wcfm_options['wc_frontend_manager_button_background_color_settings'] ) ) { $button_style .= 'background: ' . $wcfm_options['wc_frontend_manager_button_background_color_settings'] . ';border-bottom-color: ' . $wcfm_options['wc_frontend_manager_button_background_color_settings'] . ';'; }
+			if( isset( $wcfm_options['wc_frontend_manager_button_text_color_settings'] ) ) { $button_style .= 'color: ' . $wcfm_options['wc_frontend_manager_button_text_color_settings'] . ';'; }
 			
 			$wcfm_enquiry_button_label  = isset( $wcfm_options['wcfm_enquiry_button_label'] ) ? $wcfm_options['wcfm_enquiry_button_label'] : __( 'Ask a Question', 'wc-frontend-manager' );
+			
+			$base_color = '';
+			if( isset( $wcfm_options['wc_frontend_manager_base_highlight_color_settings'] ) ) { $base_color = $wcfm_options['wc_frontend_manager_base_highlight_color_settings']; }
 			
 			$button_class = '';
 			if( !is_user_logged_in() && apply_filters( 'wcfm_is_allow_enquiry_with_login', false ) ) { $button_class = ' wcfm_login_popup'; }
@@ -451,11 +423,8 @@ class WCFM_Enquiry {
 			<div class="wcfm_ele_wrapper wcfm_catalog_enquiry_button_wrapper">
 				<div class="wcfm-clearfix"></div>
 				<a href="#" class="wcfm_catalog_enquiry <?php echo $button_class; ?>" data-store="<?php echo $vendor_id; ?>" data-product="<?php echo $product_id; ?>" style="<?php echo $button_style; ?>"><span class="wcfmfa fa-question-circle"></span>&nbsp;&nbsp;<span class="add_enquiry_label"><?php _e( $wcfm_enquiry_button_label, 'wc-frontend-manager' ); ?></span></a>
-				<?php do_action( 'wcfm_after_product_catalog_enquiry_button' ); ?>
-				<?php if( $hover_color ) { ?>
-					<style>
-					a.wcfm_catalog_enquiry:hover{background: <?php echo $hover_color; ?> !important;background-color: <?php echo $hover_color; ?> !important;border-bottom-color: <?php echo $hover_color; ?> !important;color: <?php echo $hover_text_color; ?> !important;}
-					</style>
+				<?php if( $base_color ) { ?>
+					<style>a.wcfm_catalog_enquiry:hover{background: <?php echo $base_color; ?> !important;border-bottom-color: <?php echo $base_color; ?> !important;}</style>
 				<?php } ?>
 				<div class="wcfm-clearfix"></div>
 			</div>
@@ -470,7 +439,7 @@ class WCFM_Enquiry {
    */
 	function wcfmmp_store_enquiry_button() {
 		global $WCFM, $WCFMmp;
-		if( apply_filters( 'wcfm_is_pref_enquiry', true ) && apply_filters( 'wcfm_is_pref_enquiry_button', true ) && apply_filters( 'wcfmmp_is_allow_store_header_enquiry', true ) ) {
+		if( apply_filters( 'wcfm_is_pref_enquiry_button', true ) ) {
 			$vendor_id = 0;
 			if( ( function_exists( 'wcfmmp_is_store_page' ) && wcfmmp_is_store_page() ) ) {
 				$vendor_id = get_query_var( 'author' );
@@ -478,15 +447,8 @@ class WCFM_Enquiry {
 			
 			$button_class = '';
 			if( !is_user_logged_in() && apply_filters( 'wcfm_is_allow_enquiry_with_login', false ) ) { $button_class = ' wcfm_login_popup'; }
-			
-			$wcfm_enquiry_button_label  = __( 'Inquiry', 'wc-frontend-manager' );
-			
-			if( apply_filters( 'wcfm_is_allow_store_inquiry_custom_button_label', false ) ) {
-				$wcfm_options = $WCFM->wcfm_options;
-				$wcfm_enquiry_button_label  = isset( $wcfm_options['wcfm_enquiry_button_label'] ) ? $wcfm_options['wcfm_enquiry_button_label'] : __( 'Inquiry', 'wc-frontend-manager' );
-			}
 			?>
-			<div class="lft bd_icon_box"><a class="wcfm_store_enquiry <?php echo $button_class; ?>" data-store="<?php echo $vendor_id; ?>" data-product="0" href="#"><i class="wcfmfa fa-question" aria-hidden="true"></i><span><?php _e( $wcfm_enquiry_button_label, 'wc-frontend-manager' ); ?></span></a></div>
+			<div class="lft bd_icon_box"><a class="wcfm_store_enquiry <?php echo $button_class; ?>" data-store="<?php echo $vendor_id; ?>" data-product="0" href="#"><i class="wcfmfa fa-question" aria-hidden="true"></i><span><?php _e( 'Inquiry', 'wc-frontend-manager' ); ?></span></a></div>
 			<?php
 		}
 	}
@@ -498,18 +460,11 @@ class WCFM_Enquiry {
    */
 	function wcfmmp_store_list_enquiry_button( $store_id ) {
 		global $WCFM, $WCFMmp;
-		if( apply_filters( 'wcfm_is_pref_enquiry', true ) && apply_filters( 'wcfm_is_pref_enquiry_button', true ) && apply_filters( 'wcfm_is_allow_store_list_enquiry', true ) && $WCFM->wcfm_vendor_support->wcfm_vendor_has_capability( $store_id, 'enquiry' ) ) {
+		if( apply_filters( 'wcfm_is_pref_enquiry_button', true ) && apply_filters( 'wcfm_is_allow_store_list_enquiry', true ) ) {
 			$button_class = '';
 			if( !is_user_logged_in() && apply_filters( 'wcfm_is_allow_enquiry_with_login', false ) ) { $button_class = ' wcfm_login_popup'; }
-			
-			$wcfm_enquiry_button_label  = __( 'Inquiry', 'wc-frontend-manager' );
-			
-			if( apply_filters( 'wcfm_is_allow_store_list_inquiry_custom_button_label', false ) ) {
-				$wcfm_options = $WCFM->wcfm_options;
-				$wcfm_enquiry_button_label  = isset( $wcfm_options['wcfm_enquiry_button_label'] ) ? $wcfm_options['wcfm_enquiry_button_label'] : __( 'Inquiry', 'wc-frontend-manager' );
-			}
 			?>
-			<p class="store-enquiry"><a class="wcfm_catalog_enquiry <?php echo $button_class; ?>" data-store="<?php echo $store_id; ?>" data-product="0" href="#"><span class="wcfmfa fa-question-circle fa-question-circle"></span>&nbsp;<span class="add_enquiry_label"><?php _e( $wcfm_enquiry_button_label, 'wc-frontend-manager' ); ?></span></a></p>
+			<p class="store-enquiry"><a class="wcfm_catalog_enquiry <?php echo $button_class; ?>" data-store="<?php echo $store_id; ?>" data-product="0" href="#"><span class="wcfmfa fa-question-circle fa-question-circle"></span>&nbsp;<span class="add_enquiry_label"><?php _e( 'Inquiry', 'wc-frontend-manager' ); ?></span></a></p>
 			<?php
 		}
 	}
@@ -540,7 +495,7 @@ class WCFM_Enquiry {
 			
 			?>
 			<div class="wcfm_dashboard_enquiries">
-				<div class="page_collapsible" id="wcfm_dashboard_enquiries"><span class="wcfmfa fa-question-circle fa-question-circle"></span><span class="dashboard_widget_head"><?php _e('Inquiries', 'wc-frontend-manager'); ?></span></div>
+				<div class="page_collapsible" id="wcfm_dashboard_enquiries"><span class="wcfmfa fa-question-circle fa-question-circle"></span><span class="dashboard_widget_head"><?php _e('Enquiries', 'wc-frontend-manager'); ?></span></div>
 				<div class="wcfm-container">
 					<div id="wcfm_dashboard_enquiries_expander" class="wcfm-content">
 					  <?php
@@ -580,41 +535,6 @@ class WCFM_Enquiry {
 	}
 	
 	/**
-	 * Enquiry Reply Attachments Get/Show
-	 */
-	function wcfm_enquiry_reply_attachments( $wcfm_enquiry_reply_id, $context = 'view' ) {
-		global $WCFM, $wpdb;
-		
-		$attachments = '';
-		if( $wcfm_enquiry_reply_id ) {
-			$wcfm_options = $WCFM->wcfm_options;
-			$wcfm_enquiry_allow_attachment = isset( $wcfm_options['wcfm_enquiry_allow_attachment'] ) ? $wcfm_options['wcfm_enquiry_allow_attachment'] : 'yes';
-			if( ( $wcfm_enquiry_allow_attachment == 'yes' ) && apply_filters( 'wcfm_is_allow_enquiry_reply_attachment', true ) ) {
-				$wcfm_enquiry_attachments = $wpdb->get_results( "SELECT value from {$wpdb->prefix}wcfm_enquiries_response_meta WHERE `key` = 'attchment' AND `enquiry_response_id` = " . $wcfm_enquiry_reply_id );
-				if( !empty( $wcfm_enquiry_attachments ) ) {
-					foreach( $wcfm_enquiry_attachments as $wcfm_enquiry_attachment ) {
-						if( $wcfm_enquiry_attachment->value ) {
-							$attachments = maybe_unserialize( $wcfm_enquiry_attachment->value );
-							if( $attachments && is_array( $attachments ) && !empty( $attachments ) ) {
-								if( $context == 'view' ) {
-									echo '<div class="wcfm_clearfix"></div><br /><h2 style="font-size:15px;">' . __( 'Attachment(s)', 'wc-frontend-manager' ) . '</h2><div class="wcfm_clearfix"></div>';
-									foreach( $attachments as $attachment ) {
-										echo '<a class="wcfm-wp-fields-uploader wcfm_linked_attached" target="_blank" style="width:32px;height:32px;margin-right:10px;" href="' . $attachment . '"><span style="font-size:32px;color:	#f86c6b;display:inline-block;" class="wcfmfa fa-file-image"></span></a>';
-									}
-									return;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		
-		return $attachments;
-	}
-	
-	
-	/**
    * Enquiry Tab content on Single Product
    */
 	function wcfm_enquiry_product_tab_content() {
@@ -625,14 +545,6 @@ class WCFM_Enquiry {
 	function wcfm_enquiry_message_types( $message_types ) {
 		$message_types['enquiry'] = __( 'New Enquiry', 'wc-frontend-manager' );
 		return $message_types;
-	}
-	
-	function wcfm_enquiry_with_login( $is_allow ) {
-		global $WCFM, $wp;
-		$wcfm_options = $WCFM->wcfm_options;
-		$wcfm_enquiry_with_login    = isset( $wcfm_options['wcfm_enquiry_with_login'] ) ? $wcfm_options['wcfm_enquiry_with_login'] : 'no';
-		if( $wcfm_enquiry_with_login == 'yes' ) $is_allow = true;
-		return $is_allow;
 	}
 	
 	/**
@@ -654,16 +566,10 @@ class WCFM_Enquiry {
  			if( is_user_logged_in() ) {
 				if( isset( $wp->query_vars[$this->wcfm_myaccount_view_inquiry_endpoint] ) && !empty( $wp->query_vars[$this->wcfm_myaccount_view_inquiry_endpoint] ) ) {
 					$WCFM->library->load_blockui_lib();
-					$WCFM->library->load_select2_lib();
-					$WCFM->library->load_multiinput_lib();
-					$WCFM->library->load_collapsible_lib();
 					wp_enqueue_script( 'wcfm_enquiry_manage_js', $WCFM->library->js_lib_url_min . 'enquiry/wcfm-script-my-account-enquiry-manage.js', array('jquery'), $WCFM->version, true );
 					// Localized Script
 					$wcfm_messages = get_wcfm_enquiry_manage_messages();
 					wp_localize_script( 'wcfm_enquiry_manage_js', 'wcfm_enquiry_manage_messages', $wcfm_messages );
-					
-					$wcfm_dashboard_messages = get_wcfm_dashboard_messages();
-					wp_localize_script( 'wcfm_enquiry_manage_js', 'wcfm_dashboard_messages', $wcfm_dashboard_messages );
 				}
 			}
  		}
@@ -684,7 +590,7 @@ class WCFM_Enquiry {
  		if( is_account_page() ) {
  			if( is_user_logged_in() ) {
  				if( isset( $wp->query_vars[$this->wcfm_myaccount_view_inquiry_endpoint] ) && !empty( $wp->query_vars[$this->wcfm_myaccount_view_inquiry_endpoint] ) ) {
- 					//wp_enqueue_style( 'collapsible_css',  $WCFM->library->css_lib_url_min . 'wcfm-style-collapsible.css', array(), $WCFM->version );
+ 					wp_enqueue_style( 'collapsible_css',  $WCFM->library->css_lib_url_min . 'wcfm-style-collapsible.css', array(), $WCFM->version );
  					wp_enqueue_style( 'wcfm_menu_css',  $WCFM->library->css_lib_url_min . 'menu/wcfm-style-menu.css', array(), $WCFM->version );
  					wp_enqueue_style( 'wcfm_enquiry_manage_css',  $WCFM->library->css_lib_url_min . 'enquiry/wcfm-style-enquiry-manage.css', array(), $WCFM->version );
  					wp_enqueue_style( 'wcfm_my_account_enquiry_manage_css',  $WCFM->library->css_lib_url_min . 'enquiry/wcfm-style-my-account-enquiry-manage.css', array(), $WCFM->version );

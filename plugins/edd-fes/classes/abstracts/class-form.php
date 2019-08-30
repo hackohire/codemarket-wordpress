@@ -530,9 +530,10 @@ class FES_Form {
 				if ( is_array( $templates_to_exclude ) && in_array( $field->supports['template'], $templates_to_exclude ) ) {
 					continue;
 				}
-				// Alpeshkumar
-				//$values = $field->sanitize( $values, $this->save_id, $user_id ); // this works like an apply_filters. Locate your value and sanitize it
+
+				$values = $field->sanitize( $values, $this->save_id, $user_id ); // this works like an apply_filters. Locate your value and sanitize it
 			}
+
 			foreach ( $fields as $field ) {
 				if ( ! is_object( $field ) ) {
 					continue;

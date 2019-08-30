@@ -21,13 +21,13 @@ class DayPreview extends Component {
 
 	renderInterval = ( interval, key ) => {
 		return (
-			<span key={ key }>
+			<dd key={ key }>
 				{ sprintf(
-					'%s - %s',
+					_x( 'From %s to %s', 'from business opening hour to closing hour', 'jetpack' ),
 					this.formatTime( interval.opening ),
 					this.formatTime( interval.closing )
 				) }
-			</span>
+			</dd>
 		);
 	};
 
@@ -40,11 +40,11 @@ class DayPreview extends Component {
 		return (
 			<Fragment>
 				<dt className={ day.name }>{ localization.days[ day.name ] }</dt>
-				<dd>
-					{ isEmpty( hours )
-						? _x( 'Closed', 'business is closed on a full day', 'jetpack' )
-						: hours.map( this.renderInterval ) }
-				</dd>
+				{ isEmpty( hours ) ? (
+					<dd>{ _x( 'Closed', 'business is closed on a full day', 'jetpack' ) }</dd>
+				) : (
+					hours.map( this.renderInterval )
+				) }
 			</Fragment>
 		);
 	}

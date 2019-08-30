@@ -188,7 +188,6 @@ class WCFM_Library {
         
       case 'wcfm-coupons':
         $this->load_datatable_lib();
-        $this->load_select2_lib();
         wp_enqueue_script( 'wcfm_coupons_js', $this->js_lib_url . 'coupons/wcfm-script-coupons.js', array('jquery', 'dataTables_js' ), $WCFM->version, true );
         
         // Screen manager
@@ -213,7 +212,6 @@ class WCFM_Library {
       case 'wcfm-coupons-manage':
       	$this->load_collapsible_lib();
       	$this->load_datepicker_lib();
-      	$this->load_select2_lib();
         wp_enqueue_script( 'wcfm_coupons_manage_js', $this->js_lib_url . 'coupons/wcfm-script-coupons-manage.js', array('jquery'), $WCFM->version, true );
         // Localized Script
         $wcfm_messages = get_wcfm_coupons_manage_messages();
@@ -281,7 +279,6 @@ class WCFM_Library {
       
       case 'wcfm-listings':
       	$this->load_datatable_lib();
-      	$this->load_select2_lib();
 	    	wp_enqueue_script( 'wcfm_listings_js', $this->js_lib_url . 'listings/wcfm-script-listings.js', array('jquery'), $WCFM->version, true );
 	    	
 	    	// Screen manager
@@ -368,7 +365,7 @@ class WCFM_Library {
 				
       	wp_enqueue_script( 'wcfm_profile_js', $this->js_lib_url . 'profile/wcfm-script-profile.js', array('jquery','select2_js'), $WCFM->version, true );
       	
-      	$wcfm_profile_params = array( 'short' => __( 'Too short', 'wc-frontend-manager' ), 'weak' => __( 'Weak', 'wc-frontend-manager' ), 'good' => __( 'Good', 'wc-frontend-manager' ), 'strong' => __( 'Strong', 'wc-frontend-manager' ), 'passowrd_failed' => __( 'Password strength should be atleast "Good".', 'wc-frontend-manager' ) );
+      	$wcfm_profile_params = array( 'short' => __( 'Too short', 'wc-frontend-manager' ), 'weak' => __( 'Weak', 'wc-frontend-manager' ), 'good' => __( 'Good', 'wc-frontend-manager' ), 'strong' => __( 'Strong', 'wc-frontend-manager' ), 'passowrd_failed' => __( 'Passowrd strength should be atleast "Good".', 'wc-frontend-manager' ) );
 				wp_localize_script( 'wcfm_profile_js', 'wcfm_profile_params', $wcfm_profile_params );
       break;
       
@@ -545,7 +542,7 @@ class WCFM_Library {
       	// Screen manager
 	    	$wcfm_screen_manager_data = array();
 	    	if( !WCFM_Dependencies::wcfmvm_plugin_active_check() ) {
-	    		$wcfm_screen_manager_data = array( 4  => __( 'Membership', 'wc-frontend-manager' ) );
+	    		$wcfm_screen_manager_data = array( 4  => __( 'Memebership', 'wc-frontend-manager' ) );
 	    	}
 	    	if( apply_filters( 'wcfm_vendors_additonal_data_hidden', true ) ) {
 	    		$wcfm_screen_manager_data[10] = 'yes';
@@ -1269,7 +1266,7 @@ class WCFM_Library {
 		if( $start_date && $end_date ) $wcfm_date_range = $start_date . ' ' . __( 'to', 'wc-frontend-manager' ) . ' ' . $end_date;
 		?>
 		<div class="wcfm-date-range-field">
-			<input type="text" name="wcfm-date-range" class="wcfm-date-range" autocomplete="off" placeholder="<?php _e( 'Choose Date Range', 'wc-frontend-manager' ); ?> ..." value="<?php echo $wcfm_date_range; ?>">
+			<input type="text" name="wcfm-date-range" class="wcfm-date-range" autocomplete="off" placeholder="<?php _e( 'Choose Data Range', 'wc-frontend-manager' ); ?> ..." value="<?php echo $wcfm_date_range; ?>">
 
 			<input type="hidden" name="wcfm-date_from" autocomplete="off" value="">
 			<input type="hidden" name="wcfm-date_to" autocomplete="off" value="">
@@ -1511,11 +1508,9 @@ class WCFM_Library {
 	function generateTaxonomyHTML( $taxonomy, $product_taxonomies, $selected_taxonomies, $nbsp = '', $is_checklist = false, $is_custom = false, $is_hierarchical = true, $is_children = false, $super_parent = 0 ) {
 		global $WCFM;
 		
-		$default_category_id = absint( get_option( 'default_product_cat', 0 ) );
-		
 		foreach ( $product_taxonomies as $cat ) {
 			
-			if( apply_filters( 'wcfm_is_allow_hide_uncatorized', false, $cat->term_id ) && ( ( $cat->term_id == $default_category_id ) || ( in_array( $cat->slug, array( 'uncategorized', 'uncategorised' ) ) ) ) ) continue;
+			if( apply_filters( 'wcfm_is_allow_hide_uncatorized', false ) && ( $cat->slug == 'uncategorized' ) ) continue;
 			
 			$checklis_label_class = '';
 			$cat_group_class = '';

@@ -97,7 +97,7 @@ class WCFM_Marketplace {
 			
   }
   
-  // WCFM Marketplace Store Logo
+  // WCFM Dokan Store Logo
   function wcfmmp_store_logo( $store_logo ) {
   	$user_id = $this->vendor_id;
   	$vendor_data = get_user_meta( $user_id, 'wcfmmp_profile_settings', true );
@@ -114,7 +114,7 @@ class WCFM_Marketplace {
   	return $store_logo;
   }
   
-  // WCFM Marketplace Store Name
+  // WCFM Dokan Store Name
   function wcfmmp_store_name( $store_name ) {
   	$user_id = $this->vendor_id;
   	
@@ -139,14 +139,14 @@ class WCFM_Marketplace {
   	return $args;
   }
   
-  // WCFM Marketplace Listing args
+  // Dokan Listing args
 	function wcfmmp_listing_args( $args ) {
   	$args['author'] = $this->vendor_id;
   	return $args;
   }
   
   /**
-   * WCFM Marketplace filter customers
+   * Dokan filter customers
    */
   function wcfmmp_filter_customers( $args ) {
   	global $WCFM, $wpdb;
@@ -182,18 +182,6 @@ class WCFM_Marketplace {
 		if( isset( $args['meta_value'] ) ) unset( $args['meta_value'] );
 		return $args;
   }
-  
-  // Update Comment User as Vendor
-  public function wcfm_update_comment_vendor( $commentdata, $order ) {
-  	global $WCFM;
-		$vendor_id = $this->vendor_id;
-
-		$commentdata[ 'user_id' ]              = $vendor_id;
-		$commentdata[ 'comment_author' ]       = $WCFM->wcfm_vendor_support->wcfm_get_vendor_store_name_by_vendor( absint($vendor_id) );
-		$commentdata[ 'comment_author_email' ] = $WCFM->wcfm_vendor_support->wcfm_get_vendor_email_by_vendor( absint($vendor_id) );
-
-		return $commentdata;
-	}
   
   // Orders Filter
   function wcfmmp_orders_filter() {
@@ -660,7 +648,6 @@ class WCFM_Marketplace {
   	$sql = "
   	SELECT GROUP_CONCAT(ID) as commission_ids,
   	   SUM(commission_amount) as line_total,
-  	   SUM(total_commission) as total_commission,
   	   SUM(item_total) as item_total,
   	   SUM(item_sub_total) as item_sub_total,
 	     SUM(shipping) as shipping,
@@ -684,7 +671,7 @@ class WCFM_Marketplace {
     $refund_total     = 0;
     $discount_total   = 0;
     
-    $total = $order_due[0]->total_commission;
+    $total = $order_due[0]->line_total;
     if( $WCFMmp->wcfmmp_vendor->is_vendor_deduct_discount( $this->vendor_id, $order_id ) ) {
     	$calculated_total = $order_due[0]->item_total;
     } else {
@@ -707,12 +694,12 @@ class WCFM_Marketplace {
     $refund_total = $order_due[0]->refunded_amount;
     $discount_total = $order_due[0]->discount_amount;
 		if ( $get_shipping = $WCFMmp->wcfmmp_vendor->is_vendor_get_shipping( $this->vendor_id ) ) {
-			//$total += ( float ) $order_due[0]->shipping; 
+			$total += ( float ) $order_due[0]->shipping; 
 		}
 		if ( $get_tax = $WCFMmp->wcfmmp_vendor->is_vendor_get_tax( $this->vendor_id ) ) {
-			//$total += (float) $order_due[0]->tax;
+			$total += (float) $order_due[0]->tax;
 			if( $get_shipping ) {
-				//$total += ( float ) $order_due[0]->shipping_tax_amount;
+				$total += ( float ) $order_due[0]->shipping_tax_amount;
 			}
 		}
 		?>
@@ -874,7 +861,7 @@ class WCFM_Marketplace {
   	return $order_status;
   }
   
-  // WCFM Marketplace dashboard top seller query
+  // Dokanendor dashboard top seller query
   function wcfmmp_dashboard_status_widget_top_seller_query( $query, $limit = 5 ) {
   	global $WCFM, $wpdb, $_POST;
   	

@@ -31,26 +31,13 @@ if( isset( $wp->query_vars['wcfm-customers-details'] ) && !empty( $wp->query_var
 		$user_email = $customer_user->user_email;
 		$first_name = $customer_user->first_name;
 		$last_name = $customer_user->last_name;
-	} else {
-		wcfm_restriction_message_show( "Invalid Customer" );
-		return;
 	}
-} else {
-	wcfm_restriction_message_show( "Invalid Customer" );
-	return;
 }
 
-/*if( wcfm_is_vendor() ) {
-	$is_customer_for_vendor = $WCFM->wcfm_vendor_support->wcfm_is_component_for_vendor( $customer_id, 'customer' );
-	if( !$is_customer_for_vendor ) {
-		if( apply_filters( 'wcfm_is_show_customer_restrict_message', true, $customer_id ) ) {
-			wcfm_restriction_message_show( "Restricted Customer" );
-		} else {
-			echo apply_filters( 'wcfm_show_custom_customer_restrict_message', '', $customer_id );
-		}
-		return;
-	}
-}*/
+if( !$customer_id ) {
+	wcfm_restriction_message_show( "No Customer" );
+	return;
+}
 
 ?>
 
@@ -195,7 +182,7 @@ if( isset( $wp->query_vars['wcfm-customers-details'] ) && !empty( $wp->query_var
 		
 		<?php do_action( 'begin_wcfm_customers_details_bookings' ); ?>
 	  
-		<?php if( wcfm_is_booking() && ( current_user_can( 'manage_bookings_settings' ) || current_user_can( 'manage_bookings' ) ) && apply_filters( 'wcfm_is_allow_booking_list', true ) && apply_filters( 'wcfm_is_allow_customer_details_bookings', true ) ) { ?>
+		<?php if( wcfm_is_booking() && current_user_can( 'manage_bookings' ) && apply_filters( 'wcfm_is_allow_booking_list', true ) && apply_filters( 'wcfm_is_allow_customer_details_bookings', true ) ) { ?>
 			<div class="page_collapsible" id="wcfm_customers_bookings_head"><span class="wcfmfa fa-calendar-check"></span><span class="dashboard_widget_head">&nbsp;<?php _e('Bookings', 'wc-frontend-manager'); ?></span></div>
 			<div class="wcfm-container">
 				<div id="wcfm_customers_bookings_listing_expander" class="wcfm-content">

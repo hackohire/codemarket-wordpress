@@ -22,9 +22,6 @@ $coupon_amount = 0;
 $free_shipping = '';
 $expiry_date = '';
 
-$wcfm_vendor = 0;
-$vendor_arr = array();
-
 if( isset( $wp->query_vars['wcfm-coupons-manage'] ) && !empty( $wp->query_vars['wcfm-coupons-manage'] ) ) {
 	$coupon_post = get_post( $wp->query_vars['wcfm-coupons-manage'] );
 	
@@ -51,25 +48,8 @@ if( isset( $wp->query_vars['wcfm-coupons-manage'] ) && !empty( $wp->query_vars['
 		$coupon_amount = $wc_coupon->get_amount();
 		$free_shipping = ( get_post_meta( $coupon_id, 'free_shipping', true) == 'yes' ) ? 'enable' : '';
 		$expiry_date   = $wc_coupon->get_date_expires() ? $wc_coupon->get_date_expires()->date( 'Y-m-d' ) : '';
-		
-		$wcfm_vendor = $coupon_post->post_author;
-		if( wcfm_is_vendor( $wcfm_vendor ) ) {
-			$vendor_arr = array( $coupon_post->post_author => $WCFM->wcfm_vendor_support->wcfm_get_vendor_store_name_by_vendor( $coupon_post->post_author ) );
-		}
 	} else {
 		wcfm_restriction_message_show( "Invalid Coupon" );
-		return;
-	}
-}
-
-if( wcfm_is_vendor() ) {
-	$is_coupon_for_vendor = $WCFM->wcfm_vendor_support->wcfm_is_component_for_vendor( $coupon_id, 'coupon' );
-	if( !$is_coupon_for_vendor ) {
-		if( apply_filters( 'wcfm_is_show_coupon_restrict_message', true, $coupon_id ) ) {
-			wcfm_restriction_message_show( "Restricted Coupon" );
-		} else {
-			echo apply_filters( 'wcfm_show_custom_coupon_restrict_message', '', $coupon_id );
-		}
 		return;
 	}
 }
@@ -125,18 +105,11 @@ do_action( 'before_wcfm_coupons_manage' );
 																																															"expiry_date" => array('label' => __('Coupon expiry date', 'wc-frontend-manager'), 'type' => 'text', 'placeholder' => 'YYYY-MM-DD', 'custom_attributes' => array( 'date_format' => 'yy-mm-dd' ), 'class' => 'wcfm-text wcfm_ele wcfm_datepicker', 'label_class' => 'wcfm_ele wcfm_title', 'value' => $expiry_date),
 																																															"coupon_id" => array('type' => 'hidden', 'value' => $coupon_id)
 																																					), $coupon_id ) );
-							
 							if( apply_filters( 'wcfm_is_allow_free_shipping_coupons', true ) ) {
 								$WCFM->wcfm_fields->wcfm_generate_form_field( array ( "free_shipping" => array('label' => __('Allow free shipping', 'wc-frontend-manager') , 'type' => 'checkbox', 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'enable', 'label_class' => 'wcfm_title checkbox_title', 'hints' => __('Check this box if the coupon grants free shipping. The free shipping method must be enabled and be set to require "a valid free shipping coupon" (see the "Free Shipping Requires" setting).', 'wc-frontend-manager'), 'dfvalue' => $free_shipping ) ) );
 							}
 							
-							if( function_exists( 'wcfmmp_get_store_url' ) && !wcfm_is_vendor() ) {
-								$WCFM->wcfm_fields->wcfm_generate_form_field( array(  
-																																	"wcfm_vendor" => array( 'label' => __( 'Store', 'wc-frontend-manager' ), 'type' => 'select', 'options' => $vendor_arr, 'class' => 'wcfm-select wcfm_ele', 'label_class' => 'wcfm_title', 'value' => $wcfm_vendor ),
-																																) );
-							}
-							
-							// For Dokan Pro && WCFM Marketplace Only
+							// For Dokan Pro Only
 							if( WCFM_Dependencies::dokanpro_plugin_active_check() || function_exists( 'wcfmmp_get_store_url' ) ) {
 								$show_on_store = ( get_post_meta( $coupon_id, 'show_on_store', true) == 'yes' ) ? 'yes' : 'no';
 								$WCFM->wcfm_fields->wcfm_generate_form_field( array ( "show_on_store" => array('label' => __('Show on store', 'wc-frontend-manager') , 'type' => 'checkbox', 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'hints' => __('Check this box if you want to show this coupon in store page.', 'wc-frontend-manager'), 'dfvalue' => $show_on_store ) ) );

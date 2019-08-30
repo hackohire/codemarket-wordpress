@@ -40,10 +40,6 @@ jQuery(document).ready(function($) {
 			collapsHeight += $(this).height() + 50;
 		}
 	});  
-	
-	if( $('#wcfm_vendor').length > 0 ) {
-		$('#wcfm_vendor').select2( $wcfm_vendor_select_args );
-	}
 		
 	function wcfm_customers_manage_form_validate() {
 		$is_valid = true;

@@ -104,13 +104,7 @@ class WCFM_Marketplace_Report_Sales_By_Date extends WC_Admin_Report {
 			
 			if( $data->item_id ) {
 				try {
-					if( apply_filters( 'wcfmmmp_gross_sales_respect_setting', true ) ) {
-						$gross_sales_amount += (float) $WCFMmp->wcfmmp_commission->wcfmmp_get_commission_meta(  $data->ID, 'gross_total' );
-					} else {
-						$gross_sales_amount += (float) $WCFMmp->wcfmmp_commission->wcfmmp_get_commission_meta(  $data->ID, 'gross_sales_total' );
-					}
-					
-					/*if( $WCFMmp->wcfmmp_vendor->is_vendor_deduct_discount( $vendor_id, $data->order_id ) ) {
+					if( $WCFMmp->wcfmmp_vendor->is_vendor_deduct_discount( $vendor_id, $data->order_id ) ) {
 						$gross_sales_amount += (float) $data->item_total;
 					} else {
 						$gross_sales_amount += (float) $data->item_sub_total;
@@ -123,7 +117,7 @@ class WCFM_Marketplace_Report_Sales_By_Date extends WC_Admin_Report {
 						if($is_vendor_get_tax) {
 							$gross_sales_amount += (float) $data->shipping_tax_amount;
 						}
-					}*/
+					}
 					
 					// Deduct Refunded Amount
 					$gross_sales_amount -= (float) sanitize_text_field( $data->refunded_amount );
@@ -166,11 +160,7 @@ class WCFM_Marketplace_Report_Sales_By_Date extends WC_Admin_Report {
 		if( $admin_fee_mode ) {
 		  $this->report_data->total_earned = $gross_sales_amount - $total_sales;
 		  $net_paid_sales_amount = $WCFM->wcfm_vendor_support->wcfm_get_gross_sales_by_vendor( $vendor_id, $this->current_range, true );
-		  if( $net_paid_sales_amount && ( $net_paid_sales_amount > $total_commission_amount ) ) {
-		  	$this->report_data->total_commission = $net_paid_sales_amount - $total_commission_amount;
-		  } else {
-		  	$this->report_data->total_commission = 0;
-		  }
+		  $this->report_data->total_commission = $net_paid_sales_amount - $total_commission_amount;
 		}
 	}
 
@@ -379,7 +369,7 @@ class WCFM_Marketplace_Report_Sales_By_Date extends WC_Admin_Report {
 		
 		$vendor_id = $WCFMmp->vendor_id; //apply_filters( 'wcfm_current_vendor_id', get_current_user_id() );
 		
-		$select = "SELECT GROUP_CONCAT(ID) commission_ids, GROUP_CONCAT(item_id) order_item_ids, COUNT( DISTINCT commission.order_id ) AS count, SUM( commission.quantity ) AS order_item_count, COALESCE( SUM( commission.item_total ), 0 ) AS total_item_total, COALESCE( SUM( commission.item_sub_total ), 0 ) AS total_item_sub_total, COALESCE( SUM( commission.shipping ), 0 ) AS total_shipping, COALESCE( SUM( commission.tax ), 0 ) AS total_tax, COALESCE( SUM( commission.shipping_tax_amount ), 0 ) AS total_shipping_tax_amount, COALESCE( SUM( commission.total_commission ), 0 ) AS total_commission, COALESCE( SUM( commission.refunded_amount ), 0 ) AS total_refund, commission.created AS time";
+		$select = "SELECT GROUP_CONCAT(item_id) order_item_ids, COUNT( DISTINCT commission.order_id ) AS count, SUM( commission.quantity ) AS order_item_count, COALESCE( SUM( commission.item_total ), 0 ) AS total_item_total, COALESCE( SUM( commission.item_sub_total ), 0 ) AS total_item_sub_total, COALESCE( SUM( commission.shipping ), 0 ) AS total_shipping, COALESCE( SUM( commission.tax ), 0 ) AS total_tax, COALESCE( SUM( commission.shipping_tax_amount ), 0 ) AS total_shipping_tax_amount, COALESCE( SUM( commission.total_commission ), 0 ) AS total_commission, COALESCE( SUM( commission.refunded_amount ), 0 ) AS total_refund, commission.created AS time";
 
 		$sql = $select;
 		$sql .= " FROM {$wpdb->prefix}wcfm_marketplace_orders AS commission";
@@ -402,15 +392,7 @@ class WCFM_Marketplace_Report_Sales_By_Date extends WC_Admin_Report {
 		if( !empty( $results ) ) {
 			foreach( $results as $result ) {
 				$gross_sales = 0.00;
-				$commission_ids = explode( ",", $result->commission_ids );
-				foreach( $commission_ids as $commission_id ) {
-					if( apply_filters( 'wcfmmmp_gross_sales_respect_setting', true ) ) {
-						$gross_sales += (float) $WCFMmp->wcfmmp_commission->wcfmmp_get_commission_meta( $commission_id, 'gross_total' );
-					} else {
-						$gross_sales += (float) $WCFMmp->wcfmmp_commission->wcfmmp_get_commission_meta( $commission_id, 'gross_sales_total' );
-					}
-				}
-				/*if( $WCFMmp->wcfmmp_vendor->is_vendor_deduct_discount( $vendor_id ) ) {
+				if( $WCFMmp->wcfmmp_vendor->is_vendor_deduct_discount( $vendor_id ) ) {
 					$gross_sales = (float) $result->total_item_total;
 				} else {
 					$gross_sales = (float) $result->total_item_sub_total;
@@ -423,7 +405,7 @@ class WCFM_Marketplace_Report_Sales_By_Date extends WC_Admin_Report {
 					if($is_vendor_get_tax) {
 						$gross_sales += (float) $result->total_shipping_tax_amount;
 					}
-				}*/
+				}
 				
 				// Deduct Refunded Amount
 				$gross_sales -= (float) $result->total_refund;
@@ -461,7 +443,7 @@ class WCFM_Marketplace_Report_Sales_By_Date extends WC_Admin_Report {
 		}
 		
 		// Total Paid Commission
-		$select = "SELECT GROUP_CONCAT(ID) commission_ids, GROUP_CONCAT(item_id) order_item_ids, COUNT( DISTINCT commission.order_id ) AS count, SUM( commission.quantity ) AS order_item_count, COALESCE( SUM( commission.item_total ), 0 ) AS total_item_total, COALESCE( SUM( commission.item_sub_total ), 0 ) AS total_item_sub_total, COALESCE( SUM( commission.shipping ), 0 ) AS total_shipping, COALESCE( SUM( commission.tax ), 0 ) AS total_tax, COALESCE( SUM( commission.shipping_tax_amount ), 0 ) AS total_shipping_tax_amount, COALESCE( SUM( commission.total_commission ), 0 ) AS total_commission, COALESCE( SUM( commission.refunded_amount ), 0 ) AS total_refund, commission.commission_paid_date AS time";
+		$select = "SELECT GROUP_CONCAT(item_id) order_item_ids, COUNT( DISTINCT commission.order_id ) AS count, SUM( commission.quantity ) AS order_item_count, COALESCE( SUM( commission.item_total ), 0 ) AS total_item_total, COALESCE( SUM( commission.item_sub_total ), 0 ) AS total_item_sub_total, COALESCE( SUM( commission.shipping ), 0 ) AS total_shipping, COALESCE( SUM( commission.tax ), 0 ) AS total_tax, COALESCE( SUM( commission.shipping_tax_amount ), 0 ) AS total_shipping_tax_amount, COALESCE( SUM( commission.total_commission ), 0 ) AS total_commission, COALESCE( SUM( commission.refunded_amount ), 0 ) AS total_refund, commission.commission_paid_date AS time";
 
 		$sql = $select;
 		$sql .= " FROM {$wpdb->prefix}wcfm_marketplace_orders AS commission";
@@ -472,7 +454,7 @@ class WCFM_Marketplace_Report_Sales_By_Date extends WC_Admin_Report {
 		$sql .= apply_filters( 'wcfm_order_status_condition', '', 'commission' );
 		$sql .= " AND commission.is_trashed != 1";
 		$sql .= " AND ( commission.withdraw_status = 'paid' OR commission.withdraw_status = 'completed' )";
-		$sql  = wcfm_query_time_range_filter( $sql, 'commission_paid_date', $this->current_range );
+		$sql = wcfm_query_time_range_filter( $sql, 'commission_paid_date', $this->current_range );
 		
 		$sql .= " GROUP BY DATE( commission.commission_paid_date )";
 		
@@ -485,16 +467,7 @@ class WCFM_Marketplace_Report_Sales_By_Date extends WC_Admin_Report {
 		if( !empty( $results ) ) {
 			foreach( $results as $result ) {
 				$paid_gross_sales = 0.00;
-				$commission_ids = explode( ",", $result->commission_ids );
-				foreach( $commission_ids as $commission_id ) {
-					if( apply_filters( 'wcfmmmp_gross_sales_respect_setting', true ) ) {
-						$paid_gross_sales += (float) $WCFMmp->wcfmmp_commission->wcfmmp_get_commission_meta( $commission_id, 'gross_total' );
-					} else {
-						$paid_gross_sales += (float) $WCFMmp->wcfmmp_commission->wcfmmp_get_commission_meta( $commission_id, 'gross_sales_total' );
-					}
-				}
-				
-				/*if( $WCFMmp->wcfmmp_vendor->is_vendor_deduct_discount( $vendor_id ) ) {
+				if( $WCFMmp->wcfmmp_vendor->is_vendor_deduct_discount( $vendor_id ) ) {
 					$paid_gross_sales = (float) $result->total_item_total;
 				} else {
 					$paid_gross_sales = (float) $result->total_item_sub_total;
@@ -507,7 +480,7 @@ class WCFM_Marketplace_Report_Sales_By_Date extends WC_Admin_Report {
 					if($is_vendor_get_tax) {
 						$paid_gross_sales += (float) $result->total_shipping_tax_amount;
 					}
-				}*/
+				}
 				
 				$paid_gross_sales -= (float) $result->total_refund;
 				$result->paid_gross_sales = $paid_gross_sales;

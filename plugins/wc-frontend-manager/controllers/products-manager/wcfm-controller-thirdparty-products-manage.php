@@ -78,13 +78,6 @@ class WCFM_ThirdParty_Products_Manage_Controller {
 			}
 		}
 		
-		// WooCommerce Product Schedular - 6.1.4
-    if( apply_filters( 'wcfm_is_allow_wc_product_scheduler', true ) ) {
-			if( WCFM_Dependencies::wcfm_wc_product_scheduler_active_check() ) {
-				add_action( 'after_wcfm_products_manage_meta_save', array( &$this, 'wcfm_wc_product_scheduler_product_meta_save' ), 160, 2 );
-			}
-		}
-		
 		// Third Party Product Meta Data Save
     add_action( 'after_wcfm_products_manage_meta_save', array( &$this, 'wcfm_thirdparty_products_manage_meta_save' ), 100, 2 );
 	}
@@ -627,61 +620,6 @@ class WCFM_ThirdParty_Products_Manage_Controller {
 
 			$product_free_ongkir = isset($wcfm_products_manage_form_data['epeken_product_free_ongkir']) ? $wcfm_products_manage_form_data['epeken_product_free_ongkir'] : '';
 			update_post_meta( $new_product_id, 'product_free_ongkir', $product_free_ongkir);
-		}
-	}
-	
-	/**
-	 * Product Manager WC Product Scheduler Product Meta data save
-	 */
-	function wcfm_wc_product_scheduler_product_meta_save( $new_product_id, $wcfm_products_manage_form_data ) {
-		global $wpdb, $WCFM, $_POST;
-		
-		$wpas_error=false;
-		$wpas_st_hh = 00;
-		$wpas_st_mn = 00;
-		$wpas_end_hh = 00;
-		$wpas_end_mn = 00;
-		$wpas_status = sanitize_text_field($wcfm_products_manage_form_data['wpas_select_status']);
-		$countdown = sanitize_text_field($wcfm_products_manage_form_data['wpas_enable_countdown']);
-		
-		$wpas_st_date = sanitize_text_field($wcfm_products_manage_form_data['wpas_st_date']);
-		if(!empty($wcfm_products_manage_form_data['wpas_st_hh'])) $wpas_st_hh = sanitize_text_field($wcfm_products_manage_form_data['wpas_st_hh']);
-		if( absint($wpas_st_hh) > 12 ) $wpas_st_hh = 11;
-		if(!empty($wcfm_products_manage_form_data['wpas_st_mn'])) $wpas_st_mn = sanitize_text_field($wcfm_products_manage_form_data['wpas_st_mn']);
-		if( absint($wpas_st_mn) > 60 ) $wpas_st_mn = 59;
-		
-		$wpas_end_date=sanitize_text_field($wcfm_products_manage_form_data['wpas_end_date']);
-		if(!empty($wcfm_products_manage_form_data['wpas_end_hh'])) $wpas_end_hh = sanitize_text_field($wcfm_products_manage_form_data['wpas_end_hh']);
-		if( absint($wpas_end_hh) > 12 ) $wpas_end_hh = 11;
-		if(!empty($wcfm_products_manage_form_data['wpas_end_mn'])) $wpas_end_mn = sanitize_text_field($wcfm_products_manage_form_data['wpas_end_mn']);
-		if( absint($wpas_end_mn) > 60 ) $wpas_end_mn = 59;
-		
-		$wpas_start_schedule_hook = "wpas_start_shedule_sale";
-		$wpas_end_schedule_hook = "wpas_end_shedule_sale";	
-		//Y-m-d H:i:s
-		$wpas_st_time = strtotime($wpas_st_date." ".$wpas_st_hh.":".$wpas_st_mn.":00"); 
-		
-		//echo "start time".$wpas_st_time;
-		$wpas_end_time = strtotime($wpas_end_date." ".$wpas_end_hh.":".$wpas_end_mn.":00");
-		if($wpas_status == 1) {		
-			wp_clear_scheduled_hook( $wpas_start_schedule_hook, array($new_product_id) );
-			wp_clear_scheduled_hook( $wpas_end_schedule_hook, array($new_product_id) );	
-			wp_schedule_single_event( $wpas_st_time, $wpas_start_schedule_hook, array($new_product_id) );
-			wp_schedule_single_event( $wpas_end_time, $wpas_end_schedule_hook, array($new_product_id) );
-		}
-		// Save Data
-		
-		if (!empty($wpas_st_date) && !empty($wpas_end_date)) {
-			
-			update_post_meta( $new_product_id, 'wpas_schedule_sale_status', $wpas_status );   
-			update_post_meta( $new_product_id, 'wpas_schedule_sale_st_time', $wpas_st_time );   
-			update_post_meta( $new_product_id, 'wpas_schedule_sale_end_time', $wpas_end_time );   
-			update_post_meta( $new_product_id, 'wpas_schedule_sale_countdown', $countdown );   
-			
-			if($wpas_st_time > time()) {
-				update_post_meta( $new_product_id, 'wpas_schedule_sale_mode', 0 );   	
-			}
-			
 		}
 	}
 	

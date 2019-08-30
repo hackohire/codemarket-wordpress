@@ -166,7 +166,7 @@ class WCFM_Listings_Controller {
 					// Mark Filled
 					if( $wcfm_allow_listings_mark_filled = apply_filters( 'wcfm_is_allow_listings_mark_filled', true ) ) {
 						if ( is_position_filled( $wcfm_listings_single->ID ) ) {
-							$actions .= '<a class="wcfm-action-icon" href="' . wp_nonce_url( add_query_arg( array( 'action' => 'mark_not_filled', 'job_id' => $wcfm_listings_single->ID ), $jobs_dashboard_url ), 'job_manager_my_job_actions' ) . '"><span class="wcfmfa fa-times-circle text_tip" data-tip="' . esc_attr__( 'Mark not filled', 'wp-job-manager' ) . '"></span></a>';
+							$actions .= '<a class="wcfm-action-icon" href="' . wp_nonce_url( add_query_arg( array( 'action' => 'mark_not_filled', 'job_id' => $wcfm_listings_single->ID ), $jobs_dashboard_url ), 'job_manager_my_job_actions' ) . '"><span class="wcfmfa fa-check-circle text_tip" data-tip="' . esc_attr__( 'Mark not filled', 'wp-job-manager' ) . '"></span></a>';
 						} else {
 							$actions .= '<a class="wcfm-action-icon" href="' . wp_nonce_url( add_query_arg( array( 'action' => 'mark_filled', 'job_id' => $wcfm_listings_single->ID ), $jobs_dashboard_url ), 'job_manager_my_job_actions' ) . '"><span class="wcfmfa fa-check-circle text_tip" data-tip="' . esc_attr__( 'Mark filled', 'wp-job-manager' ) . '"></span></a>';
 						}

@@ -509,7 +509,7 @@ class WC_Tracker {
 			FROM {$wpdb->prefix}posts AS orders
 			LEFT JOIN {$wpdb->prefix}postmeta AS order_meta ON order_meta.post_id = orders.ID
 			WHERE order_meta.meta_key =  '_order_total'
-				AND orders.post_status in ( 'wc-completed', 'wc-refunded' )
+				AND orders.post_status =  'wc-completed'
 			GROUP BY order_meta.meta_key
 		"
 		);

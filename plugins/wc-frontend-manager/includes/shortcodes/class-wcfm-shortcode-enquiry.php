@@ -53,40 +53,18 @@ class WCFM_Enquiry_Shortcode {
 		$button_style = '';
 		$background_color = '';
 		$color = '';
-		$hover_color = '';
-		$hover_text_color = '#ffffff';
+		$base_color = '';
 		$alignment = '';
-		
-		$wcfm_store_color_settings = get_option( 'wcfm_store_color_settings', array() );
 		
 		if ( isset( $attr['background'] ) && !empty( $attr['background'] ) ) { $background_color = $attr['background']; }
 		if( $background_color ) { $button_style .= 'background: ' . $background_color . ';border-bottom-color: ' . $background_color . ';'; }
-		else {
-			if( !empty( $wcfm_store_color_settings ) ) {
-				if( isset( $wcfm_store_color_settings['button_bg'] ) ) { $button_style .= 'background: ' . $wcfm_store_color_settings['button_bg'] . ';border-bottom-color: ' . $wcfm_store_color_settings['button_bg'] . ';'; }
-			} else {
-				if( isset( $wcfm_options['wc_frontend_manager_button_background_color_settings'] ) ) { $button_style .= 'background: ' . $wcfm_options['wc_frontend_manager_button_background_color_settings'] . ';border-bottom-color: ' . $wcfm_options['wc_frontend_manager_button_background_color_settings'] . ';'; }
-			}
-		}
+		elseif( isset( $wcfm_options['wc_frontend_manager_button_background_color_settings'] ) ) { $button_style .= 'background: ' . $wcfm_options['wc_frontend_manager_button_background_color_settings'] . ';border-bottom-color: ' . $wcfm_options['wc_frontend_manager_button_background_color_settings'] . ';'; }
 		if ( isset( $attr['color'] ) && !empty( $attr['color'] ) ) { $color = $attr['color']; }
 		if( $color ) { $button_style .= 'color: ' . $color . ';'; }
-		else {
-			if( !empty( $wcfm_store_color_settings ) ) {
-				if( isset( $wcfm_store_color_settings['button_text'] ) ) { $button_style .= 'color: ' . $wcfm_store_color_settings['button_text'] . ';'; }
-			} else {
-				if( isset( $wcfm_options['wc_frontend_manager_button_text_color_settings'] ) ) { $button_style .= 'color: ' . $wcfm_options['wc_frontend_manager_button_text_color_settings'] . ';'; }
-			}
-		}
+		elseif( isset( $wcfm_options['wc_frontend_manager_button_text_color_settings'] ) ) { $button_style .= 'color: ' . $wcfm_options['wc_frontend_manager_button_text_color_settings'] . ';'; }
 		
-		if ( isset( $attr['hover'] ) && !empty( $attr['hover'] ) ) { $hover_color = $attr['hover']; }
-		else {
-			if( !empty( $wcfm_store_color_settings ) ) {
-				if( isset( $wcfm_store_color_settings['button_active_bg'] ) ) { $hover_color = $wcfm_store_color_settings['button_active_bg']; }
-				if( isset( $wcfm_store_color_settings['button_active_text'] ) ) { $hover_text_color = $wcfm_store_color_settings['button_active_text']; }
-			} else {
-				if( isset( $wcfm_options['wc_frontend_manager_base_highlight_color_settings'] ) ) { $hover_color = $wcfm_options['wc_frontend_manager_base_highlight_color_settings']; }
-			}
-		}
+		if ( isset( $attr['hover'] ) && !empty( $attr['hover'] ) ) { $base_color = $attr['hover']; }
+		elseif( isset( $wcfm_options['wc_frontend_manager_base_highlight_color_settings'] ) ) { $base_color = $wcfm_options['wc_frontend_manager_base_highlight_color_settings']; }
 		
 		if ( isset( $attr['align'] ) && !empty( $attr['align'] ) ) { $button_style .= 'float: ' . $attr['align'] . ';'; }
 		
@@ -95,9 +73,9 @@ class WCFM_Enquiry_Shortcode {
 		?>
 		<div class="wcfm_ele_wrapper wcfm_enquiry_widget">
 			<div class="wcfm-clearfix"></div>
-			<a href="#" class="wcfm_catalog_enquiry <?php echo $button_class; ?>" data-store="<?php echo $vendor_id; ?>" data-product="<?php echo $product_id; ?>" style="<?php echo $button_style; ?>"><span class="wcfmfa fa-question-circle"></span>&nbsp;&nbsp;<span class="add_enquiry_label"><?php _e( $ask_question_label, 'wc-frontend-manager' ); ?></span></a>
-			<?php if( $hover_color ) { ?>
-				<style>a.wcfm_catalog_enquiry:hover{background: <?php echo $hover_color; ?> !important;background-color: <?php echo $hover_color; ?> !important;border-bottom-color: <?php echo $hover_color; ?> !important;color: <?php echo $hover_text_color; ?> !important;}</style>
+			<a href="#" class="wcfm_catalog_enquiry <?php echo $button_class; ?>" data-store="<?php echo $vendor_id; ?>" data-product="<?php echo $product_id; ?>" style="<?php echo $button_style; ?>"><span class="wcfmfa fa-question-circle"></span>&nbsp;&nbsp;<span class="add_enquiry_label"><?php echo $ask_question_label; ?></span></a>
+			<?php if( $base_color ) { ?>
+				<style>a.wcfm_catalog_enquiry:hover{background: <?php echo $base_color; ?> !important;border-bottom-color: <?php echo $base_color; ?> !important;}</style>
 			<?php } ?>
 			<div class="wcfm-clearfix"></div><br />
 		</div>

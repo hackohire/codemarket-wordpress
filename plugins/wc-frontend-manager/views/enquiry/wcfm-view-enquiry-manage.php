@@ -12,7 +12,7 @@
  
 global $wp, $WCFM, $wpdb, $blog_id;
 
-if( !apply_filters( 'wcfm_is_pref_enquiry', true ) || !apply_filters( 'wcfm_is_allow_enquiry', true ) || !apply_filters( 'wcfm_is_allow_enquiry_reply', true ) ) {
+if( !apply_filters( 'wcfm_is_pref_enquiry', true ) || !apply_filters( 'wcfm_is_allow_enquiry', true ) ) {
 	wcfm_restriction_message_show( "Enquiry Board" );
 	return;
 }
@@ -46,32 +46,14 @@ if( isset( $wp->query_vars['wcfm-enquiry-manage'] ) && !empty( $wp->query_vars['
 			$inquiry_customer_name = $enquiry_data->customer_name;
 			$inquiry_customer_email = $enquiry_data->customer_email;
 		}
-	} else {
+	}  else {
 		wcfm_restriction_message_show( "Inquiry Not Found" );
 		return;
 	}
 	
 	$product_id = $enquiry_data->product_id;
 	$is_private = ( $enquiry_data->is_private == 0 ) ? 'no' : 'yes';
-} else {
-	wcfm_restriction_message_show( "Inquiry Not Found" );
-	return;
 }
-
-if( wcfm_is_vendor() ) {
-	$is_inquiry_for_vendor = $WCFM->wcfm_vendor_support->wcfm_is_component_for_vendor( $inquiry_id, 'inquiry' );
-	if( !$is_inquiry_for_vendor ) {
-		if( apply_filters( 'wcfm_is_show_inquiry_restrict_message', true, $inquiry_id ) ) {
-			wcfm_restriction_message_show( "Restricted Inquiry" );
-		} else {
-			echo apply_filters( 'wcfm_show_custom_inquiry_restrict_message', '', $inquiry_id );
-		}
-		return;
-	}
-}
-
-$wcfm_options = $WCFM->wcfm_options;
-$wcfm_enquiry_allow_attachment = isset( $wcfm_options['wcfm_enquiry_allow_attachment'] ) ? $wcfm_options['wcfm_enquiry_allow_attachment'] : 'yes';
 
 do_action( 'before_wcfm_enquiry_manage' );
 
@@ -91,7 +73,7 @@ do_action( 'before_wcfm_enquiry_manage' );
 			
 			<?php
 			echo '<a id="add_new_enquiry_dashboard" class="add_new_wcfm_ele_dashboard text_tip" href="'.get_wcfm_enquiry_url().'" data-tip="' . __('Enquiries', 'wc-frontend-manager') . '"><span class="wcfmfa fa-question-circle"></span><span class="text">' . __( 'Enquiries', 'wc-frontend-manager') . '</span></a>';
-			if( $inquiry_id && $product_id ) { echo '<a class="add_new_wcfm_ele_dashboard text_tip" target="_permalink" href="'.get_permalink($product_id).'" data-tip="' . __('View Product', 'wc-frontend-manager') . '"><span class="wcfmfa fa-cube"></span></a>'; }
+			if( $inquiry_id && $product_id ) { echo '<a class="add_new_wcfm_ele_dashboard text_tip" target="_permalink" href="'.get_permalink($product_id).'" data-tip="' . __('View Product', 'wc-frontend-manager') . '"><span class="wcfmfa fa-eye"></span></a>'; }
 			?>
 			<div class="wcfm-clearfix"></div>
 		</div>
@@ -107,77 +89,25 @@ do_action( 'before_wcfm_enquiry_manage' );
 				<div class="inquiry_content">
 					<?php echo $inquiry_content; ?>
 					<div class="wcfm_clearfix"></div>
+					
+					<?php
+					$additional_info = '';
+					$wcfm_enquiry_meta_values = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}wcfm_enquiries_meta WHERE `enquiry_id` = " . $inquiry_id);
+					if( !empty( $wcfm_enquiry_meta_values ) ) {
+						echo "<div style=\"margin-top: 30px;width:auto;min-width:350px;\"><h2>" . __( 'Additional Info', 'wc-frontend-manager' ) . "</h2><div class=\"wcfm_clearfix\"></div>";
+						foreach( $wcfm_enquiry_meta_values as $wcfm_enquiry_meta_value ) {
+							?>
+							<p class="store_name wcfm_ele wcfm_title"><strong><?php _e( $wcfm_enquiry_meta_value->key, 'wc-frontend-manager'); ?></strong></p>
+							<span class="wcfm_vendor_store_info"><?php echo $wcfm_enquiry_meta_value->value; ?></span>
+							<div class="wcfm_clearfix"></div>
+							<?php
+						}
+						echo "</div><div class=\"wcfm_clearfix\"></div><br />";
+					}
+					?>
 				</div>
-					
-				<div class="inquiry_content_details">
-				  <div class="inquiry_content_for">
-						<?php
-						
-						if( $inquiry_product_id || $inquiry_vendor_id ) {
-							echo "<div style=\"width:auto;min-width:350px;\"><h2>" . __( 'Inquiry For', 'wc-frontend-manager' ) . "</h2><div class=\"wcfm_clearfix\"></div>";
-						}
-						
-						if( $inquiry_product_id ) {
-							$post_obj = get_post( $inquiry_product_id );
-							if( $post_obj->post_type == 'product' ) {
-								$the_product = wc_get_product( $inquiry_product_id );
-								$thumbnail = $the_product->get_image( 'thumbnail' );
-								$datatip_msg = __( 'Inquiry for Product', 'wc-frontend-manager' );
-							} else {
-								$thumbnail = '';
-								$datatip_msg = sprintf( __( 'Inquiry for %s', 'wc-frontend-manager' ), $post_obj->post_type );
-							}
-							echo '<div class="wcfm_product_for_inquiry">' . $thumbnail . '&nbsp;<a class="img_tip" data-tip="'. $datatip_msg .'" href="'. get_permalink($inquiry_product_id) .'" target="_blank">'.get_the_title($inquiry_product_id).'</a></div>';
-						}
-						
-						if( $inquiry_vendor_id ) {
-							if( apply_filters( 'wcfmmp_is_allow_sold_by_linked', true ) ) {
-								$store_name = $WCFM->wcfm_vendor_support->wcfm_get_vendor_store_by_vendor( absint($inquiry_vendor_id) );
-							} else {
-								$store_name = $WCFM->wcfm_vendor_support->wcfm_get_vendor_store_name_by_vendor( absint($inquiry_vendor_id) );
-							}
-							$store_logo = $WCFM->wcfm_vendor_support->wcfm_get_vendor_logo_by_vendor( absint($inquiry_vendor_id) );
-							echo '<div class="wcfm_store_for_inquiry"><img class="wcfmmp_sold_by_logo img_tip" src="' . $store_logo . '" data-tip="'. __( 'Inquiry for Store', 'wc-frontend-manager' ) .'" />&nbsp;' . $store_name . '</div>';
-						}
-						
-						if( $inquiry_product_id || $inquiry_vendor_id ) {
-							echo "</div><div class=\"wcfm_clearfix\"></div><br />";
-						}
-						
-						$additional_info = '';
-						$wcfm_enquiry_meta_values = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}wcfm_enquiries_meta WHERE `enquiry_id` = " . $inquiry_id);
-						if( !empty( $wcfm_enquiry_meta_values ) ) {
-							echo "<div style=\"margin-top: 30px;width:auto;min-width:350px;\"><h2>" . __( 'Additional Info', 'wc-frontend-manager' ) . "</h2><div class=\"wcfm_clearfix\"></div>";
-							foreach( $wcfm_enquiry_meta_values as $wcfm_enquiry_meta_value ) {
-								?>
-								<p class="store_name wcfm_ele wcfm_title"><strong><?php _e( $wcfm_enquiry_meta_value->key, 'wc-frontend-manager'); ?></strong></p>
-								<span class="wcfm_vendor_store_info"><?php echo $wcfm_enquiry_meta_value->value; ?></span>
-								<div class="wcfm_clearfix"></div>
-								<?php
-							}
-							echo "</div><div class=\"wcfm_clearfix\"></div><br />";
-						}
-						?>
-					</div>
-					
-					<div class="inquiry_info">
-						<div class="inquiry_date"><span class="wcfmfa fa-clock"></span>&nbsp;<?php echo date_i18n( wc_date_format() . ' ' . wc_time_format(), strtotime( $enquiry_data->posted ) ); ?></div>
-						<?php if( apply_filters( 'wcfm_allow_view_customer_name', true ) ) { ?>
-							<div class="inquiry_by">
-								<span class="wcfmfa fa-user"></span>&nbsp;
-								<span class="inquiry_by_customer">
-								<?php if( $inquiry_customer_id && apply_filters( 'wcfm_is_allow_view_customer', true ) ) { ?>
-									<?php echo '<a target="_blank" href="' . get_wcfm_customers_details_url($inquiry_customer_id) . '" class="wcfm_inquiry_by_customer inquiry_by_customer">' . $inquiry_customer_name . '</a>'; ?>
-								<?php } else { ?>
-									<?php echo $inquiry_customer_name; ?>
-								<?php } ?>
-								<?php if( apply_filters( 'wcfm_allow_view_customer_email', true ) ) { ?>
-									 <br /><?php echo $inquiry_customer_email; ?>
-								<?php } ?>
-								</span>
-							</div>
-						<?php } ?>
-					</div>
+				<div class="inquiry_info">
+					<div class="inquiry_date"><span class="wcfmfa fa-clock"></span>&nbsp;<?php echo date_i18n( wc_date_format() . ' ' . wc_time_format(), strtotime( $enquiry_data->posted ) ); ?></div>
 				</div>
 				<div class="wcfm_clearfix"></div>
 			</div>
@@ -237,11 +167,6 @@ do_action( 'before_wcfm_enquiry_manage' );
 						</div>
 						<div class="inquiry_reply_content">
 							<?php echo $wcfm_enquiry_reply->reply; ?>
-							
-							<?php
-							// Attachments
-							$WCFM->wcfm_enquiry->wcfm_enquiry_reply_attachments( $wcfm_enquiry_reply->ID );
-							?>
 						</div>
 						<?php
 						if( apply_filters( 'wcfm_is_allow_eniquiry_dalate', true ) ) {
@@ -276,28 +201,17 @@ do_action( 'before_wcfm_enquiry_manage' );
 						}
 						$inquiry_stick_class = '';
 						if( !$inquiry_product_id ) $inquiry_stick_class = ' wcfm_custom_hide';
-						 $wcfm_enquiry_reply_fields = apply_filters( 'wcfm_enquiry_reply_fields', array(
-																																														"inquiry_reply"           => array( 'label' => __( 'Message', 'wc-frontend-manager'), 'type' => $wpeditor, 'class' => 'wcfm-textarea wcfm_ele wcfm_full_ele ' . $rich_editor, 'label_class' => 'wcfm_title wcfm_full_ele_title', 'media_buttons' => false, 'teeny' => true ),
-																																														"inquiry_reply_break"     => array( 'type' => 'html', 'value' => '<div class="wcfm-clearfix" style="margin-bottom: 25px;"></div>' ),
-																																														"inquiry_attachments"     => array( 'label' => __( 'Attachment(s)', 'wc-frontend-manager'), 'type' => 'multiinput', 'class' => 'wcfm-text wcfm_ele wcfm_non_sortable', 'label_class' => 'wcfm_title', 'value' => array(), 'options' => array(
-																																																																		"file" => array( 'label' => __('Add File', 'wc-frontend-manager'), 'type' => 'file', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title'),
-																																																							                 ), 'desc' => sprintf( __( 'Please upload any of these file types: %1$s', 'wc-frontend-manager' ), '<b style="color:#f86c6b;">' . implode( ', ', array_keys( wcfm_get_allowed_mime_types() ) ) . '</b>' ) ),
-																																														"inquiry_reply_break2"    => array( 'type' => 'html', 'value' => '<div class="wcfm-clearfix" style="margin-bottom: 15px;"></div>' ),
-																																														"inquiry_stick"           => array( 'label' => __( 'Stick at Product Page', 'wc-frontend-manager' ), 'type' => 'checkbox', 'class' => 'wcfm-checkbox' . $inquiry_stick_class, 'label_class' => 'wcfm_title checkbox_title' . $inquiry_stick_class, 'value' => 'yes', 'hints' => __( 'Enable to stick this reply at product page', 'wc-frontend-manager' ) ),
-																																														"inquiry_id"              => array( 'type' => 'hidden', 'value' => $inquiry_id ),
-																																														"inquiry_product_id"      => array( 'type' => 'hidden', 'value' => $inquiry_product_id ),
-																																														"inquiry_vendor_id"       => array( 'type' => 'hidden', 'value' => $inquiry_vendor_id ),
-																																														"inquiry_customer_id"     => array( 'type' => 'hidden', 'value' => $inquiry_customer_id ),
-																																														"inquiry_customer_name"   => array( 'type' => 'hidden', 'value' => $inquiry_customer_name ),
-																																														"inquiry_customer_email"  => array( 'type' => 'hidden', 'value' => $inquiry_customer_email )
-																																														) );
-						
-						if( ( $wcfm_enquiry_allow_attachment == 'no' ) || !apply_filters( 'wcfm_is_allow_enquiry_reply_attachment', true ) ) {
-							if( isset( $wcfm_enquiry_reply_fields['inquiry_attachments'] ) ) unset( $wcfm_enquiry_reply_fields['inquiry_attachments'] );
-							if( isset( $wcfm_enquiry_reply_fields['inquiry_reply_break2'] ) ) unset( $wcfm_enquiry_reply_fields['inquiry_reply_break2'] );
-						}
-						
-						$WCFM->wcfm_fields->wcfm_generate_form_field( $wcfm_enquiry_reply_fields );
+						$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_enquiry_reply_fields', array(
+																																																		"inquiry_reply"           => array( 'type' => $wpeditor, 'class' => 'wcfm-textarea wcfm_ele wcfm_full_ele ' . $rich_editor, 'label_class' => 'wcfm_title wcfm_full_ele_title', 'media_buttons' => false, 'teeny' => true ),
+																																																		"enquiry_reply_beak"      => array( 'type' => 'html', 'value' => '<div class="wcfm-clearfix" style="margin-bottom: 15px;"></div>' ),
+																																																		"inquiry_stick"           => array( 'label' => __( 'Stick at Product Page', 'wc-frontend-manager' ), 'type' => 'checkbox', 'class' => 'wcfm-checkbox' . $inquiry_stick_class, 'label_class' => 'wcfm_title checkbox_title' . $inquiry_stick_class, 'value' => 'yes', 'hints' => __( 'Enable to stick this reply at product page', 'wc-frontend-manager' ) ),
+																																																		"inquiry_id"              => array( 'type' => 'hidden', 'value' => $inquiry_id ),
+																																																		"inquiry_product_id"      => array( 'type' => 'hidden', 'value' => $inquiry_product_id ),
+																																																		"inquiry_vendor_id"       => array( 'type' => 'hidden', 'value' => $inquiry_vendor_id ),
+																																																		"inquiry_customer_id"     => array( 'type' => 'hidden', 'value' => $inquiry_customer_id ),
+																																																		"inquiry_customer_name"   => array( 'type' => 'hidden', 'value' => $inquiry_customer_name ),
+																																																		"inquiry_customer_email"  => array( 'type' => 'hidden', 'value' => $inquiry_customer_email )
+																																																		) ) );
 						?>
 						<div class="wcfm-clearfix"></div>
 						<div class="wcfm-message" tabindex="-1"></div>

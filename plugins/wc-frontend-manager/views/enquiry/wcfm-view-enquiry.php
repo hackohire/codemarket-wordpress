@@ -80,7 +80,7 @@ $ranges = array(
 							<th><?php _e( 'Customer', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Store', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Additional Info', 'wc-frontend-manager' ); ?></th>
-							<th style="max-width: 250px;"><?php _e( 'Replies', 'wc-frontend-manager' ); ?></th>
+							<th style="max-width: 250px;"><?php _e( 'Reply', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Date', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Actions', 'wc-frontend-manager' ); ?></th>
 						</tr>
@@ -92,7 +92,7 @@ $ranges = array(
 							<th><?php _e( 'Customer', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Store', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Additional Info', 'wc-frontend-manager' ); ?></th>
-							<th style="max-width: 250px;"><?php _e( 'Replies', 'wc-frontend-manager' ); ?></th>
+							<th style="max-width: 250px;"><?php _e( 'Reply', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Date', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Actions', 'wc-frontend-manager' ); ?></th>
 						</tr>

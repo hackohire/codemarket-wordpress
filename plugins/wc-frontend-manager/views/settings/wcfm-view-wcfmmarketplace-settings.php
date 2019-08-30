@@ -114,58 +114,57 @@ $mobile_banner_url = $mobile_banner ? wp_get_attachment_url( $mobile_banner ) : 
 
 // Visiblity
 $global_store_name_position = isset( $WCFMmp->wcfmmp_marketplace_options['store_name_position'] ) ? $WCFMmp->wcfmmp_marketplace_options['store_name_position'] : 'on_banner';
-$store_name_position    = isset( $vendor_data['store_name_position'] ) ? esc_attr( $vendor_data['store_name_position'] ) : $global_store_name_position;
-$global_store_ppp       = isset( $WCFMmp->wcfmmp_marketplace_options['store_ppp'] ) ? $WCFMmp->wcfmmp_marketplace_options['store_ppp'] : get_option('posts_per_page');
-$store_ppp              = isset( $vendor_data['store_ppp'] ) ? absint( $vendor_data['store_ppp'] ) : $global_store_ppp;
-$store_hide_email       = isset( $vendor_data['store_hide_email'] ) ? esc_attr( $vendor_data['store_hide_email'] ) : 'no';
-$store_hide_phone       = isset( $vendor_data['store_hide_phone'] ) ? esc_attr( $vendor_data['store_hide_phone'] ) : 'no';
-$store_hide_address     = isset( $vendor_data['store_hide_address'] ) ? esc_attr( $vendor_data['store_hide_address'] ) : 'no';
-$store_hide_map         = isset( $vendor_data['store_hide_map'] ) ? esc_attr( $vendor_data['store_hide_map'] ) : 'no';
+$store_name_position = isset( $vendor_data['store_name_position'] ) ? esc_attr( $vendor_data['store_name_position'] ) : $global_store_name_position;
+$global_store_ppp = isset( $WCFMmp->wcfmmp_marketplace_options['store_ppp'] ) ? $WCFMmp->wcfmmp_marketplace_options['store_ppp'] : get_option('posts_per_page');
+$store_ppp = isset( $vendor_data['store_ppp'] ) ? absint( $vendor_data['store_ppp'] ) : $global_store_ppp;
+$store_hide_email = isset( $vendor_data['store_hide_email'] ) ? esc_attr( $vendor_data['store_hide_email'] ) : 'no';
+$store_hide_phone = isset( $vendor_data['store_hide_phone'] ) ? esc_attr( $vendor_data['store_hide_phone'] ) : 'no';
+$store_hide_address = isset( $vendor_data['store_hide_address'] ) ? esc_attr( $vendor_data['store_hide_address'] ) : 'no';
 $store_hide_description = isset( $vendor_data['store_hide_description'] ) ? esc_attr( $vendor_data['store_hide_description'] ) : 'no';
-$store_hide_policy      = isset( $vendor_data['store_hide_policy'] ) ? esc_attr( $vendor_data['store_hide_policy'] ) : 'no';
+$store_hide_policy = isset( $vendor_data['store_hide_policy'] ) ? esc_attr( $vendor_data['store_hide_policy'] ) : 'no';
 
 // Payment
 $payment_mode = isset( $vendor_data['payment']['method'] ) ? esc_attr( $vendor_data['payment']['method'] ) : '' ;
 if( isset($_GET['code']) ) {
 	$payment_mode = 'stripe';
 }
-$paypal         = isset( $vendor_data['payment']['paypal']['email'] ) ? esc_attr( $vendor_data['payment']['paypal']['email'] ) : '' ;
-$skrill         = isset( $vendor_data['payment']['skrill']['email'] ) ? esc_attr( $vendor_data['payment']['skrill']['email'] ) : '' ;
-$ac_name        = isset( $vendor_data['payment']['bank']['ac_name'] ) ? esc_attr( $vendor_data['payment']['bank']['ac_name'] ) : '';
-$ac_number      = isset( $vendor_data['payment']['bank']['ac_number'] ) ? esc_attr( $vendor_data['payment']['bank']['ac_number'] ) : '';
+$paypal = isset( $vendor_data['payment']['paypal']['email'] ) ? esc_attr( $vendor_data['payment']['paypal']['email'] ) : '' ;
+$skrill = isset( $vendor_data['payment']['skrill']['email'] ) ? esc_attr( $vendor_data['payment']['skrill']['email'] ) : '' ;
+$ac_name   = isset( $vendor_data['payment']['bank']['ac_name'] ) ? esc_attr( $vendor_data['payment']['bank']['ac_name'] ) : '';
+$ac_number = isset( $vendor_data['payment']['bank']['ac_number'] ) ? esc_attr( $vendor_data['payment']['bank']['ac_number'] ) : '';
 $bank_name      = isset( $vendor_data['payment']['bank']['bank_name'] ) ? esc_attr( $vendor_data['payment']['bank']['bank_name'] ) : '';
 $bank_addr      = isset( $vendor_data['payment']['bank']['bank_addr'] ) ? esc_textarea( $vendor_data['payment']['bank']['bank_addr'] ) : '';
 $routing_number = isset( $vendor_data['payment']['bank']['routing_number'] ) ? esc_attr( $vendor_data['payment']['bank']['routing_number'] ) : '';
 $iban           = isset( $vendor_data['payment']['bank']['iban'] ) ? esc_attr( $vendor_data['payment']['bank']['iban'] ) : '';
-$swift          = isset( $vendor_data['payment']['bank']['swift'] ) ? esc_attr( $vendor_data['payment']['bank']['swift'] ) : '';
-$ifsc           = isset( $vendor_data['payment']['bank']['ifsc'] ) ? esc_attr( $vendor_data['payment']['bank']['ifsc'] ) : '';
+$swift     = isset( $vendor_data['payment']['bank']['swift'] ) ? esc_attr( $vendor_data['payment']['bank']['swift'] ) : '';
+$ifsc     = isset( $vendor_data['payment']['bank']['ifsc'] ) ? esc_attr( $vendor_data['payment']['bank']['ifsc'] ) : '';
 
 // SEO
-$wcfmmp_seo_meta_title        = isset( $vendor_data['store_seo']['wcfmmp-seo-meta-title'] ) ? $vendor_data['store_seo']['wcfmmp-seo-meta-title'] : '';
-$wcfmmp_seo_meta_desc         = isset( $vendor_data['store_seo']['wcfmmp-seo-meta-desc'] ) ? $vendor_data['store_seo']['wcfmmp-seo-meta-desc'] : '';
-$wcfmmp_seo_meta_keywords     = isset( $vendor_data['store_seo']['wcfmmp-seo-meta-keywords'] ) ? $vendor_data['store_seo']['wcfmmp-seo-meta-keywords'] : '';
-$wcfmmp_seo_og_title          = isset( $vendor_data['store_seo']['wcfmmp-seo-og-title'] ) ? $vendor_data['store_seo']['wcfmmp-seo-og-title'] : '';
-$wcfmmp_seo_og_desc           = isset( $vendor_data['store_seo']['wcfmmp-seo-og-desc'] ) ? $vendor_data['store_seo']['wcfmmp-seo-og-desc'] : '';
-$wcfmmp_seo_og_image          = isset( $vendor_data['store_seo']['wcfmmp-seo-og-image'] ) ? $vendor_data['store_seo']['wcfmmp-seo-og-image'] : 0;
+$wcfmmp_seo_meta_title = isset( $vendor_data['store_seo']['wcfmmp-seo-meta-title'] ) ? $vendor_data['store_seo']['wcfmmp-seo-meta-title'] : '';
+$wcfmmp_seo_meta_desc = isset( $vendor_data['store_seo']['wcfmmp-seo-meta-desc'] ) ? $vendor_data['store_seo']['wcfmmp-seo-meta-desc'] : '';
+$wcfmmp_seo_meta_keywords    = isset( $vendor_data['store_seo']['wcfmmp-seo-meta-keywords'] ) ? $vendor_data['store_seo']['wcfmmp-seo-meta-keywords'] : '';
+$wcfmmp_seo_og_title     = isset( $vendor_data['store_seo']['wcfmmp-seo-og-title'] ) ? $vendor_data['store_seo']['wcfmmp-seo-og-title'] : '';
+$wcfmmp_seo_og_desc = isset( $vendor_data['store_seo']['wcfmmp-seo-og-desc'] ) ? $vendor_data['store_seo']['wcfmmp-seo-og-desc'] : '';
+$wcfmmp_seo_og_image   = isset( $vendor_data['store_seo']['wcfmmp-seo-og-image'] ) ? $vendor_data['store_seo']['wcfmmp-seo-og-image'] : 0;
 $wcfmmp_seo_twitter_title     = isset( $vendor_data['store_seo']['wcfmmp-seo-twitter-title'] ) ? $vendor_data['store_seo']['wcfmmp-seo-twitter-title'] : '';
-$wcfmmp_seo_twitter_desc      = isset( $vendor_data['store_seo']['wcfmmp-seo-twitter-desc'] ) ? $vendor_data['store_seo']['wcfmmp-seo-twitter-desc'] : '';
-$wcfmmp_seo_twitter_image     = isset( $vendor_data['store_seo']['wcfmmp-seo-twitter-image'] ) ? $vendor_data['store_seo']['wcfmmp-seo-twitter-image'] : 0;
+$wcfmmp_seo_twitter_desc = isset( $vendor_data['store_seo']['wcfmmp-seo-twitter-desc'] ) ? $vendor_data['store_seo']['wcfmmp-seo-twitter-desc'] : '';
+$wcfmmp_seo_twitter_image   = isset( $vendor_data['store_seo']['wcfmmp-seo-twitter-image'] ) ? $vendor_data['store_seo']['wcfmmp-seo-twitter-image'] : 0;
 
 // Facebook image
-$wcfmmp_seo_og_image_url      = $wcfmmp_seo_og_image ? wp_get_attachment_thumb_url( $wcfmmp_seo_og_image ) : '';
+$wcfmmp_seo_og_image_url = $wcfmmp_seo_og_image ? wp_get_attachment_thumb_url( $wcfmmp_seo_og_image ) : '';
 
 // Twitter URL
 $wcfmmp_seo_twitter_image_url = $wcfmmp_seo_twitter_image ? wp_get_attachment_thumb_url( $wcfmmp_seo_twitter_image ) : '';
 
 // Customer Support
-$vendor_customer_phone        = isset( $vendor_data['customer_support']['phone'] ) ? $vendor_data['customer_support']['phone'] : '';
-$vendor_customer_email        = isset( $vendor_data['customer_support']['email'] ) ? $vendor_data['customer_support']['email'] : '';
-$vendor_csd_return_address1   = isset( $vendor_data['customer_support']['address1'] ) ? $vendor_data['customer_support']['address1'] : '';
-$vendor_csd_return_address2   = isset( $vendor_data['customer_support']['address2'] ) ? $vendor_data['customer_support']['address2'] : '';
-$vendor_csd_return_country    = isset( $vendor_data['customer_support']['country'] ) ? $vendor_data['customer_support']['country'] : '';
-$vendor_csd_return_city       = isset( $vendor_data['customer_support']['city'] ) ? $vendor_data['customer_support']['city'] : '';
-$vendor_csd_return_state      = isset( $vendor_data['customer_support']['state'] ) ? $vendor_data['customer_support']['state'] : '';
-$vendor_csd_return_zip        = isset( $vendor_data['customer_support']['zip'] ) ? $vendor_data['customer_support']['zip'] : '';
+$vendor_customer_phone = isset( $vendor_data['customer_support']['phone'] ) ? $vendor_data['customer_support']['phone'] : '';
+$vendor_customer_email = isset( $vendor_data['customer_support']['email'] ) ? $vendor_data['customer_support']['email'] : '';
+$vendor_csd_return_address1 = isset( $vendor_data['customer_support']['address1'] ) ? $vendor_data['customer_support']['address1'] : '';
+$vendor_csd_return_address2 = isset( $vendor_data['customer_support']['address2'] ) ? $vendor_data['customer_support']['address2'] : '';
+$vendor_csd_return_country = isset( $vendor_data['customer_support']['country'] ) ? $vendor_data['customer_support']['country'] : '';
+$vendor_csd_return_city = isset( $vendor_data['customer_support']['city'] ) ? $vendor_data['customer_support']['city'] : '';
+$vendor_csd_return_state = isset( $vendor_data['customer_support']['state'] ) ? $vendor_data['customer_support']['state'] : '';
+$vendor_csd_return_zip = isset( $vendor_data['customer_support']['zip'] ) ? $vendor_data['customer_support']['zip'] : '';
 
 // GEO Locate Support
 if( is_user_logged_in() && !$vendor_csd_return_country ) {
@@ -192,33 +191,20 @@ if( $vendor_csd_return_state ) $csd_state_options[$vendor_csd_return_state] = $v
 // Vacation Mode
 $wcfm_vacation_mode = isset( $vendor_data['wcfm_vacation_mode'] ) ? $vendor_data['wcfm_vacation_mode'] : 'no';
 $wcfm_disable_vacation_purchase = isset( $vendor_data['wcfm_disable_vacation_purchase'] ) ? $vendor_data['wcfm_disable_vacation_purchase'] : 'no';
-$wcfm_vacation_mode_type        = isset( $vendor_data['wcfm_vacation_mode_type'] ) ? $vendor_data['wcfm_vacation_mode_type'] : 'instant';
-$wcfm_vacation_start_date       = isset( $vendor_data['wcfm_vacation_start_date'] ) ? $vendor_data['wcfm_vacation_start_date'] : '';
-$wcfm_vacation_end_date         = isset( $vendor_data['wcfm_vacation_end_date'] ) ? $vendor_data['wcfm_vacation_end_date'] : '';
-$wcfm_vacation_mode_msg         = ! empty( $vendor_data['wcfm_vacation_mode_msg'] ) ? $vendor_data['wcfm_vacation_mode_msg'] : '';
+$wcfm_vacation_mode_type = isset( $vendor_data['wcfm_vacation_mode_type'] ) ? $vendor_data['wcfm_vacation_mode_type'] : 'instant';
+$wcfm_vacation_start_date = isset( $vendor_data['wcfm_vacation_start_date'] ) ? $vendor_data['wcfm_vacation_start_date'] : '';
+$wcfm_vacation_end_date = isset( $vendor_data['wcfm_vacation_end_date'] ) ? $vendor_data['wcfm_vacation_end_date'] : '';
+$wcfm_vacation_mode_msg = ! empty( $vendor_data['wcfm_vacation_mode_msg'] ) ? $vendor_data['wcfm_vacation_mode_msg'] : '';
 
-$store_banner_width             = isset( $WCFMmp->wcfmmp_marketplace_options['store_banner_width'] ) ? $WCFMmp->wcfmmp_marketplace_options['store_banner_width'] : '1650';
-$store_banner_height            = isset( $WCFMmp->wcfmmp_marketplace_options['store_banner_height'] ) ? $WCFMmp->wcfmmp_marketplace_options['store_banner_height'] : '350';
-$store_banner_mwidth            = isset( $WCFMmp->wcfmmp_marketplace_options['store_banner_mwidth'] ) ? $WCFMmp->wcfmmp_marketplace_options['store_banner_mwidth'] : '520';
-$store_banner_mheight           = isset( $WCFMmp->wcfmmp_marketplace_options['store_banner_mheight'] ) ? $WCFMmp->wcfmmp_marketplace_options['store_banner_mheight'] : '150';
+$store_banner_width = isset( $WCFMmp->wcfmmp_marketplace_options['store_banner_width'] ) ? $WCFMmp->wcfmmp_marketplace_options['store_banner_width'] : '1650';
+$store_banner_height = isset( $WCFMmp->wcfmmp_marketplace_options['store_banner_height'] ) ? $WCFMmp->wcfmmp_marketplace_options['store_banner_height'] : '350';
+$store_banner_mwidth = isset( $WCFMmp->wcfmmp_marketplace_options['store_banner_mwidth'] ) ? $WCFMmp->wcfmmp_marketplace_options['store_banner_mwidth'] : '520';
+$store_banner_mheight = isset( $WCFMmp->wcfmmp_marketplace_options['store_banner_mheight'] ) ? $WCFMmp->wcfmmp_marketplace_options['store_banner_mheight'] : '150';
 
 $banner_help_text = sprintf(
 		__('Upload a banner for your store. Banner size is (%sx%s) pixels.', 'wc-frontend-manager' ),
 		$store_banner_width, $store_banner_height
 );
-
-$store_banner_types = array( 'single_img' => __( 'Static Image', 'wc-frontend-manager' ), 'slider' => __( 'Slider', 'wc-frontend-manager' ), 'video' => __( 'Video', 'wc-frontend-manager' ) );
-$store_list_banner_types = array( 'single_img' => __( 'Static Image', 'wc-frontend-manager' ), 'video' => __( 'Video', 'wc-frontend-manager' ) );
-
-if( !apply_filters( 'wcfmmp_is_allow_video_banner', true ) ) {
-	unset( $store_banner_types['video'] );
-	unset( $store_list_banner_types['video'] );
-}
-if( !apply_filters( 'wcfmmp_is_allow_slider_banner', true ) ) {
-	unset( $store_banner_types['slider'] );
-}
-
-$all_shipping_countries = WC()->countries->get_shipping_countries();
 
 $is_marketplace = wcfm_is_marketplace();
 ?>
@@ -260,17 +246,50 @@ $is_marketplace = wcfm_is_marketplace();
 				</div>
 				<div class="wcfm-container wcfm_marketplace_store_settings">
 					<div id="wcfm_settings_form_store_expander" class="wcfm-content">
-					  <div class="wcfm_clearfix"></div>
-						<div class="wcfm_vendor_settings_heading"><h2><?php _e( 'General Setting', 'wc-frontend-manager' ); ?></h2></div>
-						<div class="wcfm_clearfix"></div>
-						<div class="store_address">
-						  <?php
-						  $settings_fields_general = apply_filters( 'wcfm_marketplace_settings_fields_general', array(
-						  	                                        "store_name"  => array('label' => __('Store Name', 'wc-frontend-manager') , 'type' => 'text', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'custom_attributes' => array( 'required' => true ), 'value' => $store_name ),
-																												"store_slug"  => array('label' => __('Store Slug', 'wc-frontend-manager') , 'type' => 'text', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'custom_attributes' => array( 'required' => true ), 'value' => urldecode($store_slug) ),
-																												"store_email" => array('label' => __('Store Email', 'wc-frontend-manager') , 'type' => 'text', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $store_email ),
-																												"phone"       => array('label' => __('Store Phone', 'wc-frontend-manager') , 'type' => 'text', 'placeholder' => '+123456..', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $phone ),
-																												), $user_id );
+						<?php
+						  $store_banner_types = array( 'single_img' => __( 'Static Image', 'wc-frontend-manager' ), 'slider' => __( 'Slider', 'wc-frontend-manager' ), 'video' => __( 'Video', 'wc-frontend-manager' ) );
+						  $store_list_banner_types = array( 'single_img' => __( 'Static Image', 'wc-frontend-manager' ), 'video' => __( 'Video', 'wc-frontend-manager' ) );
+						  
+						  if( !apply_filters( 'wcfmmp_is_allow_video_banner', true ) ) {
+						  	unset( $store_banner_types['video'] );
+						  	unset( $store_list_banner_types['video'] );
+						  }
+						  if( !apply_filters( 'wcfmmp_is_allow_slider_banner', true ) ) {
+						  	unset( $store_banner_types['slider'] );
+						  }
+						
+              $all_shipping_countries = WC()->countries->get_shipping_countries();
+							$settings_fields_general = apply_filters( 'wcfm_marketplace_settings_fields_general', array(
+																																																"gravatar" => array('label' => __('Store Logo', 'wc-frontend-manager') , 'type' => 'upload', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title', 'prwidth' => 150, 'value' => $gravatar_url, 'hints' => __( 'Preferred  size is (125x125) pixels.', 'wc-frontend-manager' ) ),
+																																																
+																																																"banner_type" => array('label' => __('Store Banner Type', 'wc-frontend-manager') , 'type' => 'select', 'options' => $store_banner_types, 'class' => 'wcfm-select wcfm_ele wcfm-banner-uploads', 'label_class' => 'wcfm_title', 'value' => $banner_type ),
+																																																"banner" => array('label' => __('Store Banner', 'wc-frontend-manager') , 'type' => 'upload', 'class' => 'wcfm-text wcfm_ele banner_type_upload banner_type_field banner_type_single_img wcfm-banner-uploads', 'label_class' => 'wcfm_title banner_type_field banner_type_single_img', 'prwidth' => 250, 'value' => $banner_url, 'hints' => $banner_help_text ),
+																																																"banner_video" => array('label' => __('Video Banner', 'wc-frontend-manager') , 'type' => 'text', 'class' => 'wcfm-text wcfm_ele banner_type_field banner_type_video', 'label_class' => 'wcfm_title banner_type_field banner_type_video','value' => $banner_video, 'hints' => __( 'Insert YouTube video URL.', 'wc-frontend-manager' ) ),
+																																																"banner_slider"  => array( 'label' => __('Slider', 'wc-frontend-manager'), 'type' => 'multiinput', 'class' => 'wcfm-text wcfm_ele banner_type_upload banner_type_field banner_type_slider wcfm_non_sortable', 'label_class' => 'wcfm_title banner_type_field banner_type_slider', 'value' => $banner_slider, 'hints' => $banner_help_text, 'options' => array(
+																																																																									"image" => array( 'type' => 'upload', 'class' => 'wcfm_gallery_upload banner_type_upload wcfm-banner-uploads', 'prwidth' => 75),
+																																																																									"link"  => array( 'type' => 'text', 'class' => 'wcfm-text banner_type_slilder_link', 'placeholder' => __( 'Slider Hyperlink', 'wc-frontend-manager' ) ),
+																																																																								) ),
+																																																"slider_break" => array( 'type' => 'html', 'value' => '<div class="wcfm_clearfix"></div>' ),
+																																																
+																																																"mobile_banner" => array('label' => __('Mobile Banner', 'wc-frontend-manager') , 'type' => 'upload', 'class' => 'wcfm-text wcfm_ele wcfm-banner-uploads', 'label_class' => 'wcfm_title', 'prwidth' => 250, 'value' => $mobile_banner_url, 'hints' => __( 'This Banner will be visible when someone browse store from Mobile.', 'wc-frontend-manager' ) ),
+																																																
+																																																"list_banner_type" => array('label' => __('Store List Banner Type', 'wc-frontend-manager') , 'type' => 'select', 'options' => $store_list_banner_types, 'class' => 'wcfm-select wcfm_ele wcfm-list-banner-uploads', 'label_class' => 'wcfm_title', 'value' => $list_banner_type ),
+																																																"list_banner" => array('label' => __('Store List Banner', 'wc-frontend-manager') , 'type' => 'upload', 'class' => 'wcfm-text wcfm_ele wcfm-banner-uploads list_banner_type_upload list_banner_type_field list_banner_type_single_img', 'label_class' => 'wcfm_title list_banner_type_field list_banner_type_single_img', 'prwidth' => 250, 'value' => $list_banner_url, 'hints' => __( 'This Banner will be visible at Store List Page.', 'wc-frontend-manager' ) ),
+																																																
+																																																"list_banner_video" => array('label' => __('Store List Video Banner', 'wc-frontend-manager') , 'type' => 'text', 'class' => 'wcfm-text wcfm_ele list_banner_type_field list_banner_type_video', 'label_class' => 'wcfm_title list_banner_type_field list_banner_type_video','value' => $list_banner_video, 'hints' => __( 'Insert YouTube video URL.', 'wc-frontend-manager' ) ),
+																																																
+																																																"store_name"  => array('label' => __('Store Name', 'wc-frontend-manager') , 'type' => 'text', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'custom_attributes' => array( 'required' => true ), 'value' => $store_name ),
+																																																"store_slug"  => array('label' => __('Store Slug', 'wc-frontend-manager') , 'type' => 'text', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'custom_attributes' => array( 'required' => true ), 'value' => urldecode($store_slug) ),
+																																																"store_email" => array('label' => __('Store Email', 'wc-frontend-manager') , 'type' => 'text', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $store_email ),
+																																																"phone"       => array('label' => __('Store Phone', 'wc-frontend-manager') , 'type' => 'text', 'placeholder' => '+123456..', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $phone ),
+																																																
+																																																"shop_description" => array('label' => __('Shop Description', 'wc-frontend-manager') , 'type' => $wpeditor, 'class' => 'wcfm-textarea wcfm_ele ' . $rich_editor, 'label_class' => 'wcfm_title', 'value' => $shop_description, 'hints' => __( 'This is displayed on your shop page.', 'wc-frontend-manager' ) ),
+																																																"shop_shipping_countries" => array('label' => __('Select Shipping Countries', 'wc-frontend-manager'), 'type' => 'select', 'class' => 'wcfm-select wcfm-select2 wcfm_ele', 'label_class' => 'wcfm_title select_title', 'options' => $all_shipping_countries, 'attributes' => array( 'multiple' => 'multiple' ), 'value' => $shop_shipping_countries  )
+                                                                                                ), $user_id );
+							
+							if( !apply_filters( 'wcfm_is_allow_store_logo', true ) ) {
+								if( isset( $settings_fields_general['gravatar'] ) ) { unset( $settings_fields_general['gravatar'] ); }
+							}
 							
 							if( !apply_filters( 'wcfm_is_allow_store_name', true ) || !$WCFMmp->wcfmmp_vendor->is_vendor_sold_by( $user_id ) ) {
 								if( isset( $settings_fields_general['store_name'] ) ) { unset( $settings_fields_general['store_name'] ); }
@@ -281,6 +300,32 @@ $is_marketplace = wcfm_is_marketplace();
 								if( isset( $settings_fields_general['store_slug'] ) ) { unset( $settings_fields_general['store_slug'] ); }
 							}
 							
+							if( !apply_filters( 'wcfm_is_allow_store_banner', true ) ) {
+								if( isset( $settings_fields_general['list_banner_type'] ) ) { unset( $settings_fields_general['list_banner_type'] ); }
+								if( isset( $settings_fields_general['list_banner'] ) ) { unset( $settings_fields_general['list_banner'] ); }
+								if( isset( $settings_fields_general['list_banner_video'] ) ) { unset( $settings_fields_general['list_banner_video'] ); }
+								if( isset( $settings_fields_general['banner_type'] ) ) { unset( $settings_fields_general['banner_type'] ); }
+								if( isset( $settings_fields_general['banner'] ) ) { unset( $settings_fields_general['banner'] ); }
+								if( isset( $settings_fields_general['banner_video'] ) ) { unset( $settings_fields_general['banner_video'] ); }
+								if( isset( $settings_fields_general['banner_slider'] ) ) { unset( $settings_fields_general['banner_slider'] ); }
+								if( isset( $settings_fields_general['mobile_banner'] ) ) { unset( $settings_fields_general['mobile_banner'] ); }
+							}
+							
+							if( !apply_filters( 'wcfm_is_allow_store_list_banner', true ) ) {
+								if( isset( $settings_fields_general['list_banner_type'] ) ) { unset( $settings_fields_general['list_banner_type'] ); }
+								if( isset( $settings_fields_general['list_banner'] ) ) { unset( $settings_fields_general['list_banner'] ); }
+								if( isset( $settings_fields_general['list_banner_video'] ) ) { unset( $settings_fields_general['list_banner_video'] ); }
+							}
+							
+							if( !apply_filters( 'wcfm_is_allow_store_banner_type', true ) ) {
+								if( isset( $settings_fields_general['banner_type'] ) ) { unset( $settings_fields_general['banner_type'] ); }
+								if( isset( $settings_fields_general['list_banner_type'] ) ) { unset( $settings_fields_general['list_banner_type'] ); }
+							}
+							
+							if( !apply_filters( 'wcfm_is_allow_store_mobile_banner', true ) ) {
+								if( isset( $settings_fields_general['mobile_banner'] ) ) { unset( $settings_fields_general['mobile_banner'] ); }
+							}
+							
 							if( !apply_filters( 'wcfm_is_allow_store_email', true ) ) {
 								if( isset( $settings_fields_general['store_email'] ) ) { unset( $settings_fields_general['store_email'] ); }
 							}
@@ -289,139 +334,21 @@ $is_marketplace = wcfm_is_marketplace();
 								if( isset( $settings_fields_general['phone'] ) ) { unset( $settings_fields_general['phone'] ); }
 							}
 							
+							if( !apply_filters( 'wcfm_is_allow_store_description', true ) ) {
+								if( isset( $settings_fields_general['shop_description'] ) ) { unset( $settings_fields_general['shop_description'] ); }
+							}
+              
+              if( !apply_filters( 'wcfm_is_allow_store_shipping_countries', false ) ) {
+                if( isset( $settings_fields_general['shop_shipping_countries'] ) ) { unset( $settings_fields_general['shop_shipping_countries'] ); }
+              }
+										
 							$WCFM->wcfm_fields->wcfm_generate_form_field( $settings_fields_general );	
-						  ?>
-						</div>
-						
-						<?php if( apply_filters( 'wcfm_is_allow_brand_settings', true ) ) { ?>
-							<div class="wcfm_clearfix"></div><br />
-							<div class="wcfm_vendor_settings_heading"><h2><?php _e( 'Store Brand Setup', 'wc-frontend-manager' ); ?></h2></div>
-							<div class="wcfm_clearfix"></div>
-							<div class="store_address">		
-								<?php
-								$settings_fields_general = apply_filters( 'wcfm_marketplace_settings_fields_general', array(
-																																																	"gravatar" => array('label' => __('Store Logo', 'wc-frontend-manager') , 'type' => 'upload', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title', 'prwidth' => 150, 'value' => $gravatar_url, 'hints' => __( 'Preferred  size is (125x125) pixels.', 'wc-frontend-manager' ) ),
-																																																	
-																																																	"banner_type" => array('label' => __('Store Banner Type', 'wc-frontend-manager') , 'type' => 'select', 'options' => $store_banner_types, 'class' => 'wcfm-select wcfm_ele wcfm-banner-uploads', 'label_class' => 'wcfm_title', 'value' => $banner_type ),
-																																																	"banner" => array('label' => __('Store Banner', 'wc-frontend-manager') , 'type' => 'upload', 'class' => 'wcfm-text wcfm_ele banner_type_upload banner_type_field banner_type_single_img wcfm-banner-uploads', 'label_class' => 'wcfm_title banner_type_field banner_type_single_img', 'prwidth' => 250, 'value' => $banner_url, 'hints' => $banner_help_text ),
-																																																	"banner_video" => array('label' => __('Video Banner', 'wc-frontend-manager') , 'type' => 'text', 'class' => 'wcfm-text wcfm_ele banner_type_field banner_type_video', 'label_class' => 'wcfm_title banner_type_field banner_type_video','value' => $banner_video, 'hints' => __( 'Insert YouTube video URL.', 'wc-frontend-manager' ) ),
-																																																	"banner_slider"  => array( 'label' => __('Slider', 'wc-frontend-manager'), 'type' => 'multiinput', 'class' => 'wcfm-text wcfm_ele banner_type_upload banner_type_field banner_type_slider wcfm_non_sortable', 'label_class' => 'wcfm_title banner_type_field banner_type_slider', 'value' => $banner_slider, 'hints' => $banner_help_text, 'options' => array(
-																																																																										"image" => array( 'type' => 'upload', 'class' => 'wcfm_gallery_upload banner_type_upload wcfm-banner-uploads', 'prwidth' => 75),
-																																																																										"link"  => array( 'type' => 'text', 'class' => 'wcfm-text banner_type_slilder_link', 'placeholder' => __( 'Slider Hyperlink', 'wc-frontend-manager' ) ),
-																																																																									) ),
-																																																	"slider_break" => array( 'type' => 'html', 'value' => '<div class="wcfm_clearfix"></div>' ),
-																																																	
-																																																	"mobile_banner" => array('label' => __('Mobile Banner', 'wc-frontend-manager') , 'type' => 'upload', 'class' => 'wcfm-text wcfm_ele wcfm-banner-uploads', 'label_class' => 'wcfm_title', 'prwidth' => 250, 'value' => $mobile_banner_url, 'hints' => __( 'This Banner will be visible when someone browse store from Mobile.', 'wc-frontend-manager' ) ),
-																																																	
-																																																	"list_banner_type" => array('label' => __('Store List Banner Type', 'wc-frontend-manager') , 'type' => 'select', 'options' => $store_list_banner_types, 'class' => 'wcfm-select wcfm_ele wcfm-list-banner-uploads', 'label_class' => 'wcfm_title', 'value' => $list_banner_type ),
-																																																	"list_banner" => array('label' => __('Store List Banner', 'wc-frontend-manager') , 'type' => 'upload', 'class' => 'wcfm-text wcfm_ele wcfm-banner-uploads list_banner_type_upload list_banner_type_field list_banner_type_single_img', 'label_class' => 'wcfm_title list_banner_type_field list_banner_type_single_img', 'prwidth' => 250, 'value' => $list_banner_url, 'hints' => __( 'This Banner will be visible at Store List Page.', 'wc-frontend-manager' ) ),
-																																																	
-																																																	"list_banner_video" => array('label' => __('Store List Video Banner', 'wc-frontend-manager') , 'type' => 'text', 'class' => 'wcfm-text wcfm_ele list_banner_type_field list_banner_type_video', 'label_class' => 'wcfm_title list_banner_type_field list_banner_type_video','value' => $list_banner_video, 'hints' => __( 'Insert YouTube video URL.', 'wc-frontend-manager' ) ),
-																																																	
-																																																	"shop_description" => array('label' => __('Shop Description', 'wc-frontend-manager') , 'type' => $wpeditor, 'class' => 'wcfm-textarea wcfm_ele ' . $rich_editor, 'label_class' => 'wcfm_title', 'value' => $shop_description, 'hints' => __( 'This is displayed on your shop page.', 'wc-frontend-manager' ) ),
-																																																	"shop_shipping_countries" => array('label' => __('Select Shipping Countries', 'wc-frontend-manager'), 'type' => 'select', 'class' => 'wcfm-select wcfm-select2 wcfm_ele', 'label_class' => 'wcfm_title select_title', 'options' => $all_shipping_countries, 'attributes' => array( 'multiple' => 'multiple' ), 'value' => $shop_shipping_countries  )
-																																																	), $user_id );
-								
-								if( !apply_filters( 'wcfm_is_allow_store_logo', true ) ) {
-									if( isset( $settings_fields_general['gravatar'] ) ) { unset( $settings_fields_general['gravatar'] ); }
-								}
-								
-								if( !apply_filters( 'wcfm_is_allow_store_banner', true ) ) {
-									if( isset( $settings_fields_general['list_banner_type'] ) ) { unset( $settings_fields_general['list_banner_type'] ); }
-									if( isset( $settings_fields_general['list_banner'] ) ) { unset( $settings_fields_general['list_banner'] ); }
-									if( isset( $settings_fields_general['list_banner_video'] ) ) { unset( $settings_fields_general['list_banner_video'] ); }
-									if( isset( $settings_fields_general['banner_type'] ) ) { unset( $settings_fields_general['banner_type'] ); }
-									if( isset( $settings_fields_general['banner'] ) ) { unset( $settings_fields_general['banner'] ); }
-									if( isset( $settings_fields_general['banner_video'] ) ) { unset( $settings_fields_general['banner_video'] ); }
-									if( isset( $settings_fields_general['banner_slider'] ) ) { unset( $settings_fields_general['banner_slider'] ); }
-									if( isset( $settings_fields_general['mobile_banner'] ) ) { unset( $settings_fields_general['mobile_banner'] ); }
-								}
-								
-								if( !apply_filters( 'wcfm_is_allow_store_list_banner', true ) ) {
-									if( isset( $settings_fields_general['list_banner_type'] ) ) { unset( $settings_fields_general['list_banner_type'] ); }
-									if( isset( $settings_fields_general['list_banner'] ) ) { unset( $settings_fields_general['list_banner'] ); }
-									if( isset( $settings_fields_general['list_banner_video'] ) ) { unset( $settings_fields_general['list_banner_video'] ); }
-								}
-								
-								if( !apply_filters( 'wcfm_is_allow_store_banner_type', true ) ) {
-									if( isset( $settings_fields_general['banner_type'] ) ) { unset( $settings_fields_general['banner_type'] ); }
-									if( isset( $settings_fields_general['list_banner_type'] ) ) { unset( $settings_fields_general['list_banner_type'] ); }
-								}
-								
-								if( !apply_filters( 'wcfm_is_allow_store_mobile_banner', true ) ) {
-									if( isset( $settings_fields_general['mobile_banner'] ) ) { unset( $settings_fields_general['mobile_banner'] ); }
-								}
-								
-								if( !apply_filters( 'wcfm_is_allow_store_description', true ) ) {
-									if( isset( $settings_fields_general['shop_description'] ) ) { unset( $settings_fields_general['shop_description'] ); }
-								}
-								
-								if( !apply_filters( 'wcfm_is_allow_store_shipping_countries', false ) ) {
-									if( isset( $settings_fields_general['shop_shipping_countries'] ) ) { unset( $settings_fields_general['shop_shipping_countries'] ); }
-								}
-											
-								$WCFM->wcfm_fields->wcfm_generate_form_field( $settings_fields_general );	
-								?>
-							</div>
-						<?php } ?>
-						
-						<?php if( apply_filters( 'wcfm_is_allow_store_visibility', true ) ) { ?>
-							<div class="wcfm_clearfix"></div><br />
-							<div class="wcfm_vendor_settings_heading"><h2><?php _e( 'Store Visibility Setup', 'wc-frontend-manager' ); ?></h2></div>
-							<div class="wcfm_clearfix"></div>
-							<div class="store_address store_visibility_wrap">
-							  <?php
-								$settings_fields_visibility = apply_filters( 'wcfm_marketplace_settings_fields_visibility', array(
-																														"store_name_position" => array( 'label' => __('Store Name Position', 'wc-multivendor-marketplace'), 'type' => 'select', 'options' => array( 'on_banner' => __( 'On Banner', 'wc-multivendor-marketplace' ), 'on_header' => __( 'At Header', 'wc-multivendor-marketplace' ) ), 'class' => 'wcfm-select wcfm_ele', 'label_class' => 'wcfm_title', 'value' => $store_name_position, 'hints' => __( 'Store name position at you Store Page.', 'wc-frontend-manager' ) ),
-																														"store_ppp" => array( 'label' => __('Products per page', 'wc-multivendor-marketplace'), 'type' => 'number', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title', 'value' => $store_ppp, 'attributes' => array( 'min'=> 1, 'step' => 1 ), 'hints' => __( 'No of products at you Store Page.', 'wc-frontend-manager' ) ),
-																														"store_hide_email" => array('label' => __( 'Hide Email from Store', 'wc-frontend-manager') , 'type' => 'checkbox', 'class' => 'wcfm-checkbox wcfm_ele', 'label_class' => 'wcfm_title checkbox_title wcfm_ele', 'value' => 'yes', 'dfvalue' => $store_hide_email ),
-																														"store_hide_phone" => array('label' => __( 'Hide Phone from Store', 'wc-frontend-manager') , 'type' => 'checkbox', 'class' => 'wcfm-checkbox wcfm_ele', 'label_class' => 'wcfm_title checkbox_title wcfm_ele', 'value' => 'yes', 'dfvalue' => $store_hide_phone ),
-																														"store_hide_address" => array('label' => __( 'Hide Address from Store', 'wc-frontend-manager') , 'type' => 'checkbox', 'class' => 'wcfm-checkbox wcfm_ele', 'label_class' => 'wcfm_title checkbox_title wcfm_ele', 'value' => 'yes', 'dfvalue' => $store_hide_address ),
-																														"store_hide_map" => array('label' => __( 'Hide Map from Store', 'wc-frontend-manager') , 'type' => 'checkbox', 'class' => 'wcfm-checkbox wcfm_ele', 'label_class' => 'wcfm_title checkbox_title wcfm_ele', 'value' => 'yes', 'dfvalue' => $store_hide_map ),
-																														"store_hide_description" => array('label' => __( 'Hide About from Store', 'wc-frontend-manager') , 'type' => 'checkbox', 'class' => 'wcfm-checkbox wcfm_ele', 'label_class' => 'wcfm_title checkbox_title wcfm_ele', 'value' => 'yes', 'dfvalue' => $store_hide_description ),
-																														"store_hide_policy" => array('label' => __( 'Hide Policy from Store', 'wc-frontend-manager') , 'type' => 'checkbox', 'class' => 'wcfm-checkbox wcfm_ele', 'label_class' => 'wcfm_title checkbox_title wcfm_ele', 'value' => 'yes', 'dfvalue' => $store_hide_policy ),
-																														), $user_id );
-								
-								if( !apply_filters( 'wcfm_is_allow_show_email', true ) ) {
-									if( isset( $settings_fields_visibility['store_hide_email'] ) ) { unset( $settings_fields_visibility['store_hide_email'] ); }
-								}
-								
-								if( !apply_filters( 'wcfm_is_allow_show_phone', true ) ) {
-									if( isset( $settings_fields_visibility['store_hide_phone'] ) ) { unset( $settings_fields_visibility['store_hide_phone'] ); }
-								}
-								
-								if( !apply_filters( 'wcfm_is_allow_show_address', true ) ) {
-									if( isset( $settings_fields_visibility['store_hide_address'] ) ) { unset( $settings_fields_visibility['store_hide_address'] ); }
-								}
-								
-								if( !apply_filters( 'wcfm_is_allow_store_description', true ) ) {
-									if( isset( $settings_fields_visibility['store_hide_description'] ) ) { unset( $settings_fields_visibility['store_hide_description'] ); }
-								}
-								
-								if( !apply_filters( 'wcfm_is_pref_policies', true ) || !apply_filters( 'wcfm_is_allow_store_policy', true ) || !apply_filters( 'wcfm_is_allow_policy_settings', true ) || !apply_filters( 'wcfm_is_allow_show_policy', true ) ) {
-									if( isset( $settings_fields_visibility['store_hide_policy'] ) ) { unset( $settings_fields_visibility['store_hide_policy'] ); }
-								}
-								
-								$WCFM->wcfm_fields->wcfm_generate_form_field( $settings_fields_visibility );
-								?>
-							</div>
-						<?php } ?>
-					</div>
-				</div>
-				<!-- collapsible end -->
 							
-				<!-- collapsible -->
-				<?php if( apply_filters( 'wcfm_is_allow_store_address', true ) ) { ?>
-					<div class="page_collapsible" id="wcfm_settings_location_head">
-						<label class="wcfmfa fa-globe"></label>
-						<?php _e('Location', 'wc-frontend-manager'); ?><span></span>
-					</div>
-					<div class="wcfm-container wcfm_marketplace_store_location_settings">
-						<div id="wcfm_settings_form_store_location_expander" class="wcfm-content">
+							if( apply_filters( 'wcfm_is_allow_store_address', true ) ) {
+						  ?>
 						
-							<div class="wcfm_clearfix"></div>
-							<div class="wcfm_vendor_settings_heading"><h2><?php _e( 'Store Address', 'wc-frontend-manager' ); ?></h2></div>
-							<div class="wcfm_clearfix"></div>
+							<div class="wcfm_clearfix"></div><br/>
+							<div class="wcfm_vendor_settings_heading"><h3><?php _e( 'Store Address', 'wc-frontend-manager' ); ?></h3></div>
 							<div class="store_address store_address_wrap">
 								<?php
 									$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_marketplace_settings_fields_address', array(
@@ -439,9 +366,8 @@ $is_marketplace = wcfm_is_marketplace();
 							$api_key = isset( $WCFMmp->wcfmmp_marketplace_options['wcfm_google_map_api'] ) ? $WCFMmp->wcfmmp_marketplace_options['wcfm_google_map_api'] : '';
 							if ( $api_key ) {
 								?>
-								<div class="wcfm_clearfix"></div><br />
-								<div class="wcfm_vendor_settings_heading"><h2><?php _e( 'Store Location', 'wc-frontend-manager' ); ?></h2></div>
 								<div class="wcfm_clearfix"></div>
+								<div class="wcfm_vendor_settings_heading"><h3><?php _e( 'Store Location', 'wc-frontend-manager' ); ?></h3></div>
 								<div class="store_address store_location_wrap">
 									<?php
 										$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_marketplace_settings_fields_location', array(
@@ -455,15 +381,56 @@ $is_marketplace = wcfm_is_marketplace();
 									<div class="wcfm-marketplace-google-map" id="wcfm-marketplace-map"></div>
 									<div class="wcfm_clearfix"></div><br />
 								</div>
-							<?php } ?>
-							
-						</div>
+							<?php
+							}
+							?>
+						
+						<?php
+							}
+						?>
+						
+						<?php if( apply_filters( 'wcfm_is_allow_store_visibility', true ) ) { ?>
+							<div class="wcfm_clearfix"></div>
+							<div class="wcfm_vendor_settings_heading"><h3><?php _e( 'Store Visibility', 'wc-frontend-manager' ); ?></h3></div>
+							<div class="store_address store_visibility_wrap">
+								<?php
+								  $settings_fields_visibility = apply_filters( 'wcfm_marketplace_settings_fields_visibility', array(
+																															"store_name_position" => array( 'label' => __('Store Name Position', 'wc-multivendor-marketplace'), 'type' => 'select', 'options' => array( 'on_banner' => __( 'On Banner', 'wc-multivendor-marketplace' ), 'on_header' => __( 'At Header', 'wc-multivendor-marketplace' ) ), 'class' => 'wcfm-select wcfm_ele', 'label_class' => 'wcfm_title', 'value' => $store_name_position, 'hints' => __( 'Store name position at you Store Page.', 'wc-frontend-manager' ) ),
+																															"store_ppp" => array( 'label' => __('Products per page', 'wc-multivendor-marketplace'), 'type' => 'number', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title', 'value' => $store_ppp, 'attributes' => array( 'min'=> 1, 'step' => 1 ), 'hints' => __( 'No of products at you Store Page.', 'wc-frontend-manager' ) ),
+																															"store_hide_email" => array('label' => __( 'Hide Email from Store', 'wc-frontend-manager') , 'type' => 'checkbox', 'class' => 'wcfm-checkbox wcfm_ele', 'label_class' => 'wcfm_title checkbox_title wcfm_ele', 'value' => 'yes', 'dfvalue' => $store_hide_email ),
+																															"store_hide_phone" => array('label' => __( 'Hide Phone from Store', 'wc-frontend-manager') , 'type' => 'checkbox', 'class' => 'wcfm-checkbox wcfm_ele', 'label_class' => 'wcfm_title checkbox_title wcfm_ele', 'value' => 'yes', 'dfvalue' => $store_hide_phone ),
+																															"store_hide_address" => array('label' => __( 'Hide Address from Store', 'wc-frontend-manager') , 'type' => 'checkbox', 'class' => 'wcfm-checkbox wcfm_ele', 'label_class' => 'wcfm_title checkbox_title wcfm_ele', 'value' => 'yes', 'dfvalue' => $store_hide_address ),
+																															"store_hide_description" => array('label' => __( 'Hide About from Store', 'wc-frontend-manager') , 'type' => 'checkbox', 'class' => 'wcfm-checkbox wcfm_ele', 'label_class' => 'wcfm_title checkbox_title wcfm_ele', 'value' => 'yes', 'dfvalue' => $store_hide_description ),
+																															"store_hide_policy" => array('label' => __( 'Hide Policy from Store', 'wc-frontend-manager') , 'type' => 'checkbox', 'class' => 'wcfm-checkbox wcfm_ele', 'label_class' => 'wcfm_title checkbox_title wcfm_ele', 'value' => 'yes', 'dfvalue' => $store_hide_policy ),
+																															), $user_id );
+									$WCFM->wcfm_fields->wcfm_generate_form_field( $settings_fields_visibility );
+									
+									if( !apply_filters( 'wcfm_is_allow_show_email', true ) ) {
+										if( isset( $settings_fields_visibility['store_hide_email'] ) ) { unset( $settings_fields_visibility['store_hide_email'] ); }
+									}
+									
+									if( !apply_filters( 'wcfm_is_allow_show_phone', true ) ) {
+										if( isset( $settings_fields_visibility['store_hide_phone'] ) ) { unset( $settings_fields_visibility['store_hide_phone'] ); }
+									}
+									
+									if( !apply_filters( 'wcfm_is_allow_show_address', true ) ) {
+										if( isset( $settings_fields_visibility['store_hide_address'] ) ) { unset( $settings_fields_visibility['store_hide_address'] ); }
+									}
+									
+									if( !apply_filters( 'wcfm_is_allow_store_description', true ) ) {
+										if( isset( $settings_fields_visibility['store_hide_description'] ) ) { unset( $settings_fields_visibility['store_hide_description'] ); }
+									}
+									
+									if( !apply_filters( 'wcfm_is_pref_policies', true ) || !apply_filters( 'wcfm_is_allow_store_policy', true ) ) {
+										if( isset( $settings_fields_visibility['store_hide_policy'] ) ) { unset( $settings_fields_visibility['store_hide_policy'] ); }
+									}
+								?>
+							</div>
+						<?php } ?>
 					</div>
-					<div class="wcfm_clearfix"></div>
-				<?php } ?>
+				</div>
+				<div class="wcfm_clearfix"></div>
 				<!-- end collapsible -->
-				
-				<?php do_action( 'wcfm_vendor_settings_after_location', $user_id ); ?>
 				
 			  <!-- collapsible -->
 				<?php if( $wcfm_is_allow_billing_settings = apply_filters( 'wcfm_is_allow_billing_settings', true ) ) { ?>
@@ -706,9 +673,8 @@ $is_marketplace = wcfm_is_marketplace();
 												'redirect_uri' => get_wcfm_settings_url(),
 												'state' => $user_id,
 												'stripe_user' => array( 
-													                    'email'         => $user_email,
-													                    'url'           => wcfmmp_get_store_url( $user_id ) ,
-													                    'business_name' => $store_name
+													                    'email' => $user_email,
+													                    'url'   => wcfmmp_get_store_url( $user_id )  
 													                    )
 											);
 											$url = 'https://connect.stripe.com/oauth/authorize?' . http_build_query($authorize_request_body);
@@ -773,8 +739,6 @@ $is_marketplace = wcfm_is_marketplace();
 					<div class="wcfm_clearfix"></div>
 				<?php } ?>
 				<!-- end collapsible -->
-				
-				<?php do_action( 'wcfm_vendor_settings_after_payment', $user_id ); ?>
 			
 				<!-- collapsible -->
 				<?php if( apply_filters( 'wcfm_is_allow_vshipping_settings', true ) && apply_filters( 'wcfm_is_allow_store_shipping', true ) ) { ?>
@@ -797,8 +761,6 @@ $is_marketplace = wcfm_is_marketplace();
 						</div>
 					<?php } ?>
 				<?php } ?>
-				
-				<?php do_action( 'wcfm_vendor_settings_after_shipping', $user_id ); ?>
 			
 				<?php if( apply_filters( 'wcfm_is_allow_vseo_settings', true ) ) { ?>
 					<div class="page_collapsible" id="wcfm_settings_form_seo_head">
@@ -807,57 +769,24 @@ $is_marketplace = wcfm_is_marketplace();
 					</div>
 					<div class="wcfm-container">
 						<div id="wcfm_settings_form_seo_expander" class="wcfm-content">
-						  <div class="wcfm_clearfix"></div>
-							<div class="wcfm_vendor_settings_heading"><h2><?php _e( 'General Setup', 'wc-frontend-manager' ); ?></h2></div>
-							<div class="wcfm_clearfix"></div>
-							<div class="store_address">
-								<?php
-								$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_vendors_settings_fields_seo', array(
-																																							"wcfmmp-seo-meta-title" => array('label' => __('SEO Title', 'wc-frontend-manager') , 'name' => 'store_seo[wcfmmp-seo-meta-title]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $wcfmmp_seo_meta_title, 'hints' => __('SEO Title is shown as the title of your store page', 'wc-frontend-manager') ),
-																																							"wcfmmp-seo-meta-desc" => array('label' => __('Meta Description', 'wc-frontend-manager'), 'name' => 'store_seo[wcfmmp-seo-meta-desc]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $wcfmmp_seo_meta_desc, 'hints' => __('The meta description is often shown as the black text under the title in a search result. For this to work it has to contain the keyword that was searched for and should be less than 156 chars.', 'wc-frontend-manager') ),
-																																							"wcfmmp-seo-meta-keywords" => array('label' => __('Meta Keywords', 'wc-frontend-manager'), 'name' => 'store_seo[wcfmmp-seo-meta-keywords]', 'type' => 'textarea', 'class' => 'wcfm-textarea wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $wcfmmp_seo_meta_keywords, 'hints' => __('Insert some comma separated keywords for better ranking of your store page.', 'wc-frontend-manager') ),
-																																						 ), $user_id ) );
-									
-								?>
-							</div>
-							
-							<?php if( apply_filters( 'wcfm_is_allow_vendor_seo_facebook', true ) ) { ?>
-								<div class="wcfm_clearfix"></div><br />
-								<div class="wcfm_vendor_settings_heading"><h2><?php _e( 'Facebook Setup', 'wc-frontend-manager' ); ?></h2></div>
-								<div class="wcfm_clearfix"></div>
-								<div class="store_address">
-									<?php
-									$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_vendors_settings_fields_seo_facebook', array(
-																																								"wcfmmp-seo-og-title" => array('label' => __('Facebook Title', 'wc-frontend-manager'), 'name' => 'store_seo[wcfmmp-seo-og-title]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $wcfmmp_seo_og_title ),
-																																								"wcfmmp-seo-og-desc" => array('label' => __('Facebook Description', 'wc-frontend-manager'), 'name' => 'store_seo[wcfmmp-seo-og-desc]', 'type' => 'textarea', 'class' => 'wcfm-textarea wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $wcfmmp_seo_og_desc ),
-																																								"wcfmmp-seo-og-image" => array('label' => __('Facebook Image', 'wc-frontend-manager'), 'name' => 'store_seo[wcfmmp-seo-og-image]', 'type' => 'upload', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $wcfmmp_seo_og_image_url ),
-																																							 ), $user_id ) );
-										
-									?>
-								</div>
-							<?php } ?>
-							
-							<?php if( apply_filters( 'wcfm_is_allow_vendor_seo_twitter', true ) ) { ?>
-								<div class="wcfm_clearfix"></div><br />
-								<div class="wcfm_vendor_settings_heading"><h2><?php _e( 'Twitter Setup', 'wc-frontend-manager' ); ?></h2></div>
-								<div class="wcfm_clearfix"></div>
-								<div class="store_address">
-									<?php
-									$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_vendors_settings_fields_seo_twitter', array(
-																																								"wcfmmp-seo-twitter-title" => array('label' => __('Twitter Title', 'wc-frontend-manager'), 'name' => 'store_seo[wcfmmp-seo-twitter-title]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $wcfmmp_seo_twitter_title ),
-																																								"wcfmmp-seo-twitter-desc" => array('label' => __('Twitter Description', 'wc-frontend-manager'), 'name' => 'store_seo[wcfmmp-seo-twitter-desc]', 'type' => 'textarea', 'class' => 'wcfm-textarea wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $wcfmmp_seo_twitter_desc ),
-																																								"wcfmmp-seo-twitter-image" => array('label' => __('Twitter Image', 'wc-frontend-manager'), 'name' => 'store_seo[wcfmmp-seo-twitter-image]', 'type' => 'upload', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $wcfmmp_seo_twitter_image_url ),
-																																							 ), $user_id ) );
-										
-									?>
-								</div>
-							<?php } ?>
+							<?php
+							$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_vendors_settings_fields_seo', array(
+																																						"wcfmmp-seo-meta-title" => array('label' => __('SEO Title', 'wc-frontend-manager') , 'name' => 'store_seo[wcfmmp-seo-meta-title]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $wcfmmp_seo_meta_title, 'hints' => __('SEO Title is shown as the title of your store page', 'wc-frontend-manager') ),
+																																						"wcfmmp-seo-meta-desc" => array('label' => __('Meta Description', 'wc-frontend-manager'), 'name' => 'store_seo[wcfmmp-seo-meta-desc]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $wcfmmp_seo_meta_desc, 'hints' => __('The meta description is often shown as the black text under the title in a search result. For this to work it has to contain the keyword that was searched for and should be less than 156 chars.', 'wc-frontend-manager') ),
+																																						"wcfmmp-seo-meta-keywords" => array('label' => __('Meta Keywords', 'wc-frontend-manager'), 'name' => 'store_seo[wcfmmp-seo-meta-keywords]', 'type' => 'textarea', 'class' => 'wcfm-textarea wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $wcfmmp_seo_meta_keywords, 'hints' => __('Insert some comma separated keywords for better ranking of your store page.', 'wc-frontend-manager') ),
+																																						"wcfmmp-seo-og-title" => array('label' => __('Facebook Title', 'wc-frontend-manager'), 'name' => 'store_seo[wcfmmp-seo-og-title]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $wcfmmp_seo_og_title ),
+																																						"wcfmmp-seo-og-desc" => array('label' => __('Facebook Description', 'wc-frontend-manager'), 'name' => 'store_seo[wcfmmp-seo-og-desc]', 'type' => 'textarea', 'class' => 'wcfm-textarea wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $wcfmmp_seo_og_desc ),
+																																						"wcfmmp-seo-og-image" => array('label' => __('Facebook Image', 'wc-frontend-manager'), 'name' => 'store_seo[wcfmmp-seo-og-image]', 'type' => 'upload', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $wcfmmp_seo_og_image_url ),
+																																						"wcfmmp-seo-twitter-title" => array('label' => __('Twitter Title', 'wc-frontend-manager'), 'name' => 'store_seo[wcfmmp-seo-twitter-title]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $wcfmmp_seo_twitter_title ),
+																																						"wcfmmp-seo-twitter-desc" => array('label' => __('Twitter Description', 'wc-frontend-manager'), 'name' => 'store_seo[wcfmmp-seo-twitter-desc]', 'type' => 'textarea', 'class' => 'wcfm-textarea wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $wcfmmp_seo_twitter_desc ),
+																																						"wcfmmp-seo-twitter-image" => array('label' => __('Twitter Image', 'wc-frontend-manager'), 'name' => 'store_seo[wcfmmp-seo-twitter-image]', 'type' => 'upload', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $wcfmmp_seo_twitter_image_url ),
+																																					 ), $user_id ) );
+								
+							?>
 						</div>
 					</div>
 				<?php } ?>
 				<!-- end collapsible -->
-				
-				<?php do_action( 'wcfm_vendor_settings_after_seo', $user_id ); ?>
 				
 				<!-- collapsible - Customer Support -->
 				<?php if( apply_filters( 'wcfm_is_allow_customer_support_settings', true ) ) { ?>
@@ -884,8 +813,6 @@ $is_marketplace = wcfm_is_marketplace();
 					<div class="wcfm_clearfix"></div>
 				<?php } ?>
 				<!-- end collapsible -->
-				
-				<?php do_action( 'wcfm_vendor_settings_after_customer_support', $user_id ); ?>
 				
 				<?php do_action( 'end_wcfm_vendor_settings', $user_id ); ?>
 				

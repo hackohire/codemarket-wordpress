@@ -319,11 +319,4 @@ class WCFM_Dependencies {
 		return in_array( 'woocommerce-booking/woocommerce-booking.php', self::$active_plugins ) || array_key_exists( 'woocommerce-booking/woocommerce-booking.php', self::$active_plugins );
 		return false;
 	}
-	
-	// WooCommerce Product Schedular - 6.1.4
-	static function wcfm_wc_product_scheduler_active_check() {
-		if ( ! self::$active_plugins ) self::init();
-		return in_array( 'woo-product-availability-scheduler/woocommerce-product-availability-scheduler.php', self::$active_plugins ) || array_key_exists( 'woo-product-availability-scheduler/woocommerce-product-availability-scheduler.php', self::$active_plugins );
-		return false;
-	}
 }

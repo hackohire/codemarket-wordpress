@@ -70,9 +70,9 @@ class WCFM_Settings_Controller {
 	  if( !isset($wcfm_settings_form['float_button_disabled']) ) $options['float_button_disabled'] = 'no';
 	  else $options['float_button_disabled'] = 'yes';
 	  
-	  // Inquiry Button Disabled
-	  //if( !isset($wcfm_settings_form['enquiry_button_disabled']) ) $options['enquiry_button_disabled'] = 'no';
-	  //else $options['enquiry_button_disabled'] = 'yes';
+	  // Float Button Disabled
+	  if( !isset($wcfm_settings_form['enquiry_button_disabled']) ) $options['enquiry_button_disabled'] = 'no';
+	  else $options['enquiry_button_disabled'] = 'yes';
 	  
 	  // Header Panel Disabled
 	  if( !isset($wcfm_settings_form['headpanel_disabled']) ) $options['headpanel_disabled'] = 'no';
@@ -191,27 +191,6 @@ class WCFM_Settings_Controller {
 			$options['wcfm_enquiry_button_label'] = $wcfm_settings_form['wcfm_enquiry_button_label'];
 		} else {
 			$options['wcfm_enquiry_button_label'] = __( 'Ask a Question', 'wc-frontend-manager' );
-		}
-		
-		// Enquiry With Login 
-		if( isset($wcfm_settings_form['wcfm_enquiry_with_login']) ) {
-			$options['wcfm_enquiry_with_login'] = 'yes';
-		} else {
-			$options['wcfm_enquiry_with_login'] = 'no';
-		}
-		
-		// Enquiry Allow Attachment
-		if( isset($wcfm_settings_form['wcfm_enquiry_allow_attachment']) ) {
-			$options['wcfm_enquiry_allow_attachment'] = 'yes';
-		} else {
-			$options['wcfm_enquiry_allow_attachment'] = 'no';
-		}
-		
-		// Enquiry Button Position
-		if( isset($wcfm_settings_form['wcfm_enquiry_button_position']) ) {
-			$options['wcfm_enquiry_button_position'] = $wcfm_settings_form['wcfm_enquiry_button_position'];
-		} else {
-			$options['wcfm_enquiry_button_position'] = 'bellow_atc';
 		}
 		
 		// Enquiry Custom Fields

@@ -304,20 +304,6 @@ jQuery(document).ready( function($) {
 		}).change();
 	}
 	
-	// Store Hours
-	if( $("#wcfm_store_hours_off_days").length > 0 ) {
-		$("#wcfm_store_hours_off_days").select2();
-		
-		$("#wcfm_store_hours_off_days").change(function() {
-			$('.wcfm_store_hours_fields').removeClass('wcfm_ele_hide');
-			if( $(this).val() ) {
-				$.each($(this).val(), function( $i, $off_days ) {
-					$('.wcfm_store_hours_fields_'+$off_days).addClass('wcfm_ele_hide');	
-				});
-			}
-		}).change();
-	}
-	
 	function GetURLParameterSetup(sParam) {
 		var sPageURL = window.location.search.substring(1);
 		var sURLVariables = sPageURL.split('&');
@@ -354,6 +340,20 @@ jQuery(document).ready( function($) {
 		}
 	
 		setTimeout( progress, 200 );
+	}
+	
+	// Store Hours
+	if( $("#wcfm_store_hours_off_days").length > 0 ) {
+		$("#wcfm_store_hours_off_days").select2();
+		
+		$("#wcfm_store_hours_off_days").change(function() {
+			$('.wcfm_store_hours_fields').removeClass('wcfm_ele_hide');
+			if( $(this).val() ) {
+				$.each($(this).val(), function( $i, $off_days ) {
+					$('.wcfm_store_hours_fields_'+$off_days).addClass('wcfm_ele_hide');	
+				});
+			}
+		}).change();
 	}
 	
 });

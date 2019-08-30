@@ -192,28 +192,6 @@ input[type='checkbox'].wcfm-checkbox, .wcfm-tabWrap input[type="checkbox"] {
 
 #variations .wcfm-wp-fields-uploader { margin-bottom: 10px !important; }
 
-.wcfm_add_new_category, .wcfm_new_tax_ele, .wcfm_new_parent_taxt_ele, .wcfm_add_new_taxonomy_form {
-	max-width: 214px;
-	margin: auto !important;
-  display: block !important;
-  margin-bottom: 15px !important;
-}
-
-
-.wcfm_add_new_category {
-	text-decoration: underline;
-	cursor: pointer;
-	float: right;
-	text-align: right;
-}
-
-.wcfm_side_add_new_category { float: none; }
-.wcfm_side_add_new_category { margin-top: -20px !important; }
-#wcfm-main-contentainer .wcfm_add_category_bt { margin-right: 0px !important; }
-.wcfm_add_new_taxonomy_form_hide { display: none !important; }
-
-.wcfm_add_new_category:hover { color: #17a2b8;}
-
 .wcfm_article_manager_cats_checklist_fields {
 	border: 1px solid #ccc;
 	border-radius: 3px;

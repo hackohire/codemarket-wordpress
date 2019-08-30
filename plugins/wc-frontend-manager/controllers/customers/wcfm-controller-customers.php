@@ -103,17 +103,6 @@ class WCFM_Customers_Controller {
 																);
 		}
 		
-		// Vendor Filter
-		if( isset($_POST['customer_vendor']) && !empty($_POST['customer_vendor']) ) {
-			$is_marketplace = wcfm_is_marketplace();
-			if( $is_marketplace ) {
-				if( !wcfm_is_vendor() ) {
-					$args['meta_key'] = '_wcfm_vendor';        
-					$args['meta_value'] = $_POST['customer_vendor'];
-				}
-			}
-		}
-		
 		$wcfm_customers_array = get_users( $args );
 		            
 		// Get Product Count
@@ -160,18 +149,6 @@ class WCFM_Customers_Controller {
 				// Email
 				if( apply_filters( 'wcfm_allow_view_customer_email', true ) ) {
 					$wcfm_customers_json_arr[$index][] = $wcfm_customers_single->user_email;
-				} else {
-					$wcfm_customers_json_arr[$index][] = '&ndash;';
-				}
-				
-				// Store
-				if( !wcfm_is_vendor() ) {
-					$customer_vendor = get_user_meta( $wcfm_customers_single->ID, '_wcfm_vendor', true );
-					if( $customer_vendor && wcfm_is_vendor( $customer_vendor ) ) {
-						$wcfm_customers_json_arr[$index][] = $WCFM->wcfm_vendor_support->wcfm_get_vendor_store_by_vendor( $customer_vendor );
-					} else {
-						$wcfm_customers_json_arr[$index][] = '&ndash;';
-					}
 				} else {
 					$wcfm_customers_json_arr[$index][] = '&ndash;';
 				}

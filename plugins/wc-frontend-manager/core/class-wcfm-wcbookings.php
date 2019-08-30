@@ -22,8 +22,7 @@ class WCFM_WCBookings {
 			add_filter( 'wcfm_endpoint_title', array( &$this, 'wcb_wcfm_endpoint_title' ), 20, 2 );
 			add_action( 'init', array( &$this, 'wcb_wcfm_init' ), 20 );
     		
-    	if ( current_user_can( 'manage_bookings_settings' ) || current_user_can( 'manage_bookings' ) ) {
-    		
+    	if ( current_user_can( 'manage_bookings' ) ) {
     		// WC Booking Menu Filter
 				add_filter( 'wcfm_menus', array( &$this, 'wcb_wcfm_menus' ), 20 );
 				
@@ -68,11 +67,9 @@ class WCFM_WCBookings {
   function wcb_wcfm_query_vars( $query_vars ) {
   	$wcfm_modified_endpoints = wcfm_get_option( 'wcfm_endpoints', array() );
   	
-  	if( isset( $wcfm_modified_endpoints['wcfm-bookings'] ) && !empty( $wcfm_modified_endpoints['wcfm-bookings'] ) && $wcfm_modified_endpoints['wcfm-bookings'] == 'bookings' ) $wcfm_modified_endpoints['wcfm-bookings'] = 'bookingslist';
-  	
 		$query_booking_vars = array(
 			'wcfm-bookings-dashboard'       => ! empty( $wcfm_modified_endpoints['wcfm-bookings-dashboard'] ) ? $wcfm_modified_endpoints['wcfm-bookings-dashboard'] : 'bookings-dashboard',
-			'wcfm-bookings'                 => ! empty( $wcfm_modified_endpoints['wcfm-bookings'] ) ? $wcfm_modified_endpoints['wcfm-bookings'] : 'bookingslist',
+			'wcfm-bookings'                 => ! empty( $wcfm_modified_endpoints['wcfm-bookings'] ) ? $wcfm_modified_endpoints['wcfm-bookings'] : 'bookings',
 			'wcfm-bookings-resources'       => ! empty( $wcfm_modified_endpoints['wcfm-bookings-resources'] ) ? $wcfm_modified_endpoints['wcfm-bookings-resources'] : 'bookings-resources',
 			'wcfm-bookings-resources-manage'=> ! empty( $wcfm_modified_endpoints['wcfm-bookings-resources-manage'] ) ? $wcfm_modified_endpoints['wcfm-bookings-resources-manage'] : 'bookings-resources-manage',
 			'wcfm-bookings-manual'          => ! empty( $wcfm_modified_endpoints['wcfm-bookings-manual'] ) ? $wcfm_modified_endpoints['wcfm-bookings-manual'] : 'bookings-manual',
@@ -144,7 +141,7 @@ class WCFM_WCBookings {
   function wcb_wcfm_menus( $menus ) {
   	global $WCFM;
   	
-  	if ( current_user_can( 'manage_bookings_settings' ) || current_user_can( 'manage_bookings' ) ) {
+  	if ( current_user_can( 'manage_bookings' ) ) {
   		if( WCFM_Dependencies::wcfmu_plugin_active_check() ) {
 				$menus = array_slice($menus, 0, 3, true) +
 														array( 'wcfm-bookings-dashboard' => array(   'label'  => __( 'Bookings', 'woocommerce-bookings'),
@@ -172,7 +169,7 @@ class WCFM_WCBookings {
    */
   function wcb_product_types( $pro_types ) {
   	global $WCFM;
-  	if ( current_user_can( 'manage_bookings_settings' ) || current_user_can( 'manage_bookings' ) ) {
+  	if ( current_user_can( 'manage_bookings' ) ) {
   		$pro_types['booking'] = __( 'Bookable product', 'woocommerce-bookings' );
   	}
   	

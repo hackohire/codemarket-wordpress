@@ -219,10 +219,7 @@ class Sharing_Service {
 		// Default services
 		if ( ! is_array( $enabled ) ) {
 			$enabled = array(
-				'visible' => array(
-					'twitter',
-					'facebook',
-				),
+				'visible' => array(),
 				'hidden'  => array(),
 			);
 
@@ -306,17 +303,17 @@ class Sharing_Service {
 	public function set_global_options( $data ) {
 		$options = get_option( 'sharing-options' );
 
-		// No options yet.
+		// No options yet
 		if ( ! is_array( $options ) ) {
 			$options = array();
 		}
 
-		// Defaults.
+		// Defaults
 		$options['global'] = array(
 			'button_style'  => 'icon-text',
 			'sharing_label' => $this->default_sharing_label,
 			'open_links'    => 'same',
-			'show'          => ! isset( $options['global'] ) ? array( 'post', 'page' ) : array(),
+			'show'          => array(),
 			'custom'        => isset( $options['global']['custom'] ) ? $options['global']['custom'] : array(),
 		);
 

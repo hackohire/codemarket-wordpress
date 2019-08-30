@@ -309,8 +309,6 @@ do_action( 'before_wcfm_orders_details', $order_id );
 													}
 					
 													$field_name = 'billing_' . $key;
-													
-													if( !apply_filters( 'wcfm_allow_view_customer_'.$field_name, true ) ) continue;
 					
 													if ( is_callable( array( $order, 'get_' . $field_name ) ) ) {
 														$field_value = $order->{"get_$field_name"}( 'edit' );
@@ -351,8 +349,6 @@ do_action( 'before_wcfm_orders_details', $order_id );
 															}
 					
 															$field_name = 'shipping_' . $key;
-															
-															if( !apply_filters( 'wcfm_allow_view_customer_'.$field_name, true ) ) continue;
 					
 															if ( is_callable( array( $order, 'get_' . $field_name ) ) ) {
 																$field_value = $order->{"get_$field_name"}( 'edit' );
@@ -451,7 +447,7 @@ do_action( 'before_wcfm_orders_details', $order_id );
 								</td>
 								<td class="name" data-sort-value="<?php echo esc_attr( $item->get_name() ); ?>">
 									<?php
-										echo $product_link ? '<a href="' . esc_url( $product_link ) . '" class="wc-order-item-name">' .  esc_html( apply_filters( 'wcfm_order_item_name', $item->get_name(), $item ) ) . '</a>' : '<div class="class="wc-order-item-name"">' . esc_html( apply_filters( 'wcfm_order_item_name', $item->get_name(), $item ) ) . '</div>';
+										echo $product_link ? '<a href="' . esc_url( $product_link ) . '" class="wc-order-item-name">' .  esc_html( $item->get_name() ) . '</a>' : '<div class="class="wc-order-item-name"">' . esc_html( $item->get_name() ) . '</div>';
 							
 										if ( $_product && $_product->get_sku() ) {
 											echo '<div class="wc-order-item-sku"><strong>' . __( 'SKU:', 'wc-frontend-manager' ) . '</strong> ' . esc_html( $_product->get_sku() ) . '</div>';
@@ -872,6 +868,8 @@ do_action( 'before_wcfm_orders_details', $order_id );
 						</tr>
 						<?php } ?>
 				
+						<?php do_action( 'wcfm_order_totals_after_total', $order->get_id() ); ?>
+				
 						<?php if( apply_filters( 'wcfm_order_details_refund_line_item', true ) && apply_filters( 'wcfm_order_details_refund_total', true ) ) { ?>
 							<?php if ( $order->get_total_refunded() ) : ?>
 								<tr>
@@ -881,32 +879,6 @@ do_action( 'before_wcfm_orders_details', $order_id );
 								</tr>
 							<?php endif; ?>
 						<?php } ?>
-						
-						<?php if( ( $marketplece = wcfm_is_marketplace() ) && !wcfm_is_vendor() && apply_filters( 'wcfm_is_allow_view_commission', true ) && apply_filters( 'wcfm_is_allow_commission_manage', true ) ) { ?>
-						<tr>
-							<th class="label"><?php if( $admin_fee_mode = apply_filters( 'wcfm_is_admin_fee_mode', false ) ) { _e( 'Admin Fees', 'wc-frontend-manager' ); } else { _e( 'Vendor Commission', 'wc-frontend-manager' ); } ?>:</th>
-							<td width="1%"></td>
-							<td class="total">
-								<div class="view">
-								  <?php 
-								  $commission = $WCFM->wcfm_vendor_support->wcfm_get_commission_by_order( $order->get_id() );
-									if( $commission ) {
-										$gross_sales  = (float) $order->get_total();
-										$total_refund = (float) $order->get_total_refunded();
-										if( $admin_fee_mode || ( $marketplece == 'dokan' ) ) {
-											$commission = $gross_sales - $total_refund - $commission;
-										}
-										echo  wc_price( $commission, array( 'currency' => $order->get_currency() ) );
-									} else {
-										echo  __( 'N/A', 'wc-frontend-manager' );
-									}
-								  ?>
-								 </div>
-							</td>
-						</tr>
-						<?php } ?>
-						
-						<?php do_action( 'wcfm_order_totals_after_total', $order->get_id() ); ?>
 				
 						<?php 
 						//do_action( 'woocommerce_admin_order_totals_after_refunded', $order->get_id() ); 

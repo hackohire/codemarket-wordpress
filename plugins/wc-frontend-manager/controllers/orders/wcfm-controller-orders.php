@@ -186,7 +186,7 @@ class WCFM_Orders_Controller {
 																																					'autop'     => false,
 																																				) ) );
 				
-					$order_item_details .= '<div class=""><span class="qty">' . $item->get_quantity() . 'x</span><span class="name">' . apply_filters( 'wcfm_order_item_name', $item->get_name(), $item );
+					$order_item_details .= '<div class=""><span class="qty">' . $item->get_quantity() . 'x</span><span class="name">' . $item->get_name();
 					if ( $product && $product->get_sku() ) {
 						$order_item_details .= ' (' . __( 'SKU:', 'wc-frontend-manager' ) . ' ' . esc_html( $product->get_sku() ) . ')';
 					}

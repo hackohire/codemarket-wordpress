@@ -9,7 +9,6 @@
 		"map",
 		"markdown",
 		"publicize",
-		"recurring-payments",
 		"related-posts",
 		"repeat-visitor",
 		"sharing",
@@ -21,5 +20,5 @@
 		"videopress",
 		"wordads"
 	],
-	"beta": [ "seo" ]
+	"beta": [ "seo", "membership-button" ]
 }

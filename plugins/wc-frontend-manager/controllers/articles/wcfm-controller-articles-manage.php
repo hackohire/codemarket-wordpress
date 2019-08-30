@@ -31,12 +31,6 @@ class WCFM_Articles_Manage_Controller {
 	  	$is_publish = false;
 	  	$current_user_id = apply_filters( 'wcfm_current_vendor_id', get_current_user_id() );
 	  	
-	  	if( function_exists( 'wcfmmp_get_store_url' ) && !wcfm_is_vendor() ) {
-	  		if( isset( $wcfm_articles_manage_form_data['wcfm_vendor'] ) && !empty( $wcfm_articles_manage_form_data['wcfm_vendor'] ) ) {
-	  			$current_user_id = absint( $wcfm_articles_manage_form_data['wcfm_vendor'] );
-	  		}
-	  	}
-	  	
 	  	// WCFM form custom validation filter
 	  	$custom_validation_results = apply_filters( 'wcfm_form_custom_validation', $wcfm_articles_manage_form_data, 'article_manage' );
 	  	if(isset($custom_validation_results['has_error']) && !empty($custom_validation_results['has_error'])) {
@@ -77,7 +71,7 @@ class WCFM_Articles_Manage_Controller {
 			} else { // For Update
 				$is_update = true;
 				$new_article['ID'] = $wcfm_articles_manage_form_data['article_id'];
-				if( wcfm_is_marketplace() && ( !function_exists( 'wcfmmp_get_store_url' ) || wcfm_is_vendor() ) ) unset( $new_article['post_author'] );
+				unset( $new_article['post_author'] );
 				unset( $new_article['post_name'] );
 				if( ($article_status != 'draft') && (get_post_status( $new_article['ID'] ) == 'publish') ) {
 					if( apply_filters( 'wcfm_is_allow_publish_live_articles', true ) ) {

@@ -1,13 +1,13 @@
-﻿=== WCFM - WooCommerce Frontend Manager ===
+﻿=== WCFM - WooCommerce Frontend Manager - WC Marketplace, WC Vendors & Dokan with Bookings & Listings ===
 Contributors: wclovers
 Tags: woocommerce marketplace, multivendor marketplace, multi vendor, product vendors, wp user frontend, product vendor dashboard, ecommerce, vendor shop manager, woocommerce frontend shop manager, wcvendors, woocommerce frontend manager, wc frontend manager, woocommerce frontend shop manager, shop manager, ecommerce, e-commerce, woocommerce live manager
 Donate link: https://www.paypal.me/wclovers/25usd
 Requires at least: 4.4
 Tested up to: 5.2
 WC requires at least: 3.0
-WC tested up to: 3.6.0
+WC tested up to: 3.5.0
 Requires PHP: 5.6
-Stable tag: 6.1.6
+Stable tag: 6.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -115,7 +115,6 @@ WCFM is now fully compatible with -
 - Featured Image From URL
 - WP Hide & Security Enhancer
 - SCD – Smart Currency Detector
-- Woocommerce Product Availability Scheduler
 - WooCommerce Measurement Price Calculator
 - WooCommerce Advanced Product Labels
 - WooCommerce Wholesale Prices
@@ -279,88 +278,6 @@ Fully compatible with all major multi-vendor marketplace plugins - <strong>WC Ma
 25. WCFM Dashboard - Mobile view
 
 == Changelog ==
-
-= 6.1.6 =
-*Updated - 11/06/2019*
-
-* Enhance - YiTH Quick Product view "Catalog Mode" compatibility added
-* Enhance - Flatsome Quick Product view "Catalog Mode" compatibility added
-* Fixed   - WCFM Installer load issue resolved
-* Fixed   - WCFM Marketplace vendors able to see other vendors' order note issue resolved 
-
-= 6.1.5 =
-*Updated - 09/06/2019*
-
-* Enhance - Inquiry and Support reply "Attachment" support added
-* Enhance - Inquiry Button position setting added
-* Enhance - Inquiry and Chat Now button display together improved
-* Enhance - New capability options added
-* Enhance - French Translation update
-* Tweak   - Product "Inquiry" button available though vendor's Inquiry Capability "OFF"
-* Tweak   - "Disable Ask a Question Button" setting option removed, will work as per "Inquiry Module" setting
-* Fixed   - Uncategorized category exclude filter issue resolved
-* Fixed   - Vendor customer "Total Spent" amount display issue resolved
-
-= 6.1.4 =
-*Updated - 04/06/2019*
-
-* Enhance - Woocommerce Product Availability Scheduler plugin's compatibility added
-* Enhance - Support Ticket reference details added under ticket manage screen
-* Enhance - Inquiry and Support customer linked to customer details page for better reference
-* Enhance - WCFM Marketplace vendor manager "Commission & Withdrawal" and "Store Hours & Vacation" separate setting section added
-* Enhance - Other vendors' Inquiry, Support Ticket access by changing ID at browser bar restriction check added
-* Enhance - Article, Coupon and Customer vendor association option added under Admin Dashboard
-* Enhance - WCFM Marketplace "Product Multivendor" global and group wise capability option added
-* Enhance - Inquiry manager separate capability option added
-* Tweak   - Product Multivendor "Product Title" edit disabled
-* Fixed   - "Add to My Store" catalog page endpoint 404 issue resolved
-* Fixed   - Vendor's order details "Admin Feee" twice visibility issue resolved
-* Fixed   - Admin vendor manager update store SEO setting reset issue resolved
-* Fixed   - Listing Inquiry manage page broken issue resolved
-* Fixed   - Withdrawal and Payment page "Default Status" filter not working issue resolved
-* Fixed   - Some type errors issue resolved
-
-= 6.1.3 =
-*Updated - 31/05/2019*
-
-* Enhance - FooEvents Check-in App Compatibility added (WCFM Ultimate Require)
-* Enhance - WooCommerce Bookings 1.14.2 new capability compatibility added (please refresh vendor capability after update) 
-* Enhance - Vendor media bulk delete option added
-* Enhance - WC Appointments 4.5 calendar display compatibility added
-* Enhance - WC Product Addon and Fancy Product Designer capability option added
-* Enhance - Inquiry only for logged in user setting option added
-* Enhance - WCFM Marketplace Store and Store List page "Inquiry" custom button label compatibility added
-* Enhance - Commission details added under Admin Order Details page
-* Enhance - Booking resouce available quantity input option added under product manager
-* Tweak   - All Vendors "Followers" manage page added under Admin dashboard, previously only vendors allow to manage own followers
-* Fixed   - WCFM Marketplace Admin Total Fee display negative issue resolved
-* Fixed   - Notification display slash(\) issue resolved
-* Fixed   - Dashboard product list search pagination issue resolved
-
-= 6.1.2 =
-*Updated - 24/05/2019*
-
-* Feature - WCFM Affiliate registration compatibility added - [Documentation](https://docs.wclovers.com/wcfm-affiliate/)
-* Feature - WCFM Marketplec Membership subscription invoice option compatibility added, attach to "Welcome Email" (WCFM Ultimate require)
-* Feature - WCFM Membership subscription cost "Tax" support compatibility added (setup Tax under WCFM Membership Setting -> Tax Setting)
-* Enhance - Inquiry manage display improved
-* Fixed   - Dashboard "Welcome Box" Staff name replaced by vendor name issue resolved
-
-= 6.1.1 =
-*Updated - 15/05/2019*
-
-* Feature - FooEvents Tickets listing added (WCFM Ultmate require)
-* Enhance - Vendor coupon "Include Products" option added
-* Enhance - "Add Article" disable due to "low space" capability checking added 
-* Enhance - Admin customers list store filter added
-* Enhance - Admin vendors list store orders section quick reference link added
-* Enhance - Vednor profile additional information added under Admin Vendor Manager -> Profile Section
-* Enhance - Multi-input block remove confirmation added
-* Enhance - Listings "Mark Fill" inside WCFM dashboard option added
-* Enhance - Article new category add option added
-* Tweak   - Booking date range filter work with booking start date, previously worked with booking created date
-* Tweak   - Appointment date range filter work with appointment start date, previously worked with booking created date
-* Fixed   - Product page custom field display issue resolved
 
 = 6.1.0 =
 *Updated - 07/05/2019*
@@ -2039,8 +1956,9 @@ Fully compatible with all major multi-vendor marketplace plugins - <strong>WC Ma
 
 == Upgrade Notice ==
 
-= 6.1.6 =
-* Enhance - YiTH Quick Product view "Catalog Mode" compatibility added
-* Enhance - Flatsome Quick Product view "Catalog Mode" compatibility added
-* Fixed   - WCFM Installer load issue resolved
-* Fixed   - WCFM Marketplace vendors able to see other vendors' order note issue resolved 
+= 6.1.0 =
+* Feature - Category wise Attributes mapping option added (WCFM Ultimate require) - [Documentation](https://docs.wclovers.com/attributes/#category-attributes-mapping)
+* Enhance - WCFM Marketplace vendor's sales report "tax" added 
+* Fixed   - Product Manager Catalog visibility twice display issue resolved
+* Fixed   - Dashboard vendors list page not loading issue resolved
+* Fixed   - WCFM Marketplace store list search result verified badge not display issue resolved 

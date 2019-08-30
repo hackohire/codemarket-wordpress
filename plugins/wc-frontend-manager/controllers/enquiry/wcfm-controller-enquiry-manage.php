@@ -42,9 +42,6 @@ class WCFM_Enquiry_Manage_Controller {
 				echo '{"status": false, "message": "' . $custom_validation_error . '"}';
 				die;
 			}
-			
-			// Handle Attachment Uploads - 6.1.5
-			$attchments = wcfm_handle_file_upload();
 	  	
 	  	$inquiry_reply           = apply_filters( 'wcfm_editor_content_before_save', stripslashes( html_entity_decode( $_POST['inquiry_reply'], ENT_QUOTES, 'UTF-8' ) ) );
 	  	$inquiry_reply_by        = apply_filters( 'wcfm_message_author', get_current_user_id() );
@@ -55,7 +52,6 @@ class WCFM_Enquiry_Manage_Controller {
 	  	$inquiry_customer_name   = $wcfm_enquiry_reply_form_data['inquiry_customer_name'];
 	  	$inquiry_customer_email  = $wcfm_enquiry_reply_form_data['inquiry_customer_email'];
 	  	
-	  	$inquiry_reply           = apply_filters( 'wcfm_enquiry_reply_content', $inquiry_reply, $inquiry_product_id, $inquiry_vendor_id, $inquiry_customer_id );
 	  	$inquiry_reply           = esc_sql( $inquiry_reply );
 	  	
 	  	$current_time = date( 'Y-m-d H:i:s', current_time( 'timestamp', 0 ) );
@@ -70,28 +66,6 @@ class WCFM_Enquiry_Manage_Controller {
 													
 			$wpdb->query($wcfm_create_enquiry_reply);
 			$enquiry_reply_id = $wpdb->insert_id;
-			
-			// Attachment Update
-			$mail_attachments = array();
-			if( !empty( $attchments ) && isset( $attchments['inquiry_attachments'] ) && !empty( $attchments['inquiry_attachments'] ) ) {
-				$inquiry_attachments = maybe_serialize( $attchments['inquiry_attachments'] );
-				$wcfm_enuquiry_meta_update = "INSERT into {$wpdb->prefix}wcfm_enquiries_response_meta 
-																		(`enquiry_response_id`, `key`, `value`)
-																		VALUES
-																		({$enquiry_reply_id}, 'attchment', '{$inquiry_attachments}' )";
-				$wpdb->query($wcfm_enuquiry_meta_update);
-				
-				// Prepare Mail Attachment
-				$upload_dir = wp_upload_dir();
-				foreach( $attchments['inquiry_attachments'] as $inquiry_attachment ) {
-					if (empty($upload_dir['error'])) {
-						$upload_base = trailingslashit( $upload_dir['basedir'] );
-						$upload_url = trailingslashit( $upload_dir['baseurl'] );
-						$inquiry_attachment = str_replace( $upload_url, $upload_base, $inquiry_attachment );
-						$mail_attachments[] = $inquiry_attachment;
-					}
-				}
-			}
 		
 			if(isset($wcfm_enquiry_reply_form_data['inquiry_stick']) && !empty($wcfm_enquiry_reply_form_data['inquiry_stick'])) {
 				$replied = date('Y-m-d H:i:s');
@@ -149,12 +123,9 @@ class WCFM_Enquiry_Manage_Controller {
 																 sprintf( __( 'We recently have a enquiry from you regarding "%s". Please check below for our input for the same: ', 'wc-frontend-manager' ), '{enquiry_for}' ) .
 																 '<br/><br/><strong><i>' . 
 																 '"{inquiry_reply}"' . 
-																 '</i></strong><br/><br/>';
-																 
-				if( $inquiry_customer_id )											 
-					$reply_mail_body    .=   sprintf( __( 'Check more details %shere%s.', 'wc-frontend-manager' ), '<a href="{enquiry_url}">', '</a>' );
-				
-				$reply_mail_body    .=   '<br /><br/>' . __( 'Thank You', 'wc-frontend-manager' ) .
+																 '</i></strong><br/><br/>' .
+																 sprintf( __( 'Check more details %shere%s.', 'wc-frontend-manager' ), '<a href="{enquiry_url}">', '</a>' ) .
+																 '<br /><br/>' . __( 'Thank You', 'wc-frontend-manager' ) .
 																 '<br/><br/>';
 																 
 				$subject = str_replace( '{site_name}', get_bloginfo( 'name' ), $reply_mail_subject );
@@ -183,9 +154,9 @@ class WCFM_Enquiry_Manage_Controller {
 				}
 				
 				if( $vendor_reply ) {
-					wp_mail( $inquiry_customer_email, $subject, $message, $headers, $mail_attachments );
+					wp_mail( $inquiry_customer_email, $subject, $message, $headers );
 				} else {
-					wp_mail( $inquiry_customer_email, $subject, $message, '', $mail_attachments );
+					wp_mail( $inquiry_customer_email, $subject, $message );
 				}
 			}
 			
@@ -227,10 +198,7 @@ class WCFM_My_Account_Enquiry_Manage_Controller {
 	  
 	  if(isset($_POST['inquiry_reply']) && !empty($_POST['inquiry_reply'])) {
 	  	
-	  	// Handle Attachment Uploads - 6.1.5
-			$attchments = wcfm_handle_file_upload();
-	  	
-	  	$inquiry_reply           = apply_filters( 'wcfm_editor_content_before_save', stripslashes( html_entity_decode( $_POST['inquiry_reply'], ENT_QUOTES, 'UTF-8' ) ) );
+	  	$inquiry_reply           =  apply_filters( 'wcfm_editor_content_before_save', stripslashes( html_entity_decode( $_POST['inquiry_reply'], ENT_QUOTES, 'UTF-8' ) ) );
 	  	$inquiry_reply_by        = apply_filters( 'wcfm_message_author', get_current_user_id() );
 	  	$inquiry_id              = absint( $wcfm_enquiry_reply_form_data['inquiry_id'] );
 	  	$inquiry_product_id      = absint( $wcfm_enquiry_reply_form_data['inquiry_product_id'] );
@@ -239,7 +207,6 @@ class WCFM_My_Account_Enquiry_Manage_Controller {
 	  	$inquiry_customer_name   = $wcfm_enquiry_reply_form_data['inquiry_customer_name'];
 	  	$inquiry_customer_email  = $wcfm_enquiry_reply_form_data['inquiry_customer_email'];
 	  	
-	  	$inquiry_reply           = apply_filters( 'wcfm_enquiry_reply_content', $inquiry_reply, $inquiry_product_id, $inquiry_vendor_id, $inquiry_customer_id );
 	  	$inquiry_reply           = esc_sql( $inquiry_reply );
 	  	
 	  	$current_time = date( 'Y-m-d H:i:s', current_time( 'timestamp', 0 ) );
@@ -257,28 +224,6 @@ class WCFM_My_Account_Enquiry_Manage_Controller {
 													
 			$wpdb->query($wcfm_create_enquiry_reply);
 			$enquiry_reply_id = $wpdb->insert_id;
-			
-			// Attachment Update
-			$mail_attachments = array();
-			if( !empty( $attchments ) && isset( $attchments['inquiry_attachments'] ) && !empty( $attchments['inquiry_attachments'] ) ) {
-				$inquiry_attachments = maybe_serialize( $attchments['inquiry_attachments'] );
-				$wcfm_enuquiry_meta_update = "INSERT into {$wpdb->prefix}wcfm_enquiries_response_meta 
-																		(`enquiry_response_id`, `key`, `value`)
-																		VALUES
-																		({$enquiry_reply_id}, 'attchment', '{$inquiry_attachments}' )";
-				$wpdb->query($wcfm_enuquiry_meta_update);
-				
-				// Prepare Mail Attachment
-				$upload_dir = wp_upload_dir();
-				foreach( $attchments['inquiry_attachments'] as $inquiry_attachment ) {
-					if (empty($upload_dir['error'])) {
-						$upload_base = trailingslashit( $upload_dir['basedir'] );
-						$upload_url = trailingslashit( $upload_dir['baseurl'] );
-						$inquiry_attachment = str_replace( $upload_url, $upload_base, $inquiry_attachment );
-						$mail_attachments[] = $inquiry_attachment;
-					}
-				}
-			}
 			
 			// Send mail to admin
 			$enquiry_for =  __( 'Store', 'wc-frontend-manager' );
@@ -312,9 +257,9 @@ class WCFM_My_Account_Enquiry_Manage_Controller {
 			$message = apply_filters( 'wcfm_email_content_wrapper', $message, __( 'Reply to Inquiry', 'wc-frontend-manager' ) . ' #' . sprintf( '%06u', $inquiry_id ) );
 			
 			if( apply_filters( 'wcfm_is_allow_enquiry_by_customer', true ) ) {
-			  wp_mail( $mail_to, $subject, $message, $headers, $mail_attachments );
+			  wp_mail( $mail_to, $subject, $message, $headers );
 			} else {
-				wp_mail( $mail_to, $subject, $message, '', $mail_attachments );
+				wp_mail( $mail_to, $subject, $message );
 			}
 			
 			// Direct message
@@ -329,9 +274,9 @@ class WCFM_My_Account_Enquiry_Manage_Controller {
 						$vendor_email = $WCFM->wcfm_vendor_support->wcfm_get_vendor_email_by_vendor( $inquiry_vendor_id );
 						if( $vendor_email ) {
 							if( apply_filters( 'wcfm_is_allow_enquiry_by_customer', true ) ) {
-								wp_mail( $vendor_email, $subject, $message, $headers, $mail_attachments );
+								wp_mail( $vendor_email, $subject, $message, $headers );
 							} else {
-								wp_mail( $vendor_email, $subject, $message, $headers, $mail_attachments );
+								wp_mail( $vendor_email, $subject, $message, $headers );
 							}
 						}
 						

@@ -122,22 +122,23 @@ class WCFM_Capability {
 		add_filter( 'wcfm_is_allow_show_social', array( &$this, 'wcfmcap_is_allow_show_social' ), 500 );
 		add_filter( 'wcfm_is_allow_show_follower', array( &$this, 'wcfmcap_is_allow_show_follower' ), 500 );
 		add_filter( 'wcfm_is_allow_show_policy', array( &$this, 'wcfmcap_is_allow_show_policy' ), 500 );
+		add_filter( 'wcfm_is_allow_policy_settings', array( &$this, 'wcfmcap_is_allow_show_policy' ), 500 );
 		add_filter( 'wcfm_is_allow_customer_support', array( &$this, 'wcfmcap_is_allow_customer_support' ), 500 );
+		add_filter( 'wcfm_is_allow_customer_support_settings', array( &$this, 'wcfmcap_is_allow_customer_support' ), 500 );
 		add_filter( 'wcfm_is_allow_refund_requests', array( &$this, 'wcfmcap_is_allow_refund_requests' ), 500 );
 		add_filter( 'wcfm_is_allow_reviews', array( &$this, 'wcfmcap_is_allow_reviews' ), 500 );
 		add_filter( 'wcfm_is_allow_manage_review', array( &$this, 'wcfmcap_is_allow_manage_review' ), 500 );
 		add_filter( 'wcfm_is_allow_ledger', array( &$this, 'wcfmcap_is_allow_ledger_book' ), 500 );
 		add_filter( 'wcfm_is_allow_store_hours', array( &$this, 'wcfmcap_is_allow_store_hours' ), 500 );
-		add_filter( 'wcfmmp_is_allow_single_product_multivendor', array( &$this, 'wcfmcap_is_allow_product_multivendor' ), 500 );
 		add_filter( 'wcfmmp_is_allow_video_banner', array( &$this, 'wcfmcap_is_allow_video_banner' ), 500 );
 		add_filter( 'wcfmmp_is_allow_slider_banner', array( &$this, 'wcfmcap_is_allow_slider_banner' ), 500 );
 		
 		// Settings Inside
-		add_filter( 'wcfm_is_allow_store_name', array( &$this, 'wcfmcap_is_allow_store_name' ), 500 );
-		add_filter( 'wcfm_is_allow_store_phone', array( &$this, 'wcfmcap_is_allow_store_phone' ), 500 );
 		add_filter( 'wcfm_is_allow_store_logo', array( &$this, 'wcfmcap_is_allow_store_logo' ), 500 );
 		add_filter( 'wcfm_is_allow_store_banner', array( &$this, 'wcfmcap_is_allow_store_banner' ), 500 );
+		add_filter( 'wcfm_is_allow_store_name', array( &$this, 'wcfmcap_is_allow_store_name' ), 500 );
 		add_filter( 'wcfm_is_allow_store_description', array( &$this, 'wcfmcap_is_allow_store_description' ), 500 );
+		add_filter( 'wcfm_is_allow_store_phone', array( &$this, 'wcfmcap_is_allow_store_phone' ), 500 );
 		add_filter( 'wcfm_is_allow_store_address', array( &$this, 'wcfmcap_is_allow_store_address' ), 500 );
 		
 		// Withdrwal Permission
@@ -157,9 +158,6 @@ class WCFM_Capability {
 		// Custom Caps
 		add_filter( 'wcfm_is_allow_commission_manage', array( &$this, 'wcfmcap_is_allow_commission_manage' ), 500 );
 		add_filter( 'wcfm_allow_wp_admin_view', array( &$this, 'wcfmcap_is_allow_wp_admin_view' ), 500 );
-		
-		// Integrations
-		add_filter( 'wcfm_is_allow_wc_product_scheduler', array( &$this, 'wcfmcap_is_allow_wc_product_scheduler' ), 500 );
 	}
 	
 	// WCFM wcfmcap Menu
@@ -1001,13 +999,6 @@ class WCFM_Capability {
   	return $allow;
   }
   
-  // Product Multivendor
-  function wcfmcap_is_allow_product_multivendor( $allow ) {
-  	$product_multivendor = ( isset( $this->wcfm_capability_options['product_multivendor'] ) ) ? $this->wcfm_capability_options['product_multivendor'] : 'no';
-  	if( $product_multivendor == 'yes' ) return false;
-  	return $allow;
-  }
-  
   // Allow Video Banner
   function wcfmcap_is_allow_video_banner( $allow ) {
   	$video_banner = ( isset( $this->wcfm_capability_options['video_banner'] ) ) ? $this->wcfm_capability_options['video_banner'] : 'no';
@@ -1125,12 +1116,4 @@ class WCFM_Capability {
   	if( $vnd_wpadmin == 'yes' ) return false;
   	return $allow;
   }
-  
-  // WooCommerce Product Schedular
-  function wcfmcap_is_allow_wc_product_scheduler( $allow ) {
-  	$wc_product_scheduler = ( isset( $this->wcfm_capability_options['wc_product_scheduler'] ) ) ? $this->wcfm_capability_options['wc_product_scheduler'] : 'no';
-  	if( $wc_product_scheduler == 'yes' ) return false;
-  	return $allow;
-  }
-  
 }

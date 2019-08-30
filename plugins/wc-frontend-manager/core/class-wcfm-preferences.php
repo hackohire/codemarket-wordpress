@@ -54,9 +54,6 @@ class WCFM_Preferences {
 		// WCFM Marketplace Product Multivendor
 		add_filter( 'wcfm_is_pref_product_multivendor', array( &$this, 'wcfmpref_product_multivendor' ), 750 );
 		
-		// Add to My Store Catalog
-		add_filter( 'wcfm_is_pref_sell_items_catalog', array( &$this, 'wcfmpref_product_multivendor_sell_items_catalog' ), 750 );
-		
 		add_filter( 'wcfm_is_pref_ledger_book', array( &$this, 'wcfmpref_ledger_book' ), 750 );
 		add_filter( 'wcfm_is_pref_media_manager', array( &$this, 'wcfmpref_media_manager' ), 750 );
 		
@@ -139,8 +136,8 @@ class WCFM_Preferences {
   
   // Enquiry Button
   function wcfmpref_enquiry_button( $is_pref ) {
-  	//$is_enquiry_button_disabled = ( isset( $this->wcfm_options['enquiry_button_disabled'] ) ) ? $this->wcfm_options['enquiry_button_disabled'] : 'no';
-  	//if( $is_enquiry_button_disabled == 'yes' ) $is_pref = false;
+  	$is_enquiry_button_disabled = ( isset( $this->wcfm_options['enquiry_button_disabled'] ) ) ? $this->wcfm_options['enquiry_button_disabled'] : 'no';
+  	if( $is_enquiry_button_disabled == 'yes' ) $is_pref = false;
   	return $is_pref;
   }
   
@@ -232,16 +229,8 @@ class WCFM_Preferences {
   // WCFM Marketplace Product Multivendor
   function wcfmpref_product_multivendor( $is_pref ) {
   	global $WCFM, $WCFMmp;
-  	$product_mulivendor = isset( $WCFMmp->wcfmmp_marketplace_options['product_mulivendor'] ) ? 'no' : 'yes';
-  	$product_mulivendor = ( isset( $this->wcfm_module_options['product_mulivendor'] ) ) ? $this->wcfm_module_options['product_mulivendor'] : $product_mulivendor;
-  	if( $product_mulivendor == 'yes' ) $is_pref = false;
-  	return $is_pref;
-  }
-  
-  // WCFM Marketplace Product Multivendor Add to My Store Catalog
-  function wcfmpref_product_multivendor_sell_items_catalog( $is_pref ) {
-  	$sell_items_catalog = ( isset( $this->wcfm_module_options['sell_items_catalog'] ) ) ? $this->wcfm_module_options['sell_items_catalog'] : 'no';
-  	if( $sell_items_catalog == 'yes' ) $is_pref = false;
+  	$product_mulivendor = isset( $WCFMmp->wcfmmp_marketplace_options['product_mulivendor'] ) ? $WCFMmp->wcfmmp_marketplace_options['product_mulivendor'] : 'yes';
+  	if( $product_mulivendor == 'no' ) $is_pref = false;
   	return $is_pref;
   }
   

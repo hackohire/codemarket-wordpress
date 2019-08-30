@@ -155,7 +155,7 @@ class WCFM_Non_Ajax {
 												window.chartColors.orange,
 												window.chartColors.purple,
 										],
-										label: '<?php _e( "Top Selling Products", "wc-frontend-manager" ); ?>'
+										label: 'Top Selling Products'
 								}],
 								labels: top_sellers_array.labels
 						},

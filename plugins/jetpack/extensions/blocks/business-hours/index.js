@@ -8,7 +8,6 @@ import { Path } from '@wordpress/components';
  * Internal dependencies
  */
 import './editor.scss';
-import './style.scss';
 import BusinessHours from './edit';
 import renderMaterialIcon from '../../shared/render-material-icon';
 

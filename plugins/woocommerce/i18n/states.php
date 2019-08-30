@@ -1077,7 +1077,6 @@ return array(
 		'VS' => __( 'Vaslui', 'woocommerce' ),
 		'VN' => __( 'Vrancea', 'woocommerce' ),
 	),
-	'RS' => array(),
 	'SG' => array(),
 	'SK' => array(),
 	'SI' => array(),

@@ -31,12 +31,6 @@ class WCFM_Coupons_Manage_Controller {
 	  	$is_publish = false;
 	  	$current_user_id = apply_filters( 'wcfm_current_vendor_id', get_current_user_id() );
 	  	
-	  	if( function_exists( 'wcfmmp_get_store_url' ) && !wcfm_is_vendor() ) {
-	  		if( isset( $wcfm_coupon_manager_form_data['wcfm_vendor'] ) && !empty( $wcfm_coupon_manager_form_data['wcfm_vendor'] ) ) {
-	  			$current_user_id = absint( $wcfm_coupon_manager_form_data['wcfm_vendor'] );
-	  		}
-	  	}
-	  	
 	  	// WCFM form custom validation filter
 	  	$custom_validation_results = apply_filters( 'wcfm_form_custom_validation', $wcfm_coupon_manager_form_data, 'coupon_manage' );
 	  	if(isset($custom_validation_results['has_error']) && !empty($custom_validation_results['has_error'])) {
@@ -76,7 +70,7 @@ class WCFM_Coupons_Manage_Controller {
 			} else { // For Update
 				$is_update = true;
 				$new_coupon['ID'] = $wcfm_coupon_manager_form_data['coupon_id'];
-				if( wcfm_is_marketplace() && ( !function_exists( 'wcfmmp_get_store_url' ) || wcfm_is_vendor() ) ) unset( $new_coupon['post_author'] );
+				if( wcfm_is_marketplace() ) unset( $new_coupon['post_author'] );
 				unset( $new_coupon['post_name'] );
 				if( ($coupon_status != 'draft') && (get_post_status( $new_coupon['ID'] ) == 'publish') ) {
 					if( apply_filters( 'wcfm_is_allow_publish_live_coupons', true ) ) {
@@ -115,7 +109,7 @@ class WCFM_Coupons_Manage_Controller {
 					'free_shipping'               => isset( $wcfm_coupon_manager_form_data['free_shipping'] ),
 				), $new_coupon_id, $wcfm_coupon_manager_form_data ) );
 				
-				if( wcfm_is_marketplace() && !WCFM_Dependencies::wcfmu_plugin_active_check() && ( wcfm_is_vendor() || ( function_exists( 'wcfmmp_get_store_url' ) && !wcfm_is_vendor() ) ) ) {
+				if( wcfm_is_vendor() && !WCFM_Dependencies::wcfmu_plugin_active_check() ) {
 					$products_objs = $WCFM->wcfm_vendor_support->wcfm_get_products_by_vendor( $current_user_id, 'publish' );
 					$product_ids = array( 0 => -1 );
 					if( !empty($products_objs) ) {
@@ -124,7 +118,6 @@ class WCFM_Coupons_Manage_Controller {
 							$product_ids[] = esc_attr( $products_obj->ID );
 						}
 					}
-					update_post_meta( $new_coupon_id, '_wcfm_vendor_coupon_all_product', 'yes' );
 					$wc_coupon->set_props( array( 'product_ids' => $product_ids ) );
 				}
 				
@@ -146,7 +139,7 @@ class WCFM_Coupons_Manage_Controller {
 					if( get_post_status( $new_coupon_id ) == 'draft' ) {
 						if(!$has_error) echo '{"status": true, "message": "' . $wcfm_coupon_messages['coupon_saved'] . '", "id": "' . $new_coupon_id . '"}';
 					} else {
-						if(!$has_error) echo '{"status": true, "message": "' . $wcfm_coupon_messages['coupon_published'] . '", "redirect": "' . get_wcfm_coupons_manage_url($new_coupon_id) . '"}';
+						if(!$has_error) echo '{"status": true, "message": "' . $wcfm_coupon_messages['coupon_published'] . '", "redirect": "' . get_wcfm_coupons_url() . '"}';
 					}
 				}
 				die;

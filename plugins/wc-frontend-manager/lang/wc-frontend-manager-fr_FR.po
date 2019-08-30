@@ -2,12 +2,12 @@
 # This file is distributed under the same license as the Plugins - WooCommerce Frontend Manager &#8211; WC Marketplace, WC Vendors &amp; Dokan with Bookings &amp; Listings - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-06-05 14:44+0100\n"
+"PO-Revision-Date: 2018-11-09 09:55+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Loco https://localise.biz/\n"
 "Language: fr_FR\n"
 "Project-Id-Version: Plugins - WooCommerce Frontend Manager &#8211; WC "
 "Marketplace, WC Vendors &amp; Dokan with Bookings &amp; Listings - Stable "
@@ -15,7 +15,7 @@ msgstr ""
 "POT-Creation-Date: 2018-10-30 21:42+0000\n"
 "Last-Translator: admin <aa@wcl.com>\n"
 "Language-Team: French (France)\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: "
 
 #: core/class-wcfm-admin.php:100
 msgid ""
@@ -39,7 +39,7 @@ msgstr ""
 
 #: core/class-wcfm-admin.php:112
 msgid "WCFM U >>"
-msgstr "WCFM U >>"
+msgstr "WCFM U > >"
 
 #: core/class-wcfm-admin.php:148
 msgid ""
@@ -97,7 +97,7 @@ msgstr ""
 
 #: core/class-wcfm-admin.php:205
 msgid "WCFM GS >>"
-msgstr "WCFM GS >>"
+msgstr "WCFM GS > >"
 
 #: core/class-wcfm-admin.php:225 core/class-wcfm-admin.php:265
 #: core/class-wcfm-admin.php:266 core/class-wcfm-admin.php:267
@@ -106,7 +106,7 @@ msgstr "Vue WCFM"
 
 #: core/class-wcfm-admin.php:284 core/class-wcfm-admin.php:294
 #: core/class-wcfm-admin.php:296 core/class-wcfm-admin.php:298
-#: core/class-wcfm-wcvendors.php:196
+#: core/class-wcfm-wcvendors.php:196 core/class-wcfm-wcvendors.php:196
 msgid "WCFM Home"
 msgstr "Accueil WCFM"
 
@@ -116,7 +116,7 @@ msgid ""
 "WCFM totally works from front-end ... check dashboard settings %shere >>%s"
 msgstr ""
 "WCFM fonctionne totalement en front-end... Vérifiez les paramètres du "
-"tableau de bord %sici >> %s"
+"tableau de bord %sici > > %s"
 
 #: core/class-wcfm-admin.php:346
 msgid "This page should contain \"[wc_frontend_manager]\" short code"
@@ -138,15 +138,15 @@ msgstr "Un nouveau %s <b>%s</b> ajouté au magasin par <b>%s</b>"
 #: core/class-wcfm-ajax.php:430 core/class-wcfm-ajax.php:464
 #, php-format
 msgid "<b>%s</b> order status updated to <b>%s</b> by <b>%s</b>"
-msgstr "<b>%s</b>Etat de la commande passé à <b>%s</b> by <b>%s</b>"
+msgstr ""
 
 #: core/class-wcfm-ajax.php:473
 msgid "Order status updated."
-msgstr "Etat de la commande Mis à jour"
+msgstr ""
 
 #: core/class-wcfm-ajax.php:645
 msgid "Email Verification Code"
-msgstr "Code de vérification email"
+msgstr ""
 
 #: core/class-wcfm-ajax.php:646 core/class-wcfm-notification.php:364
 #: controllers/enquiry/wcfm-controller-enquiry-manage.php:101
@@ -158,7 +158,7 @@ msgstr "Bonjour"
 #: core/class-wcfm-ajax.php:648
 #, php-format
 msgid "Here is your email verification code - <b>%s</b>"
-msgstr "Votre code de vérification - <b>%s</b>"
+msgstr ""
 
 #: core/class-wcfm-ajax.php:649 core/class-wcfm-notification.php:371
 #: controllers/enquiry/wcfm-controller-enquiry-manage.php:108
@@ -169,21 +169,21 @@ msgstr "Merci"
 
 #: core/class-wcfm-ajax.php:659
 msgid "Email verification code send to your email."
-msgstr "Votre code de vérificatin est envoyé par email"
+msgstr ""
 
 #: core/class-wcfm-ajax.php:661
 msgid "Email verification not working right now, please try after sometime."
-msgstr "La vérification n'a pas fonctionné, réessayez plus tard"
+msgstr ""
 
 #: core/class-wcfm-ajax.php:685
 #, php-format
 msgid "<b>%s</b> (Store: <b>%s</b>) has been disabled."
-msgstr "<b>%s</b> (Boutique: <b>%s</b>) a été désactivée"
+msgstr ""
 
 #: core/class-wcfm-ajax.php:689
 #, php-format
 msgid "Your Store: <b>%s</b> has been disabled."
-msgstr "Votre boutique: <b>%s</b> a été désactivée"
+msgstr ""
 
 #: core/class-wcfm-ajax.php:692
 msgid "Vendor successfully disabled."
@@ -485,8 +485,9 @@ msgstr "Gestionnaire des demandes de renseignements"
 
 #: core/class-wcfm-enquiry.php:287 core/class-wcfm-enquiry.php:301
 #: views/enquiry/wcfm-view-my-account-enquiry-manage.php:68
+#: views/enquiry/wcfm-view-my-account-enquiry-manage.php:68
 msgid "Inquiries"
-msgstr "Questions"
+msgstr ""
 
 #: core/class-wcfm-enquiry.php:309 core/class-wcfm-enquiry.php:417
 #: helpers/class-wcfm-install.php:317
@@ -495,10 +496,11 @@ msgstr "Questions"
 #: views/enquiry/wcfm-view-enquiry-form.php:36
 #: views/enquiry/wcfm-view-my-account-enquiry-manage.php:65
 msgid "Inquiry"
-msgstr "Question"
+msgstr ""
 
 #: core/class-wcfm-enquiry.php:366 core/class-wcfm-enquiry.php:450
 #: helpers/wcfm-core-functions.php:1109
+#: views/enquiry/wcfm-view-enquiry-manage.php:75
 #: views/enquiry/wcfm-view-enquiry-manage.php:75
 #: views/enquiry/wcfm-view-enquiry-tab.php:52
 #: views/enquiry/wcfm-view-enquiry.php:43
@@ -692,43 +694,43 @@ msgstr ""
 
 #: core/class-wcfm-library.php:1051
 msgid "Day"
-msgstr "Jour"
+msgstr ""
 
 #: core/class-wcfm-library.php:1052
 msgid "Days"
-msgstr "Jours"
+msgstr ""
 
 #: core/class-wcfm-library.php:1053
 msgid "Close"
-msgstr "Fermer"
+msgstr ""
 
 #: core/class-wcfm-library.php:1054
 msgid "mo"
-msgstr "Lun"
+msgstr ""
 
 #: core/class-wcfm-library.php:1055
 msgid "tu"
-msgstr "Mar"
+msgstr ""
 
 #: core/class-wcfm-library.php:1056
 msgid "we"
-msgstr "Mer"
+msgstr ""
 
 #: core/class-wcfm-library.php:1057
 msgid "th"
-msgstr "Jeu"
+msgstr ""
 
 #: core/class-wcfm-library.php:1058
 msgid "fr"
-msgstr "Ven"
+msgstr ""
 
 #: core/class-wcfm-library.php:1059
 msgid "sa"
-msgstr "Sam"
+msgstr ""
 
 #: core/class-wcfm-library.php:1060
 msgid "su"
-msgstr "Dim"
+msgstr ""
 
 #: core/class-wcfm-library.php:1061
 msgid "W"
@@ -736,51 +738,51 @@ msgstr ""
 
 #: core/class-wcfm-library.php:1063
 msgid "january"
-msgstr "Janvier"
+msgstr ""
 
 #: core/class-wcfm-library.php:1064
 msgid "february"
-msgstr "Février"
+msgstr ""
 
 #: core/class-wcfm-library.php:1065
 msgid "march"
-msgstr "Mars"
+msgstr ""
 
 #: core/class-wcfm-library.php:1066
 msgid "april"
-msgstr "Avril"
+msgstr ""
 
 #: core/class-wcfm-library.php:1067
 msgid "may"
-msgstr "Mai"
+msgstr ""
 
 #: core/class-wcfm-library.php:1068
 msgid "june"
-msgstr "Juin"
+msgstr ""
 
 #: core/class-wcfm-library.php:1069
 msgid "july"
-msgstr "Juillet"
+msgstr ""
 
 #: core/class-wcfm-library.php:1070
 msgid "august"
-msgstr "Août"
+msgstr ""
 
 #: core/class-wcfm-library.php:1071
 msgid "september"
-msgstr "Septembre"
+msgstr ""
 
 #: core/class-wcfm-library.php:1072
 msgid "october"
-msgstr "Octobre"
+msgstr ""
 
 #: core/class-wcfm-library.php:1073
 msgid "november"
-msgstr "Novembre"
+msgstr ""
 
 #: core/class-wcfm-library.php:1074
 msgid "december"
-msgstr "Décembre"
+msgstr ""
 
 #: core/class-wcfm-library.php:1076
 msgid "Shortcuts"
@@ -1063,19 +1065,19 @@ msgstr "Politique de remboursement"
 #: core/class-wcfm-policy.php:82 core/class-wcfm-policy.php:194
 #: core/class-wcfm-policy.php:338
 msgid "Cancellation/Return/Exchange Policy"
-msgstr "Retour/Annulation/Echange"
+msgstr ""
 
 #: core/class-wcfm-policy.php:323
 msgid "Product Policies"
-msgstr "CGV Produit"
+msgstr ""
 
 #: core/class-wcfm-policy.php:420
 msgid "Store Polices"
-msgstr "CGV Boutique"
+msgstr ""
 
 #: core/class-wcfm-policy.php:597
 msgid "Cancellation / Return / Exchange Policy"
-msgstr "Retour / Annulation / Echange"
+msgstr ""
 
 #: core/class-wcfm-query.php:116
 msgid "Products Dashboard"
@@ -1098,11 +1100,13 @@ msgstr "Responsable des stocks produits"
 #: views/products/wcfm-view-products-export.php:58
 #: views/products/wcfm-view-products.php:90
 #: views/products/wcfm-view-products.php:95
+#: views/products/wcfm-view-products.php:95
 msgid "Products Import"
 msgstr "Import des produits"
 
 #: core/class-wcfm-query.php:130
 #: views/products/wcfm-view-products-export.php:33
+#: views/products/wcfm-view-products.php:82
 #: views/products/wcfm-view-products.php:82
 msgid "Products Export"
 msgstr "Exportation de produits"
@@ -1168,6 +1172,7 @@ msgstr "Profil"
 
 #: core/class-wcfm-query.php:172 core/class-wcfm.php:740
 #: views/wcfm-view-header-panels.php:73
+#: views/knowledgebase/wcfm-view-knowledgebase-manage.php:66
 #: views/knowledgebase/wcfm-view-knowledgebase-manage.php:66
 #: views/knowledgebase/wcfm-view-knowledgebase.php:26
 msgid "Knowledgebase"
@@ -1327,6 +1332,8 @@ msgstr "Date personnalisée"
 #: views/messages/wcfm-view-messages.php:137
 #: views/products-manager/wcfm-view-products-manage-tabs.php:245
 #: views/products-manager/wcfm-view-products-manage.php:472
+#: views/products-manager/wcfm-view-products-manage.php:472
+#: views/products-popup/wcfm-view-product-popup.php:131
 #: views/products-popup/wcfm-view-product-popup.php:131
 #: views/settings/wcfm-view-dokan-settings.php:490
 #: views/settings/wcfm-view-wcfmmarketplace-settings.php:770
@@ -1545,8 +1552,8 @@ msgstr ""
 #: core/class-wcfm-vendor-support.php:2275
 #, php-format
 msgid ""
-"Manage vendor backend access from <a href=\"%s\">WCfM Capability Controller</"
-"a>."
+"Manage vendor backend access from <a href=\"%s\">WCfM Capability "
+"Controller</a>."
 msgstr ""
 "Gérez l'accès au back-end du fournisseur à partir du <a href=\"%s\"> "
 "contrôleur de capacité WCfM </a>."
@@ -2359,8 +2366,8 @@ msgstr "Nous avons fini !"
 #: helpers/class-wcfm-setup-bak.php:983 helpers/class-wcfm-setup.php:1011
 msgid ""
 "Your marketplace is ready. It's time to experience the things more Easily "
-"and Peacefully. Also you will be a bit more relax than ever before, have "
-"fun!!"
+"and Peacefully. Also you will be a bit more relax than ever before, have fun!"
+"!"
 msgstr ""
 
 #: helpers/class-wcfm-setup-bak.php:985 helpers/class-wcfm-setup.php:1013
@@ -2424,24 +2431,24 @@ msgstr ""
 #: helpers/wcfm-core-functions.php:6
 #, php-format
 msgid ""
-"WooCommerce Frontend Manager is inactive. The WooCommerce plugin must be "
-"active for the WooCommerce Frontend Manager to work. Please install & "
-"activate WooCommerce"
+"%sWooCommerce Frontend Manager is inactive.%s The %sWooCommerce plugin%s "
+"must be active for the WooCommerce Frontend Manager to work. Please "
+"%sinstall & activate WooCommerce%s"
 msgstr ""
-"WooCommerce frontend Manager est inactif. le WooCommerce plugin doit être "
-"actif pour que le gestionnaire frontend WooCommerce fonctionne. Veuillez "
-"sinstaller et activer WooCommerce"
+"%sWooCommerce frontend Manager est inactif. %s le %sWooCommerce plugin %s "
+"doit être actif pour que le gestionnaire frontend WooCommerce fonctionne. "
+"Veuillez sinstaller et activer WooCommerce %s"
 
 #: helpers/wcfm-core-functions.php:16
 #, php-format
 msgid ""
-"Opps ..!!! You are using WC %s. WCFM works only with WC 3.0+. PLease upgrade "
-"your WooCommerce version now to make your life easier and peaceful by using "
-"WCFM."
+"%sOpps ..!!!%s You are using %sWC %s. WCFM works only with %sWC 3.0+%s. "
+"PLease upgrade your WooCommerce version now to make your life easier and "
+"peaceful by using WCFM."
 msgstr ""
-"Opps..!!! vous utilisez WC %s. WCFM fonctionne uniquement avec WC 3.0 +. "
-"Veuillez mettre à jour votre version WooCommerce maintenant pour rendre "
-"votre vie plus facile et paisible en utilisant WCFM."
+"%sOpps..!!!  %s vous utilisez% WC %s. WCFM fonctionne uniquement avec% WC 3."
+"0 + %s. Veuillez mettre à jour votre version WooCommerce maintenant pour "
+"rendre votre vie plus facile et paisible en utilisant WCFM."
 
 #: helpers/wcfm-core-functions.php:44
 #, php-format
@@ -3306,7 +3313,7 @@ msgstr "Editer client"
 
 #: controllers/enquiry/wcfm-controller-enquiry-manage.php:100
 msgid "Reply for your Inquiry"
-msgstr "Réponse à votre question"
+msgstr ""
 
 #: controllers/enquiry/wcfm-controller-enquiry-manage.php:103
 #, php-format
@@ -3321,20 +3328,18 @@ msgstr ""
 #: controllers/enquiry/wcfm-controller-enquiry-manage.php:183
 #: controllers/enquiry/wcfm-controller-enquiry-manage.php:194
 msgid "Inquiry Reply"
-msgstr "Réponse à la question"
+msgstr ""
 
 #: controllers/enquiry/wcfm-controller-enquiry-manage.php:124
 #, php-format
 msgid "New reply posted for Inquiry <b>%s</b>"
-msgstr "Nouvelle réponse à la question <b>%s</b>"
+msgstr ""
 
 #: controllers/enquiry/wcfm-controller-enquiry-manage.php:186
 msgid ""
 "You have received reply for your \"{product_title}\" inquiry. Please check "
 "below for the details: "
 msgstr ""
-"Vous avez recu une réponse à votre question sur le produit "
-"\"{product_title}\". Ci-dessous pour les déails: "
 
 #: controllers/enquiry/wcfm-controller-enquiry-manage.php:190
 msgid "Check more details here"
@@ -3342,13 +3347,13 @@ msgstr "Répondre dans votre espace vendeur :"
 
 #: controllers/enquiry/wcfm-controller-enquiry-manage.php:202
 msgid "Reply to Inquiry"
-msgstr "Réponse à une question"
+msgstr ""
 
 #: controllers/enquiry/wcfm-controller-enquiry-manage.php:207
 #: controllers/enquiry/wcfm-controller-enquiry-manage.php:221
 #, php-format
 msgid "New reply received for Inquiry <b>%s</b>"
-msgstr "Nouvelle réponse à la question <b>%s</b>"
+msgstr ""
 
 #: controllers/enquiry/wcfm-controller-enquiry-tab.php:46
 msgid "Captcha failed, please try again."
@@ -3372,18 +3377,18 @@ msgstr "Nouvelle demande de renseignement pour"
 #: controllers/enquiry/wcfm-controller-enquiry-tab.php:138
 #, php-format
 msgid "You have a recent enquiry for %s."
-msgstr "Vous avez une demande d'information pour %s."
+msgstr ""
 
 #: controllers/enquiry/wcfm-controller-enquiry-tab.php:143
 #, php-format
 msgid "To respond to this Enquiry, please %sClick Here%s"
-msgstr "Pour répondre à cette demande, %sCliquez ici%s"
+msgstr ""
 
 #: controllers/enquiry/wcfm-controller-enquiry-tab.php:168
 #: controllers/enquiry/wcfm-controller-enquiry-tab.php:186
 #, php-format
 msgid "New Inquiry <b>%s</b> received for <b>%s</b>"
-msgstr "Nouvelle question <b>%s</b> recu pour <b>%s</b>"
+msgstr ""
 
 #: controllers/listings/wcfm-controller-listings.php:26
 #: views/listings/wcfm-view-listings.php:39
@@ -3402,7 +3407,7 @@ msgstr "Prévisualiser"
 
 #: controllers/listings/wcfm-controller-listings.php:28
 msgid "Pending Payment"
-msgstr "Paiement en attente"
+msgstr ""
 
 #: controllers/messages/wcfm-controller-message-sent.php:47
 msgid "Message sent successfully"
@@ -3620,7 +3625,7 @@ msgstr "Badge sauvegardé avec succès"
 #: controllers/vendors/wcfm-controller-vendors-new.php:159
 #: views/settings/wcfm-view-wcfmmarketplace-settings.php:245
 msgid "Store Name"
-msgstr "Nom de boutique"
+msgstr ""
 
 #: controllers/vendors/wcfm-controller-vendors-new.php:161
 msgid "Click here ..."
@@ -4072,10 +4077,16 @@ msgstr "TItre de l’annonce "
 
 #: views/articles/wcfm-view-articles-manage.php:167
 #: views/articles/wcfm-view-articles-manage.php:262
+#: views/articles/wcfm-view-articles-manage.php:262
+#: views/knowledgebase/wcfm-view-knowledgebase-manage.php:89
 #: views/knowledgebase/wcfm-view-knowledgebase-manage.php:89
 #: views/products-manager/wcfm-view-products-manage.php:482
+#: views/products-manager/wcfm-view-products-manage.php:482
+#: views/products-manager/wcfm-view-products-manage.php:604
 #: views/products-manager/wcfm-view-products-manage.php:604
 #: views/products-popup/wcfm-view-product-popup.php:149
+#: views/products-popup/wcfm-view-product-popup.php:149
+#: views/settings/wcfm-view-settings.php:512
 #: views/settings/wcfm-view-settings.php:512
 msgid "Categories"
 msgstr "Catégories"
@@ -4958,8 +4969,8 @@ msgstr "commission ces 7 derniers jours"
 #, php-format
 msgid "<strong>%s item</strong>"
 msgid_plural "<strong>%s items</strong>"
-msgstr[0] "<strong>%s objet</strong>"
-msgstr[1] "<strong>%s objets</strong>"
+msgstr[0] "<strong>%d objet</strong>"
+msgstr[1] "<strong>%d objets</strong>"
 
 #: views/dashboard/wcfm-view-dashboard.php:155
 msgid "sold in last 7 days"
@@ -5339,6 +5350,7 @@ msgstr "Créer un nouveau sujet"
 
 #: views/notice/wcfm-view-notice-manage.php:58
 #: views/notice/wcfm-view-notice-view.php:57
+#: views/notice/wcfm-view-notice-view.php:57
 #: views/notice/wcfm-view-notices.php:33
 msgid "Topics"
 msgstr "Sujets"
@@ -5525,6 +5537,7 @@ msgid "Add New Product"
 msgstr "Ajouter un nouveau produit"
 
 #: views/products/wcfm-view-products.php:104
+#: views/products/wcfm-view-products.php:109
 #: views/products/wcfm-view-products.php:109
 msgid "Stock Manager"
 msgstr "Gestionnaire des stocks"
@@ -5734,7 +5747,7 @@ msgstr "Variations"
 #, php-format
 msgid ""
 "Before you can add a variation you need to add some variation attributes on "
-"the Attributes tab. Learn more"
+"the Attributes tab. %sLearn more%s"
 msgstr ""
 "Avant de pouvoir ajouter une variation vous devez ajouter des variations "
 "d&rsquo;attributs dans l&rsquo;onglet <strong>Attributs</strong>."
@@ -6178,9 +6191,14 @@ msgstr "Identique à la facture"
 
 #: views/profile/wcfm-view-profile.php:321
 #: views/settings/wcfm-view-dokan-settings.php:141
+#: views/settings/wcfm-view-dokan-settings.php:141
+#: views/settings/wcfm-view-wcfmmarketplace-settings.php:192
 #: views/settings/wcfm-view-wcfmmarketplace-settings.php:192
 #: views/settings/wcfm-view-wcmarketplace-settings.php:148
+#: views/settings/wcfm-view-wcmarketplace-settings.php:148
 #: views/settings/wcfm-view-wcpvendors-settings.php:85
+#: views/settings/wcfm-view-wcpvendors-settings.php:85
+#: views/settings/wcfm-view-wcvendors-settings.php:132
 #: views/settings/wcfm-view-wcvendors-settings.php:132
 msgid "Social"
 msgstr "Social"
@@ -6413,6 +6431,7 @@ msgid "Routing Number"
 msgstr "Numéro de routage"
 
 #: views/settings/wcfm-view-dokan-settings.php:280
+#: views/settings/wcfm-view-wcfmmarketplace-settings.php:405
 #: views/settings/wcfm-view-wcfmmarketplace-settings.php:405
 #: views/withdrawal/wcfm/wcfm-view-transaction-details.php:81
 msgid "IBAN"
@@ -7347,10 +7366,10 @@ msgstr ""
 #: views/settings/wcfm-view-wcvendors-settings.php:404
 msgid "From Address"
 msgstr ""
-"Les courriels automatiques, comme par exemple les informations "
-"d'inscription, seront envoyés depuis cette adresse. Utilisez une adresse se "
-"terminant par le domaine de votre site pour éviter que ces courriels ne "
-"soient signalés comme des pourriels (spam)."
+"Les courriels automatiques, comme par exemple les informations d'inscription,"
+" seront envoyés depuis cette adresse. Utilisez une adresse se terminant par "
+"le domaine de votre site pour éviter que ces courriels ne soient signalés "
+"comme des pourriels (spam)."
 
 #: views/vendors/wcfm-view-vendors-manage.php:145
 #: views/vendors/wcfm-view-vendors-new.php:62
@@ -7361,14 +7380,14 @@ msgstr "Gérer le fournisseur"
 #: views/vendors/wcfm-view-vendors-new.php:75
 #: views/vendors/wcfm-view-vendors.php:28
 msgid "Add New Vendor"
-msgstr "Ajouter Vendeur"
+msgstr ""
 
 #: views/vendors/wcfm-view-vendors-manage.php:241
 #, php-format
-msgid "%s product"
+msgid "<strong>%s product</strong><br />"
 msgid_plural "<strong>%s products</strong><br />"
 msgstr[0] "<strong> %s produit </strong> < br/>"
-msgstr[1] "<strong> %s produits </strong> < br/>"
+msgstr[1] ""
 
 #: views/vendors/wcfm-view-vendors-manage.php:243
 msgid "total products posted"
@@ -7400,11 +7419,11 @@ msgstr "Envoyer le message"
 
 #: views/vendors/wcfm-view-vendors-new.php:69
 msgid "Edit Vendor"
-msgstr "Modifier Vendeur"
+msgstr ""
 
 #: views/vendors/wcfm-view-vendors-new.php:69
 msgid "Add Vendor"
-msgstr "Ajouter Vendeur"
+msgstr ""
 
 #: views/vendors/wcfm-view-vendors.php:25
 msgid "Vendors Listing"
@@ -7412,7 +7431,7 @@ msgstr "Liste des vendeurs"
 
 #: views/vendors/wcfm-view-vendors.php:29
 msgid "Pending Vendors"
-msgstr "Vendeur en attente"
+msgstr ""
 
 #: views/wc_bookings/wcfm-view-wcbookings-dashboard.php:52
 #: views/wc_bookings/wcfm-view-wcbookings.php:70
@@ -7458,11 +7477,11 @@ msgstr "Numéro de commande :"
 
 #: views/wc_bookings/wcfm-view-wcbookings-details.php:130
 msgid "Confirm"
-msgstr "Coonfirmer"
+msgstr ""
 
 #: views/wc_bookings/wcfm-view-wcbookings-details.php:131
 msgid "Decline"
-msgstr "Refuser"
+msgstr ""
 
 #: views/wc_bookings/wcfm-view-wcbookings-details.php:167
 msgid "Resource:"
@@ -7500,66 +7519,66 @@ msgstr "Une erreur s'est produite; veuillez réessayer plus tard"
 
 #: controllers/withdrawal/dokan/wcfm-controller-withdrawal-requests-actions.php:57
 msgid "Seller account balance not enough for this withdrawal."
-msgstr "Pas assez sur le compte du vendeur pour ce retrait"
+msgstr ""
 
 #: controllers/withdrawal/dokan/wcfm-controller-withdrawal-requests-actions.php:106
 msgid "Withdrawal Requests successfully approved."
-msgstr "Demande de retrait approuvée"
+msgstr ""
 
 #: controllers/withdrawal/dokan/wcfm-controller-withdrawal-requests-actions.php:108
 msgid "No withdrawals selected for approve."
-msgstr "Aucune sélection"
+msgstr ""
 
 #: controllers/withdrawal/dokan/wcfm-controller-withdrawal-requests-actions.php:170
 #: controllers/withdrawal/wcfm/wcfm-controller-withdrawal-requests-actions.php:109
 msgid "Withdrawal Requests successfully cancelled."
-msgstr "Retrait annulé"
+msgstr ""
 
 #: controllers/withdrawal/dokan/wcfm-controller-withdrawal-requests-actions.php:172
 #: controllers/withdrawal/wcfm/wcfm-controller-withdrawal-requests-actions.php:111
 msgid "No withdrawals selected for cancel."
-msgstr "Aucune seléction pour l'annulation"
+msgstr ""
 
 #: controllers/withdrawal/dokan/wcfm-controller-withdrawal-requests.php:77
 msgid "Withdrawal Approved"
-msgstr "Retrait Approuvé"
+msgstr ""
 
 #: controllers/withdrawal/dokan/wcfm-controller-withdrawal-requests.php:79
 #: controllers/withdrawal/wcfm/wcfm-controller-payments.php:100
 #: controllers/withdrawal/wcfm/wcfm-controller-withdrawal-requests.php:95
 #: controllers/withdrawal/wcfm/wcfm-controller-withdrawal-reverse.php:91
 msgid "Withdrawal Cancelled"
-msgstr "Retrait Annulé"
+msgstr ""
 
 #: controllers/withdrawal/dokan/wcfm-controller-withdrawal-requests.php:81
 msgid "Withdrawal Pending"
-msgstr "Retrait Approuvé"
+msgstr ""
 
 #: controllers/withdrawal/wcfm/wcfm-controller-payments.php:98
 #: controllers/withdrawal/wcfm/wcfm-controller-withdrawal-requests.php:93
 #: controllers/withdrawal/wcfm/wcfm-controller-withdrawal-reverse.php:89
 msgid "Withdrawal Completed"
-msgstr "Retrait effectué"
+msgstr ""
 
 #: controllers/withdrawal/wcfm/wcfm-controller-payments.php:102
 #: controllers/withdrawal/wcfm/wcfm-controller-withdrawal-requests.php:97
 msgid "Withdrawal Processing"
-msgstr "Retrait en cours"
+msgstr ""
 
 #: controllers/withdrawal/wcfm/wcfm-controller-payments.php:153
 #: views/withdrawal/wcfm/wcfm-view-transaction-details.php:162
 msgid "Auto Withdrawal"
-msgstr "Retrait automatique"
+msgstr ""
 
 #: controllers/withdrawal/wcfm/wcfm-controller-payments.php:156
 #: views/withdrawal/wcfm/wcfm-view-transaction-details.php:165
 msgid "By Payment Type"
-msgstr "Par Type de Paiement"
+msgstr ""
 
 #: controllers/withdrawal/wcfm/wcfm-controller-payments.php:158
 #: views/withdrawal/wcfm/wcfm-view-transaction-details.php:167
 msgid "By Request"
-msgstr "Par demande"
+msgstr ""
 
 #: controllers/withdrawal/wcfm/wcfm-controller-payments.php:160
 msgid "Split Pay"
@@ -7567,24 +7586,24 @@ msgstr ""
 
 #: controllers/withdrawal/wcfm/wcfm-controller-withdrawal-request.php:83
 msgid "Withdrawal Request successfully processed."
-msgstr "Demande de Retrait effectuée"
+msgstr ""
 
 #: controllers/withdrawal/wcfm/wcfm-controller-withdrawal-request.php:85
 msgid "Withdrawal Request processing failed, please contact Store Admin."
-msgstr "Demande de Retrait en echec, contactez l'administrateur"
+msgstr ""
 
 #: controllers/withdrawal/wcfm/wcfm-controller-withdrawal-request.php:90
 #, php-format
 msgid "Vendor <b>%s</b> has placed a Withdrawal Request #%s."
-msgstr "Le vendeur <b>%s</b> a emis une demande de retrait #%s"
+msgstr ""
 
 #: controllers/withdrawal/wcfm/wcfm-controller-withdrawal-request.php:92
 msgid "Your withdrawal request successfully sent."
-msgstr "Votre demande de retrait a été envoyée"
+msgstr ""
 
 #: controllers/withdrawal/wcfm/wcfm-controller-withdrawal-request.php:97
 msgid "Your withdrawal request failed, please try after sometime."
-msgstr "Echec de votre demande de retrait, réessayez plus tard "
+msgstr ""
 
 #: controllers/withdrawal/wcfm/wcfm-controller-withdrawal-request.php:100
 msgid "No payment method selected for withdrawal commission"
@@ -7596,7 +7615,7 @@ msgstr "Aucune Commission sélectionnée pour le retrait"
 
 #: controllers/withdrawal/wcfm/wcfm-controller-withdrawal-requests-actions.php:59
 msgid "Withdrawal Requests successfully processed."
-msgstr "Succès de la Demande de retrait "
+msgstr ""
 
 #: controllers/withdrawal/wcfm/wcfm-controller-withdrawal-requests-actions.php:61
 msgid "Withdrawal Requests partially processed, check log for more details."
@@ -7604,15 +7623,15 @@ msgstr ""
 
 #: controllers/withdrawal/wcfm/wcfm-controller-withdrawal-requests-actions.php:64
 msgid "No withdrawals selected for approval."
-msgstr "Aucun Retrait sélectionné"
+msgstr ""
 
 #: controllers/withdrawal/wcfm/wcfm-controller-withdrawal-reverse-actions.php:46
 msgid "Reverse Withdrawal Requests successfully approveed."
-msgstr "Demande de Retrait inverse approuvée"
+msgstr ""
 
 #: controllers/withdrawal/wcfm/wcfm-controller-withdrawal-reverse-actions.php:48
 msgid "No reverse withdrawals selected for approve."
-msgstr "Aucun Retrait inverse sélectionné"
+msgstr ""
 
 #: controllers/withdrawal/wcmp/wcfm-controller-payments.php:84
 msgid "Direct Bank Transfer"
@@ -7677,13 +7696,13 @@ msgstr ""
 #: views/withdrawal/wcfm/wcfm-view-withdrawal-reverse.php:64
 #: views/withdrawal/wcfm/wcfm-view-withdrawal-reverse.php:76
 msgid "Requests"
-msgstr "Demandes"
+msgstr ""
 
 #: views/withdrawal/dokan/wcfm-view-withdrawal-requests.php:80
 #: views/withdrawal/wcfm/wcfm-view-withdrawal-requests.php:106
 #: views/withdrawal/wcfm/wcfm-view-withdrawal-reverse.php:96
 msgid "Note to Vendor(s)"
-msgstr "Note au(x) Vendeur(s) "
+msgstr ""
 
 #: views/withdrawal/dokan/wcfm-view-withdrawal-requests.php:87
 #: views/withdrawal/wcfm/wcfm-view-withdrawal-requests.php:113
@@ -7694,7 +7713,7 @@ msgstr "Annuler"
 #: views/withdrawal/wcfm/wcfm-view-withdrawal-requests.php:114
 #: views/withdrawal/wcfm/wcfm-view-withdrawal-reverse.php:103
 msgid "Approve"
-msgstr "Approuvé"
+msgstr ""
 
 #: views/withdrawal/dokan/wcfm-view-withdrawal.php:64
 #: views/withdrawal/wcfm/wcfm-view-transaction-details.php:113
@@ -7724,7 +7743,7 @@ msgstr "Transc.ID"
 #: views/withdrawal/wcfm/wcfm-view-withdrawal-requests.php:70
 #: views/withdrawal/wcfm/wcfm-view-withdrawal-requests.php:86
 msgid "Order IDs"
-msgstr "Commande IDs"
+msgstr ""
 
 #: views/withdrawal/wcfm/wcfm-view-payments.php:71
 #: views/withdrawal/wcfm/wcfm-view-payments.php:85
@@ -7751,7 +7770,7 @@ msgstr ""
 
 #: views/withdrawal/wcfm/wcfm-view-transaction-details.php:84
 msgid "Payment Received Email"
-msgstr "Message pour Paiement Recu"
+msgstr ""
 
 #: views/withdrawal/wcfm/wcfm-view-transaction-details.php:85
 #: views/withdrawal/wcfm/wcfm-view-transaction-details.php:88
@@ -7781,7 +7800,7 @@ msgstr ""
 
 #: views/withdrawal/wcfm/wcfm-view-transaction-details.php:136
 msgid "Order ID(s)"
-msgstr "Commande ID(s)"
+msgstr ""
 
 #: views/withdrawal/wcfm/wcfm-view-transaction-details.php:137
 msgid "Commission ID(s)"
@@ -7797,23 +7816,23 @@ msgstr ""
 
 #: views/withdrawal/wcfm/wcfm-view-transaction-details.php:175
 msgid "Total Amount"
-msgstr "Montant Total"
+msgstr ""
 
 #: views/withdrawal/wcfm/wcfm-view-transaction-details.php:179
 msgid "Withdrawal Charges"
-msgstr "Frais pour Retrait"
+msgstr ""
 
 #: views/withdrawal/wcfm/wcfm-view-transaction-details.php:183
 msgid "Paid Amount"
-msgstr "Montant Payé"
+msgstr ""
 
 #: views/withdrawal/wcfm/wcfm-view-transaction-details.php:183
 msgid "Payable Amount"
-msgstr "Montant Payable"
+msgstr ""
 
 #: views/withdrawal/wcfm/wcfm-view-withdrawal-requests.php:35
 msgid "Reverse Withdrawal"
-msgstr "Retenu / retrait inverse"
+msgstr ""
 
 #: views/withdrawal/wcfm/wcfm-view-withdrawal-requests.php:67
 #: views/withdrawal/wcfm/wcfm-view-withdrawal-requests.php:83
@@ -7822,11 +7841,11 @@ msgstr ""
 
 #: views/withdrawal/wcfm/wcfm-view-withdrawal-reverse.php:25
 msgid "Reverse Withdrawals"
-msgstr "Retrait inverse"
+msgstr ""
 
 #: views/withdrawal/wcfm/wcfm-view-withdrawal-reverse.php:32
 msgid "Reverse Withdrawal Requests"
-msgstr "Demandes de retrait inverse"
+msgstr ""
 
 #: views/withdrawal/wcfm/wcfm-view-withdrawal-reverse.php:65
 #: views/withdrawal/wcfm/wcfm-view-withdrawal-reverse.php:77
@@ -7844,7 +7863,7 @@ msgstr ""
 
 #: views/withdrawal/wcfm/wcfm-view-withdrawal.php:42
 msgid "Pending Withdrawals: "
-msgstr "Retraits en attente"
+msgstr ""
 
 #: views/withdrawal/wcfm/wcfm-view-withdrawal.php:46
 #: views/withdrawal/wcmp/wcfm-view-withdrawal.php:36
@@ -7853,7 +7872,7 @@ msgstr "Seuil pour les remboursements: "
 
 #: views/withdrawal/wcfm/wcfm-view-withdrawal.php:51
 msgid "Reverse pay balance "
-msgstr "Balance de retenus"
+msgstr ""
 
 #: views/withdrawal/wcfm/wcfm-view-withdrawal.php:52
 #, php-format
@@ -7863,7 +7882,7 @@ msgstr ""
 #: views/withdrawal/wcfm/wcfm-view-withdrawal.php:73
 #: views/withdrawal/wcfm/wcfm-view-withdrawal.php:86
 msgid "Select all to send request"
-msgstr "Selectionnez tous pour envoyer une demande"
+msgstr ""
 
 #: views/withdrawal/wcfm/wcfm-view-withdrawal.php:76
 #: views/withdrawal/wcfm/wcfm-view-withdrawal.php:89

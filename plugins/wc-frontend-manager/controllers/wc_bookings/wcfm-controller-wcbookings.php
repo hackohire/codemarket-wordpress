@@ -49,27 +49,30 @@ class WCFM_WCBookings_Controller {
 						);
 		if( isset( $_POST['search'] ) && !empty( $_POST['search']['value'] )) $args['s'] = $_POST['search']['value'];
 		if( isset( $_POST['booking_status'] ) && !empty( $_POST['booking_status'] ) ) { $args['post_status'] = $_POST['booking_status']; }
+		if( isset( $_POST['booking_filter'] ) && !empty( $_POST['booking_filter'] ) ) { $args['meta_key'] = '_booking_product_id'; $args['meta_value'] = $_POST['booking_filter']; }
 		
 		if ( ! empty( $_POST['filter_date_form'] ) && ! empty( $_POST['filter_date_to'] ) ) {
-			$args['meta_query'] = array(
-				                      array(
-																			'relation' => 'AND',
-																			array(
-																				'key'   => '_booking_start',
-																				'value' => esc_sql( date( 'Ymd000000',  strtotime( $_POST['filter_date_form'] ) ) ),
-																				'compare' => '>=',
-																			),
-																			array(
-																				'key' => '_booking_start',
-																				'value' => esc_sql( date( 'Ymd000000',  strtotime( $_POST['filter_date_to'] . ' +1 day' ) ) ),
-																				'compare' => '<=',
-																			)
-																		)
+			$fyear  = absint( substr( $_POST['filter_date_form'], 0, 4 ) );
+			$fmonth = absint( substr( $_POST['filter_date_form'], 5, 2 ) );
+			$fday   = absint( substr( $_POST['filter_date_form'], 8, 2 ) );
+			
+			$tyear  = absint( substr( $_POST['filter_date_to'], 0, 4 ) );
+			$tmonth = absint( substr( $_POST['filter_date_to'], 5, 2 ) );
+			$tday   = absint( substr( $_POST['filter_date_to'], 8, 2 ) );
+			
+			$args['date_query'] = array(
+																	'after' => array(
+																										'year'  => $fyear,
+																										'month' => $fmonth,
+																										'day'   => $fday,
+																									),
+																	'before' => array(
+																										'year'  => $tyear,
+																										'month' => $tmonth,
+																										'day'   => $tday,
+																									),
+																	'inclusive' => true
 															);
-		}
-		
-		if( isset( $_POST['booking_filter'] ) && !empty( $_POST['booking_filter'] ) ) { 
-		  $args['meta_key'] = '_booking_product_id'; $args['meta_value'] = $_POST['booking_filter']; 
 		}
 		
 		$args = apply_filters( 'wcfm_bookings_args', $args );
@@ -201,7 +204,7 @@ class WCFM_WCBookings_Controller {
 				
 				// Action
 				$actions = '';
-				if ( current_user_can( 'manage_bookings_settings' ) || current_user_can( 'manage_bookings' ) ) {
+				if ( current_user_can( 'manage_bookings' ) ) {
 					if( WCFM_Dependencies::wcfmu_plugin_active_check() ) {
 					 if ( in_array( $the_booking->get_status(), array( 'pending-confirmation' ) ) ) $actions = '<a class="wcfm_booking_mark_confirm wcfm-action-icon" href="#" data-bookingid="' . $wcfm_bookings_single->ID . '"><span class="wcfmfa fa-check-circle text_tip" data-tip="' . esc_attr__( 'Mark as Confirmed', 'wc-frontend-manager' ) . '"></span></a>';
 					}

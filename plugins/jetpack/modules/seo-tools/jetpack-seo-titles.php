@@ -156,7 +156,7 @@ class Jetpack_SEO_Titles {
 			return 'front_page';
 		}
 
-		if ( is_category() || is_tag() || is_tax() ) {
+		if ( is_category() || is_tag() ) {
 			return 'groups';
 		}
 

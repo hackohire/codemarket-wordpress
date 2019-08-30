@@ -21,7 +21,6 @@ $vendor_admin_id = 0;
 $user_name = '&ndash;';
 $user_email = '&ndash;';
 $store_phone = '';
-$store_address = '&ndash;';
 $first_name = '&ndash;';
 $last_name = '&ndash;';
 $vendor_store = '&ndash;';
@@ -105,15 +104,13 @@ if( isset( $wp->query_vars['wcfm-vendors-manage'] ) && !empty( $wp->query_vars['
 			$first_name = $vendor_user->first_name;
 			$last_name = $vendor_user->last_name;
 		} elseif( $marketplece == 'wcfmmarketplace' ) {
-  		$vendor_user   = get_userdata( $vendor_id );
-  		//$vendor_data   = get_user_meta( $vendor_id, 'wcfmmp_profile_settings', true );
-  		$store_user    = wcfmmp_get_store( $vendor_id );
-			$user_name     = $vendor_user->user_login;
-			$user_email    = $store_user->get_email();
-			$first_name    = $vendor_user->first_name;
-			$last_name     = $vendor_user->last_name;
-			$store_phone   = $store_user->get_phone();
-			$store_address = '<a style="color:#4dbd74;" href="https://maps.google.com/?q=' . rawurlencode( $store_user->get_address_string() ) . '&z=16" target="_blank">' . $store_user->get_address_string() . '</a>'; 
+  		$vendor_user = get_userdata( $vendor_id );
+  		$vendor_data = get_user_meta( $vendor_id, 'wcfmmp_profile_settings', true );
+			$user_name   = $vendor_user->user_login;
+			$user_email  = $vendor_user->user_email; //isset( $vendor_data['show_email'] ) ? esc_attr( $vendor_data['show_email'] ) : 'no';
+			$first_name  = $vendor_user->first_name;
+			$last_name   = $vendor_user->last_name;
+			$store_phone = isset( $vendor_data['phone'] ) ? esc_attr( $vendor_data['phone'] ) : '';
 		}
 		
 		if( !$first_name ) $first_name = '&ndash;';
@@ -295,16 +292,15 @@ if( $WCFM->is_marketplace && ( $WCFM->is_marketplace == 'wcfmmarketplace' ) && a
 						do_action( 'before_wcfm_vendor_vendor_fields_general', $vendor_admin_id, $vendor_id );
 					
 						if( $vendor_id ) {
-							$WCFM->wcfm_fields->wcfm_generate_form_field(  array( "user_name" => array( 'label' => __('Store Admin', 'wc-frontend-manager') , 'type' => 'text', 'attributes' => array( 'readonly' => true ), 'class' => 'wcfm-text wcfm_ele ', 'label_class' => 'wcfm_ele wcfm_title', 'value' => $first_name . ' ' . $last_name . ' (' . $user_name . ')' ) ) );
+							$WCFM->wcfm_fields->wcfm_generate_form_field(  array( "user_name" => array( 'label' => __('Store Admin', 'wc-frontend-manager') , 'type' => 'text', 'attributes' => array( 'readonly' => true ), 'class' => 'wcfm-text wcfm_ele ', 'label_class' => 'wcfm_ele wcfm_title', 'value' => $user_name ) ) );
 						} else {
-							$WCFM->wcfm_fields->wcfm_generate_form_field(  array( "user_name" => array( 'label' => __('Store Admin', 'wc-frontend-manager') , 'type' => 'text', 'class' => 'wcfm-text wcfm_ele ', 'label_class' => 'wcfm_ele wcfm_title', 'value' => $first_name . ' ' . $last_name . ' (' . $user_name . ')' ) ) );
+							$WCFM->wcfm_fields->wcfm_generate_form_field(  array( "user_name" => array( 'label' => __('Store Admin', 'wc-frontend-manager') , 'type' => 'text', 'class' => 'wcfm-text wcfm_ele ', 'label_class' => 'wcfm_ele wcfm_title', 'value' => $user_name ) ) );
 						}
 						$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_vendor_vendor_fields_general', array(  
 																																					"user_email" => array( 'label' => __('Email', 'wc-frontend-manager') , 'type' => 'text', 'attributes' => array( 'readonly' => true ), 'class' => 'wcfm-text wcfm_ele ', 'label_class' => 'wcfm_ele wcfm_title', 'value' => $user_email),
 																																					"store_phone" => array( 'label' => __('Phone', 'wc-frontend-manager') , 'type' => 'text', 'attributes' => array( 'readonly' => true ), 'class' => 'wcfm-text wcfm_ele ', 'label_class' => 'wcfm_ele wcfm_title', 'value' => $store_phone),
-																																					"store_address" => array( 'label' => __('Address', 'wc-frontend-manager') , 'type' => 'html', 'attributes' => array( 'style' => 'display:inline-block;' ), 'class' => 'wcfm-text wcfm_ele ', 'label_class' => 'wcfm_ele wcfm_title', 'value' => $store_address),
-																																					//"first_name" => array( 'label' => __('First Name', 'wc-frontend-manager') , 'type' => 'text', 'attributes' => array( 'readonly' => true ), 'class' => 'wcfm-text wcfm_ele ', 'label_class' => 'wcfm_ele wcfm_title', 'value' => $first_name),
-																																					//"last_name" => array( 'label' => __('Last Name', 'wc-frontend-manager') , 'type' => 'text', 'attributes' => array( 'readonly' => true ), 'class' => 'wcfm-text wcfm_ele ', 'label_class' => 'wcfm_ele wcfm_title', 'value' => $last_name),
+																																					"first_name" => array( 'label' => __('First Name', 'wc-frontend-manager') , 'type' => 'text', 'attributes' => array( 'readonly' => true ), 'class' => 'wcfm-text wcfm_ele ', 'label_class' => 'wcfm_ele wcfm_title', 'value' => $first_name),
+																																					"last_name" => array( 'label' => __('Last Name', 'wc-frontend-manager') , 'type' => 'text', 'attributes' => array( 'readonly' => true ), 'class' => 'wcfm-text wcfm_ele ', 'label_class' => 'wcfm_ele wcfm_title', 'value' => $last_name),
 																																					//"paypal_email" => array( 'label' => __('PayPal Email', 'wc-frontend-manager') , 'type' => 'text', 'attributes' => array( 'readonly' => true ), 'class' => 'wcfm-text wcfm_ele ', 'label_class' => 'wcfm_ele wcfm_title', 'value' => $vendor_paypal),
 																																					"vendor_id" => array('type' => 'hidden', 'value' => $vendor_id )
 																																			 ), $vendor_admin_id, $vendor_id ) );
@@ -342,7 +338,7 @@ if( $WCFM->is_marketplace && ( $WCFM->is_marketplace == 'wcfmmarketplace' ) && a
 			
 			
 			<!-- collapsible -->
-			<div class="page_collapsible vendor_manage_profile" id="wcfm_vendor_manage_form_profile_head"><label class="wcfmfa fa-user-alt"></label><?php _e( 'Profile', 'wc-frontend-manager' ); ?><span></span></div>
+			<div class="page_collapsible vendor_manage_profile" id="wcfm_vendor_manage_form_profile_head"><label class="wcfmfa fa-user-alt"></label><?php _e( 'Profile Update', 'wc-frontend-manager' ); ?><span></span></div>
 			<div class="wcfm-container">
 				<div id="wcfm_vendor_manage_form_profile_expander" class="wcfm-content">
 					<form id="wcfm_vendor_manage_profile_form" class="wcfm">
@@ -355,7 +351,6 @@ if( $WCFM->is_marketplace && ( $WCFM->is_marketplace == 'wcfmmarketplace' ) && a
 																																																		), $vendor_admin_id, $vendor_id ) );
 						
 						do_action( 'after_wcfm_vendors_manage_form', $vendor_admin_id, $vendor_id );
-						
 						if( !WCFM_Dependencies::wcfmgs_plugin_active_check() ) {
 							if( apply_filters( 'is_wcfmgs_inactive_notice_show', true ) ) {
 								wcfmgs_feature_help_text_show( __( 'Vendors Capability', 'wc-frontend-manager' ) );

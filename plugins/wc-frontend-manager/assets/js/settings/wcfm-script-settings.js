@@ -178,20 +178,6 @@ jQuery(document).ready( function($) {
 		 });
 	});
 	
-	// Store Hours
-	if( $("#wcfm_default_store_hours_off_days").length > 0 ) {
-		$("#wcfm_default_store_hours_off_days").select2();
-		
-		$("#wcfm_default_store_hours_off_days").change(function() {
-			$('.wcfm_store_hours_fields').removeClass('wcfm_ele_hide');
-			if( $(this).val() ) {
-				$.each($(this).val(), function( $i, $off_days ) {
-					$('.wcfm_store_hours_fields_'+$off_days).addClass('wcfm_ele_hide');	
-				});
-			}
-		}).change();
-	}
-	
 	// Save Settings
 	$('#wcfm_settings_save_button').click(function(event) {
 	  event.preventDefault();

@@ -195,14 +195,6 @@ input.custom_field_is_group_name {
 .store_address p.wcfm_full_title {
 	width: 65%;
 }
-#wcfm-main-contentainer .store_address .multi_input_block {
-	margin-left: 3%;
-	width: 97% !important;
-}
-#wcfm-main-contentainer .store_address p.instructions {
-	margin-left: 3%;
-	width: 97% !important;
-}
 
 #wcfm_settings_form_shipping_expander .wcfm_half_ele, #wcfm_settings_form_marketplace_expander .wcfm_half_ele {
 	width: 29% !important;
@@ -221,18 +213,13 @@ input.custom_field_is_group_name {
 	width: 100%;
 }
 
-/** WCFM Marketplace Store Hours Start **/ 
-#wcfm-main-contentainer .wcfm_store_hours_fields {
-	margin-bottom: 25px;
-}
 #wcfm-main-contentainer .wcfm_store_hours_label {
   width: 15% !important;
 }
 #wcfm-main-contentainer .wcfm_store_hours_field {
-	width: 20% !important;
-	margin-right: 5% !important;
+	width: 35% !important;
+	margin-left: 5%;
 }
-/** WCFM Marketplace Store Hours End **/
 
 .module_head_message {
 	font-weight: 500;

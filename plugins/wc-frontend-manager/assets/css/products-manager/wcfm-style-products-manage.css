@@ -272,7 +272,7 @@ ul.product_taxonomy_checklist li {
 }
 
 .product_tags_ele, .wcfm_fetch_tag_cloud, .wcfm_add_new_category, .wcfm_new_tax_ele, .wcfm_new_parent_taxt_ele, .wcfm_add_new_taxonomy_form, .catalog_visibility_ele {
-	max-width: 214px !important;
+	max-width: 214px;
 	margin: auto !important;
   display: block !important;
   margin-bottom: 15px !important;
@@ -362,12 +362,6 @@ p.wcfm_page_options_desc {
 	margin-right: 0% !important;
 	display: block;
 	width: 100% !important
-}
-
-p.instructions {
-	display: block !important;
-	margin-top: -25px !important;
-	margin-bottom: 15px !important;
 }
 
 /*... One product multiple vendor ..............................................*/

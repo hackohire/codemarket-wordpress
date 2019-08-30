@@ -49,9 +49,6 @@ class WCFM_Admin {
 		 */
 		add_action( 'admin_init', array( &$this, 'wcfm_settings_init' ) );
 		
-		// Add a post display state for special WCFM pages.
-		add_filter( 'display_post_states', array( $this, 'wcfm_add_display_post_states' ), 10, 2 );
-		
 		/**
 		 * Register our wcfm_options_page to the admin_menu action hook
 		 */
@@ -93,7 +90,7 @@ class WCFM_Admin {
 		}
 
 		// check if it has already been dismissed
-		$offer_key = 'wcfm_wcfmu_inactive04062019';
+		$offer_key = 'wcfm_wcfmu_inactive05052019';
 		$hide_notice = get_option( $offer_key . '_tracking_notice', 'no' );
 
 		if ( 'hide' == $hide_notice ) {
@@ -147,7 +144,7 @@ class WCFM_Admin {
 		}
 
 		// check if it has already been dismissed
-		$offer_key = 'wcfm_wcfmvm_inactive04062019';
+		$offer_key = 'wcfm_wcfmvm_inactive07072019';
 		$hide_notice = get_option( $offer_key . '_tracking_notice', 'no' );
 
 		if ( 'hide' == $hide_notice ) {
@@ -192,7 +189,7 @@ class WCFM_Admin {
 		}
 
 		// check if it has already been dismissed
-		$offer_key = 'wcfm_wcfmgs_inactive04062019';
+		$offer_key = 'wcfm_wcfmgs_inactive05052019';
 		$hide_notice = get_option( $offer_key . '_tracking_notice', 'no' );
 
 		if ( 'hide' == $hide_notice ) {
@@ -503,33 +500,6 @@ class WCFM_Admin {
 		</div>
 		<?php
   }
-  
-  /**
-	 * Add a post display state for special WCFM pages in the page list table.
-	 *
-	 * @param array   $post_states An array of post display states.
-	 * @param WP_Post $post        The current post object.
-	 */
-	public function wcfm_add_display_post_states( $post_states, $post ) {
-		
-		if ( absint( get_option('wc_frontend_manager_page_id') ) === $post->ID ) {
-			$post_states['wcfm_page_for_store_manager'] = __( 'Vendor Dashboard Page', 'wc-frontend-manager' );
-		}
-
-		if ( absint( get_option('wcfm_vendor_membership_page_id') ) === $post->ID ) {
-			$post_states['wcfm_page_for_membership'] = __( 'Vendor Membership Page', 'wc-frontend-manager' );
-		}
-
-		if ( absint( get_option('wcfm_vendor_registration_page_id') ) === $post->ID ) {
-			$post_states['wcfm_page_for_registration'] = __( 'Vendor Registration Page', 'wc-frontend-manager' );
-		}
-		
-		if ( absint( get_option('wcfm_affiliate_registration_page_id') ) === $post->ID ) {
-			$post_states['wcfm_page_for_affiliate_registration'] = __( 'Affiliate Registration Page', 'wc-frontend-manager' );
-		}
-
-		return $post_states;
-	}
 	
   function wcfm_admin_script() {
   	global $WCFM;

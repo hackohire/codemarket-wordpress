@@ -17,7 +17,7 @@ class WCFM_Product_Popup {
 		if ( !is_admin() || defined('DOING_AJAX') ) {
 			if( apply_filters( 'wcfm_is_pref_restriction_check', true ) ) {
 				if( current_user_can( 'edit_products' ) && apply_filters( 'wcfm_is_allow_manage_products', true ) ) {
-					if( apply_filters( 'wcfm_is_allow_add_products', true ) && apply_filters( 'wcfm_is_allow_pm_add_products', true ) ) {
+					if( apply_filters( 'wcfm_is_allow_add_products', true ) ) {
 						if( apply_filters( 'wcfm_is_allow_product_popup', true ) ) {
 							if( apply_filters( 'wcfm_is_allow_product_limit', true ) ) {
 								if( apply_filters( 'wcfm_is_allow_space_limit', true ) ) {

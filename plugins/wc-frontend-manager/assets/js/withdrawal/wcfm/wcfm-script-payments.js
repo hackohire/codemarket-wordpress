@@ -2,7 +2,7 @@ jQuery(document).ready(function($) {
 		
 	$start_date = '';
 	$end_date = '';
-	$status_type = $('#dropdown_status_type').val();
+	$status_type = 'completed';
 	
 	$wcfm_payments_table = $('#wcfm-payments').DataTable( {
 		"processing": true,

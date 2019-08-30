@@ -22,9 +22,6 @@ $first_name = '';
 $last_name = '';
 $has_custom_capability = 'no';
 
-$wcfm_vendor = 0;
-$vendor_arr = array();
-
 $bfirst_name = '';
 $blast_name  = '';
 $bphone = '';
@@ -66,11 +63,6 @@ if( isset( $wp->query_vars['wcfm-customers-manage'] ) && !empty( $wp->query_vars
 		$first_name = $customer_user->first_name;
 		$last_name = $customer_user->last_name;
 		
-		$wcfm_vendor = get_user_meta( $customer_id, '_wcfm_vendor', true );
-		if( wcfm_is_vendor( $wcfm_vendor ) ) {
-			$vendor_arr = array( $wcfm_vendor => $WCFM->wcfm_vendor_support->wcfm_get_vendor_store_name_by_vendor( absint( $wcfm_vendor ) ) );
-		}
-		
 		$bfirst_name = get_user_meta( $customer_id, 'billing_first_name', true );
 		$blast_name  = get_user_meta( $customer_id, 'billing_last_name', true );
 		$bphone  = get_user_meta( $customer_id, 'billing_phone', true );
@@ -91,21 +83,6 @@ if( isset( $wp->query_vars['wcfm-customers-manage'] ) && !empty( $wp->query_vars
 		$sstate  = get_user_meta( $customer_id, 'shipping_state', true );
 		$szip  = get_user_meta( $customer_id, 'shipping_postcode', true );
 		
-	} else {
-		wcfm_restriction_message_show( "Invalid Customer" );
-		return;
-	}
-}
-
-if( wcfm_is_vendor() ) {
-	$is_customer_for_vendor = $WCFM->wcfm_vendor_support->wcfm_is_component_for_vendor( $customer_id, 'customer' );
-	if( !$is_customer_for_vendor ) {
-		if( apply_filters( 'wcfm_is_show_customer_restrict_message', true, $customer_id ) ) {
-			wcfm_restriction_message_show( "Restricted Customer" );
-		} else {
-			echo apply_filters( 'wcfm_show_custom_customer_restrict_message', '', $customer_id );
-		}
-		return;
 	}
 }
 
@@ -171,12 +148,6 @@ do_action( 'before_wcfm_customers_manage' );
 							}
 				
 							$WCFM->wcfm_fields->wcfm_generate_form_field( $customer_fields_general );
-							
-							if( function_exists( 'wcfmmp_get_store_url' ) && !wcfm_is_vendor() ) {
-								$WCFM->wcfm_fields->wcfm_generate_form_field( array(  
-																																	"wcfm_vendor" => array( 'label' => __( 'Store', 'wc-frontend-manager' ), 'type' => 'select', 'options' => $vendor_arr, 'class' => 'wcfm-select wcfm_ele', 'label_class' => 'wcfm_title', 'value' => $wcfm_vendor ),
-																																) );
-							}
 						?>
 				</div>
 			</div>

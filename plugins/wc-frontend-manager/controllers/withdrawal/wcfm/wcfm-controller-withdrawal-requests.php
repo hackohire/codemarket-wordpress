@@ -100,7 +100,7 @@ class WCFM_Withdrawal_Requests_Controller {
 				}
 				
 				// Transc.ID
-				$transaction_label = apply_filters( 'wcfm_withdrawal_requests_label', '<a href="' . wcfm_transaction_details_url( $wcfm_withdrawal_request_single->ID ) . '" class="wcfm_dashboard_item_title">#' . sprintf( '%06u', $wcfm_withdrawal_request_single->ID ) . '</a>', $wcfm_withdrawal_request_single->ID, $wcfm_withdrawal_request_single->order_ids, $wcfm_withdrawal_request_single->commission_ids );
+				$transaction_label = apply_filters( 'wcfm_withdrawal_requests_label', '<a href="' . wcfm_transaction_details_url( $wcfm_withdrawal_request_single->ID ) . '" class="wcfm_dashboard_item_title"># ' . sprintf( '%06u', $wcfm_withdrawal_request_single->ID ) . '</a>', $wcfm_withdrawal_request_single->ID, $wcfm_withdrawal_request_single->order_ids, $wcfm_withdrawal_request_single->commission_ids );
 				if( apply_filters( 'wcfm_is_pref_vendor_invoice', true ) && ( $wcfm_withdrawal_request_single->withdraw_status != 'cancelled' ) && WCFM_Dependencies::wcfmu_plugin_active_check() && WCFM_Dependencies::wcfm_wc_pdf_invoices_packing_slips_plugin_active_check() ) {
 					$invoice_url = add_query_arg( array( 'withdraw_id' => $wcfm_withdrawal_request_single->ID, 'action' => 'store_payment_invoice' ), WC()->ajax_url() );
 					$transaction_label .= '<br /><a class="wcfm_withdrawal_invoice wcfm-action-icon withdrawal_quick_action wcfmfa fa-file-pdf text_tip" href="'.$invoice_url.'" data-withdrawalid="' . $wcfm_withdrawal_request_single->ID . '" data-tip="' . esc_attr__( 'Invoice', 'wc-frontend-manager' ) . '"></a>';

@@ -151,7 +151,7 @@ class WCFM_WCSubscriptions {
 		} elseif ( wcs_order_contains_subscription( $order_id, 'resubscribe' ) ) {
 			$order_label .= '<br /><span class="subscription_resubscribe_order wcfm-action-icon wcfmfa fa-history text_tip" data-tip="' . esc_attr__( 'Resubscribe Order', 'woocommerce-subscriptions' ) . '"></span>';
 		} elseif ( wcs_order_contains_subscription( $order_id, 'parent' ) ) {
-			$order_label .= '<br /><span class="subscription_parent_order wcfm-action-icon fab fa-dashcube text_tip" data-tip="' . esc_attr__( 'Parent Order', 'woocommerce-subscriptions' ) . '"></span>';
+			$order_label .= '<br /><span class="subscription_parent_order wcfm-action-icon wcfmfa fa-dashcube text_tip" data-tip="' . esc_attr__( 'Parent Order', 'woocommerce-subscriptions' ) . '"></span>';
 		}
 		
 		return $order_label;

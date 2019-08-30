@@ -50,7 +50,8 @@ class WCFM_Enquiry_Tab_Controller {
 	  
 	  if(isset($wcfm_enquiry_tab_form_data['enquiry']) && !empty($wcfm_enquiry_tab_form_data['enquiry'])) {
 	  	
-	  	$enquiry = apply_filters( 'wcfm_editor_content_before_save', wcfm_stripe_newline( $wcfm_enquiry_tab_form_data['enquiry'] ) );
+	  	$enquiry = wcfm_stripe_newline( $wcfm_enquiry_tab_form_data['enquiry'] );
+	  	$enquiry = esc_sql( $enquiry );
 	  	$reply = '';
 	  	
 	  	$author_id = 0;
@@ -85,9 +86,6 @@ class WCFM_Enquiry_Tab_Controller {
 				}
 	  		$customer_email = $userdata->user_email;
 	  	}
-	  	
-	  	$enquiry = apply_filters( 'wcfm_enquiry_content', $enquiry, $product_id, $vendor_id, $customer_id );
-	  	$enquiry = esc_sql( $enquiry );
 	  	
 	  	if( !defined( 'DOING_WCFM_EMAIL' ) ) 
 	  		define( 'DOING_WCFM_EMAIL', true );
@@ -193,8 +191,6 @@ class WCFM_Enquiry_Tab_Controller {
 					}
 				}
 	  	}
-	  	
-	  	do_action( 'wcfm_after_enquiry_submit',  $enquiry_id, $customer_id, $product_id, $vendor_id, $enquiry, $wcfm_enquiry_tab_form_data );
 			
 			echo '{"status": true, "message": "' . $wcfm_enquiry_messages['enquiry_saved'] . '"}';
 		} else {

@@ -86,7 +86,7 @@ class WCFM_Notification {
 			if( !$vendor_id ) return;
   	
 			$wcfm_messages = sprintf( __( 'Product <b>%s</b> has been approved.', 'wc-frontend-manager' ), '<a class="wcfm_dashboard_item_title" href="' . get_permalink( $product_id ) . '">' . get_the_title( $product_id ) . '</a>' );
-			$this->wcfm_send_direct_message( -1, $vendor_id, 1, 0, $wcfm_messages, 'product_review', apply_filters( 'wcfm_is_allow_product_approved_notification_email', true ) );
+			$this->wcfm_send_direct_message( -1, $vendor_id, 1, 0, $wcfm_messages, 'new_product', apply_filters( 'wcfm_is_allow_product_approved_notification_email', true ) );
 		
 			update_post_meta( $product_id, '_wcfm_product_approved_notified', 'yes' );
 		}
@@ -381,7 +381,6 @@ class WCFM_Notification {
 			$message = str_replace( '{notification_message}', $wcfm_messages, $notification_mail_body );
 			$message = str_replace( '{notification_url}', get_wcfm_messages_url(), $message );
 			$message = apply_filters( 'wcfm_email_content_wrapper', $message, __( "Notification", "wc-frontend-manager" ) . " - " . $message_type );
-			$message = wcfm_removeslashes( $message );
 			
 			$user_email = '';
 			if( $message_to ) {
@@ -458,7 +457,7 @@ class WCFM_Notification {
 			
 			if ( !empty( $wcfm_messages ) ) {
 				foreach ( $wcfm_messages as $wcfm_message ) {
-					$wcfm_messages_json_arr .=  '<div class="wcfm_notification_box">' . $this->get_wcfm_notification_icon( $wcfm_message->message_type ) . wcfm_removeslashes( htmlspecialchars_decode( $wcfm_message->message ) ) . '</div>';
+					$wcfm_messages_json_arr .=  '<div class="wcfm_notification_box">' . $this->get_wcfm_notification_icon( $wcfm_message->message_type ) . htmlspecialchars_decode($wcfm_message->message) . '</div>';
 				}
 			}
 			if( $wcfm_messages_json_arr ) $wcfm_messages_json_arr = '<div class="wcfm_notification_wrapper"><span class="wcfmfa fa-times-circle wcfm_notification_close"></span><div class="wcfm-clearfix"></div>' . $wcfm_messages_json_arr . '</div>';
@@ -572,8 +571,6 @@ class WCFM_Notification {
   		break;
   		
   		case 'product_review':
-  		case 'product_lowstk':
-  		case 'product_outofstk':
   			$message_type_class .= 'fa-cube';
   		break;
   		
@@ -658,13 +655,6 @@ class WCFM_Notification {
   		
   		case 'new_delivery_boy':
   			$message_type_class .= 'fa-user';
-  		break;
-  		
-  		case 'new_affiliate':
-  		case 'affiliate_approval':
-  		case 'affiliate_assign':
-  		case 'affiliate_complete':
-  			$message_type_class .= 'fa-user-friends';
   		break;
   		
   		case 'shipment_tracking':

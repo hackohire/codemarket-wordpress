@@ -37,7 +37,7 @@ class PublicizeConnection extends Component {
 						'jetpack'
 					) }
 				</p>
-				<ExternalLink href={ `https://wordpress.com/marketing/connections/${ getSiteFragment() }` }>
+				<ExternalLink href={ `https://wordpress.com/sharing/${ getSiteFragment() }` }>
 					{ __( 'Go to Sharing settings', 'jetpack' ) }
 				</ExternalLink>
 			</Notice>

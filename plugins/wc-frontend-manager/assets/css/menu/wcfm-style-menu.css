@@ -653,7 +653,6 @@ p.checkbox_title { vertical-align: middle; }
 	box-shadow: none;
 	line-height: 18px;
 	min-height:35px;
-	max-width: 100%;
 }
 
 #wcfm-main-contentainer .wp-editor-wrap {
@@ -794,7 +793,7 @@ input.wcfm-checkbox:checked:before {
 #wcfm-main-contentainer .mce-tinymce button[type="button"] {
 	padding: 4px 6px;
 }
-.mce-window .wp-editor-help table.fixed{position: relative !important;}
+
 
 
 /* WCFM Data Table Styling */

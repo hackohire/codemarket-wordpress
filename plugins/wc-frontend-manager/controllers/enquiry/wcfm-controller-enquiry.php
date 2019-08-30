@@ -130,18 +130,11 @@ class WCFM_Enquiry_Controller {
 				}
 				
 				// Customer
-				$customer_details = '';
-				if( apply_filters( 'wcfm_allow_view_customer_name', true ) ) {
-					if( $wcfm_enquirys_single->customer_id && apply_filters( 'wcfm_is_allow_view_customer', true ) ) {
-						$customer_details =  '<a target="_blank" href="' . get_wcfm_customers_details_url($wcfm_enquirys_single->customer_id) . '" class="wcfm_inquiry_by_customer">' . $wcfm_enquirys_single->customer_name . '</a>';
-					} else {
-						$customer_details =  $wcfm_enquirys_single->customer_name;
-					}
-					if( apply_filters( 'wcfm_allow_view_customer_email', true ) ) {
-						$customer_details .= "<br />" . $wcfm_enquirys_single->customer_email;
-					}
-				} 
-				$wcfm_enquirys_json_arr[$index][] =  apply_filters( 'wcfm_enquiry_customer_name_display', $customer_details, $wcfm_enquirys_single->customer_id, $wcfm_enquirys_single );
+				if( apply_filters( 'wcfm_allow_order_customer_details', true ) ) {
+					$wcfm_enquirys_json_arr[$index][] =  apply_filters( 'wcfm_enquiry_customer_name_display', $wcfm_enquirys_single->customer_name  . "<br />" . $wcfm_enquirys_single->customer_email, $wcfm_enquirys_single->customer_id, $wcfm_enquirys_single );
+				} else {
+					$wcfm_enquirys_json_arr[$index][] =  apply_filters( 'wcfm_enquiry_customer_name_display', $wcfm_enquirys_single->customer_name, $wcfm_enquirys_single->customer_id, $wcfm_enquirys_single );
+				}
 				
 				
 				// Vendor
@@ -170,15 +163,12 @@ class WCFM_Enquiry_Controller {
 				}
 				$wcfm_enquirys_json_arr[$index][] =  $additional_info;
 				
-				// Replies
-				$wcfm_enquiry_replies = $wpdb->get_results( "SELECT * from {$wpdb->prefix}wcfm_enquiries_response WHERE `enquiry_id` = " . $wcfm_enquirys_single->ID );
-				$wcfm_enquirys_json_arr[$index][] =  '<span class="reply_view_count">' . count( $wcfm_enquiry_replies ) . '</span>';
-				
-				//if( $wcfm_enquirys_single->reply ) {
-					//$wcfm_enquirys_json_arr[$index][] =  $wcfm_enquirys_single->reply;
-				//} else {
-					//$wcfm_enquirys_json_arr[$index][] = '&ndash;'; 
-				//}
+				// Reply
+				if( $wcfm_enquirys_single->reply ) {
+					$wcfm_enquirys_json_arr[$index][] =  $wcfm_enquirys_single->reply;
+				} else {
+					$wcfm_enquirys_json_arr[$index][] = '&ndash;'; 
+				}
 				
 				// Date
 				$wcfm_enquirys_json_arr[$index][] = date_i18n( wc_date_format() . ' ' . wc_time_format(), strtotime( $wcfm_enquirys_single->posted ) );

@@ -120,9 +120,6 @@ class FES_Post_Content_Field extends FES_Field {
 				$options['media_buttons'] = false;
 			}
 			printf( '<span class="fes-rich-validation" data-required="%s" data-type="rich" data-id="%s"></span>', $this->characteristics['required'], $this->name() );
-			
-			$value = str_replace(array("\r\n", "\r"), "<br />", $value);
-			
 			wp_editor( $value, $this->name(), $options );
 		} elseif ( $this->characteristics['rich'] == 'teeny' ) {
 			$options = array( 'editor_height' => $this->characteristics['rows'], 'quicktags' => false, 'teeny' => true, 'editor_class' => $req_class );

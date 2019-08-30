@@ -11,7 +11,7 @@
  
 global $wp, $WCFM, $WCFMu, $thebooking, $wpdb;
 
-if( !current_user_can( 'manage_bookings_settings' ) && !current_user_can( 'manage_bookings' ) ) {
+if( !current_user_can( 'manage_bookings' ) ) {
 	wcfm_restriction_message_show( "Bookings" );
 	return;
 }
@@ -23,35 +23,17 @@ if ( ! is_object( $thebooking ) ) {
 }
 
 $booking_id = $wp->query_vars['wcfm-bookings-details'];
-if( $booking_id ) {
-	$post = get_post($booking_id);
-	$booking = new WC_Booking( $post->ID );
-	$order             = $booking->get_order();
-	$product_id        = $booking->get_product_id( 'edit' );
-	$resource_id       = $booking->get_resource_id( 'edit' );
-	$customer_id       = $booking->get_customer_id( 'edit' );
-	$product           = $booking->get_product( $product_id );
-	$resource          = new WC_Product_Booking_Resource( $resource_id );
-	$customer          = $booking->get_customer();
-	$statuses          = array_unique( array_merge( get_wc_booking_statuses( null, true ), get_wc_booking_statuses( 'user', true ), get_wc_booking_statuses( 'cancel', true ) ) );
-	$statuses          = apply_filters( 'wcfm_allowed_booking_status', $statuses );
-} else {
-	wcfm_restriction_message_show( "Invalid Booking" );
-	return;
-}
-
-if( wcfm_is_vendor() ) {
-	$is_booking_for_vendor = $WCFM->wcfm_vendor_support->wcfm_is_component_for_vendor( $booking_id, 'booking' );
-	if( !$is_booking_for_vendor ) {
-		if( apply_filters( 'wcfm_is_show_booking_restrict_message', true, $booking_id ) ) {
-			wcfm_restriction_message_show( "Restricted Booking" );
-		} else {
-			echo apply_filters( 'wcfm_show_custom_booking_restrict_message', '', $booking_id );
-		}
-		return;
-	}
-}
-
+$post = get_post($booking_id);
+$booking = new WC_Booking( $post->ID );
+$order             = $booking->get_order();
+$product_id        = $booking->get_product_id( 'edit' );
+$resource_id       = $booking->get_resource_id( 'edit' );
+$customer_id       = $booking->get_customer_id( 'edit' );
+$product           = $booking->get_product( $product_id );
+$resource          = new WC_Product_Booking_Resource( $resource_id );
+$customer          = $booking->get_customer();
+$statuses          = array_unique( array_merge( get_wc_booking_statuses( null, true ), get_wc_booking_statuses( 'user', true ), get_wc_booking_statuses( 'cancel', true ) ) );
+$statuses          = apply_filters( 'wcfm_allowed_booking_status', $statuses );
 
 do_action( 'before_wcfm_bookings_details' );
 ?>

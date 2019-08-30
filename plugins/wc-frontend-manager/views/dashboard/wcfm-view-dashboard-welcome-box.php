@@ -21,7 +21,7 @@ if ( !$wp_user_avatar ) {
 	$wp_user_avatar = apply_filters( 'wcfm_defaut_user_avatar', $WCFM->plugin_url . 'assets/images/avatar.png' );
 }
 
-$userdata = get_userdata( get_current_user_id() );
+$userdata = get_userdata( $user_id );
 $first_name = $userdata->first_name;
 $last_name  = $userdata->last_name;
 $display_name  = $userdata->display_name;

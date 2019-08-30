@@ -99,7 +99,7 @@ class MailChimp_WooCommerce_Order
      */
     public function setId($id)
     {
-        $this->id = preg_replace('/[^0-9]/i','', $id);
+        $this->id = $id;
 
         return $this;
     }
@@ -208,12 +208,10 @@ class MailChimp_WooCommerce_Order
      * @param null $campaign_id
      * @return MailChimp_WooCommerce_Order
      */
-    public function setCampaignId($id)
+    public function setCampaignId($campaign_id)
     {
-        $api = MailChimp_WooCommerce_MailChimpApi::getInstance();
-        $cid = trim($id);
-        $campaign = $api->getCampaign($cid);
-        $this->campaign_id = $campaign['id'];
+        $this->campaign_id = $campaign_id;
+
         return $this;
     }
 

@@ -177,16 +177,7 @@ class WCFM_Products_Controller {
 		$filtered_pro_count = $pro_count; 
 		
 		if( isset( $_POST['search'] ) && !empty( $_POST['search']['value'] )) {
-			
-			$args['posts_per_page'] = -1;
-			$args['offset'] = 0;
-			$args['fields'] = 'ids';
-			
-			$wcfm_products_count_array = get_posts( $args );
-			$filtered_pro_count = $pro_count = count( $wcfm_products_count_array );
-			
 			unset( $args['s'] );
-			unset( $args['fields'] );
 			
 			$search_ids = array();
 			$terms      = explode( ',', $_POST['search']['value'] );
@@ -360,8 +351,6 @@ class WCFM_Products_Controller {
 					$pro_type = '<span class="product-type tips wcfmfa fa-gavel text_tip" data-tip="' . esc_attr__( 'Auction', 'wc-frontend-manager' ) . '"></span>';
 				} elseif ( 'redq_rental' == $the_product->get_type() ) {
 					$pro_type = '<span class="product-type tips wcfmfa fa-cab text_tip" data-tip="' . esc_attr__( 'Rental', 'wc-frontend-manager' ) . '"></span>';
-				} elseif ( 'booking' == $the_product->get_type() ) {
-					$pro_type = '<span class="product-type tips wcfmfa fa-calendar text_tip" data-tip="' . esc_attr__( 'Booking', 'wc-frontend-manager' ) . '"></span>';
 				} elseif ( 'accommodation-booking' == $the_product->get_type() ) {
 					$pro_type = '<span class="product-type tips wcfmfa fa-calendar text_tip" data-tip="' . esc_attr__( 'Accommodation', 'wc-frontend-manager' ) . '"></span>';
 				} elseif ( 'appointment' == $the_product->get_type() ) {
@@ -418,7 +407,7 @@ class WCFM_Products_Controller {
 					if( apply_filters( 'wcfm_is_allow_featured_product', true ) ) {
 						if( WCFM_Dependencies::wcfmu_plugin_active_check() ) {
 							if( has_term( 'featured', 'product_visibility', $wcfm_products_single->ID ) ) {
-								$actions .= '<br/><a class="wcfm_product_featured wcfm-action-icon" href="#" data-featured="nofeatured" data-proid="' . $wcfm_products_single->ID . '"><span class="wcfmfa fa-star-of-life text_tip" data-tip="' . esc_attr__( 'No Featured', 'wc-frontend-manager' ) . '"></span></a>';
+								$actions .= '<br/><a class="wcfm_product_featured wcfm-action-icon" href="#" data-featured="nofeatured" data-proid="' . $wcfm_products_single->ID . '"><span class="wcfmfa fa-star text_tip" style="font-weight:900;" data-tip="' . esc_attr__( 'No Featured', 'wc-frontend-manager' ) . '"></span></a>';
 							} else {
 								if( apply_filters( 'wcfm_has_featured_product_limit', true ) ) {
 									$actions .= '<br/><a class="wcfm_product_featured wcfm-action-icon" href="#" data-featured="featured" data-proid="' . $wcfm_products_single->ID . '"><span class="wcfmfa fa-star text_tip" data-tip="' . esc_attr__( 'Mark Featured', 'wc-frontend-manager' ) . '"></span></a>';

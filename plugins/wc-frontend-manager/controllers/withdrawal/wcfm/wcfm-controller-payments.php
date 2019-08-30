@@ -105,7 +105,7 @@ class WCFM_Payments_Controller {
 				// Transc.ID
 				$transaction_label = '';
 				if( apply_filters( 'wcfm_is_allow_transaction_details', true ) ) {
-					$transaction_label = '<a href="' . wcfm_transaction_details_url( $wcfm_payments_single->ID ) . '" class="wcfm_dashboard_item_title">#' . sprintf( '%06u', $wcfm_payments_single->ID ) . '</a>';
+					$transaction_label = '<a href="' . wcfm_transaction_details_url( $wcfm_payments_single->ID ) . '" class="wcfm_dashboard_item_title"># ' . sprintf( '%06u', $wcfm_payments_single->ID ) . '</a>';
 				} else {
 					$transaction_label = '<span class="wcfm_dashboard_item_title"># ' . sprintf( '%06u', $wcfm_payments_single->ID ) . '</span>';
 				}

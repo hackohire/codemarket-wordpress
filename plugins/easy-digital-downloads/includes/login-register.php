@@ -51,7 +51,7 @@ function edd_register_form( $redirect = '' ) {
 		$redirect = edd_get_current_page_url();
 	}
 
-	$edd_register_redirect = 'sumit2.codemarket.io';
+	$edd_register_redirect = $redirect;
 
 	ob_start();
 

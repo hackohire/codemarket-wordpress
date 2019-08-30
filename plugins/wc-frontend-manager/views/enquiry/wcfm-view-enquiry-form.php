@@ -32,9 +32,8 @@ if( wcfm_is_marketplace() ) {
 
 $wcfm_options = $WCFM->wcfm_options;
 $wcfm_enquiry_custom_fields = isset( $wcfm_options['wcfm_enquiry_custom_fields'] ) ? $wcfm_options['wcfm_enquiry_custom_fields'] : array();
-$wcfm_enquiry_button_label  = isset( $wcfm_options['wcfm_enquiry_button_label'] ) ? $wcfm_options['wcfm_enquiry_button_label'] : __( 'Ask a Question', 'wc-frontend-manager' );
 
-$wcfm_enquiry_form_heading  = apply_filters( 'wcfm_enquiry_form_heading', $wcfm_enquiry_button_label );
+$wcfm_enquiry_form_heading  = apply_filters( 'wcfm_enquiry_form_heading', __( 'Inquiry', 'wc-frontend-manager' ) );
 ?>
 
 <div class="enquiry_form_wrapper_hide">

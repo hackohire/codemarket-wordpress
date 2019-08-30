@@ -111,7 +111,7 @@ $count_articles['any']     = $count_articles['publish'] + $count_articles['pendi
 							<th><?php _e( 'Status', 'wc-frontend-manager' ); ?></th>
 							<th><span class="wcfmfa fa-eye text_tip" data-tip="<?php _e( 'Views', 'wc-frontend-manager' ); ?>"></span></th>
 							<th><?php _e( 'Date', 'wc-frontend-manager' ); ?></th>
-							<th><?php _e( 'Store', 'wc-frontend-manager' ); ?></th>
+							<th><?php _e( 'Author', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Actions', 'wc-frontend-manager' ); ?></th>
 						</tr>
 					</thead>
@@ -122,7 +122,7 @@ $count_articles['any']     = $count_articles['publish'] + $count_articles['pendi
 							<th><?php _e( 'Status', 'wc-frontend-manager' ); ?></th>
 							<th><span class="wcfmfa fa-eye text_tip" data-tip="<?php _e( 'Views', 'wc-frontend-manager' ); ?>"></span></th>
 							<th><?php _e( 'Date', 'wc-frontend-manager' ); ?></th>
-							<th><?php _e( 'Store', 'wc-frontend-manager' ); ?></th>
+							<th><?php _e( 'Author', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Actions', 'wc-frontend-manager' ); ?></th>
 						</tr>
 					</tfoot>

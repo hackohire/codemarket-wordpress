@@ -962,7 +962,6 @@ if(!function_exists('get_wcfm_dashboard_messages')) {
 		
 		$messages = array(
 											"product_approve_confirm"            => __( "Are you sure and want to approve / publish this 'Product'?", "wc-frontend-manager" ),
-											"multiblock_delete_confirm"          => __( "Are you sure and want to delete this 'Block'?\nYou can't undo this action ...", "wc-frontend-manager" ),
 											"article_delete_confirm"             => __( "Are you sure and want to delete this 'Article'?\nYou can't undo this action ...", "wc-frontend-manager" ),
 											"product_delete_confirm"             => __( "Are you sure and want to delete this 'Product'?\nYou can't undo this action ...", "wc-frontend-manager" ),
 											"message_delete_confirm"             => __( "Are you sure and want to delete this 'Message'?\nYou can't undo this action ...", "wc-frontend-manager" ),
@@ -1005,8 +1004,6 @@ if(!function_exists('get_wcfm_dashboard_messages')) {
 											"wcfm_multiblick_remove_help"        => __( 'Remove Block', 'wc-frontend-manager' ),
 											"wcfm_multiblick_collapse_help"      => __( 'Toggle Block', 'wc-frontend-manager' ),
 											"wcfm_multiblick_sortable_help"      => __( 'Drag to re-arrange blocks', 'wc-frontend-manager' ),
-											"sell_this_item_confirm"             => __( 'Do you want to add this item(s) to your store?', 'wc-frontend-manager' ),
-											"bulk_no_itm_selected"               => __( 'Please select some product first!', 'wc-frontend-manager' ),
 											"user_non_logged_in"                 => __( 'Please login to the site first!', 'wc-frontend-manager' ),
                       "shiping_method_not_selected"        => __( 'Please select a shipping method', 'wc-frontend-manager' ),
                       "shiping_method_not_found"           => __( 'Shipping method not found', 'wc-frontend-manager' ),
@@ -1025,8 +1022,6 @@ if(!function_exists('get_wcfm_message_types')) {
 		$message_types = array(
 											'direct'            => __( 'Direct Message', 'wc-frontend-manager' ),
 											'product_review'    => __( 'Approve Product', 'wc-frontend-manager' ),
-											'product_lowstk'    => __( 'Low Stock Product', 'wc-frontend-manager' ),
-											//'product_outofstk'  => __( 'Out of Stock Product', 'wc-frontend-manager' ),
 											'status-update'     => __( 'Status Updated', 'wc-frontend-manager' ),
 											'withdraw-request'  => __( 'Withdrawal Requests', 'wc-frontend-manager' ),
 											'refund-request'    => __( 'Refund Requests', 'wc-frontend-manager' ),
@@ -1061,10 +1056,7 @@ function wcfm_get_endpoint_url( $endpoint, $value = '', $permalink = '' ) {
 	
 	// WC 3.6 FIX
 	if( $endpoint == 'orders' ) $endpoint = 'orderslist';
-	if( $endpoint == 'booking' ) $endpoint = 'bookinglist';
-	if( $endpoint == 'bookings' ) $endpoint = 'bookingslist';
 	if( $endpoint == 'subscriptions' ) $endpoint = 'subscriptionslist';
-	if( $endpoint == 'sell-items-catalog' ) $endpoint = 'add-to-my-store-catalog';
 
 	if ( get_option( 'permalink_structure' ) ) {
 		if ( strstr( $permalink, '?' ) ) {
@@ -1390,72 +1382,6 @@ function wcfm_force_user_can_richedit( $is_allow ) {
 }
 
 /**
- * WCFM Handle Form File Upload
- */
-function wcfm_handle_file_upload( $is_multiple = true ) {
-	$attchments = array();
-	if ( ! empty( $_FILES ) ) {
-		if( $is_multiple ) {
-			foreach ( $_FILES as $file_key => $file_arr ) {
-				if( isset( $file_arr['name'] ) && count( $file_arr['name'] ) > 0 ) {
-					for( $fi = 0; $fi < count($file_arr['name']); $fi++ ) {
-						if( isset( $file_arr['name'][$fi]['file'] ) && !empty( $file_arr['name'][$fi]['file'] ) ) {
-							$file = array( 
-														 'name'     => $file_arr['name'][$fi]['file'],
-														 'type'     => $file_arr['type'][$fi]['file'],
-														 'tmp_name' => $file_arr['tmp_name'][$fi]['file'],
-														 'error'    => $file_arr['error'][$fi]['file'],
-														 'size'     => $file_arr['size'][$fi]['file'],
-														);
-					
-							$files_to_upload = wcfm_prepare_uploaded_files( $file );
-							if( !empty( $files_to_upload ) ) {
-								foreach ( $files_to_upload as $file_to_upload ) {
-									$uploaded_file = wcfm_upload_file(
-										$file_to_upload,
-										array(
-											'file_key' => $fi,
-										)
-									);
-						
-									if ( !is_wp_error( $uploaded_file ) ) {
-										$attchments[$file_key][$fi] = $uploaded_file->url;
-									} else {
-										wcfm_log( "Inquiry Attachment Error:: " . $uploaded_file->get_error_message() );
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		} else {
-			foreach ( $_FILES as $file_key => $file ) {
-				$files_to_upload = wcfm_prepare_uploaded_files( $file );
-				if( !empty( $files_to_upload ) ) {
-					foreach ( $files_to_upload as $file_to_upload ) {
-						$uploaded_file = wcfm_upload_file(
-							$file_to_upload,
-							array(
-								'file_key' => $file_key,
-							)
-						);
-			
-						if ( !is_wp_error( $uploaded_file ) ) {
-							$attchments[$file_key] = $uploaded_file->url;
-						} else {
-							wcfm_log( "Inquiry Attachment Error:: " . $uploaded_file->get_error_message() );
-						}
-					}
-				}
-			}
-		}
-	}
-	
-	return $attchments;
-}
-
-/**
  * WCFM Direct File Upload
  */
 function wcfm_prepare_uploaded_files( $file_data ) {
@@ -1695,21 +1621,6 @@ function wcfm_standard_date( $date_string ) {
 		$date_string = date( 'Y-m-d', $date_string );
 	}
 	return $date_string;
-}
-
-function wcfm_filter_content_email_phone( $content ) {
-	$patterns = array();
-	$patterns[0] = '/([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)/';
-	$patterns[1] = '/(?:(?:\+?([1-9]|[0-9][0-9]|[0-9][0-9][0-9])\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([0-9][1-9]|[0-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?/';
-
-	$replacements = array();
-	$replacements[0] = '';
-	$replacements[1] = '';
-
-	// should use just one call of preg_replace for perfomance issues
-	$content = preg_replace( $patterns, $replacements, $content );	
-	
-	return $content;
 }
 
 /**

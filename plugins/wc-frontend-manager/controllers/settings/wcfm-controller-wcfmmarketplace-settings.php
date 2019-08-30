@@ -49,45 +49,37 @@ class WCFM_Settings_Marketplace_Controller {
 		
 		// Set Gravatar
 		if( apply_filters( 'wcfm_is_allow_store_logo', true ) ) {
-			if( isset($wcfm_settings_form['gravatar']) ) {
-				if( !empty($wcfm_settings_form['gravatar'])) {
-					$wcfm_settings_form['gravatar'] = $WCFM->wcfm_get_attachment_id($wcfm_settings_form['gravatar']);
-				} else {
-					$wcfm_settings_form['gravatar'] = '';
-				}
+			if(isset($wcfm_settings_form['gravatar']) && !empty($wcfm_settings_form['gravatar'])) {
+				$wcfm_settings_form['gravatar'] = $WCFM->wcfm_get_attachment_id($wcfm_settings_form['gravatar']);
+			} else {
+				$wcfm_settings_form['gravatar'] = '';
 			}
 		}
 		
 		// Set List Banner
 		if( apply_filters( 'wcfm_is_allow_store_banner', true ) ) {
-			if( isset($wcfm_settings_form['list_banner'] ) ) {
-				if( !empty($wcfm_settings_form['list_banner']) ) {
-					$wcfm_settings_form['list_banner'] = $WCFM->wcfm_get_attachment_id($wcfm_settings_form['list_banner']);
-				} else {
-					$wcfm_settings_form['list_banner'] = '';
-				}
+			if(isset($wcfm_settings_form['list_banner']) && !empty($wcfm_settings_form['list_banner'])) {
+				$wcfm_settings_form['list_banner'] = $WCFM->wcfm_get_attachment_id($wcfm_settings_form['list_banner']);
+			} else {
+				$wcfm_settings_form['list_banner'] = '';
 			}
 		}
 		
 		// Set Banner
 		if( apply_filters( 'wcfm_is_allow_store_banner', true ) ) {
-			if( isset($wcfm_settings_form['banner']) ) {
-				if( !empty($wcfm_settings_form['banner']) ) {
-					$wcfm_settings_form['banner'] = $WCFM->wcfm_get_attachment_id($wcfm_settings_form['banner']);
-				} else {
-					$wcfm_settings_form['banner'] = '';
-				}
+			if(isset($wcfm_settings_form['banner']) && !empty($wcfm_settings_form['banner'])) {
+				$wcfm_settings_form['banner'] = $WCFM->wcfm_get_attachment_id($wcfm_settings_form['banner']);
+			} else {
+				$wcfm_settings_form['banner'] = '';
 			}
 		}
 		
 		// Set Mobile Banner
 		if( apply_filters( 'wcfm_is_allow_store_banner', true ) ) {
-			if( isset($wcfm_settings_form['mobile_banner']) ) {
-				if( !empty($wcfm_settings_form['banner']) ) {
-					$wcfm_settings_form['mobile_banner'] = $WCFM->wcfm_get_attachment_id($wcfm_settings_form['mobile_banner']);
-				} else {
-					$wcfm_settings_form['mobile_banner'] = '';
-				}
+			if(isset($wcfm_settings_form['mobile_banner']) && !empty($wcfm_settings_form['banner'])) {
+				$wcfm_settings_form['mobile_banner'] = $WCFM->wcfm_get_attachment_id($wcfm_settings_form['mobile_banner']);
+			} else {
+				$wcfm_settings_form['mobile_banner'] = '';
 			}
 		}
 		
@@ -106,14 +98,11 @@ class WCFM_Settings_Marketplace_Controller {
 				$user_login = sanitize_title( $the_user->user_login );
 				$previous_store_slug     = $the_user->user_nicename;
 				if( $previous_store_slug != $store_slug ) {
-					if( ( ( $user_login == $store_slug ) || !username_exists( $store_slug ) || !get_user_by( 'slug', $store_slug ) ) && ( apply_filters( 'wcfm_validate_store_slug', true, $store_slug ) ) ) {
+					if( ( ( $user_login == $store_slug ) || !username_exists( $store_slug ) )  && ( apply_filters( 'wcfm_validate_store_slug', true, $store_slug ) ) ) {
 						$store_slug_user = get_user_by( 'slug', $store_slug );
 						if ( !$store_slug_user || ( $store_slug_user && ( $store_slug_user->ID == $user_id ) )  ) {
-							if( apply_filters( 'wcfm_is_allow_store_slug_direct_update', true ) ) {
-								$wpdb->query( "UPDATE {$wpdb->prefix}users SET `user_nicename` = '{$store_slug}' WHERE ID =  $user_id" );
-							} else {
-								wp_update_user( array( 'ID' => $user_id, 'user_nicename' => wc_clean( $store_slug ) ) );
-							}
+							$wpdb->query( "UPDATE {$wpdb->prefix}users SET `user_nicename` = '{$store_slug}' WHERE ID =  $user_id" );
+							//wp_update_user( array( 'ID' => $user_id, 'user_nicename' => wc_clean( $store_slug ) ) );
 							if( apply_filters( 'wcfm_is_allow_reassociate_role', false ) ) {
 								$member_user = new WP_User(absint($user_id));
 								$member_user->set_role('wcfm_vendor');
@@ -139,68 +128,60 @@ class WCFM_Settings_Marketplace_Controller {
 		
 		// Visibility
 		if( apply_filters( 'wcfm_is_allow_store_visibility', true ) ) {
-			if( isset($wcfm_settings_form['store_name_position']) ) {
-				if(isset($wcfm_settings_form['store_hide_email']) && !empty($wcfm_settings_form['store_hide_email'])) {
-					$wcfm_settings_form['store_hide_email'] = 'yes';
-				} else {
-					$wcfm_settings_form['store_hide_email'] = 'no';
-				}
-				if(isset($wcfm_settings_form['store_hide_phone']) && !empty($wcfm_settings_form['store_hide_phone'])) {
-					$wcfm_settings_form['store_hide_phone'] = 'yes';
-				} else {
-					$wcfm_settings_form['store_hide_phone'] = 'no';
-				}
-				if(isset($wcfm_settings_form['store_hide_address']) && !empty($wcfm_settings_form['store_hide_address'])) {
-					$wcfm_settings_form['store_hide_address'] = 'yes';
-				} else {
-					$wcfm_settings_form['store_hide_address'] = 'no';
-				}
-				if(isset($wcfm_settings_form['store_hide_map']) && !empty($wcfm_settings_form['store_hide_map'])) {
-					$wcfm_settings_form['store_hide_map'] = 'yes';
-				} else {
-					$wcfm_settings_form['store_hide_map'] = 'no';
-				}
-				if(isset($wcfm_settings_form['store_hide_description']) && !empty($wcfm_settings_form['store_hide_description'])) {
-					$wcfm_settings_form['store_hide_description'] = 'yes';
-				} else {
-					$wcfm_settings_form['store_hide_description'] = 'no';
-				}
-				if(isset($wcfm_settings_form['store_hide_policy']) && !empty($wcfm_settings_form['store_hide_policy'])) {
-					$wcfm_settings_form['store_hide_policy'] = 'yes';
-				} else {
-					$wcfm_settings_form['store_hide_policy'] = 'no';
-				}
+			if(isset($wcfm_settings_form['store_hide_email']) && !empty($wcfm_settings_form['store_hide_email'])) {
+				$wcfm_settings_form['store_hide_email'] = 'yes';
+			} else {
+				$wcfm_settings_form['store_hide_email'] = 'no';
+			}
+			if(isset($wcfm_settings_form['store_hide_phone']) && !empty($wcfm_settings_form['store_hide_phone'])) {
+				$wcfm_settings_form['store_hide_phone'] = 'yes';
+			} else {
+				$wcfm_settings_form['store_hide_phone'] = 'no';
+			}
+			if(isset($wcfm_settings_form['store_hide_address']) && !empty($wcfm_settings_form['store_hide_address'])) {
+				$wcfm_settings_form['store_hide_address'] = 'yes';
+			} else {
+				$wcfm_settings_form['store_hide_address'] = 'no';
+			}
+			if(isset($wcfm_settings_form['store_hide_description']) && !empty($wcfm_settings_form['store_hide_description'])) {
+				$wcfm_settings_form['store_hide_description'] = 'yes';
+			} else {
+				$wcfm_settings_form['store_hide_description'] = 'no';
+			}
+			if(isset($wcfm_settings_form['store_hide_policy']) && !empty($wcfm_settings_form['store_hide_policy'])) {
+				$wcfm_settings_form['store_hide_policy'] = 'yes';
+			} else {
+				$wcfm_settings_form['store_hide_policy'] = 'no';
 			}
 		}
 		
 		if( apply_filters( 'wcfm_is_allow_vseo_settings', true ) ) {
 			// Set Facebook Image
-			if( isset($wcfm_settings_form['store_seo']) ) {
-				if( !empty($wcfm_settings_form['store_seo']['wcfmmp-seo-og-image']) ) {
-					$wcfm_settings_form['store_seo']['wcfmmp-seo-og-image'] = $WCFM->wcfm_get_attachment_id($wcfm_settings_form['store_seo']['wcfmmp-seo-og-image']);
-				} else {
-					$wcfm_settings_form['store_seo']['wcfmmp-seo-og-image'] = '';
-				}
+			if(isset($wcfm_settings_form['store_seo']) && !empty($wcfm_settings_form['store_seo']['wcfmmp-seo-og-image'])) {
+				$wcfm_settings_form['store_seo']['wcfmmp-seo-og-image'] = $WCFM->wcfm_get_attachment_id($wcfm_settings_form['store_seo']['wcfmmp-seo-og-image']);
+			} else {
+				$wcfm_settings_form['store_seo']['wcfmmp-seo-og-image'] = '';
 			}
 			
 			// Set Twitter Image
-			if( isset($wcfm_settings_form['store_seo']) ) {
-				if( !empty($wcfm_settings_form['store_seo']['wcfmmp-seo-twitter-image']) ) {
-					$wcfm_settings_form['store_seo']['wcfmmp-seo-twitter-image'] = $WCFM->wcfm_get_attachment_id($wcfm_settings_form['store_seo']['wcfmmp-seo-twitter-image']);
-				} else {
-					$wcfm_settings_form['store_seo']['wcfmmp-seo-twitter-image'] = '';
-				}
+			if(isset($wcfm_settings_form['store_seo']) && !empty($wcfm_settings_form['store_seo']['wcfmmp-seo-twitter-image'])) {
+				$wcfm_settings_form['store_seo']['wcfmmp-seo-twitter-image'] = $WCFM->wcfm_get_attachment_id($wcfm_settings_form['store_seo']['wcfmmp-seo-twitter-image']);
+			} else {
+				$wcfm_settings_form['store_seo']['wcfmmp-seo-twitter-image'] = '';
 			}
 		}
 		
 		// Vacation Settings
 		if( apply_filters( 'wcfm_is_pref_vendor_vacation', true ) && apply_filters( 'wcfm_is_allow_vacation_settings', true ) ) {
+			if( !isset( $wcfm_settings_form['wcfm_vacation_mode'] ) ) $wcfm_settings_form['wcfm_vacation_mode'] = 'no';
+			if( !isset( $wcfm_settings_form['wcfm_disable_vacation_purchase'] ) ) $wcfm_settings_form['wcfm_disable_vacation_purchase'] = 'no';
 			if( isset( $wcfm_settings_form['wcfm_vacation_mode_msg'] ) ) {
-				if( !isset( $wcfm_settings_form['wcfm_vacation_mode'] ) ) $wcfm_settings_form['wcfm_vacation_mode'] = 'no';
-				if( !isset( $wcfm_settings_form['wcfm_disable_vacation_purchase'] ) ) $wcfm_settings_form['wcfm_disable_vacation_purchase'] = 'no';
 				wcfm_update_user_meta( $user_id, '_wcfm_vacation_msg', $wcfm_settings_form['wcfm_vacation_mode_msg'] );
 			}
 		}
+		
+		// Merge the changes with existing settings
+		$wcfm_settings_form = array_merge( $vendor_data, $wcfm_settings_form );
 		
 		// Save Store Address as User Meta
 		if( isset( $wcfm_settings_form['address'] ) ) {
@@ -216,9 +197,6 @@ class WCFM_Settings_Marketplace_Controller {
 				update_user_meta( $user_id, '_wcfm_' . $address_field, $address_val );
 			}
 		}
-		
-		// Merge the changes with existing settings
-		$wcfm_settings_form = array_merge( $vendor_data, $wcfm_settings_form );
 		
 		update_user_meta( $user_id, 'wcfmmp_profile_settings', $wcfm_settings_form );
 		

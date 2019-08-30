@@ -90,7 +90,7 @@ class WCFM_Frontend {
 			if ( WCFM_Dependencies::wcfm_wp_job_manager_plugin_active_check() && is_user_logged_in() ) {
 				$job_dashboard_page = get_option( 'job_manager_job_dashboard_page_id' );
 				$add_listings_page = get_option( 'job_manager_submit_job_form_page_id' );
-				if( ( $add_listings_page && is_object( $post ) && ( $add_listings_page == $post->ID ) ) || ( $job_dashboard_page && is_object( $post ) && ( $job_dashboard_page == $post->ID ) && isset( $_GET['action'] ) && ( in_array( $_GET['action'], array( 'edit', 'mark_filled', 'mark_not_filled' ) ) ) ) ) {
+				if( ( $add_listings_page && is_object( $post ) && ( $add_listings_page == $post->ID ) ) || ( $job_dashboard_page && is_object( $post ) && ( $job_dashboard_page == $post->ID ) && isset( $_GET['action'] ) && ( $_GET['action'] == 'edit' ) ) ) {
 					$wcfm_options = $WCFM->wcfm_options;
 					$is_dashboard_full_view_disabled = isset( $wcfm_options['dashboard_full_view_disabled'] ) ? $wcfm_options['dashboard_full_view_disabled'] : 'no';
 					$is_dashboard_theme_header_disabled = isset( $wcfm_options['dashboard_theme_header_disabled'] ) ? $wcfm_options['dashboard_theme_header_disabled'] : 'no';
@@ -877,7 +877,7 @@ class WCFM_Frontend {
 			if( apply_filters( 'wcfm_is_allow_desktop_notification_sound', true ) ) {
 				wp_localize_script( 'wcfm_core_js', 'wcfm_desktop_notification_sound', apply_filters( 'wcfm_desktop_notification_sound', $WCFM->library->lib_url . 'sounds/desktop_notification.mp3' ) );
 			} else {
-				wp_localize_script( 'wcfm_core_js', 'wcfm_desktop_notification_sound', $WCFM->library->lib_url . 'sounds/empty_audio.mp3' );
+				wp_localize_script( 'wcfm_core_js', 'wcfm_notification_sound', $WCFM->library->lib_url . 'sounds/empty_audio.mp3' );
 			}
 		} else {
 			wp_localize_script( 'wcfm_core_js', 'wcfm_notification_sound', $WCFM->library->lib_url . 'sounds/empty_audio.mp3' );

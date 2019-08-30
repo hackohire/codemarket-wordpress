@@ -50,22 +50,6 @@ if( !$wcfm_is_allow_manage_customer ) {
 			<div class="wcfm-clearfix"></div>
 		</div>
 	  <div class="wcfm-clearfix"></div><br />
-	  
-	  <div class="wcfm_customers_filter_wrap wcfm_products_filter_wrap  wcfm_filters_wrap">
-			<?php	
-			if( apply_filters( 'wcfm_is_customers_vendor_filter', true ) ) {
-				$is_marketplace = wcfm_is_marketplace();
-				if( $is_marketplace ) {
-					if( !wcfm_is_vendor() ) {
-						$vendor_arr = array(); //$WCFM->wcfm_vendor_support->wcfm_get_vendor_list();
-						$WCFM->wcfm_fields->wcfm_generate_form_field( array(
-																											"dropdown_vendor" => array( 'type' => 'select', 'options' => $vendor_arr, 'attributes' => array( 'style' => 'width: 150px;' ) )
-																											 ) );
-					}
-				}
-			}
-			?>
-		</div>
 			
 		<?php do_action( 'before_wcfm_customers' ); ?>
 		
@@ -77,7 +61,6 @@ if( !$wcfm_is_allow_manage_customer ) {
 							<th><?php _e( 'Name', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Username', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Email', 'wc-frontend-manager' ); ?></th>
-							<th><?php _e( 'Store', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Location', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Orders', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Bookings', 'wc-frontend-manager' ); ?></th>
@@ -93,7 +76,6 @@ if( !$wcfm_is_allow_manage_customer ) {
 							<th><?php _e( 'Name', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Username', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Email', 'wc-frontend-manager' ); ?></th>
-							<th><?php _e( 'Store', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Location', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Orders', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Bookings', 'wc-frontend-manager' ); ?></th>

@@ -25,9 +25,6 @@ if( isset( $wp->query_vars['wcfm-products-manage'] ) && empty( $wp->query_vars['
 		wcfm_restriction_message_show( "Add Product" );
 		return;
 	}
-	if( !apply_filters( 'wcfm_is_allow_pm_add_products', true ) ) {
-		return;
-	}
 	if( !apply_filters( 'wcfm_is_allow_product_limit', true ) ) {
 		if( WCFM_Dependencies::wcfmvm_plugin_active_check() ) {
 			?>
@@ -454,12 +451,6 @@ if( count( $product_types ) == 0 ) {
 				echo '<a id="add_new_product_dashboard" class="add_new_wcfm_ele_dashboard text_tip" href="'.get_wcfm_edit_product_url().'" data-tip="' . __('Add New Product', 'wc-frontend-manager') . '"><span class="wcfmfa fa-cube"></span><span class="text">' . __( 'Add New', 'wc-frontend-manager') . '</span></a>';
 			}
 			
-			if( $product_id && apply_filters( 'wcfm_is_allow_duplicate_product', true ) && apply_filters( 'wcfm_is_allow_product_limit', true ) ) {
-				if( WCFM_Dependencies::wcfmu_plugin_active_check() ) {
-					echo '<a id="wcfm_product_duplicate" class="wcfm_product_duplicate add_new_wcfm_ele_dashboard text_tip" href="#" data-proid="'. $product_id .'" data-tip="' . __('Duplicate Product', 'wc-frontend-manager') . '"><span class="wcfmfa fa-copy"></span><span class="text">' . __( 'Duplicate', 'wc-frontend-manager') . '</span></a>';
-				}
-			}
-			
 			do_action( 'after_wcfm_products_manage_action' );
 			?>
 			<div class="wcfm-clearfix"></div>
@@ -656,16 +647,16 @@ if( count( $product_types ) == 0 ) {
 												<div class="wcfm_add_new_taxonomy_form wcfm_add_new_taxonomy_form_hide">
 													<?php 
 													$WCFM->wcfm_fields->wcfm_generate_form_field( array( "wcfm_new_cat" => array( 'type' => 'text', 'class' => 'wcfm-text wcfm_new_tax_ele wcfm_full_ele' ) ) ); 
-													$args = apply_filters( 'wcfm_wp_dropdown_categories_args', array(
-																																													'show_option_all'    => '',
-																																													'show_option_none'   => __( '-- Parent category --', 'wc-frontend-manager' ),
-																																													'option_none_value'  => '0',
-																																													'hide_empty'         => 0,
-																																													'hierarchical'       => 1,
-																																													'name'               => 'wcfm_new_parent_cat',
-																																													'class'              => 'wcfm-select wcfm_new_parent_taxt_ele wcfm_full_ele',
-																																													'taxonomy'           => 'product_cat',
-																																												) );
+													$args = array(
+																				'show_option_all'    => '',
+																				'show_option_none'   => __( '-- Parent category --', 'wc-frontend-manager' ),
+																				'option_none_value'  => '0',
+																				'hide_empty'         => 0,
+																				'hierarchical'       => 1,
+																				'name'               => 'wcfm_new_parent_cat',
+																				'class'              => 'wcfm-select wcfm_new_parent_taxt_ele wcfm_full_ele',
+																				'taxonomy'           => 'product_cat',
+																			);
 													wp_dropdown_categories( $args );
 													?>
 													<button type="button" data-taxonomy="product_cat" class="button wcfm_add_category_bt wcfm_add_taxonomy_bt"><?php _e( 'Add', 'wc-frontend-manager' ); ?></button>

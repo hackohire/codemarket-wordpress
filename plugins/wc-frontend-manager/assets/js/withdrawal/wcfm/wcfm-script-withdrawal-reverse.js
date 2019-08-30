@@ -1,6 +1,6 @@
 jQuery(document).ready(function($) {
 		
-	$status_type = $('#dropdown_status_type').val();
+	$status_type = 'pending';
 	$withdrawal_vendor = '';
 		
 	$wcfm_reverse_withdrawal_requests_table = $('#wcfm-reverse-withdrawal-requests').DataTable( {

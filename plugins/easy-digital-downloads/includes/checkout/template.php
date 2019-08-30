@@ -972,23 +972,15 @@ function edd_checkout_button_next() {
  * @return string
  */
 function edd_checkout_button_purchase() {
+	$color = edd_get_option( 'checkout_color', 'blue' );
+	$color = ( $color == 'inherit' ) ? '' : $color;
+	$style = edd_get_option( 'button_style', 'button' );
+	$label = edd_get_checkout_button_purchase_label();
 
 	ob_start();
-
-	$enabled_gateways = edd_get_enabled_payment_gateways();
-	$cart_total       = edd_get_cart_total();
-
-	if ( ! empty( $enabled_gateways ) || empty( $cart_total ) ) {
-		$color = edd_get_option( 'checkout_color', 'blue' );
-		$color = ( $color == 'inherit' ) ? '' : $color;
-		$style = edd_get_option( 'button_style', 'button' );
-		$label = edd_get_checkout_button_purchase_label();
-
-		?>
-		<input type="submit" class="edd-submit <?php echo $color; ?> <?php echo $style; ?>" id="edd-purchase-button" name="edd-purchase" value="<?php echo $label; ?>"/>
-		<?php
-	}
-
+?>
+	<input type="submit" class="edd-submit <?php echo $color; ?> <?php echo $style; ?>" id="edd-purchase-button" name="edd-purchase" value="<?php echo $label; ?>"/>
+<?php
 	return apply_filters( 'edd_checkout_button_purchase', ob_get_clean() );
 }
 

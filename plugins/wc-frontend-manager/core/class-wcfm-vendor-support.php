@@ -42,7 +42,7 @@ class WCFM_Vendor_Support {
 					add_filter( 'wcfm_is_admin_fee_mode', array( &$this, 'wcfm_is_admin_fee_mode' ) );
 				}
 				
-				if( !wcfm_is_vendor() && apply_filters( 'wcfm_is_allow_commission_manage', true ) && apply_filters( 'wcfm_is_allow_view_commission', true ) ) {
+				if( !wcfm_is_vendor() && apply_filters( 'wcfm_is_allow_commission_manage', true ) ) {
 					// Associate Vendor
 					add_action( 'end_wcfm_products_manage', array( &$this, 'wcfm_associate_vendor' ), 490 );
 					add_action( 'after_wcfm_products_manage_meta_save', array( &$this, 'wcfm_associate_vendor_save' ), 490, 2 );
@@ -425,7 +425,7 @@ class WCFM_Vendor_Support {
 			if( $wcfm_associate_vendor ) $vendor_arr = array( $wcfm_associate_vendor => $this->wcfm_get_vendor_store_name_by_vendor($wcfm_associate_vendor) ); 
 			?>
 			<!-- collapsible 11.5 - WCFM Vendor Association -->
-			<div class="page_collapsible products_manage_vendor_association simple variable grouped external booking" id="wcfm_products_manage_form_vendor_association_head"><label class="wcfmfa fa-user-alt fa-user-alt"></label><?php _e('Store', 'wc-frontend-manager'); ?><span></span></div>
+			<div class="page_collapsible products_manage_vendor_association simple variable grouped external booking" id="wcfm_products_manage_form_vendor_association_head"><label class="wcfmfa fa-user-alt fa-user-alt"></label><?php _e('Vendor', 'wc-frontend-manager'); ?><span></span></div>
 			<div class="wcfm-container simple variable external grouped booking">
 				<div id="wcfm_products_manage_form_vendor_association_expander" class="wcfm-content">
 					<?php
@@ -790,11 +790,6 @@ class WCFM_Vendor_Support {
         $vendor_role->add_cap( 'upload_files' );
         $vendor_role->add_cap( 'unfiltered_html' );
         
-        // WooCommerce
-        $vendor_role->add_cap( 'manage_woocommerce' );
-        $vendor_role->add_cap( 'publish_shop_orders' );
-        $vendor_role->add_cap( 'list_users' );
-        
         // WooCommerce POS Capability
         $vendor_role->add_cap( 'manage_woocommerce_pos' );
         $vendor_role->add_cap( 'access_woocommerce_pos' );
@@ -805,14 +800,8 @@ class WCFM_Vendor_Support {
 				if( wcfm_is_booking() ) {
 					if( isset( $options['manage_booking'] ) && $options[ 'manage_booking' ] == 'yes' ) {
 						$vendor_role->remove_cap( 'manage_bookings' );
-						$vendor_role->remove_cap( 'manage_bookings_settings' );
-						$vendor_role->remove_cap( 'manage_bookings_timezones' );
-						$vendor_role->remove_cap( 'manage_bookings_connection' );
 					} else {
 						$vendor_role->add_cap( 'manage_bookings' );
-						$vendor_role->add_cap( 'manage_bookings_settings' );
-						$vendor_role->add_cap( 'manage_bookings_timezones' );
-						$vendor_role->add_cap( 'manage_bookings_connection' );
 					}
 				}
 				
@@ -1081,7 +1070,7 @@ class WCFM_Vendor_Support {
 	public function wcfm_get_vendor_logo_by_vendor( $vendor_id ) {
 		global $WCFM, $wpdb, $WCMp;
   	
-  	$store_logo = apply_filters( 'wcfmmp_store_default_logo', $WCFM->plugin_url . 'assets/images/wcfmmp-blue.png' );
+  	$store_logo = '';
   	
   	if( !$vendor_id ) return $store_logo;
   	$vendor_id = absint( $vendor_id );
@@ -1587,13 +1576,7 @@ class WCFM_Vendor_Support {
 			if( !empty( $gross_sales_whole_week ) ) {
 				foreach( $gross_sales_whole_week as $net_sale_whole_week ) {
 					try {
-						if( apply_filters( 'wcfmmmp_gross_sales_respect_setting', true ) ) {
-							$gross_sales += (float) $WCFMmp->wcfmmp_commission->wcfmmp_get_commission_meta( $net_sale_whole_week->ID, 'gross_total' );
-						} else {
-							$gross_sales += (float) $WCFMmp->wcfmmp_commission->wcfmmp_get_commission_meta( $net_sale_whole_week->ID, 'gross_sales_total' );
-						}
-						
-						/*if( $WCFMmp->wcfmmp_vendor->is_vendor_deduct_discount( $vendor_id, $net_sale_whole_week->order_id ) ) {
+						if( $WCFMmp->wcfmmp_vendor->is_vendor_deduct_discount( $vendor_id, $net_sale_whole_week->order_id ) ) {
 							$gross_sales += (float) sanitize_text_field( $net_sale_whole_week->item_total );
 						} else {
 							$gross_sales += (float) sanitize_text_field( $net_sale_whole_week->item_sub_total );
@@ -1609,7 +1592,7 @@ class WCFM_Vendor_Support {
 							if( $is_vendor_get_tax ) {
 								$gross_sales += (float) $WCFMmp->wcfmmp_commission->wcfmmp_get_commission_meta( $net_sale_whole_week->ID, 'gross_shipping_tax' );
 							}
-						}*/
+						}
 						
 						
 						// Deduct Refunded Amount
@@ -2212,109 +2195,6 @@ class WCFM_Vendor_Support {
 		if( empty($vendor_order_data) ) { $is_order_for_vendor = false; }
 		
 		return $is_order_for_vendor;
-	}
-	
-	function wcfm_is_component_for_vendor( $component_id, $component = '', $current_vendor = '' ) {
-  	global $WCFM, $wpdb;
-  	
-  	$is_component_for_vendor = true;
-  	if( !wcfm_is_marketplace() ) return $is_component_for_vendor;
-  	if( !wcfm_is_vendor() ) return $is_component_for_vendor;
-  	if( !$component ) return $is_component_for_vendor;
-  	
-  	$component_id = absint($component_id);
-  	
-  	if( !$component_id ) return $is_component_for_vendor;
-  	
-  	if( !$current_vendor ) {
-			$current_vendor   = apply_filters( 'wcfm_current_vendor_id', get_current_user_id() );
-		}
-  	
-  	switch( $component ) {
-  		
-  		case 'article':
-				$article = get_post( $component_id );
-				$author_id = $article->post_author;
-				if( $author_id ) {
-					if( $current_vendor != $author_id ) $is_component_for_vendor = false;
-				}
-			break;
-			
-			case 'product':
-				$article = get_post( $component_id );
-				$author_id = $article->post_author;
-				if( $author_id ) {
-					if( $current_vendor != $author_id ) $is_component_for_vendor = false;
-				}
-			break;
-			
-			case 'coupon':
-				$coupon = get_post( $component_id );
-				$author_id = $coupon->post_author;
-				if( $author_id ) {
-					if( $current_vendor != $author_id ) $is_component_for_vendor = false;
-				}
-			break;
-			
-			case 'resource':
-				$resource = get_post( $component_id );
-				$author_id = $resource->post_author;
-				if( $author_id ) {
-					if( $current_vendor != $author_id ) $is_component_for_vendor = false;
-				}
-			break;
-  		
-  	  case 'order':
-				$sql = "SELECT * FROM {$wpdb->prefix}wcfm_marketplace_orders AS commission";
-				$sql .= " WHERE 1=1";
-				$sql .= " AND commission.order_id = {$component_id}";
-				$sql .= " AND commission.vendor_id = {$current_vendor}";
-				$vendor_order_data = $wpdb->get_results( $sql );
-				if( empty($vendor_order_data) ) { $is_component_for_vendor = false; }
-			break;
-			
-			case 'booking':
-				$booking           = new WC_Booking( $component_id );
-				$product_id        = $booking->get_product_id( 'edit' );
-				$booking_vendor_id = $this->wcfm_get_vendor_id_from_product( $product_id );
-				if( empty($booking_vendor_id) || ( $booking_vendor_id != $current_vendor ) ) { $is_component_for_vendor = false; }
-			break;
-			
-			case 'inquiry':
-				$sql = "SELECT * FROM {$wpdb->prefix}wcfm_enquiries AS commission";
-				$sql .= " WHERE 1=1";
-				$sql .= " AND commission.ID = {$component_id}";
-				$sql .= " AND commission.vendor_id = {$current_vendor}";
-				$vendor_order_data = $wpdb->get_results( $sql );
-				if( empty($vendor_order_data) ) { $is_component_for_vendor = false; }
-			break;
-			
-			case 'support':
-				$sql = "SELECT * FROM {$wpdb->prefix}wcfm_support AS commission";
-				$sql .= " WHERE 1=1";
-				$sql .= " AND commission.ID = {$component_id}";
-				$sql .= " AND commission.vendor_id = {$current_vendor}";
-				$vendor_support_data = $wpdb->get_results( $sql );
-				if( empty($vendor_support_data) ) { $is_component_for_vendor = false; }
-			break;
-			
-			case 'delivery':
-				$delivery_vendor_id = get_user_meta( $component_id, '_wcfm_vendor', true );
-				if( empty($delivery_vendor_id) || ( $delivery_vendor_id != $current_vendor ) ) { $is_component_for_vendor = false; }
-			break;
-			
-			case 'customer':
-				$customer_vendor_id = get_user_meta( $component_id, '_wcfm_vendor', true );
-				if( empty($customer_vendor_id) || ( $customer_vendor_id != $current_vendor ) ) { $is_component_for_vendor = false; }
-			break;
-			
-			case 'staff':
-				$staff_vendor_id = get_user_meta( $component_id, '_wcfm_vendor', true );
-				if( empty($staff_vendor_id) || ( $staff_vendor_id != $current_vendor ) ) { $is_component_for_vendor = false; }
-			break;
-		}
-		
-		return $is_component_for_vendor;
 	}
   
   function wcfm_get_vendor_email_from_product( $product_id ) {

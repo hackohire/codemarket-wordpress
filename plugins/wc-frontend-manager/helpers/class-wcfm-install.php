@@ -218,14 +218,6 @@ class WCFM_Install {
 															PRIMARY KEY (`ID`)
 															) $collate;";
 															
-		$create_tables_query[] = "CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "wcfm_enquiries_meta` (
-															`ID` bigint(20) NOT NULL AUTO_INCREMENT,
-															`enquiry_id` bigint(20) NOT NULL default 0,
-															`key` VARCHAR(200) NOT NULL,
-															`value` longtext NOT NULL,
-															PRIMARY KEY (`ID`)
-															) $collate;";		
-															
 		$create_tables_query[] = "CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "wcfm_enquiries_response` (
 															`ID` bigint(20) NOT NULL AUTO_INCREMENT,
 															`enquiry_id` bigint(20) NOT NULL default 0,
@@ -240,13 +232,13 @@ class WCFM_Install {
 															PRIMARY KEY (`ID`)
 															) $collate;";					
 															
-		$create_tables_query[] = "CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "wcfm_enquiries_response_meta` (
+		$create_tables_query[] = "CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "wcfm_enquiries_meta` (
 															`ID` bigint(20) NOT NULL AUTO_INCREMENT,
-															`enquiry_response_id` bigint(20) NOT NULL default 0,
+															`enquiry_id` bigint(20) NOT NULL default 0,
 															`key` VARCHAR(200) NOT NULL,
 															`value` longtext NOT NULL,
 															PRIMARY KEY (`ID`)
-															) $collate;";		
+															) $collate;";													
 															
 		$create_tables_query[] = "CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "wcfm_support` (
 															`ID` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -266,15 +258,6 @@ class WCFM_Install {
 															PRIMARY KEY (`ID`)
 															) $collate;";
 															
-		$create_tables_query[] = "CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "wcfm_support_meta` (
-															`ID` bigint(20) NOT NULL AUTO_INCREMENT,
-															`support_id` bigint(20) NOT NULL default 0,
-															`key` VARCHAR(200) NOT NULL,
-															`value` longtext NOT NULL,
-															`type` VARCHAR(200) NOT NULL,
-															PRIMARY KEY (`ID`)
-															) $collate;";	
-															
 		$create_tables_query[] = "CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "wcfm_support_response` (
 															`ID` bigint(20) NOT NULL AUTO_INCREMENT,
 															`support_id` bigint(20) NOT NULL default 0,
@@ -288,14 +271,16 @@ class WCFM_Install {
 															`posted` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,	
 															PRIMARY KEY (`ID`)
 															) $collate;";	
-		
-		$create_tables_query[] = "CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "wcfm_support_response_meta` (
+															
+		$create_tables_query[] = "CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "wcfm_support_meta` (
 															`ID` bigint(20) NOT NULL AUTO_INCREMENT,
-															`support_response_id` bigint(20) NOT NULL default 0,
+															`support_id` bigint(20) NOT NULL default 0,
 															`key` VARCHAR(200) NOT NULL,
 															`value` longtext NOT NULL,
+															`type` VARCHAR(200) NOT NULL,
 															PRIMARY KEY (`ID`)
-															) $collate;";			
+															) $collate;";				
+		
 															
 		$create_tables_query[] = "CREATE TABLE IF NOT EXISTS `" . $wpdb->prefix . "wcfm_following_followers` (
 															`ID` bigint(20) NOT NULL AUTO_INCREMENT,
