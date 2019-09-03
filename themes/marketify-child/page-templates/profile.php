@@ -3,12 +3,18 @@
  * Template Name:  Profile Page
  * @package Child Marketify
  */
+ if(isset($_REQUEST['request']))
+ {?>
+     <style>.my-add-product,.hidefie{ display:none}</style>
+ <?php }
+ else
+ {
 if (!is_user_logged_in())
 {
     $link = site_url() . '/register';
     wp_redirect($link);
 }
-
+}
 global $wpdb;
 
 $author	 = get_current_user_id();
@@ -282,8 +288,8 @@ wp_enqueue_script('custom_script');
 					    <th>Title</th>
 					    <th>Image</th>
 					    <th>Price</th>
-					    <th>Edit</th>
-					    <th>Delete</th>
+					    <th class="hidefie">Edit</th>
+					    <th class="hidefie">Delete</th>
 					</tr>
 				    </thead>
 				    <tbody>
@@ -317,9 +323,9 @@ wp_enqueue_script('custom_script');
 
 						    <td class="fes-order-list-td"><?php echo edd_price($data->ID); ?></td>
 
-						    <td class="cm_edit_product_btn"><a href="<?php echo $edit_product_link . $data->ID; ?>">Edit</a></td>
+						    <td class="cm_edit_product_btn hidefie"><a href="<?php echo $edit_product_link . $data->ID; ?>">Edit</a></td>
 
-						    <td class="cm_delete_product_btn" data-id="<?php echo $data->ID; ?>">Delete</td>
+						    <td class="hidefie cm_delete_product_btn" data-id="<?php echo $data->ID; ?>">Delete</td>
 						</tr>  
 						<?php
 					    }
@@ -375,8 +381,8 @@ wp_enqueue_script('custom_script');
 					    <th>Title</th>
 					    <th>Image</th>
 					    <th>Price</th>
-					    <th>Edit</th>
-					    <th>Delete</th>
+					    <th class="hidefie">Edit</th>
+					    <th class="hidefie">Delete</th>
 					</tr>
 				    </thead>
 				    <tbody>
@@ -410,9 +416,9 @@ wp_enqueue_script('custom_script');
 
 						    <td class="fes-order-list-td"><?php echo edd_price($data->ID); ?></td>
 
-						    <td class="cm_edit_product_btn"><a href="<?php echo $edit_product_link . $data->ID; ?>">Edit</a></td>
+						    <td class="cm_edit_product_btn hidefie"><a href="<?php echo $edit_product_link . $data->ID; ?>">Edit</a></td>
 
-						    <td class="cm_delete_product_btn" data-id="<?php echo $data->ID; ?>">Delete</td>
+						    <td class="cm_delete_product_btn hidefie" data-id="<?php echo $data->ID; ?>">Delete</td>
 						</tr>  
 						<?php
 					    }
