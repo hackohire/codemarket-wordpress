@@ -80,16 +80,15 @@ function help_request_list_callback($atts)
     ob_start();
 
     $args = [
-	'post_type'	 => 'download',
-	'post_status'	 => 'publish',
-	'download_category' =>'',
-	'tax_query'	 => array(
+	'post_type'		 => 'download',
+	'post_status'		 => 'publish',
+	'download_category'	 => '',
+	'tax_query'		 => array(
 	    array(
 		'taxonomy'	 => 'types',
 		'field'		 => 'slug',
 		'terms'		 => ['help-request',],
 	    ),
-	    
 	),
     ];
 
@@ -103,60 +102,59 @@ function help_request_list_callback($atts)
 	?>
 	<h3 class="widget-title widget-title--home section-title"><span><?php echo $atts['title']; ?></span></h3>
 
-<div class="table-responsive">	<table class="table fes-table table-condensed table-striped tablesorter {sortlist: [[2,0]]}" id="myTable  help_request_list">
+	<div class="table-responsive">	<table class="table fes-table table-condensed table-striped tablesorter {sortlist: [[2,0]]}" id="myTable  help_request_list">
 
-	    <thead>
-		<tr>
-		    <th>Title</th>
-		    <th>Price</th>
-		    <th>Image</th>
-		    <th>User</th>
-		    <th>Category</th>
-		    <th>Date</th>
-		</tr>
-	    </thead>
+		<thead>
+		    <tr>
+			<th>Title</th>
+			<th>Price</th>
+			<th>Image</th>
+			<th>User</th>
+			<th>Category</th>
+			<th>Date</th>
+		    </tr>
+		</thead>
 
-	    <tbody>								
-		<?php
-	
-		foreach ($arrDownload->posts as $data)
-		{
-		    //	print_r($arrDownload);
-		    $product_link	 = get_the_permalink($data->ID);
-		    $img_url	 = get_the_post_thumbnail_url($data->ID);
-		    $user_name	 = get_userdata($data->post_author);
-		    $date		 = date_create($data->post_date);
-		    
-		 $cateogry = get_the_term_list( $data->ID, 'download_category','<ul class="styles"><li>', ',</li><li>', '</li></ul>');
+		<tbody>								
+		    <?php
+		    foreach ($arrDownload->posts as $data)
+		    {
+			//	print_r($arrDownload);
+			$product_link	 = get_the_permalink($data->ID);
+			$img_url	 = get_the_post_thumbnail_url($data->ID);
+			$user_name	 = get_userdata($data->post_author);
+			$date		 = date_create($data->post_date);
+
+			$cateogry = get_the_term_list($data->ID, 'download_category', '<ul class="styles"><li>', ',</li><li>', '</li></ul>');
+			?>
+	    	<td class="fes-order-list-td widget">
+	    	    <a href="<?php echo $product_link ?>" title="View" class="view-order-fes"><?php echo $data->post_title; ?></a>
+	    	</td>				
+
+	    	<td class="fes-order-list-td"><?php echo edd_price($data->ID); ?></td>
+
+		    <?php
+		    if ($img_url != '')
+		    {
+			echo '<td><img width="50" src="' . $img_url . '" ></td>';
+		    }
+		    else
+		    {
+			echo '<td></td>';
+		    }
 		    ?>
-	        <td class="fes-order-list-td widget">
-	    	<a href="<?php echo $product_link ?>" title="View" class="view-order-fes"><?php echo $data->post_title; ?></a>
-	        </td>				
 
-	        <td class="fes-order-list-td"><?php echo edd_price($data->ID); ?></td>
+	    	<td><?php echo $user_name->data->display_name; ?></td>
+	    	<td><?php echo $cateogry ?></td>
 
-		<?php
-		if ($img_url != '')
-		{
-		    echo '<td><img width="50" src="' . $img_url . '" ></td>';
+	    	<td><?php echo date_format($date, "Y-m-d"); ?></td>
+
+	    	</tr>
+		    <?php
 		}
-		else
-		{
-		    echo '<td></td>';
-		}
-		?>
-
-	        <td><?php echo $user_name->data->display_name; ?></td>
-	         <td><?php  echo $cateogry ?></td>
-
-	        <td><?php echo date_format($date, "Y-m-d"); ?></td>
-
-	    </tr>
-	    <?php
-	}
-	?>							
-	</tbody>
-	</table>
+		?>							
+		</tbody>
+	    </table>
 	</div>
 	<?php
     }
@@ -221,56 +219,56 @@ function product_list_callback($atts)
 
 	<div class="table-responsive"><table class="table fes-table table-condensed table-striped  tablesorter {sortlist: [[2,0]]}" id="myTable help_request_list">
 
-	    <thead>
-		<tr>
-		    <th width="40%">Title</th>
-		    <th>Price</th>
-		    <th>Image</th>
-		    <th>User</th>
-		      <th>Category</th>
-		    <th>Date</th>
-		</tr>
-	    </thead>
+		<thead>
+		    <tr>
+			<th width="40%">Title</th>
+			<th>Price</th>
+			<th>Image</th>
+			<th>User</th>
+			<th>Category</th>
+			<th>Date</th>
+		    </tr>
+		</thead>
 
-	    <tbody>								
-		<?php
-		foreach ($arrProduct->posts as $product)
-		{
-		    $product_link	 = get_the_permalink($product->ID);
-		    $img_url	 = get_the_post_thumbnail_url($product->ID);
-		    $user_name	 = get_userdata($product->post_author);
-		    $date		 = date_create($product->post_date);
-		    $cateogry = get_the_term_list( $product->ID, 'download_category','<ul class="styles"><li>', ',</li><li>', '</li></ul>');
+		<tbody>								
+		    <?php
+		    foreach ($arrProduct->posts as $product)
+		    {
+			$product_link	 = get_the_permalink($product->ID);
+			$img_url	 = get_the_post_thumbnail_url($product->ID);
+			$user_name	 = get_userdata($product->post_author);
+			$date		 = date_create($product->post_date);
+			$cateogry	 = get_the_term_list($product->ID, 'download_category', '<ul class="styles"><li>', ',</li><li>', '</li></ul>');
+			?>
+	    	<td class="fes-order-list-td widget">
+	    	    <a href="<?php echo $product_link ?>" title="View" class="view-order-fes"><?php echo $product->post_title; ?></a>
+	    	</td>				
+
+	    	<td class="fes-order-list-td"><?php echo edd_price($product->ID); ?></td>
+
+		    <?php
+		    if ($img_url != '')
+		    {
+			echo '<td><img width="50" src="' . $img_url . '" ></td>';
+		    }
+		    else
+		    {
+			echo '<td></td>';
+		    }
 		    ?>
-	        <td class="fes-order-list-td widget">
-	    	<a href="<?php echo $product_link ?>" title="View" class="view-order-fes"><?php echo $product->post_title; ?></a>
-	        </td>				
 
-	        <td class="fes-order-list-td"><?php echo edd_price($product->ID); ?></td>
+	    	<td><?php echo $user_name->data->display_name; ?></td>
+	    	<td><?php echo $cateogry ?></td>
 
-		<?php
-		if ($img_url != '')
-		{
-		    echo '<td><img width="50" src="' . $img_url . '" ></td>';
+	    	<td><?php echo date_format($date, "Y-m-d"); ?></td>
+
+	    	</tr>
+		    <?php
 		}
-		else
-		{
-		    echo '<td></td>';
-		}
-		?>
-
-	        <td><?php echo $user_name->data->display_name; ?></td>
-	          <td><?php echo $cateogry ?></td>
-
-	        <td><?php echo date_format($date, "Y-m-d"); ?></td>
-
-	    </tr>
-	    <?php
-	}
-	?>							
-	</tbody>
-	</table>
-</div>
+		?>							
+		</tbody>
+	    </table>
+	</div>
 	<?php
 	if ($atts['pagination'] == 'yes')
 	{
@@ -453,7 +451,7 @@ function cm_enqueue_style_script()
     wp_register_style('select2_style', get_stylesheet_directory_uri() . '/assets/css/select2.min.css');
 
     wp_register_script('select2_script', get_stylesheet_directory_uri() . '/assets/js/select2.full.min.js', '', '', true);
-	wp_register_script('custom_script', get_stylesheet_directory_uri() . '/assets/js/custom_script.js', '', '', true);
+    wp_register_script('custom_script', get_stylesheet_directory_uri() . '/assets/js/custom_script.js', '', '', true);
 }
 
 function check_download_category()
@@ -468,8 +466,8 @@ function check_download_category()
 
 	if (empty($term))
 	{
-		$value = ucfirst($value);
-		
+	    $value = ucfirst($value);
+
 	    $data = wp_insert_term(
 		    $value, // the term 
 		    'download_category');
@@ -501,46 +499,95 @@ function user_list_callback($atts)
 
     ob_start();
 
-  $blogusers = get_users( array( 'fields' => array( 'display_name','ID' ) ) );
+    $blogusers = get_users(array('fields' => array('display_name', 'ID')));
 //print_r($blogusers);
-	?>
-	<h3 class="widget-title widget-title--home section-title"><span><?php echo $atts['title']; ?></span></h3>
-<div class="container">
-<div class="table-responsive">	<table class="table fes-table table-condensed table-striped tablesorter {sortlist: [[2,0]]}" id="myTable user_list">
+    ?>
+    <h3 class="widget-title widget-title--home section-title"><span><?php echo $atts['title']; ?></span></h3>
+    <div class="container">
+        <div class="table-responsive">	<table class="table fes-table table-condensed table-striped tablesorter {sortlist: [[2,0]]}" id="myTable user_list">
 
-	    <thead>
-		<tr>
-		    <th>User</th>
-		   <!-- <th>Category</th>-->
-		     <th>No. of Bug Fix</th>
-		</tr>
-	    </thead>
+    	    <thead>
+    		<tr>
+    		    <th>User</th>
+    		   <!-- <th>Category</th>-->
+    		    <th>No. of Bug Fix</th>
+    		</tr>
+    	    </thead>
 
-	    <tbody>								
-		<?php
-		foreach ($blogusers as $user_id)
-		{
-		  
-		$current_user_id = $user_id->ID;
- ?>
-		    <tr>
-		     <td><a href="profile?request=<?php echo $current_user_id; ?>"><?php echo esc_html( $user_id->display_name )  ?></a></td>
-		     <!-- <td><?php //echo $cateogry ?></td>-->
-	        <td class="fes-order-list-td widget">
-	<?php echo count_user_posts($current_user_id,'download'); ?>
-	        </td>	
-	        </tr>
-	    <?php
-	}
-	
-	?>							
-	</tbody>
-	</table></div>
-	</div>
-	<?php
-    
+    	    <tbody>								
+		    <?php
+		    foreach ($blogusers as $user_id)
+		    {
 
-   return ob_get_clean();
+			$current_user_id = $user_id->ID;
+			?>
+			<tr>
+			    <td><a href="profile?request=<?php echo $current_user_id; ?>"><?php echo esc_html($user_id->display_name) ?></a></td>
+			    <!-- <td><?php //echo $cateogry           ?></td>-->
+			    <td class="fes-order-list-td widget">
+				<?php echo count_user_posts($current_user_id, 'download'); ?>
+			    </td>	
+			</tr>
+			<?php
+		    }
+		    ?>							
+    	    </tbody>
+    	</table></div>
+    </div>
+    <?php
+    return ob_get_clean();
 }
 
 add_shortcode('user_list', 'user_list_callback');
+
+function offer_help()
+{
+    $post_id = $_REQUEST['request_id'];
+    $user_id = $_REQUEST['user_id'];
+    $request_status = $_REQUEST['request_status'];
+
+    $message = [];
+
+    if ($post_id != '' && $user_id > 0)
+    {
+	$key	 = 'offer_help_' . $user_id;
+	update_post_meta($post_id, $key, $request_status);
+
+	$message['code']	 = 301;
+	$message['message']	 = 'Your request has been add';
+    }
+    else
+    {
+	$message['code']	 = 404;
+	$message['message']	 = 'Something wrong';
+    }
+
+    echo json_encode($message);
+    wp_die();
+}
+
+add_action('wp_ajax_nopriv_offer_help', 'offer_help');
+add_action('wp_ajax_offer_help', 'offer_help');
+
+function cm_share_product($post_id = 0)
+{
+	$arrShareLink = '';
+	
+	if($post_id != '' && $post_id > 0)
+	{
+		$product_link  = get_the_permalink($post_id);
+		$product_title = get_the_title($post_id);
+		
+		$facebookLink = '//www.facebook.com/sharer.php?u=' . $product_link . '&t=' . urlencode($product_title) . '';
+		$arrShareLink .= '<a href="' . $facebookLink . '" class="cm_share_product text-center d-inline-block p-2 border mr-1" data-toggle="tooltip" data-placement="top" title="Facebook"> <i class="fa fa-facebook"></i></a>';		
+		
+		$a_twitter               = urlencode($product_title) . '&url=' . $product_link;
+		$twitterLink = '//twitter.com/intent/tweet?text=' . str_replace(' ', '+', $a_twitter);
+		$arrShareLink .= '<a href="' . $twitterLink . '" class="cm_share_product text-center d-inline-block p-2 border mr-1" data-toggle="tooltip" data-placement="top" title="Twitter"> <i class="fa fa-twitter"></i></a>';
+		
+		$linkedinLink = '//www.linkedin.com/shareArticle?mini=true&url=' . $product_link . '&title=' . urlencode($product_title) . '';
+		$arrShareLink .= '<a href="' . $linkedinLink . '" class="cm_share_product text-center d-inline-block p-2 border mr-1" data-toggle="tooltip" data-placement="top" title="LinkedIn"> <i class="fa fa-linkedin"></i></a>';
+	}
+	
+	return $arrShareLink;
+}

@@ -3,18 +3,12 @@
  * Template Name:  Profile Page
  * @package Child Marketify
  */
- if(isset($_REQUEST['request']))
- {?>
-     <style>.my-add-product,.hidefie{ display:none}</style>
- <?php }
- else
- {
 if (!is_user_logged_in())
 {
     $link = site_url() . '/register';
     wp_redirect($link);
 }
-}
+
 global $wpdb;
 
 $author	 = get_current_user_id();
@@ -161,7 +155,8 @@ wp_enqueue_script('custom_script');
 				else
 				{
 				    ?>
-    				<li data-tab-id="my-tab-buy">Buy</li>				
+    				<li data-tab-id="my-tab-buy">Buy</li>
+    				<li data-tab-id="my-tab-notification">Notification</li>
 				<?php } ?> </ul>
 
 			    <div class="clear"></div>
@@ -181,6 +176,7 @@ wp_enqueue_script('custom_script');
 			    $arrSell	 = [];
 			    $arrBugsFix	 = [];
 			    $arrHelpRequest	 = [];
+			    $arrOfferHelp	 = [];
 			    $arrInterview	 = [];
 			    $arrRequirment	 = [];
 
@@ -198,6 +194,8 @@ wp_enqueue_script('custom_script');
 				    else if ($type[0]->slug == 'help-request')
 				    {
 					$arrHelpRequest[] = $product_data;
+
+					$arrOfferHelp[] = $product_data->ID;
 				    }
 				    else if ($type[0]->slug == 'interview')
 				    {
@@ -288,8 +286,8 @@ wp_enqueue_script('custom_script');
 					    <th>Title</th>
 					    <th>Image</th>
 					    <th>Price</th>
-					    <th class="hidefie">Edit</th>
-					    <th class="hidefie">Delete</th>
+					    <th>Edit</th>
+					    <th>Delete</th>
 					</tr>
 				    </thead>
 				    <tbody>
@@ -323,9 +321,9 @@ wp_enqueue_script('custom_script');
 
 						    <td class="fes-order-list-td"><?php echo edd_price($data->ID); ?></td>
 
-						    <td class="cm_edit_product_btn hidefie"><a href="<?php echo $edit_product_link . $data->ID; ?>">Edit</a></td>
+						    <td class="cm_edit_product_btn"><a href="<?php echo $edit_product_link . $data->ID; ?>">Edit</a></td>
 
-						    <td class="hidefie cm_delete_product_btn" data-id="<?php echo $data->ID; ?>">Delete</td>
+						    <td class="cm_delete_product_btn" data-id="<?php echo $data->ID; ?>">Delete</td>
 						</tr>  
 						<?php
 					    }
@@ -381,8 +379,8 @@ wp_enqueue_script('custom_script');
 					    <th>Title</th>
 					    <th>Image</th>
 					    <th>Price</th>
-					    <th class="hidefie">Edit</th>
-					    <th class="hidefie">Delete</th>
+					    <th>Edit</th>
+					    <th>Delete</th>
 					</tr>
 				    </thead>
 				    <tbody>
@@ -416,9 +414,9 @@ wp_enqueue_script('custom_script');
 
 						    <td class="fes-order-list-td"><?php echo edd_price($data->ID); ?></td>
 
-						    <td class="cm_edit_product_btn hidefie"><a href="<?php echo $edit_product_link . $data->ID; ?>">Edit</a></td>
+						    <td class="cm_edit_product_btn"><a href="<?php echo $edit_product_link . $data->ID; ?>">Edit</a></td>
 
-						    <td class="cm_delete_product_btn hidefie" data-id="<?php echo $data->ID; ?>">Delete</td>
+						    <td class="cm_delete_product_btn" data-id="<?php echo $data->ID; ?>">Delete</td>
 						</tr>  
 						<?php
 					    }
@@ -432,6 +430,65 @@ wp_enqueue_script('custom_script');
 				    </tbody>
 				</table>
 
+			    </div>
+
+			    <div class="my-tab-panel" id="my-tab-notification" style="display:none">
+				<table class="table fes-table table-condensed table-striped tablesorter {sortlist: [[2,0]]}" id="myTable fes-order-list">
+				    <thead>
+					<tr>
+					    <th>Title</th>
+					    <th>User Name</th>
+					    <th>Status</th>
+					    <th>Action</th>
+					</tr>
+				    </thead>
+				    <tbody>
+					<?php
+					if (count($arrOfferHelp) > 0)
+					{
+					    $offer_help_id = implode(',', $arrOfferHelp);
+
+					    $sql = "SELECT *  FROM `wp_postmeta` WHERE `meta_key` LIKE 'offer_help%' AND post_id IN (" . $offer_help_id . ")";
+
+					    $get_offer_help = $wpdb->get_results($sql, ARRAY_A);
+
+					    if (!empty($get_offer_help))
+					    {
+						foreach ($get_offer_help as $offer_help)
+						{
+							/*
+							echo '<pre>';
+							print_r($offer_help);
+							echo '</pre>';
+							*/
+							
+						    $explode_key	 = explode('_', $offer_help['meta_key']);
+						    $user_id	 = $explode_key[2];
+						    $user_name	 = get_userdata($user_id);
+							$product_link = get_the_permalink($offer_help['post_id']);
+						    
+						    echo '<tr>';
+						    echo '<td><a href="'. $product_link .'">'. get_the_title($offer_help['post_id']) .'</a></td>';
+						    echo '<td>'. $user_name->data->display_name .'</td>';
+						    echo '<td>'. $offer_help['meta_value'] .'</td>';
+						    
+						    echo '<td>';
+							
+							if($offer_help['meta_value'] != 'Reject')
+							{
+						    echo '<a href="JavaScript:Void(0);" class="offer_help_action" data-status="Approve" data-id="' . $offer_help['post_id'] . '" data-user-id="' . $user_id . '">Approve</a>';
+							echo ' | ';
+							echo '<a href="JavaScript:Void(0);" class="offer_help_action" data-status="Reject" data-id="' . $offer_help['post_id'] . '" data-user-id="' . $user_id . '">Reject</a>';
+							}
+						    echo '</td>';
+						    
+						    echo '</tr>';
+						}
+					    }
+					}
+					?>
+				    </tbody>
+				</table>
 			    </div>
 
 			</div>
