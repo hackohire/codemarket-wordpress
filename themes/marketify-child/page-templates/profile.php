@@ -29,506 +29,623 @@ wp_enqueue_script('custom_script');
 
 <?php do_action('marketify_entry_before'); ?>
 
-<div class="container">
-    <div id="content" class="site-content row">
+    <div class="container">
+        <div id="content" class="site-content row">
 
-	<section id="primary" class="content-area col-md-9 col-sm-7 col-xs-12">
-	    <main id="main" class="site-main" role="main">
+            <section id="primary" class="content-area col-md-9 col-sm-7 col-xs-12">
+                <main id="main" class="site-main" role="main">
 
-		<div class="row">
-		    <div class="col-md-2">
-			<div class="my-sales-amount">
-			    <strong class="widget-detail__title"><?php
-				if ($myrows)
-				{
-				    foreach ($myrows as $myrows1)
-				    {
-					echo edd_currency_filter(edd_format_amount($myrows1->sales_value));
-				    }
-				}
-				else
-				{
-				    echo edd_currency_filter(edd_format_amount(0.00));
-				}
-				?></strong> 
-			    <span class="widget-detail__info">Sales Amount</span>
-			</div>
-		    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="my-sales-amount">
+                                <strong class="widget-detail__title"><?php
+                                    if ($myrows)
+                                    {
+                                        foreach ($myrows as $myrows1)
+                                        {
+                                            echo edd_currency_filter(edd_format_amount($myrows1->sales_value));
+                                        }
+                                    }
+                                    else
+                                    {
+                                        echo edd_currency_filter(edd_format_amount(0.00));
+                                    }
+                                    ?></strong>
+                                <span class="widget-detail__info">Sales Amount</span>
+                            </div>
+                        </div>
 
-		    <div class="col-md-10">
-			<div class="my-buy-sales-products">
+                        <div class="col-md-10">
+                            <div class="my-buy-sales-products">
 
-			    <ul class="my-tab-menu">
-				<?php
-				if (isset($_REQUEST['req_id']))
-				{
-				    ?>
-    				<script>
-    				    $(document).ready(function ()
-    				    {
+                                <ul class="my-tab-menu">
+                                    <?php
+                                    if (isset($_REQUEST['req_id']))
+                                    {
+                                        ?>
+                                        <script>
+                                            $(document).ready(function ()
+                                            {
 
-    					$('.types option:eq(2)').prop('selected', true);
-    					$('.types option:eq(1)').hide();
-    					$('.types option:eq(3)').hide();
-    					$('.types option:eq(4)').hide();
+                                                $('.types option:eq(2)').prop('selected', true);
+                                                $('.types option:eq(1)').hide();
+                                                $('.types option:eq(3)').hide();
+                                                $('.types option:eq(4)').hide();
 
-    				    });
-    				</script>
-				    <?php
-				}
-				else if (isset($_REQUEST['sell']))
-				{
-				    ?>
-    				<script>
-    				    $(document).ready(function ()
-    				    {
+                                            });
+                                        </script>
+                                    <?php
+                                    }
+                                    else if (isset($_REQUEST['sell']))
+                                    {
+                                    ?>
+                                        <script>
+                                            $(document).ready(function ()
+                                            {
 
-    					$('.types option:eq(2)').hide();
-    					$('.types option:eq(1)').prop('selected', true);
-    					$('.types option:eq(3)').hide();
-    					$('.types option:eq(4)').hide();
+                                                $('.types option:eq(2)').hide();
+                                                $('.types option:eq(1)').prop('selected', true);
+                                                $('.types option:eq(3)').hide();
+                                                $('.types option:eq(4)').hide();
 
-    				    });
-    				</script>
-    				<li class="active" data-tab-id="my-tab-sell">Sell</li>
-				    <?php
-				}
-				else if (isset($_REQUEST['interview']))
-				{
-				    ?>
-    				<li class="active">Interview</li>
-    				<script>
-    				    $(document).ready(function ()
-    				    {
+                                            });
+                                        </script>
+                                        <li class="active" data-tab-id="my-tab-sell">Sell</li>
+                                    <?php
+                                    }
+                                    else if (isset($_REQUEST['interview']))
+                                    {
+                                    ?>
+                                        <li class="active">Interview</li>
+                                        <script>
+                                            $(document).ready(function ()
+                                            {
 
-    					$('.types option:eq(2)').hide();
-    					$('.types option:eq(1)').hide();
-    					$('.types option:eq(3)').prop('selected', true);
-    					$('.types option:eq(4)').hide();
+                                                $('.types option:eq(2)').hide();
+                                                $('.types option:eq(1)').hide();
+                                                $('.types option:eq(3)').prop('selected', true);
+                                                $('.types option:eq(4)').hide();
 
-    				    });
-    				</script>
+                                            });
+                                        </script>
 
-				    <?php
-				}
-				else
-				{
-				    ?>
-    				<li class="active" data-tab-id="my-tab-sell">Sell</li><?php }
-				?>
-				<?php
-				if (isset($_REQUEST['req_id']))
-				{
-				    ?><style>#my-tab-sell{display:none}</style>			
-    				<li class="active" data-tab-id="my-tab-help-request">Request Help</li>
+                                    <?php
+                                    }
+                                    else
+                                    {
+                                    ?>
+                                        <li class="active" data-tab-id="my-tab-sell">Sell</li><?php }
+                                    ?>
+                                    <?php
+                                    if (isset($_REQUEST['req_id']))
+                                    {
+                                        ?><style>#my-tab-sell{display:none}</style>
+                                        <li class="active" data-tab-id="my-tab-help-request">Request Help</li>
 
-				    <?php
-				}
-				elseif (isset($_REQUEST['sell']))
-				{
-				    ?>
-    				<style>.my-tab-panel{display:none}</style><?php
-				}
-				elseif (isset($_REQUEST['interview']))
-				{
-				    
-				}
-				else
-				{
-				    ?>
-    				<li data-tab-id="my-tab-help-request">Request Help</li>
-				<?php } ?>
-				<?php
-				if (isset($_REQUEST['req_id']))
-				{
-				    ?>
-				    <?php
-				}
-				elseif (isset($_REQUEST['sell']))
-				{
-				    
-				}
-				elseif (isset($_REQUEST['interview']))
-				{
-				    
-				}
-				else
-				{
-				    ?>
-    				<li data-tab-id="my-tab-buy">Buy</li>
-    				<li data-tab-id="my-tab-notification">Notification</li>
-				<?php } ?> </ul>
+                                        <?php
+                                    }
+                                    elseif (isset($_REQUEST['sell']))
+                                    {
+                                        ?>
+                                        <style>.my-tab-panel{display:none}</style><?php
+                                    }
+                                    elseif (isset($_REQUEST['interview']))
+                                    {
 
-			    <div class="clear"></div>
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                        <li data-tab-id="my-tab-help-request">Request Help</li>
+                                    <?php } ?>
+                                    <?php
+                                    if (isset($_REQUEST['req_id']))
+                                    {
+                                        ?>
+                                        <?php
+                                    }
+                                    elseif (isset($_REQUEST['sell']))
+                                    {
 
-			    <?php
-			    $current_user_id = get_current_user_id();
+                                    }
+                                    elseif (isset($_REQUEST['interview']))
+                                    {
 
-			    $args = [
-				'post_type'	 => 'download',
-				'author'	 => $current_user_id,
-				'post_status'	 => 'publish',
-			    ];
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                        <li data-tab-id="my-tab-buy">Buy</li>
+                                        <li data-tab-id="my-tab-notification">Notification</li>
+                                    <?php } ?> </ul>
 
-			    $arrDownload = new WP_Query($args);
-			    wp_reset_query();
+                                <div class="clear"></div>
 
-			    $arrSell	 = [];
-			    $arrBugsFix	 = [];
-			    $arrHelpRequest	 = [];
-			    $arrOfferHelp	 = [];
-			    $arrInterview	 = [];
-			    $arrRequirment	 = [];
+                                <?php
+                                $current_user_id = get_current_user_id();
 
-			    if ($arrDownload->found_posts > 0)
-			    {
-				foreach ($arrDownload->posts as $product_data)
-				{
-				    $type = get_the_terms($product_data->ID, 'types');
+                                $args = [
+                                    'post_type'	 => 'download',
+                                    'author'	 => $current_user_id,
+                                    'post_status'	 => 'publish',
+                                ];
 
-				    if ($type[0]->slug == 'bug-fix')
-				    {
-					//$arrBugsFix[] = $product_data;
-					$arrSell[] = $product_data;
-				    }
-				    else if ($type[0]->slug == 'help-request')
-				    {
-					$arrHelpRequest[] = $product_data;
+                                $arrDownload = new WP_Query($args);
+                                wp_reset_query();
 
-					$arrOfferHelp[] = $product_data->ID;
-				    }
-				    else if ($type[0]->slug == 'interview')
-				    {
-					$arrInterview[] = $product_data;
-				    }
-				    else if ($type[0]->slug == 'requirment')
-				    {
-					$arrRequirment[] = $product_data;
-				    }
-				    else
-				    {
-					$arrSell[] = $product_data;
-				    }
-				}
-			    }
+                                $arrSell	 = [];
+                                $arrBugsFix	 = [];
+                                $arrHelpRequest	 = [];
+                                $arrOfferHelp	 = [];
+                                $arrInterview	 = [];
+                                $arrRequirment	 = [];
 
-			    $site_url = get_site_url();
-			    ?>
-			    <?php
-			    if (isset($_REQUEST['req_id']))
-			    {
-				?>
-				<?php
-			    }
-			    elseif (isset($_REQUEST['sell']))
-			    {
-				
-			    }
-			    else if (isset($_REQUEST['interview']))
-			    {
-				?>
-    			    <style>
-    				#my-tab-sell{display:none}
-    			    </style>
-				<?php
-			    }
-			    else
-			    {
-				if (isset($_REQUEST['post_id']))
-				{
-				    
-				}
-				else
-				{
-				    ?>
-				    <div class="my-add-product">
-					<a class="show_product_form" href="JavaScript:Void(0);"><i class="fas fa-plus-square"></i> Add</a>
-				    </div>
-				    <?php
-				}
-			    }
-			    ?>
-			    <div class="clear"></div>
-			    <?php
-			    $form_style = '';
-			    if (isset($_REQUEST['req_id']))
-			    {
-				$form_style = '';
-			    }
-			    else if (isset($_REQUEST['sell']))
-			    {
-				$form_style = '';
-			    }
-			    else if (isset($_REQUEST['interview']))
-			    {
-				$form_style = '';
-			    }
-			    else if (isset($_REQUEST['post_id']))
-			    {
-				$form_style = '';
-			    }
-			    else
-			    {
-				$form_style = 'style="display:none"';
-			    }
+                                if ($arrDownload->found_posts > 0)
+                                {
+                                    foreach ($arrDownload->posts as $product_data)
+                                    {
+                                        $type = get_the_terms($product_data->ID, 'types');
 
-			    $edit_product_link = $site_url . '/profile/?task=edit-product&post_id=';
-			    ?>
-			    <div class="add_product_form" <?php echo $form_style ?>>
-				<?php echo EDD_FES()->forms->render_submission_form(); ?>
-			    </div>
+                                        if ($type[0]->slug == 'bug-fix')
+                                        {
+                                            //$arrBugsFix[] = $product_data;
+                                            $arrSell[] = $product_data;
+                                        }
+                                        else if ($type[0]->slug == 'help-request')
+                                        {
+                                            $arrHelpRequest[] = $product_data;
 
-			    <div class="my-tab-panel" id="my-tab-sell">				
+                                            $arrOfferHelp[] = $product_data->ID;
+                                        }
+                                        else if ($type[0]->slug == 'interview')
+                                        {
+                                            $arrInterview[] = $product_data;
+                                        }
+                                        else if ($type[0]->slug == 'requirment')
+                                        {
+                                            $arrRequirment[] = $product_data;
+                                        }
+                                        else
+                                        {
+                                            $arrSell[] = $product_data;
+                                        }
+                                    }
+                                }
 
-				<table class="table fes-table table-condensed table-striped tablesorter {sortlist: [[2,0]]}" id="myTable fes-order-list">
-				    <thead>
-					<tr>
-					    <th>Title</th>
-					    <th>Image</th>
-					    <th>Price</th>
-					    <th>Edit</th>
-					    <th>Delete</th>
-					</tr>
-				    </thead>
-				    <tbody>
+                                $site_url = get_site_url();
+                                ?>
+                                <?php
+                                if (isset($_REQUEST['req_id']))
+                                {
+                                    ?>
+                                    <?php
+                                }
+                                elseif (isset($_REQUEST['sell']))
+                                {
 
-					<?php
-					if (count($arrSell) > 0)
-					{
-					    foreach ($arrSell as $data)
-					    {
-						?>
-						<tr>
+                                }
+                                else if (isset($_REQUEST['interview']))
+                                {
+                                    ?>
+                                    <style>
+                                        #my-tab-sell{display:none}
+                                    </style>
+                                    <?php
+                                }
+                                else
+                                {
+                                    if (isset($_REQUEST['post_id']))
+                                    {
 
-						    <td class="fes-order-list-td widget">
-							<?php
-							if ($data->post_status == 'publish')
-							{
-							    $product_link = get_the_permalink($data->ID);
-							}
-							else
-							{
-							    $product_link = '#';
-							}
-							?>
-							<a href="<?php echo $product_link ?>" title="View" class="view-order-fes"><?php echo $data->post_title; ?></a>
-						    </td>
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                        <div class="my-add-product">
+                                            <a class="show_product_form" href="JavaScript:Void(0);"><i class="fas fa-plus-square"></i> Add</a>
+                                        </div>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                                <div class="clear"></div>
+                                <?php
+                                $form_style = '';
+                                if (isset($_REQUEST['req_id']))
+                                {
+                                    $form_style = '';
+                                }
+                                else if (isset($_REQUEST['sell']))
+                                {
+                                    $form_style = '';
+                                }
+                                else if (isset($_REQUEST['interview']))
+                                {
+                                    $form_style = '';
+                                }
+                                else if (isset($_REQUEST['post_id']))
+                                {
+                                    $form_style = '';
+                                }
+                                else
+                                {
+                                    $form_style = 'style="display:none"';
+                                }
 
-						    <?php
-						    $img_url = get_the_post_thumbnail_url($data->ID);
-						    ?>
-						    <td><img width="50" src="<?php echo $img_url; ?>" ></td>
+                                $edit_product_link = $site_url . '/profile/?task=edit-product&post_id=';
+                                ?>
+                                <div class="add_product_form" <?php echo $form_style ?>>
+                                    <?php echo EDD_FES()->forms->render_submission_form(); ?>
+                                </div>
 
-						    <td class="fes-order-list-td"><?php echo edd_price($data->ID); ?></td>
+                                <div class="my-tab-panel" id="my-tab-sell">
 
-						    <td class="cm_edit_product_btn"><a href="<?php echo $edit_product_link . $data->ID; ?>">Edit</a></td>
+                                    <table class="table fes-table table-condensed table-striped tablesorter {sortlist: [[2,0]]}" id="myTable fes-order-list">
+                                        <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Image</th>
+                                            <th>Price</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
 
-						    <td class="cm_delete_product_btn" data-id="<?php echo $data->ID; ?>">Delete</td>
-						</tr>  
-						<?php
-					    }
-					}
-					else
-					{
-					    echo '<tr><td colspan="5">No Product Found</td></tr>';
-					}
-					?>
+                                        <?php
+                                        if (count($arrSell) > 0)
+                                        {
+                                            foreach ($arrSell as $data)
+                                            {
+                                                ?>
+                                                <tr>
 
-				    </tbody>
-				</table>
-			    </div>
+                                                    <td class="fes-order-list-td widget">
+                                                        <?php
+                                                        if ($data->post_status == 'publish')
+                                                        {
+                                                            $product_link = get_the_permalink($data->ID);
+                                                        }
+                                                        else
+                                                        {
+                                                            $product_link = '#';
+                                                        }
+                                                        ?>
+                                                        <a href="<?php echo $product_link ?>" title="View" class="view-order-fes"><?php echo $data->post_title; ?></a>
+                                                    </td>
 
-			    <div class="my-tab-panel" id="my-tab-buy" style="display:none">				
+                                                    <?php
+                                                    $img_url = get_the_post_thumbnail_url($data->ID);
+                                                    ?>
+                                                    <td><img width="50" src="<?php echo $img_url; ?>" ></td>
 
-				<table class="table fes-table table-condensed table-striped tablesorter {sortlist: [[2,0]]}" id="myTable fes-order-list">
-				    <thead>
-					<tr>
-					    <th>Title</th>
-					    <th>Price</th>
-					</tr>
-				    </thead>
-				    <tbody>
-					<?php
-					foreach ($buy_info as $buy)
-					{
-					    if (empty($buy['commision_id']))
-					    {
-						continue;
-					    }
-					    $down_id = get_post_meta($buy['commision_id'], '_download_id', true);
+                                                    <td class="fes-order-list-td"><?php echo edd_price($data->ID); ?></td>
 
-					    $product_name	 = get_the_title($down_id);
-					    $product_link	 = get_the_permalink($down_id);
-					    $my_download	 = new EDD_Download($down_id);
-					    ?>
-    					<tr>
-    					    <td class="fes-order-list-td widget"><a href="<?php echo $product_link; ?>" title="View" class="view-order-fes"><?php echo $product_name; ?></a></td>
+                                                    <td class="cm_edit_product_btn"><a href="<?php echo $edit_product_link . $data->ID; ?>">Edit</a></td>
 
-    					    <td class="fes-order-list-td"><?php echo edd_currency_filter(edd_format_amount($my_download->get_price())); ?></td>					
-    					</tr>	
-					<?php } ?>
-				    </tbody>
-				</table>
-			    </div>
+                                                    <td class="cm_delete_product_btn" data-id="<?php echo $data->ID; ?>">Delete</td>
+                                                </tr>
+                                                <?php
+                                            }
+                                        }
+                                        else
+                                        {
+                                            echo '<tr><td colspan="5">No Product Found</td></tr>';
+                                        }
+                                        ?>
 
-			    <div class="my-tab-panel" id="my-tab-help-request"  style="display:none">
+                                        </tbody>
+                                    </table>
+                                </div>
 
-				<table class="table fes-table table-condensed table-striped tablesorter {sortlist: [[2,0]]}" id="myTable fes-order-list">
-				    <thead>
-					<tr>
-					    <th>Title</th>
-					    <th>Image</th>
-					    <th>Price</th>
-					    <th>Edit</th>
-					    <th>Delete</th>
-					</tr>
-				    </thead>
-				    <tbody>
+                                <div class="my-tab-panel" id="my-tab-buy" style="display:none">
 
-					<?php
-					if (count($arrHelpRequest) > 0)
-					{
-					    foreach ($arrHelpRequest as $data)
-					    {
-						?>
-						<tr>
+                                    <table class="table fes-table table-condensed table-striped tablesorter {sortlist: [[2,0]]}" id="myTable fes-order-list">
+                                        <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Price</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                        foreach ($buy_info as $buy)
+                                        {
+                                            if (empty($buy['commision_id']))
+                                            {
+                                                continue;
+                                            }
+                                            $down_id = get_post_meta($buy['commision_id'], '_download_id', true);
 
-						    <td class="fes-order-list-td widget">
-							<?php
-							if ($data->post_status == 'publish')
-							{
-							    $product_link = get_the_permalink($data->ID);
-							}
-							else
-							{
-							    $product_link = '#';
-							}
-							?>
-							<a href="<?php echo $product_link ?>" title="View" class="view-order-fes"><?php echo $data->post_title; ?></a>
-						    </td>
+                                            $product_name	 = get_the_title($down_id);
+                                            $product_link	 = get_the_permalink($down_id);
+                                            $my_download	 = new EDD_Download($down_id);
+                                            ?>
+                                            <tr>
+                                                <td class="fes-order-list-td widget"><a href="<?php echo $product_link; ?>" title="View" class="view-order-fes"><?php echo $product_name; ?></a></td>
 
-						    <?php
-						    $img_url = get_the_post_thumbnail_url($data->ID);
-						    ?>
-						    <td><img width="50" src="<?php echo $img_url; ?>" ></td>
+                                                <td class="fes-order-list-td"><?php echo edd_currency_filter(edd_format_amount($my_download->get_price())); ?></td>
+                                            </tr>
+                                        <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
 
-						    <td class="fes-order-list-td"><?php echo edd_price($data->ID); ?></td>
+                                <div class="my-tab-panel" id="my-tab-help-request"  style="display:none">
 
-						    <td class="cm_edit_product_btn"><a href="<?php echo $edit_product_link . $data->ID; ?>">Edit</a></td>
+                                    <table class="table fes-table table-condensed table-striped tablesorter {sortlist: [[2,0]]}" id="myTable fes-order-list">
+                                        <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Image</th>
+                                            <th>Price</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
 
-						    <td class="cm_delete_product_btn" data-id="<?php echo $data->ID; ?>">Delete</td>
-						</tr>  
-						<?php
-					    }
-					}
-					else
-					{
-					    echo '<tr><td colspan="5">No Help Request Found</td></tr>';
-					}
-					?>
+                                        <?php
+                                        if (count($arrHelpRequest) > 0)
+                                        {
+                                            foreach ($arrHelpRequest as $data)
+                                            {
+                                                ?>
+                                                <tr>
 
-				    </tbody>
-				</table>
+                                                    <td class="fes-order-list-td widget">
+                                                        <?php
+                                                        if ($data->post_status == 'publish')
+                                                        {
+                                                            $product_link = get_the_permalink($data->ID);
+                                                        }
+                                                        else
+                                                        {
+                                                            $product_link = '#';
+                                                        }
+                                                        ?>
+                                                        <a href="<?php echo $product_link ?>" title="View" class="view-order-fes"><?php echo $data->post_title; ?></a>
+                                                    </td>
 
-			    </div>
+                                                    <?php
+                                                    $img_url = get_the_post_thumbnail_url($data->ID);
+                                                    ?>
+                                                    <td><img width="50" src="<?php echo $img_url; ?>" ></td>
 
-			    <div class="my-tab-panel" id="my-tab-notification" style="display:none">
-				<table class="table fes-table table-condensed table-striped tablesorter {sortlist: [[2,0]]}" id="myTable fes-order-list">
-				    <thead>
-					<tr>
-					    <th>Title</th>
-					    <th>User Name</th>
-					    <th>Status</th>
-					    <th>Action</th>
-					</tr>
-				    </thead>
-				    <tbody>
-					<?php
-					if (count($arrOfferHelp) > 0)
-					{
-					    $offer_help_id = implode(',', $arrOfferHelp);
+                                                    <td class="fes-order-list-td"><?php echo edd_price($data->ID); ?></td>
 
-					    $sql = "SELECT *  FROM `wp_postmeta` WHERE `meta_key` LIKE 'offer_help%' AND post_id IN (" . $offer_help_id . ")";
+                                                    <td class="cm_edit_product_btn"><a href="<?php echo $edit_product_link . $data->ID; ?>">Edit</a></td>
 
-					    $get_offer_help = $wpdb->get_results($sql, ARRAY_A);
+                                                    <td class="cm_delete_product_btn" data-id="<?php echo $data->ID; ?>">Delete</td>
+                                                </tr>
+                                                <?php
+                                            }
+                                        }
+                                        else
+                                        {
+                                            echo '<tr><td colspan="5">No Help Request Found</td></tr>';
+                                        }
+                                        ?>
 
-					    if (!empty($get_offer_help))
-					    {
-						foreach ($get_offer_help as $offer_help)
-						{
-							/*
-							echo '<pre>';
-							print_r($offer_help);
-							echo '</pre>';
-							*/
-							
-						    $explode_key	 = explode('_', $offer_help['meta_key']);
-						    $user_id	 = $explode_key[2];
-						    $user_name	 = get_userdata($user_id);
-							$product_link = get_the_permalink($offer_help['post_id']);
-						    
-						    echo '<tr>';
-						    echo '<td><a href="'. $product_link .'">'. get_the_title($offer_help['post_id']) .'</a></td>';
-						    echo '<td>'. $user_name->data->display_name .'</td>';
-						    echo '<td>'. $offer_help['meta_value'] .'</td>';
-						    
-						    echo '<td>';
-							
-							if($offer_help['meta_value'] != 'Reject')
-							{
-						    echo '<a href="JavaScript:Void(0);" class="offer_help_action" data-status="Approve" data-id="' . $offer_help['post_id'] . '" data-user-id="' . $user_id . '">Approve</a>';
-							echo ' | ';
-							echo '<a href="JavaScript:Void(0);" class="offer_help_action" data-status="Reject" data-id="' . $offer_help['post_id'] . '" data-user-id="' . $user_id . '">Reject</a>';
-							}
-						    echo '</td>';
-						    
-						    echo '</tr>';
-						}
-					    }
-					}
-					?>
-				    </tbody>
-				</table>
-			    </div>
+                                        </tbody>
+                                    </table>
 
-			</div>
-		    </div>
-		</div>
+                                </div>
 
-	    </main><!-- #main -->
-	</section><!-- #primary -->
+                                <div class="my-tab-panel" id="my-tab-notification" style="display:none">
+                                    <h3 class="notification_heading">Help Request</h3>
+                                    <table class="table fes-table table-condensed table-striped tablesorter {sortlist: [[2,0]]}" id="myTable fes-order-list">
+                                        <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>User Name</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                        if (count($arrOfferHelp) > 0)
+                                        {
+                                            $offer_help_id = implode(',', $arrOfferHelp);
 
-	<div id="secondary" class="author-widget-area col-md-3 col-sm-5 col-xs-12" role="complementary">
-	    <div class="vendor-widget-area">
-		<aside class="widget widget--vendor-profile widget-detail">        
-		    <div class="download-author widget-detail--author">
-			<a class="author-avatar" href="#" rel="author"><img alt="" src="https://secure.gravatar.com/avatar/d5dd2d715cb169e6bd1a47bff5f46206?s=130&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/d5dd2d715cb169e6bd1a47bff5f46206?s=260&amp;d=mm&amp;r=g 2x" class="avatar avatar-130 photo" width="130" height="130"></a>            
-			<a class="author-link" href="#" rel="author"><?php
-			    echo ucwords($author->display_name);
-			    $_SESSION['email'] = $author->user_email;
-			    ?></a>
-		    </div>
-		</aside>
+                                            $sql = "SELECT *  FROM `wp_postmeta` WHERE `meta_key` LIKE 'offer_help%' AND post_id IN (" . $offer_help_id . ")";
+
+                                            $get_offer_help = $wpdb->get_results($sql, ARRAY_A);
+
+                                            if (!empty($get_offer_help))
+                                            {
+                                                foreach ($get_offer_help as $offer_help)
+                                                {
+                                                    /*
+                                                    echo '<pre>';
+                                                    print_r($offer_help);
+                                                    echo '</pre>';
+                                                    */
+
+                                                    $explode_key	 = explode('_', $offer_help['meta_key']);
+                                                    $user_id	 = $explode_key[2];
+                                                    $user_name	 = get_userdata($user_id);
+                                                    $product_link = get_the_permalink($offer_help['post_id']);
+
+                                                    echo '<tr>';
+                                                    echo '<td><a href="'. $product_link .'">'. get_the_title($offer_help['post_id']) .'</a></td>';
+                                                    echo '<td>'. $user_name->data->display_name .'</td>';
+                                                    echo '<td>'. $offer_help['meta_value'] .'</td>';
+
+                                                    echo '<td>';
+
+                                                    if($offer_help['meta_value'] != 'Reject')
+                                                    {
+                                                        echo '<a href="JavaScript:Void(0);" class="offer_help_action" data-status="Approve" data-id="' . $offer_help['post_id'] . '" data-user-id="' . $user_id . '">Approve</a>';
+                                                        echo ' | ';
+                                                        echo '<a href="JavaScript:Void(0);" class="offer_help_action" data-status="Reject" data-id="' . $offer_help['post_id'] . '" data-user-id="' . $user_id . '">Reject</a>';
+                                                    }
+                                                    echo '</td>';
+
+                                                    echo '</tr>';
+                                                }
+                                            }
+                                        }
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                    <div class="ab_author_notification">
+                                        <h3 class="notification_heading">Comments</h3>
+                                        <?php
 
 
-	    </div>
-	</div><!-- #secondary -->
+                                        $current_user_id = get_current_user_id();
 
-    </div><!-- #content -->
-</div>
+                                        $args = [
+                                            'post_type' => 'download',
+                                            'author' => $current_user_id,
+                                            'post_status' => 'publish',
+                                        ];
+                                        $download_post = array();
+                                        $arrDownload = new WP_Query($args);
+                                        wp_reset_query();
+                                        if ($arrDownload->found_posts > 0) {
+                                            foreach ($arrDownload->posts as $product_data) {
+                                                $download_post[] = $product_data->ID;
+                                            }
+                                        }
 
-<script>
-    jQuery(document).ready(function ()
-    {
-	jQuery('.my-tab-menu li').on('click', function ()
-	{
-	    jQuery('.my-tab-menu li').removeClass('active');
-	    jQuery(this).addClass('active');
-	    jQuery('.my-tab-panel').hide();
-	    jQuery('#' + jQuery(this).attr('data-tab-id')).show();
-	    $('.add_product_form').hide();
-	});
-    });
-</script>
+                                        if (!empty($download_post)) {
+
+
+                                            $args = array(
+                                                'post__in' => $download_post,
+                                                //'status' => 'approve',
+                                                'count' => true
+                                            );
+
+                                            $total_comment_count = get_comments($args);
+
+                                            if ($total_comment_count != 0) {
+                                                $limit = 5;
+                                                $page = (get_query_var('paged')) ? get_query_var('paged') : 1;
+                                                $offset = ($limit * $page) - $limit;
+                                                $max_num_pages = ceil($total_comment_count / $limit);
+
+
+                                                $args = array(
+                                                    'post__in' => $download_post,
+                                                    //'status' => 'approve',
+                                                    'number' => $limit,
+                                                    'offset' => $offset,
+                                                );
+
+                                                $comments = get_comments($args);
+
+                                                //wp_list_comments( array( 'per_page' => $limit, ), $comments);
+
+                                                foreach ($comments as $comment) :
+
+                                                    ?>
+                                                    <article class="row">
+                                                        <div class="col-md-2 col-sm-2 hidden-xs">
+                                                            <figure class="thumbnail">
+
+                                                                <img class="img-responsive"
+                                                                     src="<?php echo esc_url(get_avatar_url($comment->user_id)); ?>"/>
+                                                                <figcaption
+                                                                        class="text-center"><?= $comment->comment_author; ?></figcaption>
+                                                            </figure>
+                                                        </div>
+                                                        <div class="col-md-10 col-sm-10">
+                                                            <div class="panel panel-default arrow left">
+                                                                <div class="panel-body">
+                                                                    <header class="text-left">
+                                                                        <div class="comment-user pull-left"><i
+                                                                                    class="fa fa-bullhorn"></i> <?= get_the_title($comment->comment_post_ID); ?>
+                                                                        </div>
+                                                                        <time class="comment-date pull-right"
+                                                                              datetime="16-12-2014 01:05"><i
+                                                                                    class="fa fa-clock-o"></i> <?= date('dS M Y', strtotime($comment->comment_date)); ?>
+                                                                        </time>
+                                                                    </header>
+                                                                    <div class="clear"></div>
+                                                                    <div class="comment-post">
+                                                                        <p>
+                                                                            <?php echo wp_trim_words($comment->comment_content, 20); ?>
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="text-right">
+                                                                        <?php
+                                                                        $approved = '';
+                                                                        $disapproved = '';
+                                                                        if($comment->comment_approved == 0){
+                                                                            $approved = 'style=display:inline-block';
+                                                                            $disapproved = 'style=display:none';
+                                                                        }
+                                                                        else{
+                                                                            $approved = 'style=display:none';
+                                                                            $disapproved = 'style=display:inline-block';
+                                                                        }
+                                                                        ?>
+                                                                        <button <?=$approved;?> class="btn btn-default btn-sm comment_action cm_approve_<?=$comment->comment_ID;?>" data-action = "approve" data-id = "<?=$comment->comment_ID;?>"><i class="fa fa-thumbs-up"></i> Approve</button>
+                                                                        <button <?=$disapproved;?> class="btn btn-default btn-sm comment_action cm_disapprove_<?=$comment->comment_ID;?>" data-action = "hold" data-id = "<?=$comment->comment_ID;?>"><i class="fa fa-thumbs-down"></i> Disapprove</button>
+                                                                        <a <?=$disapproved;?> href="<?= get_comment_link($comment->comment_ID); ?>" class="btn btn-default btn-sm hide cm_reply_<?=$comment->comment_ID;?>"><i class="fa fa-reply"></i> Reply</a>
+                                                                        <p style="display:none;" class="cm_hide_status cm_status_<?=$comment->comment_ID;?>"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </article>
+                                                <?php
+                                                endforeach;
+
+                                                echo '<div class="product_pagination">';
+                                                cm_pagination($max_num_pages, 2);
+                                                echo '</div>';
+                                            } else {
+                                                echo '<p> No any comment found</p>';
+                                            }
+                                        } else {
+                                            echo '<p> No any comment found</p>';
+                                        }
+                                        ?>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </main><!-- #main -->
+            </section><!-- #primary -->
+
+            <div id="secondary" class="author-widget-area col-md-3 col-sm-5 col-xs-12" role="complementary">
+                <div class="vendor-widget-area">
+                    <aside class="widget widget--vendor-profile widget-detail">
+                        <div class="download-author widget-detail--author">
+                            <a class="author-avatar" href="#" rel="author"><img alt="" src="https://secure.gravatar.com/avatar/d5dd2d715cb169e6bd1a47bff5f46206?s=130&amp;d=mm&amp;r=g" srcset="https://secure.gravatar.com/avatar/d5dd2d715cb169e6bd1a47bff5f46206?s=260&amp;d=mm&amp;r=g 2x" class="avatar avatar-130 photo" width="130" height="130"></a>
+                            <a class="author-link" href="#" rel="author"><?php
+                                echo ucwords($author->display_name);
+                                $_SESSION['email'] = $author->user_email;
+                                ?></a>
+                        </div>
+                    </aside>
+
+
+                </div>
+            </div><!-- #secondary -->
+
+        </div><!-- #content -->
+    </div>
+
+    <script>
+        jQuery(document).ready(function ()
+        {
+            jQuery('.my-tab-menu li').on('click', function ()
+            {
+                jQuery('.my-tab-menu li').removeClass('active');
+                jQuery(this).addClass('active');
+                jQuery('.my-tab-panel').hide();
+                jQuery('#' + jQuery(this).attr('data-tab-id')).show();
+                $('.add_product_form').hide();
+            });
+        });
+    </script>
 
 <?php get_footer(); ?>
