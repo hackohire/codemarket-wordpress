@@ -77,12 +77,9 @@ $user_id = get_current_user_id();
 			
 			echo '<div class="form-group m-0">';
 			echo '<button type="button" class="btn_assign_offer_help">Click Me!</button>';
-			echo '</div>';
+			echo '</div>';			
 			
-			
-			
-			echo '</form>';
-			
+			echo '</form>';			
 		}
 		
 		echo '</div>';
