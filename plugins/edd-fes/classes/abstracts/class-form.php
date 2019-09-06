@@ -531,7 +531,11 @@ class FES_Form {
 					continue;
 				}
 
-				$values = $field->sanitize( $values, $this->save_id, $user_id ); // this works like an apply_filters. Locate your value and sanitize it
+				if($field->supports['template'] == 'multiple_pricing');
+				{
+					// Alpeshkumar
+					$values = $field->sanitize( $values, $this->save_id, $user_id ); // this works like an apply_filters. Locate your value and sanitize it				    
+				}
 			}
 
 			foreach ( $fields as $field ) {
