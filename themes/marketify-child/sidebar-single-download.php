@@ -26,7 +26,7 @@ $user_id	 = get_current_user_id();
 	$is_exist	 = get_post_meta($post_id, $key, true);
 
 	echo '<div class="cm_offer_help border p-3">';
-	if (!in_array($is_exist, ['Pending', 'Active', 'Reject']))
+	if (!in_array($is_exist, ['Pending', 'Approve', 'Reject']))
 	{
 	    echo '<button type="button" class="offer_help_action" data-status="Pending" data-id="' . $post_id . '" data-user-id="' . $user_id . '">Offer Help</button>';
 	}
@@ -40,10 +40,13 @@ $user_id	 = get_current_user_id();
     {
 	echo '<div class="cm_offer_help border p-3">';
 
-	$sql		 = "SELECT *  FROM `wp_postmeta` WHERE `meta_key` LIKE 'offer_help%' AND post_id IN (" . $post_id . ")";
-	$get_offer_help	 = $wpdb->get_results($sql, ARRAY_A);
+	$sql		 = "SELECT *  FROM `" . $wpdb->prefix . "postmeta` WHERE `meta_key` LIKE 'offer_help%' AND `meta_value` = 'Approve' AND post_id IN (" . $post_id . ")";
+	$get_offer_help	 = $wpdb->get_row($sql, ARRAY_A);
 
-	if (!empty($get_offer_help))
+	$sql		 = "SELECT *  FROM `" . $wpdb->prefix . "fes_vendors` WHERE `status` = 'approved'";
+	$get_vender	 = $wpdb->get_results($sql, ARRAY_A);
+
+	if (!empty($get_vender))
 	{
 	    echo '<h3 class="mb-2">Assign Help Request</h3>';
 
@@ -54,22 +57,32 @@ $user_id	 = get_current_user_id();
 	    echo '<div class="form-group cm_select_2">';
 	    echo '<select name="assign_user_id" class="form-control assign_user_id">';
 	    echo '<option value="">Select User</option>';
-	    foreach ($get_offer_help as $offer_help)
+	    foreach ($get_vender as $vender)
 	    {
-		$explode_key	 = explode('_', $offer_help['meta_key']);
-		$user_id	 = $explode_key[2];
-		$user_data	 = get_userdata($user_id);
-
-		if ($offer_help['meta_value'] == 'Approve')
+		if (!empty($get_offer_help))
 		{
-		    $selected = ' selected ';
+		    if ($get_offer_help['meta_key'] == 'offer_help_' . $vender['user_id'])
+		    {
+			if ($get_offer_help['meta_value'] == 'Approve')
+			{
+			    $selected = ' selected ';
+			}
+			else
+			{
+			    $selected = '';
+			}
+		    }
+		    else
+		    {
+			$selected = '';
+		    }
 		}
 		else
 		{
 		    $selected = '';
 		}
 
-		echo '<option ' . $selected . ' value="' . $user_data->ID . '">' . $user_data->data->display_name . '</option>';
+		echo '<option ' . $selected . ' value="' . $vender['user_id'] . '">' . $vender['name'] . '</option>';
 	    }
 	    echo '</select>';
 	    echo '<div class="cm_error text-danger d-none">Select User</div>';
